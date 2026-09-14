@@ -1,0 +1,139 @@
+{
+  "school_id": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+  "summary_text": "The school offers comprehensive educational programs ranging from preschool to IGCSE, IAL, and English Language Training. The institution maintains small class sizes to provide individual attention to students. The academic year generally runs from June to March and is divided into two semesters.",
+  "key_stats": [
+    {
+      "label": "Curriculum",
+      "value": "Preschool to IGCSE, IAL, and English Language Training"
+    },
+    {
+      "label": "Class Size",
+      "value": "Small and manageable class sizes"
+    },
+    {
+      "label": "Academic Year",
+      "value": "June to March with two semesters"
+    },
+    {
+      "label": "School Hours",
+      "value": "Monday to Friday, 9:00 AM to 3:00 PM"
+    }
+  ],
+  "things_to_verify": [
+    {
+      "claim_group_id": "9606b0ea-3e9f-4cbc-b46e-cc72bc1c2ba3",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "c23d304e-eadf-457d-9d62-fe5eb891cd10",
+      "category": "curriculum",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources disagree on the date and specific details of the Learning Showcase event at the ILBC Thuwana Campus, with one claiming it was held on September 8, 2026, and another stating it was organized for Primary 3 students on September 1, 2026. Additionally, a separate claim mentions a Learning Showcase Programme at the North Dagon Campus."
+    },
+    {
+      "claim_group_id": "46f19a08-fdcc-452f-bc46-e6c1c2257e94",
+      "category": "curriculum",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources describe different campuses of ILBC offering preschool outdoor activities and field trips in distinct locations: Dagon Seikkan Campus, North Dagon Preschool, and Thumingalar 123 Campus."
+    },
+    {
+      "claim_group_id": "17302c6b-7221-4459-afef-2f03132f5fc5",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "9787c348-2b3f-4d70-9b52-809f21834cd6",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "27c5094e-3001-423f-a43f-37acca55519f",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "0372b38e-5af5-47a0-b577-690e6491dc7c",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "16b6ac8b-b0b8-4043-ab6f-a6cfa06d48ec",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "a93680aa-5960-46f5-9c99-7cf39ab7aa91",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "a0ed0b80-c449-47a7-b83b-d76b98374791",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "6e9a03ba-0a82-4b96-bd64-b987d3f4f026",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "d583343e-cd22-45a2-a132-5c679a4d94a2",
+      "category": "contact info",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources disagree on the street address within Thumingalar Housing, Thingangyun, listing both No 180, Thu Nandar 9th St and No.123, Phayar Thone Sul Kyaung Street."
+    },
+    {
+      "claim_group_id": "6edc6d2d-3ff1-46df-b3cc-c97e45230922",
+      "category": "contact info",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources disagree on the school address. One official website source lists the address in Dagon Seikkan Township, while another official website source lists a different address in North Dagon, although both share the same phone number."
+    },
+    {
+      "claim_group_id": "11e8c14e-6639-49c7-8aeb-9e04cb5cdcc9",
+      "category": "contact info",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "20587bf1-cede-4d1e-82dc-c566650f8ec3",
+      "category": "contact info",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "Multiple official website sources list general contact emails as info@ilbc.edu.mm and recdept@ilbc.edu.mm, while another official source specifies ilbcrecdept@ilbc.edu.mm for certificate inquiries at the Yangon Campus."
+    },
+    {
+      "claim_group_id": "1b2d7e12-0972-428a-9363-237bbbeb4781",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "10ca36ba-9e68-4835-8ce0-b87e090f79e5",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "04cf9be2-278d-4eb3-b3cd-4e7805a24296",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "e12a9d57-e8dd-4db0-bfa3-83e7756120e5",
+      "category": "fees",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    }
+  ],
+  "generated_at": "2026-09-14T14:03:53.797098+00:00"
+}

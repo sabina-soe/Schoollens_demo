@@ -1,0 +1,309 @@
+{
+  "school_id": "b0595924-73f7-49c4-94b0-b05017d77ef8",
+  "summary_text": "The school provides an American curriculum through Grade 10, followed by the International Baccalaureate Diploma Programme in Grades 11 and 12. It serves a student population of over 500 students aged 3 to 18 representing over 27 nationalities. Additionally, the campus is centrally located in Bahan Township, Yangon.",
+  "key_stats": [
+    {
+      "label": "Curriculum",
+      "value": "U.S. curriculum until Grade 10, followed by the IB Diploma programme in Grades 11 and 12"
+    },
+    {
+      "label": "Student Population",
+      "value": "Over 500 students aged 3 to 18"
+    },
+    {
+      "label": "Nationalities",
+      "value": "Over 27 nationalities"
+    },
+    {
+      "label": "University Acceptance Rate",
+      "value": "100%"
+    },
+    {
+      "label": "IB Pass Rate",
+      "value": "99%"
+    },
+    {
+      "label": "Location",
+      "value": "Bahan Township, Yangon"
+    }
+  ],
+  "things_to_verify": [
+    {
+      "claim_group_id": "724e3996-ef4b-4e36-adae-cda41d0598be",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "bf0f82a8-7784-4144-9969-eea2aebd4068",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "96d6d5e4-a067-49b3-b94c-39d7b34318ea",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "5e4936ef-f731-4cd6-b247-df7423162f7c",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "88017c48-7e03-47ce-aef9-e6ec42b74f92",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "e9760455-3d80-4cbd-9fc2-0aa53eaf63ce",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "aa163e37-b1aa-46f5-a8f6-f7b50351259f",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "52a743c8-2c51-4f85-b8c1-97ba90ee8634",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "87d545fb-59f6-4816-91d4-c89eda6be34f",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "593b8e20-b677-49f6-bbc4-103f5a3b9a14",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "5d6d43c1-59e2-410d-844a-47108c6d4493",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "c124794f-426d-4b30-9e24-0471e6784f4b",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "400b2c58-2d28-45f3-b8c7-50ab3ae2584f",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "30135ba1-185a-43f0-946e-e869dca221fc",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "9a24501a-7651-4caf-a1bf-a366c4164aac",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "df6f1a7c-f199-45f7-97b3-0dbded1ebe3f",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "48bf0499-2453-4fcd-9a8a-85fef69bf403",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "f755cc2e-8397-4016-bcbb-b7475621a168",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "226531f7-cbd8-431a-a2d1-9d4b553773eb",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "76c79a8e-9460-4a61-912e-b765d056ed60",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "7ce95405-e515-444f-9779-af50c4ec05a1",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "a2605dfd-5980-41c3-8d98-b0791ce22c79",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "e3b624ed-6c00-4885-930f-fbe5d704860a",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "def05ef1-7986-4ac4-9216-820388b3d347",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "851c4713-7bc4-4ac9-9f30-a04c0ce99892",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "791391e6-94b9-400c-ad02-bb16a3af00a0",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "eda3bbc4-790a-477d-b82a-dbd9a6fd8784",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "ad32abc1-acc6-4ee7-9b8f-fe4a2f8808db",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "93820c79-54cc-404d-9770-69e1a7169f95",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "80c4e475-f5a3-4040-8ac1-f3ec903c9b5c",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "fd7589c0-01e2-445c-943e-cbbb0371cc51",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "bc9efb75-1317-4b79-8905-c7a12919c97a",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "c7ded13f-67ef-447a-a580-b4c139a77b4c",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "1d93e2db-33be-4301-b003-2a321ddad132",
+      "category": "class size",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "622b024c-1134-4008-9494-9cfaa011a1bb",
+      "category": "safety",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "c6e5e4c5-8045-4302-a728-7cbb4b554416",
+      "category": "contact info",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources disagree on Mike Simpson's email address and role, listing him as Secondary School Principal with the email msimpson@isyedu.org on one page and as Director with the email director@isyedu.org on another."
+    },
+    {
+      "claim_group_id": "0a782bb9-ee63-4e52-af70-9c5d95b7b091",
+      "category": "contact info",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "a94835fe-fdf5-4cd6-881b-0014fc615b2a",
+      "category": "contact info",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources disagree on the admissions email address, with multiple claims stating it is admissions@isyedu.org and another claim stating it is spadmissions@isyedu.org."
+    },
+    {
+      "claim_group_id": "e1143ecc-c1e0-4d5b-b8e8-bcea678101f2",
+      "category": "fees",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "3ed80e09-6b49-415e-9480-deb64a61973b",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "da64adc9-e7c4-4259-933a-03ff4ba7c417",
+      "category": "class size",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "6e1c2b4b-a2ed-44f6-b499-44b231d41646",
+      "category": "class size",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "834e5277-efc2-43a2-8371-eb6c650e953b",
+      "category": "class size",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "841d2701-22d1-4069-9bbf-1078e4a58a74",
+      "category": "safety",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "8886df23-11ca-404a-8326-48bdcb7d2b86",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "315b268a-3401-42b1-9947-10d1b9f7788c",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    }
+  ],
+  "generated_at": "2026-09-14T14:03:47.375060+00:00"
+}
