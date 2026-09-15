@@ -13,6 +13,7 @@ import {
   sourceTag,
 } from "@/lib/confidence";
 import { ConfidenceChip } from "./confidence-chip";
+import { Skeleton } from "../../components/ui/skeleton";
 
 type EvidenceRow = {
   source_excerpt: string | null;
@@ -133,10 +134,22 @@ export function EvidenceTab({ schoolId }: { schoolId: string }) {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }, [loading, rows]);
 
-  if (loading) return <p>Loading evidence…</p>;
-  if (error) return <p className="error">{error}</p>;
+  if (loading) {
+    return (
+      <div className="tab-loading-state" aria-hidden="true">
+        <Skeleton style={{ width: "100%", height: "120px", marginBottom: "16px", borderRadius: "12px" }} />
+        <Skeleton style={{ width: "100%", height: "120px", marginBottom: "16px", borderRadius: "12px" }} />
+      </div>
+    );
+  }
+  if (error) return <div className="error-banner">{error}</div>;
   if (rows.length === 0) {
-    return <p>No verified evidence on this school yet.</p>;
+    return (
+      <div className="empty-state-card">
+        <h2>No verified evidence on file</h2>
+        <p>No verified claims have been filed for this school campus yet.</p>
+      </div>
+    );
   }
 
   const grouped = new Map<string, LedgerRow[]>();
@@ -152,71 +165,103 @@ export function EvidenceTab({ schoolId }: { schoolId: string }) {
   ].filter((key) => grouped.has(key));
 
   return (
-    <div>
-      <nav className="section-jump" aria-label="Evidence sections">
-        {orderedKeys.map((key) => (
-          <a key={key} href={`#${categoryId(key)}`}>
-            {categoryTitle(key)}
-          </a>
-        ))}
+    <div className="evidence-ledger-container">
+      <nav className="section-jump-nav" aria-label="Evidence categories">
+        <span className="jump-title">Categories:</span>
+        <div className="jump-pills">
+          {orderedKeys.map((key) => (
+            <a key={key} href={`#${categoryId(key)}`} className="jump-pill">
+              {categoryTitle(key)} ({grouped.get(key)?.length || 0})
+            </a>
+          ))}
+        </div>
       </nav>
-      {orderedKeys.map((key) => {
-        const sectionRows = grouped.get(key) ?? [];
-        const stats = sectionRows.flatMap((row) =>
-          normalizeConfidence(row.confidence_label) === "supported"
-            ? row.claim_texts.map(extractNumericStat).filter((stat): stat is NonNullable<typeof stat> => Boolean(stat))
-            : [],
-        );
-        return (
-          <section key={key} id={categoryId(key)} className="profile-section">
-            <div className="profile-section-head">
-              <h2>{categoryTitle(key)}</h2>
-              <ConfidenceChip label={sectionRows[0]?.confidence_label} />
-            </div>
-            {stats.length ? (
-              <div className="stat-strip">
-                {stats.map((stat) => (
-                  <div key={`${stat.value}-${stat.label}`} className="stat-block">
-                    <p className="stat-value">{stat.value}</p>
-                    <p className="stat-label">{stat.label}</p>
-                  </div>
+
+      <div className="evidence-sections-stack">
+        {orderedKeys.map((key) => {
+          const sectionRows = grouped.get(key) ?? [];
+          const stats = sectionRows.flatMap((row) =>
+            normalizeConfidence(row.confidence_label) === "supported"
+              ? row.claim_texts.map(extractNumericStat).filter((stat): stat is NonNullable<typeof stat> => Boolean(stat))
+              : [],
+          );
+          return (
+            <section key={key} id={categoryId(key)} className="evidence-section-group">
+              <div className="section-group-header">
+                <h3 className="section-group-title">{categoryTitle(key)}</h3>
+                <span className="section-group-count">{sectionRows.length} verified item{sectionRows.length === 1 ? "" : "s"}</span>
+              </div>
+
+              {stats.length ? (
+                <div className="stats-metric-grid" style={{ marginBottom: "16px" }}>
+                  {stats.map((stat) => (
+                    <div key={`${stat.value}-${stat.label}`} className="stat-metric-card">
+                      <span className="metric-label">{stat.label}</span>
+                      <strong className="metric-value">{stat.value}</strong>
+                    </div>
+                  ))}
+                </div>
+              ) : null}
+
+              <div className="evidence-cards-list">
+                {sectionRows.map((row) => (
+                  <article key={row.id} className="evidence-item-card">
+                    <div className="evidence-item-header">
+                      <div className="evidence-header-left">
+                        <ConfidenceChip label={row.confidence_label} size="sm" />
+                        {freshnessLabel(row.last_updated) ? (
+                          <span className="evidence-freshness-tag">{freshnessLabel(row.last_updated)}</span>
+                        ) : null}
+                      </div>
+                      {normalizeConfidence(row.confidence_label) === "conflicting" ? (
+                        <Link href={`/schools/${schoolId}/conflict/${row.id}`} className="conflict-action-badge">
+                          ⚠ Inspect Contradiction Diff →
+                        </Link>
+                      ) : null}
+                    </div>
+
+                    <div className="evidence-claims-body">
+                      {row.claim_texts.map((text) => (
+                        <p key={text} className="evidence-claim-statement">
+                          {text}
+                        </p>
+                      ))}
+                    </div>
+
+                    {row.reconciliation_note ? (
+                      <div className="evidence-reconciliation-box">
+                        <svg className="recon-icon" viewBox="0 0 16 16" fill="currentColor">
+                          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                          <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+                        </svg>
+                        <p className="recon-text">{row.reconciliation_note}</p>
+                      </div>
+                    ) : null}
+
+                    {row.evidence.filter((item) => item.source_excerpt).length > 0 ? (
+                      <div className="evidence-sources-drawer">
+                        <span className="sources-label">Citing Sources:</span>
+                        {row.evidence
+                          .filter((item) => item.source_excerpt)
+                          .map((item, index) => (
+                            <blockquote key={`${row.id}-${index}`} className="evidence-source-quote">
+                              <div className="source-quote-header">
+                                <span className="source-tag-pill">
+                                  {sourceTag(item.source_type, item.source_trust_tier)}
+                                </span>
+                              </div>
+                              <p className="source-quote-text">“{item.source_excerpt}”</p>
+                            </blockquote>
+                          ))}
+                      </div>
+                    ) : null}
+                  </article>
                 ))}
               </div>
-            ) : null}
-            <ol className="evidence-ledger">
-              {sectionRows.map((row) => (
-                <li key={row.id} className="evidence-row">
-                  <div className="evidence-row-head">
-                    <ConfidenceChip label={row.confidence_label} />
-                    {normalizeConfidence(row.confidence_label) === "conflicting" ? (
-                      <Link href={`/schools/${schoolId}/conflict/${row.id}`}>Inspect contradiction</Link>
-                    ) : null}
-                  </div>
-                  {row.claim_texts.map((text) => (
-                    <p key={text} className="evidence-claim">
-                      {text}
-                    </p>
-                  ))}
-                  {row.reconciliation_note ? <p className="evidence-note">{row.reconciliation_note}</p> : null}
-                  {row.evidence
-                    .filter((item) => item.source_excerpt)
-                    .map((item, index) => (
-                      <blockquote key={`${row.id}-${index}`} className="evidence-excerpt">
-                        <span className="evidence-source-tag">
-                          {sourceTag(item.source_type, item.source_trust_tier)}
-                        </span>
-                        <span className="evidence-excerpt-text">{item.source_excerpt}</span>
-                      </blockquote>
-                    ))}
-                  {freshnessLabel(row.last_updated) ? (
-                    <p className="evidence-freshness">{freshnessLabel(row.last_updated)}</p>
-                  ) : null}
-                </li>
-              ))}
-            </ol>
-          </section>
-        );
-      })}
+            </section>
+          );
+        })}
+      </div>
     </div>
   );
 }

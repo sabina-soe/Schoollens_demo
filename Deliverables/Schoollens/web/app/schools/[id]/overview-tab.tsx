@@ -14,6 +14,7 @@ import {
 import { headlineConfidence } from "@/lib/row-confidence";
 import { ConfidenceChip } from "./confidence-chip";
 import { MediaGallery, type MediaItem } from "./media-gallery";
+import { Skeleton } from "../../components/ui/skeleton";
 
 type Source = {
   tag: string;
@@ -172,17 +173,28 @@ export function OverviewTab({ schoolId }: { schoolId: string }) {
 
   if (loading) {
     return (
-      <div className="empty-state">
-        <p>Loading summary…</p>
+      <div className="tab-loading-state" aria-hidden="true">
+        <Skeleton style={{ width: "100%", height: "80px", marginBottom: "16px", borderRadius: "12px" }} />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "24px" }}>
+          <Skeleton style={{ height: "64px", borderRadius: "8px" }} />
+          <Skeleton style={{ height: "64px", borderRadius: "8px" }} />
+          <Skeleton style={{ height: "64px", borderRadius: "8px" }} />
+        </div>
       </div>
     );
   }
-  if (error) return <p className="error">{error}</p>;
+  if (error) return <div className="error-banner">{error}</div>;
   if (sections.length === 0 && !stored?.summary_text) {
     return (
-      <div className="empty-state">
-        <h2>No verified evidence yet</h2>
-        <p>This campus is in the register, but no reconciled claims are stored. Ask will also report that sources are silent.</p>
+      <div className="empty-state-card">
+        <div className="empty-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+          </svg>
+        </div>
+        <h2>No verified evidence on file yet</h2>
+        <p>This campus is registered, but no reconciled claims have been recorded. Ask AI will also report that sources are currently silent.</p>
       </div>
     );
   }
@@ -191,88 +203,132 @@ export function OverviewTab({ schoolId }: { schoolId: string }) {
   const verify = stored?.things_to_verify ?? [];
 
   return (
-    <div>
-      {stored?.summary_text ? <p className="overview-summary">{stored.summary_text}</p> : null}
-      {stats.length ? (
-        <ul className="summary-stats">
-          {stats.map((item) => (
-            <li key={`${item.label}-${item.value}`}>
-              <p className="stat-value">{item.value}</p>
-              <p className="stat-label">{item.label}</p>
-            </li>
-          ))}
-        </ul>
-      ) : null}
-      {verify.length ? (
-        <section className="verify-panel" aria-labelledby="things-to-verify">
-          <h2 id="things-to-verify">Things to verify</h2>
-          <p className="operator-lead">
-            Conflicting, unknown, and outdated groups are listed as recorded. This list is not rewritten into the
-            summary above.
-          </p>
-          <ul className="verify-list">
-            {verify.map((item, index) => (
-              <li key={item.claim_group_id || `${item.category}-${index}`}>
-                <div className="profile-section-head">
-                  <h3>{categoryTitle(item.category)}</h3>
-                  <ConfidenceChip label={normalizeConfidence(item.confidence_label)} />
-                </div>
-                <p className="overview-summary">{item.reconciliation_note || "No reconciliation note stored."}</p>
-                {item.confidence_label === "conflicting" && item.claim_group_id ? (
-                  <p>
-                    <Link href={`/schools/${schoolId}/conflict/${item.claim_group_id}`}>Inspect contradiction</Link>
-                  </p>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-      <MediaGallery items={media} />
-      <nav className="section-jump" aria-label="Summary sections">
-        {sections.map((section) => (
-          <a key={section.key} href={`#${categoryId(section.key)}`}>
-            {categoryTitle(section.key)}
-          </a>
-        ))}
-      </nav>
-      {sections.map((section) => (
-        <section key={section.key} id={categoryId(section.key)} className="profile-section">
-          <div className="profile-section-head">
-            <h2>{categoryTitle(section.key)}</h2>
-            <ConfidenceChip label={section.confidence} />
+    <div className="overview-tab-content">
+      {stored?.summary_text ? (
+        <div className="executive-summary-card">
+          <div className="summary-card-badge">
+            <svg viewBox="0 0 16 16" fill="currentColor" className="summary-icon">
+              <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 6.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-5 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM8 12a3.5 3.5 0 0 1-3.26-2.22.5.5 0 0 1 .92-.38A2.5 2.5 0 0 0 8 11a2.5 2.5 0 0 0 2.34-1.6.5.5 0 0 1 .92.38A3.5 3.5 0 0 1 8 12z" />
+            </svg>
+            <span>Verified Overview Summary</span>
           </div>
-          <p className="overview-summary">{section.summary}</p>
-          {freshnessLabel(section.updated) ? <p className="evidence-freshness">{freshnessLabel(section.updated)}</p> : null}
-          <button
-            type="button"
-            className="secondary source-toggle"
-            aria-expanded={openKey === section.key}
-            onClick={() => setOpenKey(openKey === section.key ? null : section.key)}
-          >
-            {openKey === section.key ? "Hide sources" : "Where does this come from?"}
-          </button>
-          {openKey === section.key ? (
-            <ul className="source-list">
-              {section.sources.length === 0 ? (
-                <li>No source excerpt stored for this summary.</li>
-              ) : (
-                section.sources.map((source, index) => (
-                  <li key={`${source.groupId}-${index}`}>
-                    <span className="evidence-source-tag">{source.tag}</span>
-                    <span className="evidence-excerpt-text">{source.excerpt}</span>
-                    {source.conflicting ? (
-                      <p>
-                        <Link href={`/schools/${schoolId}/conflict/${source.groupId}`}>Inspect contradiction</Link>
-                      </p>
-                    ) : null}
-                  </li>
-                ))
-              )}
-            </ul>
-          ) : null}
+          <p className="executive-summary-text">{stored.summary_text}</p>
+        </div>
+      ) : null}
+
+      {stats.length ? (
+        <div className="stats-metric-grid">
+          {stats.map((item) => (
+            <div key={`${item.label}-${item.value}`} className="stat-metric-card">
+              <span className="metric-label">{item.label}</span>
+              <strong className="metric-value">{item.value}</strong>
+            </div>
+          ))}
+        </div>
+      ) : null}
+
+      {verify.length ? (
+        <section className="verify-alert-panel" aria-labelledby="things-to-verify">
+          <div className="verify-panel-header">
+            <svg className="verify-alert-icon" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+            <div>
+              <h2 id="things-to-verify" className="verify-title">Items Requiring Parent Verification</h2>
+              <p className="verify-lead">
+                The following areas contain conflicting records between official registry, school websites, and Facebook publications.
+              </p>
+            </div>
+          </div>
+          <div className="verify-items-list">
+            {verify.map((item, index) => (
+              <div key={item.claim_group_id || `${item.category}-${index}`} className="verify-item-card">
+                <div className="verify-item-top">
+                  <span className="verify-category-tag">{categoryTitle(item.category)}</span>
+                  <ConfidenceChip label={normalizeConfidence(item.confidence_label)} size="sm" />
+                </div>
+                <p className="verify-note">{item.reconciliation_note || "Conflicting records stored across sources."}</p>
+                {item.confidence_label === "conflicting" && item.claim_group_id ? (
+                  <Link href={`/schools/${schoolId}/conflict/${item.claim_group_id}`} className="verify-inspect-link">
+                    Inspect source contradiction diff →
+                  </Link>
+                ) : null}
+              </div>
+            ))}
+          </div>
         </section>
-      ))}
+      ) : null}
+
+      <MediaGallery items={media} />
+
+      <nav className="section-jump-nav" aria-label="Section shortcuts">
+        <span className="jump-title">Jump to section:</span>
+        <div className="jump-pills">
+          {sections.map((section) => (
+            <a key={section.key} href={`#${categoryId(section.key)}`} className="jump-pill">
+              {categoryTitle(section.key)}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <div className="category-sections-stack">
+        {sections.map((section) => (
+          <article key={section.key} id={categoryId(section.key)} className="category-section-card">
+            <div className="section-card-header">
+              <div className="section-title-wrap">
+                <h3 className="section-card-title">{categoryTitle(section.key)}</h3>
+                {freshnessLabel(section.updated) ? (
+                  <span className="section-freshness">{freshnessLabel(section.updated)}</span>
+                ) : null}
+              </div>
+              <ConfidenceChip label={section.confidence} size="sm" />
+            </div>
+
+            <p className="section-summary-text">{section.summary}</p>
+
+            <div className="section-sources-toggle">
+              <button
+                type="button"
+                className="btn-sources-toggle"
+                aria-expanded={openKey === section.key}
+                onClick={() => setOpenKey(openKey === section.key ? null : section.key)}
+              >
+                <svg className={`toggle-chevron ${openKey === section.key ? "toggle-chevron-open" : ""}`} viewBox="0 0 16 16" fill="currentColor">
+                  <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" clipRule="evenodd" />
+                </svg>
+                <span>{openKey === section.key ? "Hide source documentation" : `Inspect sources (${section.sources.length})`}</span>
+              </button>
+            </div>
+
+            {openKey === section.key ? (
+              <div className="source-drawer">
+                {section.sources.length === 0 ? (
+                  <p className="source-empty-msg">No direct source excerpts attached to this section.</p>
+                ) : (
+                  <ul className="source-items-list">
+                    {section.sources.map((source, index) => (
+                      <li key={`${source.groupId}-${index}`} className="source-item-row">
+                        <div className="source-row-top">
+                          <span className="source-badge">{source.tag}</span>
+                          {source.conflicting ? (
+                            <Link href={`/schools/${schoolId}/conflict/${source.groupId}`} className="conflict-badge-link">
+                              ⚠ Disputed in records
+                            </Link>
+                          ) : null}
+                        </div>
+                        <blockquote className="source-blockquote">
+                          “{source.excerpt}”
+                        </blockquote>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ) : null}
+          </article>
+        ))}
+      </div>
     </div>
   );
 }

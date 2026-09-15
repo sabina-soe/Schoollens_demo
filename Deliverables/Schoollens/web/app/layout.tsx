@@ -7,13 +7,13 @@ import "./globals.css";
 
 const notoSans = Noto_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-latin",
 });
 
 const notoMyanmar = Noto_Sans_Myanmar({
   subsets: ["myanmar"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-myanmar",
 });
 

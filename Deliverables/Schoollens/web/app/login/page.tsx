@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 import { ensureParentUser } from "@/lib/ensure-parent-user";
 
@@ -59,71 +60,117 @@ export default function LoginPage() {
 
   return (
     <main className="auth-page">
-      <div className="auth-panel">
-        <h1>Sign up / Log in</h1>
-        <p className="page-lead">
-          Browse stays public. An account is only for contributing — reviews, confirmations, and school claims. New
-          accounts start as parent.
-        </p>
+      <div className="auth-card-panel">
+        <div className="auth-panel-top">
+          <div className="auth-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <h1>Sign in / Register</h1>
+          <p className="auth-lead-text">
+            School browsing is always public. Accounts are used for parent verifications, community reviews, and school admin claims.
+          </p>
+        </div>
+
         {!sent ? (
-          <form className="stack-form" onSubmit={sendCode}>
-            <div className="segmented" role="group" aria-label="Sign-in channel">
+          <form className="auth-form-body" onSubmit={sendCode}>
+            <div className="segmented-channel-toggle" role="group" aria-label="Sign-in channel">
               <button
                 type="button"
-                className={channel === "email" ? "segmented-active" : ""}
-                onClick={() => setChannel("email")}
+                className={`segmented-btn ${channel === "email" ? "segmented-btn-active" : ""}`}
+                onClick={() => {
+                  setChannel("email");
+                  setError(null);
+                }}
               >
-                Email
+                <svg className="channel-icon" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383-4.708 2.825L15 11.105V5.383zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741zM1 11.105l4.708-2.897L1 5.383v5.722z" />
+                </svg>
+                <span>Email OTP</span>
               </button>
               <button
                 type="button"
-                className={channel === "phone" ? "segmented-active" : ""}
-                onClick={() => setChannel("phone")}
+                className={`segmented-btn ${channel === "phone" ? "segmented-btn-active" : ""}`}
+                onClick={() => {
+                  setChannel("phone");
+                  setError(null);
+                }}
               >
-                Phone
+                <svg className="channel-icon" viewBox="0 0 16 16" fill="currentColor">
+                  <path d="M11 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h6zM5 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H5z" />
+                  <path d="M8 14a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                </svg>
+                <span>Phone SMS</span>
               </button>
             </div>
-            <label htmlFor="contact">{channel === "email" ? "Email" : "Phone"}</label>
-            <input
-              id="contact"
-              type={channel === "email" ? "email" : "tel"}
-              autoComplete={channel === "email" ? "email" : "tel"}
-              placeholder={channel === "email" ? "you@example.com" : "+959..."}
-              value={contact}
-              onChange={(event) => setContact(event.target.value)}
-              required
-            />
-            <button type="submit" disabled={busy}>
-              {busy ? "Sending…" : "Send code"}
+
+            <div className="form-group">
+              <label htmlFor="contact" className="form-label">
+                {channel === "email" ? "Email Address" : "Phone Number (with country code)"}
+              </label>
+              <input
+                id="contact"
+                type={channel === "email" ? "email" : "tel"}
+                autoComplete={channel === "email" ? "email" : "tel"}
+                placeholder={channel === "email" ? "parent@example.com" : "+95912345678"}
+                value={contact}
+                onChange={(event) => setContact(event.target.value)}
+                required
+                className="input-custom"
+              />
+            </div>
+
+            <button type="submit" disabled={busy} className="btn btn-primary btn-full">
+              {busy ? "Sending verification code…" : "Send One-Time Code →"}
             </button>
           </form>
         ) : (
-          <form className="stack-form" onSubmit={verifyCode}>
-            <label htmlFor="code">One-time code</label>
-            <input
-              id="code"
-              inputMode="numeric"
-              autoComplete="one-time-code"
-              value={code}
-              onChange={(event) => setCode(event.target.value)}
-              required
-            />
-            <button type="submit" disabled={busy}>
-              {busy ? "Verifying…" : "Verify"}
+          <form className="auth-form-body" onSubmit={verifyCode}>
+            <div className="code-sent-banner">
+              <span>Code sent to <strong>{contact}</strong>. Please check your {channel}.</span>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="code" className="form-label">6-Digit Verification Code</label>
+              <input
+                id="code"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                placeholder="123456"
+                value={code}
+                onChange={(event) => setCode(event.target.value)}
+                required
+                className="input-custom input-code"
+              />
+            </div>
+
+            <button type="submit" disabled={busy} className="btn btn-primary btn-full">
+              {busy ? "Verifying code…" : "✓ Verify & Sign In"}
             </button>
+
             <button
               type="button"
-              className="secondary"
+              className="btn btn-secondary btn-full"
+              style={{ marginTop: "8px" }}
               onClick={() => {
                 setSent(false);
                 setCode("");
               }}
             >
-              Use a different {channel}
+              ← Use a different {channel}
             </button>
           </form>
         )}
-        {error ? <p className="error">{error}</p> : null}
+
+        {error ? <div className="error-banner">{error}</div> : null}
+
+        <div className="auth-footer-note">
+          <Link href="/terms">Terms of Service</Link>
+          <span> · </span>
+          <Link href="/privacy">Privacy Policy</Link>
+        </div>
       </div>
     </main>
   );

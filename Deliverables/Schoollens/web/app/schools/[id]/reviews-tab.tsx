@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { ConfidenceChip } from "./confidence-chip";
+import { Skeleton } from "../../components/ui/skeleton";
 
 type Sentiment = "positive" | "negative" | "neutral";
 
@@ -36,10 +37,29 @@ function sentimentLabel(value: Sentiment) {
   return "Neutral";
 }
 
-function sentimentIcon(value: Sentiment) {
-  if (value === "positive") return "+";
-  if (value === "negative") return "–";
-  return "~";
+function SentimentIcon({ value }: { value: Sentiment }) {
+  if (value === "positive") {
+    return (
+      <svg className="sentiment-svg" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path d="M4.285 9.567a.5.5 0 0 1 .683.183A3.498 3.498 0 0 0 8 11.5a3.498 3.498 0 0 0 3.032-1.75.5.5 0 1 1 .866.5A4.498 4.498 0 0 1 8 12.5a4.498 4.498 0 0 1-3.898-2.25.5.5 0 0 1 .183-.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+      </svg>
+    );
+  }
+  if (value === "negative") {
+    return (
+      <svg className="sentiment-svg" viewBox="0 0 16 16" fill="currentColor">
+        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+        <path d="M4.285 12.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 10.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 9.5a4.498 4.498 0 0 0-3.898 2.25.5.5 0 0 0 .183.683zM7 6.5C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+      </svg>
+    );
+  }
+  return (
+    <svg className="sentiment-svg" viewBox="0 0 16 16" fill="currentColor">
+      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+      <path d="M5 10.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm2-4C7 7.328 6.552 8 6 8s-1-.672-1-1.5S5.448 5 6 5s1 .672 1 1.5zm4 0c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S9.448 5 10 5s1 .672 1 1.5z" />
+    </svg>
+  );
 }
 
 export function ReviewsTab({ schoolId }: { schoolId: string }) {
@@ -141,7 +161,7 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
   async function submitVote(claimGroupId: string, vote: "confirm" | "dispute") {
     const reason = (reasonByGroup[claimGroupId] || "").trim();
     if (!reason) {
-      setVoteError("A short reason is required.");
+      setVoteError("A brief explanation is required to support your verification.");
       return;
     }
     setVoteError(null);
@@ -151,7 +171,7 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
     const user = sessionData.session?.user;
     if (!user) {
       setBusyGroup(null);
-      setVoteError("Sign in required");
+      setVoteError("Please sign in to submit a verification.");
       return;
     }
     const { error: insertError } = await supabase.from("claim_verifications").insert({
@@ -180,76 +200,108 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
     );
   }
 
-  if (loading) return <p>Loading reviews…</p>;
-  if (error) return <p className="error">{error}</p>;
+  if (loading) {
+    return (
+      <div className="tab-loading-state" aria-hidden="true">
+        <Skeleton style={{ width: "100%", height: "100px", marginBottom: "16px", borderRadius: "12px" }} />
+        <Skeleton style={{ width: "100%", height: "100px", marginBottom: "16px", borderRadius: "12px" }} />
+      </div>
+    );
+  }
+  if (error) return <div className="error-banner">{error}</div>;
 
   return (
-    <div className="reviews">
-      <section>
-        <h2>Parent Sentiment</h2>
-        <p>Mood from parent comments. It does not change a claim’s confidence.</p>
+    <div className="reviews-tab-container">
+      <section className="reviews-section">
+        <div className="section-header">
+          <span className="section-kicker">Public Community Feedback</span>
+          <h2>Extracted Parent Sentiments</h2>
+          <p className="section-lead">
+            Natural language analysis of public parent feedback. Sentiment signals do not directly alter hard factual confidence labels.
+          </p>
+        </div>
+
         {comments.length === 0 ? (
-          <p>No parent comments on this school yet.</p>
+          <div className="empty-state-card">
+            <p>No public community sentiment quotes recorded for this school campus.</p>
+          </div>
         ) : (
-          <ol className="evidence-ledger">
+          <div className="sentiment-cards-grid">
             {comments.map((comment) => {
               const sentiment = normalizeSentiment(comment.sentiment_label);
               return (
-                <li key={comment.id} className="evidence-row">
-                  <div className="evidence-row-head">
-                    <span className={`sentiment-chip sentiment-chip-${sentiment}`}>
-                      <span className="sentiment-chip-icon" aria-hidden="true">
-                        {sentimentIcon(sentiment)}
-                      </span>
+                <div key={comment.id} className="sentiment-item-card">
+                  <div className="sentiment-card-header">
+                    <span className={`sentiment-pill sentiment-pill-${sentiment}`}>
+                      <SentimentIcon value={sentiment} />
                       <span>{sentimentLabel(sentiment)}</span>
                     </span>
                     {comment.mentioned_claim_category ? (
-                      <span className="evidence-category">{comment.mentioned_claim_category}</span>
+                      <span className="sentiment-category-tag">{comment.mentioned_claim_category}</span>
                     ) : null}
                   </div>
                   {comment.comment_excerpt ? (
-                    <p className="evidence-claim">{comment.comment_excerpt}</p>
+                    <blockquote className="sentiment-excerpt-quote">
+                      “{comment.comment_excerpt}”
+                    </blockquote>
                   ) : null}
-                </li>
+                </div>
               );
             })}
-          </ol>
+          </div>
         )}
       </section>
 
-      <section className="reviews-verify">
-        <h2>Confirm or dispute</h2>
-        {!signedIn ? (
-          <p>
-            <Link href="/login">Sign in</Link> as a parent to confirm or dispute a claim.
+      <section className="reviews-verify-section">
+        <div className="section-header">
+          <span className="section-kicker">Crowdsourced Accountability</span>
+          <h2>Parent Confirmations & Disputes</h2>
+          <p className="section-lead">
+            Current parents can confirm accuracy or dispute outdated figures (e.g. recent fee adjustments).
           </p>
+        </div>
+
+        {!signedIn ? (
+          <div className="auth-prompt-banner">
+            <span>Are you a parent with first-hand experience? </span>
+            <Link href="/login" className="auth-prompt-link">Sign in as a parent</Link>
+            <span> to confirm or dispute these facts.</span>
+          </div>
         ) : !canVerify ? (
-          <p>Only a parent account can confirm or dispute a claim.</p>
+          <div className="auth-prompt-banner">
+            <span>Only verified parent accounts can submit confirmations or disputes on this school profile.</span>
+          </div>
         ) : null}
+
         {claims.length === 0 ? (
-          <p>No claims to confirm or dispute yet.</p>
+          <div className="empty-state-card">
+            <p>No claims currently available for confirmation.</p>
+          </div>
         ) : (
-          <ol className="evidence-ledger">
+          <div className="verification-cards-list">
             {claims.map((claim) => (
-              <li key={claim.id} className="evidence-row">
-                <div className="evidence-row-head">
-                  <ConfidenceChip label={claim.confidence_label} />
-                  {claim.category ? <span className="evidence-category">{claim.category}</span> : null}
+              <div key={claim.id} className="verification-item-card">
+                <div className="verification-card-header">
+                  <ConfidenceChip label={claim.confidence_label} size="sm" />
+                  {claim.category ? <span className="verify-category-tag">{claim.category}</span> : null}
+                  <div className="vote-counts-badge">
+                    <span className="count-confirm">{claim.confirms} Confirm{claim.confirms === 1 ? "" : "s"}</span>
+                    <span className="count-divider">·</span>
+                    <span className="count-dispute">{claim.disputes} Dispute{claim.disputes === 1 ? "" : "s"}</span>
+                  </div>
                 </div>
-                {claim.claim_texts.map((text) => (
-                  <p key={text} className="evidence-claim">
-                    {text}
-                  </p>
-                ))}
-                <p className="evidence-freshness">
-                  {claim.confirms} confirm · {claim.disputes} dispute
-                </p>
+
+                <div className="verification-claims-text">
+                  {claim.claim_texts.map((text) => (
+                    <p key={text} className="claim-text-row">{text}</p>
+                  ))}
+                </div>
+
                 {canVerify ? (
-                  <form
-                    className="verify-form"
-                    onSubmit={(event) => event.preventDefault()}
-                  >
-                    <label htmlFor={`reason-${claim.id}`}>Reason</label>
+                  <form className="verification-form" onSubmit={(event) => event.preventDefault()}>
+                    <label htmlFor={`reason-${claim.id}`} className="verify-form-label">
+                      Your note (e.g. "Confirmed by 2026 invoice", "Campus moved to Hlaing"):
+                    </label>
                     <textarea
                       id={`reason-${claim.id}`}
                       rows={2}
@@ -260,31 +312,34 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
                           [claim.id]: event.target.value,
                         }))
                       }
+                      placeholder="Enter brief evidence rationale…"
+                      className="verify-textarea"
                     />
-                    <div className="vote-actions">
+                    <div className="verify-action-buttons">
                       <button
                         type="button"
+                        className="btn btn-primary btn-sm"
                         disabled={busyGroup === claim.id}
                         onClick={() => submitVote(claim.id, "confirm")}
                       >
-                        Confirm
+                        ✓ Confirm Claim
                       </button>
                       <button
                         type="button"
-                        className="secondary"
+                        className="btn btn-secondary btn-sm"
                         disabled={busyGroup === claim.id}
                         onClick={() => submitVote(claim.id, "dispute")}
                       >
-                        Dispute
+                        ✕ Dispute Claim
                       </button>
                     </div>
                   </form>
                 ) : null}
-              </li>
+              </div>
             ))}
-          </ol>
+          </div>
         )}
-        {voteError ? <p className="error">{voteError}</p> : null}
+        {voteError ? <div className="error-banner">{voteError}</div> : null}
       </section>
     </div>
   );
