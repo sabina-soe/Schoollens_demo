@@ -193,8 +193,8 @@ export function OverviewTab({ schoolId }: { schoolId: string }) {
             <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
           </svg>
         </div>
-        <h2>No verified evidence on file yet</h2>
-        <p>This campus is registered, but no reconciled claims have been recorded. Ask AI will also report that sources are currently silent.</p>
+        <h2>No evidence on file yet</h2>
+        <p>This campus is registered, but no reconciled claims have been recorded. Questions will also say that sources are silent.</p>
       </div>
     );
   }
@@ -210,7 +210,7 @@ export function OverviewTab({ schoolId }: { schoolId: string }) {
             <svg viewBox="0 0 16 16" fill="currentColor" className="summary-icon">
               <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 6.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-5 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM8 12a3.5 3.5 0 0 1-3.26-2.22.5.5 0 0 1 .92-.38A2.5 2.5 0 0 0 8 11a2.5 2.5 0 0 0 2.34-1.6.5.5 0 0 1 .92.38A3.5 3.5 0 0 1 8 12z" />
             </svg>
-            <span>Verified Overview Summary</span>
+            <span>Summary</span>
           </div>
           <p className="executive-summary-text">{stored.summary_text}</p>
         </div>
@@ -234,9 +234,9 @@ export function OverviewTab({ schoolId }: { schoolId: string }) {
               <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
             </svg>
             <div>
-              <h2 id="things-to-verify" className="verify-title">Items Requiring Parent Verification</h2>
+              <h2 id="things-to-verify" className="verify-title">Worth checking</h2>
               <p className="verify-lead">
-                The following areas contain conflicting records between official registry, school websites, and Facebook publications.
+                These topics disagree across the register, school websites, and Facebook.
               </p>
             </div>
           </div>
@@ -247,10 +247,10 @@ export function OverviewTab({ schoolId }: { schoolId: string }) {
                   <span className="verify-category-tag">{categoryTitle(item.category)}</span>
                   <ConfidenceChip label={normalizeConfidence(item.confidence_label)} size="sm" />
                 </div>
-                <p className="verify-note">{item.reconciliation_note || "Conflicting records stored across sources."}</p>
+                <p className="verify-note">{item.reconciliation_note || "Sources disagree."}</p>
                 {item.confidence_label === "conflicting" && item.claim_group_id ? (
                   <Link href={`/schools/${schoolId}/conflict/${item.claim_group_id}`} className="verify-inspect-link">
-                    Inspect source contradiction diff →
+                    Compare sources
                   </Link>
                 ) : null}
               </div>

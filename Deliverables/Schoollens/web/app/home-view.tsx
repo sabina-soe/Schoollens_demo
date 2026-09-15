@@ -9,8 +9,8 @@ import { roleLabel, useSession } from "./session-context";
 const STEPS = [
   {
     step: "01",
-    title: "Browse the Public Register",
-    body: "Search MOE-registered private and international schools across Myanmar. Every school displays an evidence confidence status rather than an arbitrary letter grade.",
+    title: "Browse the register",
+    body: "Search MOE-registered private and international schools across Myanmar. Each school shows a confidence label, not a letter grade.",
     icon: (
       <svg className="step-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
@@ -20,8 +20,8 @@ const STEPS = [
   },
   {
     step: "02",
-    title: "Inspect Reconciled Evidence",
-    body: "Every claim on fees, curriculum, and safety is linked to official sources. Contradictions between Facebook, websites, and registry records remain transparently flagged.",
+    title: "Read the evidence",
+    body: "Fees, curriculum, and safety claims link back to sources. When Facebook, websites, and the register disagree, that conflict stays visible.",
     icon: (
       <svg className="step-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M9 12l2 2 4-4" />
@@ -31,8 +31,8 @@ const STEPS = [
   },
   {
     step: "03",
-    title: "Ask Grounded Questions",
-    body: "Inquire about specific school policies. Answers strictly cite verified database records. If evidence is missing, SchoolLens says so plainly without guessing.",
+    title: "Ask a question",
+    body: "Answers cite retrieved records. If sources are silent, SchoolLens says so.",
     icon: (
       <svg className="step-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
         <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
@@ -50,7 +50,7 @@ const LEGEND_ITEMS = [
   {
     label: "likely",
     title: "Likely",
-    desc: "Single reliable official source, pending cross-corroboration.",
+    desc: "One reliable official source, not yet confirmed by another.",
   },
   {
     label: "conflicting",
@@ -65,7 +65,7 @@ const LEGEND_ITEMS = [
   {
     label: "unknown",
     title: "Unknown",
-    desc: "Insufficient public documentation or pending verification.",
+    desc: "Not enough public record, or still under review.",
   },
 ] as const;
 
@@ -90,12 +90,12 @@ export function HomeView() {
     <main className="home-page">
       {status === "in" && (role === "school_admin" || role === "moderator" || role === "platform_operator") ? (
         <div className="workspace-strip-card">
-          <span className="workspace-badge">Admin Mode</span>
-          <span className="workspace-text">Signed in as <strong>{roleLabel(role)}</strong>.</span>
+          <span className="workspace-badge">Signed in</span>
+          <span className="workspace-text">Working as <strong>{roleLabel(role)}</strong>.</span>
           <div className="workspace-actions">
-            {role === "school_admin" ? <Link href="/school-admin" className="workspace-link">Open School Admin →</Link> : null}
-            {role === "moderator" ? <Link href="/moderator" className="workspace-link">Open Moderator Queue →</Link> : null}
-            {role === "platform_operator" ? <Link href="/operator" className="workspace-link">Open Operator Portal →</Link> : null}
+            {role === "school_admin" ? <Link href="/school-admin" className="workspace-link">School admin</Link> : null}
+            {role === "moderator" ? <Link href="/moderator" className="workspace-link">Moderator queue</Link> : null}
+            {role === "platform_operator" ? <Link href="/operator" className="workspace-link">Operator</Link> : null}
           </div>
         </div>
       ) : null}
@@ -103,13 +103,13 @@ export function HomeView() {
       <section className="home-hero">
         <div className="home-hero-badge">
           <span className="badge-pulse" />
-          <span>Independent Myanmar School Registry</span>
+          <span>Myanmar school evidence</span>
         </div>
         <h1 className="home-title">
-          See what sources actually say — <span className="title-highlight">not a paid ranking.</span>
+          See what sources actually say — <span className="title-highlight">not a ranking.</span>
         </h1>
         <p className="home-lead">
-          SchoolLens reconciles official MOE records, institutional websites, and verified community documentation into evidence-linked school facts. No sponsored listings. No unverified reviews.
+          SchoolLens reconciles the MOE register, school websites, and Facebook into evidence-linked claims. No sponsored listings. The AI does not pick a school.
         </p>
         <div className="home-actions">
           <Link href="/schools" className="btn btn-primary btn-lg">
@@ -119,15 +119,15 @@ export function HomeView() {
             </svg>
           </Link>
           <Link href="/questionnaire" className="btn btn-secondary btn-lg">
-            <span>Set Your Priorities</span>
+            <span>Set your priorities</span>
           </Link>
         </div>
       </section>
 
       <section className="home-steps-section" aria-label="How SchoolLens works">
         <div className="section-header">
-          <span className="section-kicker">Transparent Methodology</span>
-          <h2>How SchoolLens Operates</h2>
+          <span className="section-kicker">How it works</span>
+          <h2>How SchoolLens works</h2>
         </div>
         <div className="home-steps-grid">
           {STEPS.map((step) => (
@@ -146,10 +146,10 @@ export function HomeView() {
       <section className="home-legend-section" aria-labelledby="confidence-legend">
         <div className="legend-header">
           <div className="legend-header-text">
-            <span className="section-kicker">Evidence Confidence Standards</span>
-            <h2 id="confidence-legend">Confidence is the Product</h2>
+            <span className="section-kicker">Confidence labels</span>
+            <h2 id="confidence-legend">Confidence is the product</h2>
             <p>
-              Every claim is audited for multi-source consensus. Color and icon signals work together to ensure clarity on mobile devices and modest displays.
+              Every claim group gets a label. Color is never the only signal — the icon and word travel with it.
             </p>
           </div>
         </div>

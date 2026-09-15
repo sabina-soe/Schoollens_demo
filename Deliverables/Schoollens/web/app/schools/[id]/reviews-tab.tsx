@@ -214,16 +214,16 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
     <div className="reviews-tab-container">
       <section className="reviews-section">
         <div className="section-header">
-          <span className="section-kicker">Public Community Feedback</span>
-          <h2>Extracted Parent Sentiments</h2>
+          <span className="section-kicker">Reviews</span>
+          <h2>Public comments</h2>
           <p className="section-lead">
-            Natural language analysis of public parent feedback. Sentiment signals do not directly alter hard factual confidence labels.
+            Public parent comments. Sentiment does not change confidence labels.
           </p>
         </div>
 
         {comments.length === 0 ? (
           <div className="empty-state-card">
-            <p>No public community sentiment quotes recorded for this school campus.</p>
+            <p>No public comments on file.</p>
           </div>
         ) : (
           <div className="sentiment-cards-grid">
@@ -254,10 +254,10 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
 
       <section className="reviews-verify-section">
         <div className="section-header">
-          <span className="section-kicker">Crowdsourced Accountability</span>
-          <h2>Parent Confirmations & Disputes</h2>
+          <span className="section-kicker">Parents</span>
+          <h2>Confirm or dispute</h2>
           <p className="section-lead">
-            Current parents can confirm accuracy or dispute outdated figures (e.g. recent fee adjustments).
+            Current parents can confirm a claim or flag outdated figures, such as a recent fee change.
           </p>
         </div>
 
@@ -269,13 +269,13 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
           </div>
         ) : !canVerify ? (
           <div className="auth-prompt-banner">
-            <span>Only verified parent accounts can submit confirmations or disputes on this school profile.</span>
+            <span>Only parent accounts can confirm or dispute claims here.</span>
           </div>
         ) : null}
 
         {claims.length === 0 ? (
           <div className="empty-state-card">
-            <p>No claims currently available for confirmation.</p>
+            <p>No claims to confirm yet.</p>
           </div>
         ) : (
           <div className="verification-cards-list">

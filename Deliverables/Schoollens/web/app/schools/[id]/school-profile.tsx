@@ -179,25 +179,25 @@ export function SchoolProfile({ id }: { id: string }) {
               <p className="profile-network-notice">
                 <span>Multi-branch network: </span>
                 <Link href={`/schools/network/${school.school_group_id}`} className="network-action-link">
-                  View network campus map ({branches.length} locations) →
+                  View network map ({branches.length} campuses)
                 </Link>
               </p>
             ) : null}
 
             {ownStatus === "pending" ? (
               <div className="admin-status-banner admin-status-pending">
-                Your claim for this school profile is currently pending moderator review.
+                Your claim is waiting for moderator review.
               </div>
             ) : null}
             {ownStatus === "approved" ? (
               <div className="admin-status-banner admin-status-approved">
-                ✓ You are a verified school administrator for this profile.
+                You administer this school.
               </div>
             ) : null}
           </div>
 
           <div className="profile-confidence-panel" aria-label="Evidence confidence breakdown">
-            <span className="confidence-panel-label">Evidence Audit Status</span>
+            <span className="confidence-panel-label">Evidence</span>
             <div className="confidence-summary-chips">
               {totalGroups === 0 ? (
                 <ConfidenceChip label="unknown" />
@@ -229,12 +229,12 @@ export function SchoolProfile({ id }: { id: string }) {
             </div>
           ) : null}
           <div className="stat-pill">
-            <span className="stat-pill-label">Campus Count</span>
-            <strong className="stat-pill-value">{branches.length || 1} {branches.length > 1 ? "Locations" : "Campus"}</strong>
+            <span className="stat-pill-label">Campuses</span>
+            <strong className="stat-pill-value">{branches.length || 1}</strong>
           </div>
           <div className="stat-pill">
-            <span className="stat-pill-label">Total Verified Claims</span>
-            <strong className="stat-pill-value">{totalGroups} Items</strong>
+            <span className="stat-pill-label">Claim groups</span>
+            <strong className="stat-pill-value">{totalGroups}</strong>
           </div>
         </div>
       </header>
@@ -282,7 +282,7 @@ export function SchoolProfile({ id }: { id: string }) {
               <svg className="tab-icon" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M2.678 11.894a1 1 0 0 1 .287.804 10.766 10.766 0 0 1-.825 2.408c.45-.19.9-.408 1.347-.645a1 1 0 0 1 .843-.075c1.134.453 2.378.714 3.67.714 4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a1 1 0 0 1 .708.194z" />
               </svg>
-              <span>Ask AI Grounded Q&A</span>
+              <span>Ask a question</span>
             </button>
             <button
               type="button"
@@ -293,7 +293,7 @@ export function SchoolProfile({ id }: { id: string }) {
               <svg className="tab-icon" viewBox="0 0 16 16" fill="currentColor">
                 <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
               </svg>
-              <span>Parent Verifications</span>
+              <span>Reviews</span>
             </button>
           </nav>
 
@@ -325,7 +325,7 @@ export function SchoolProfile({ id }: { id: string }) {
                   </a>
                 </li>
               ) : (
-                <li className="aside-empty-item">No official website documented</li>
+                <li className="aside-empty-item">No website on file</li>
               )}
               {school.official_facebook_url ? (
                 <li>
@@ -338,16 +338,16 @@ export function SchoolProfile({ id }: { id: string }) {
                   </a>
                 </li>
               ) : (
-                <li className="aside-empty-item">No official Facebook page documented</li>
+                <li className="aside-empty-item">No Facebook page on file</li>
               )}
             </ul>
           </section>
 
           <section className="aside-card aside-card-cta">
-            <h3 className="aside-card-title">Inquire About This School</h3>
-            <p className="aside-card-desc">Ask specific questions regarding fees, class size, or facilities. Strictly grounded in verified records.</p>
+            <h3 className="aside-card-title">Ask about this school</h3>
+            <p className="aside-card-desc">Questions about fees, class size, or facilities. Answers use retrieved evidence only.</p>
             <button type="button" className="btn btn-primary btn-full" onClick={() => setTab("ask")}>
-              Ask Grounded AI →
+              Ask a question
             </button>
           </section>
 
@@ -356,9 +356,9 @@ export function SchoolProfile({ id }: { id: string }) {
             {ownStatus === "rejected" || ownStatus === null ? (
               <ClaimForm schoolId={school.id} signedIn={signedIn} />
             ) : ownStatus === "pending" ? (
-              <p className="aside-status-msg">Your claim is currently pending moderator review.</p>
+              <p className="aside-status-msg">Waiting for moderator review.</p>
             ) : (
-              <p className="aside-status-msg aside-status-active">✓ You administer this verified profile.</p>
+              <p className="aside-status-msg aside-status-active">You administer this school.</p>
             )}
           </section>
         </aside>

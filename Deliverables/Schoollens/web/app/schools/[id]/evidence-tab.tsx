@@ -146,8 +146,8 @@ export function EvidenceTab({ schoolId }: { schoolId: string }) {
   if (rows.length === 0) {
     return (
       <div className="empty-state-card">
-        <h2>No verified evidence on file</h2>
-        <p>No verified claims have been filed for this school campus yet.</p>
+        <h2>No evidence on file</h2>
+        <p>No claim groups have been recorded yet.</p>
       </div>
     );
   }
@@ -215,7 +215,7 @@ export function EvidenceTab({ schoolId }: { schoolId: string }) {
                       </div>
                       {normalizeConfidence(row.confidence_label) === "conflicting" ? (
                         <Link href={`/schools/${schoolId}/conflict/${row.id}`} className="conflict-action-badge">
-                          ⚠ Inspect Contradiction Diff →
+                          Compare sources
                         </Link>
                       ) : null}
                     </div>

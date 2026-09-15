@@ -73,7 +73,6 @@ export function QuestionnaireForm() {
       }
       setStatus("ready");
     })();
-    // Load once on mount; ranks seed is static.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -130,15 +129,15 @@ export function QuestionnaireForm() {
     return (
       <main className="narrow-page">
         <div className="auth-card-panel">
-          <div className="page-intro-badge">Parent Tools</div>
-          <h1>Set Your School Priorities</h1>
+          <div className="page-intro-badge">Priorities</div>
+          <h1>Set your school priorities</h1>
           <p className="page-lead">
-            Sign in as a parent to record your monthly budget, preferred townships, and specific educational needs. SchoolLens will use these to organize evidence without generating black-box school ranks.
+            Sign in as a parent to record your monthly budget, preferred townships, and needs. SchoolLens uses this to organize evidence, not to rank schools.
           </p>
           <div className="auth-actions-group" style={{ marginTop: "24px", display: "flex", gap: "12px" }}>
             <SignInControl />
             <Link href="/schools" className="btn btn-secondary">
-              Browse Directory First →
+              Browse schools
             </Link>
           </div>
         </div>
@@ -149,9 +148,9 @@ export function QuestionnaireForm() {
   return (
     <main className="narrow-page">
       <header className="page-intro">
-        <div className="page-intro-badge">Personalized Search Focus</div>
-        <h1>Your Family Priorities</h1>
-        <p className="page-lead">This configuration records what matters to you. SchoolLens will not automatically rank or eliminate schools.</p>
+        <div className="page-intro-badge">Priorities</div>
+        <h1>Your family priorities</h1>
+        <p className="page-lead">This records what matters to you. SchoolLens will not rank or hide schools.</p>
       </header>
 
       <div className="stepper-wrap">
@@ -170,7 +169,7 @@ export function QuestionnaireForm() {
       <form className="wizard-form-card" onSubmit={submit}>
         {step === 0 ? (
           <fieldset className="wizard-fieldset">
-            <legend className="wizard-legend">Where & Monthly Budget</legend>
+            <legend className="wizard-legend">Where you live and monthly budget</legend>
             <div className="form-group">
               <label htmlFor="budget" className="form-label">Monthly Tuition Budget (MMK)</label>
               <div className="budget-slider-wrap">
@@ -216,8 +215,8 @@ export function QuestionnaireForm() {
 
         {step === 1 ? (
           <fieldset className="wizard-fieldset">
-            <legend className="wizard-legend">Rank What Matters (1 = Highest Priority)</legend>
-            <p className="wizard-subtext">Order the factors most critical for your child's learning environment.</p>
+            <legend className="wizard-legend">What matters most (1 = highest)</legend>
+            <p className="wizard-subtext">Order the factors that matter most for your child.</p>
             <div className="rank-items-stack">
               {PRIORITY_KEYS.map((item) => (
                 <div key={item.key} className="rank-item-card">
@@ -245,7 +244,7 @@ export function QuestionnaireForm() {
 
         {step === 2 ? (
           <fieldset className="wizard-fieldset">
-            <legend className="wizard-legend">Child Information & Specific Needs</legend>
+            <legend className="wizard-legend">Child details</legend>
             <div className="form-group">
               <label htmlFor="child_age" className="form-label">Child’s Age or Current Grade</label>
               <input
@@ -258,7 +257,7 @@ export function QuestionnaireForm() {
             </div>
 
             <div className="form-group">
-              <span className="form-label">Special Considerations & Requirements (Optional)</span>
+              <span className="form-label">Needs (optional)</span>
               <div className="needs-chips-grid">
                 {NEEDS.map((need) => {
                   const active = needs.includes(need);
@@ -287,11 +286,11 @@ export function QuestionnaireForm() {
           ) : <span />}
           {step < STEPS.length - 1 ? (
             <button type="button" className="btn btn-primary" onClick={() => setStep((current) => current + 1)}>
-              Continue →
+              Continue
             </button>
           ) : (
             <button type="submit" disabled={busy} className="btn btn-primary">
-              {busy ? "Saving Priorities…" : "✓ Save Priorities"}
+              {busy ? "Saving…" : "Save priorities"}
             </button>
           )}
         </div>
@@ -302,8 +301,8 @@ export function QuestionnaireForm() {
               <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
             </svg>
             <div>
-              <strong>Priorities successfully saved!</strong>
-              <p>Your search context has been recorded. <Link href="/schools" className="banner-action-link">Browse schools now →</Link></p>
+              <strong>Priorities saved.</strong>
+              <p>You can browse schools with this in mind. <Link href="/schools" className="banner-action-link">Browse schools</Link></p>
             </div>
           </div>
         ) : null}

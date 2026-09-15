@@ -6,7 +6,7 @@ import { sourceTag } from "@/lib/confidence";
 import { ConfidenceChip } from "./confidence-chip";
 import { Skeleton } from "../../components/ui/skeleton";
 
-const NO_EVIDENCE_ANSWER = "There is no verified evidence in public sources regarding this specific inquiry.";
+const NO_EVIDENCE_ANSWER = "There is no verified evidence on this.";
 
 type Citation = {
   id: string;
@@ -77,8 +77,8 @@ async function loadCitations(groupIds: string[]): Promise<Citation[]> {
 const SUGGESTIONS = [
   "What do sources say about tuition fees?",
   "What curriculum is officially listed?",
-  "What do sources report regarding student safety?",
-  "What average class size is documented?",
+  "What do sources say about student safety?",
+  "What average class size is reported?",
 ];
 
 export function AskTab({ schoolId }: { schoolId: string }) {
@@ -164,15 +164,15 @@ export function AskTab({ schoolId }: { schoolId: string }) {
           </svg>
         </div>
         <div>
-          <h2 className="ai-banner-title">Grounded Evidence Inquiries</h2>
-          <p className="ai-banner-desc">SchoolLens answers solely based on verified public records. If data is unrecorded or contested, it says so plainly without generating assumptions.</p>
+          <h2 className="ai-banner-title">Ask a question</h2>
+          <p className="ai-banner-desc">Answers use retrieved evidence only. If sources are silent or disagree, SchoolLens says so.</p>
         </div>
       </div>
 
       {turns.length === 0 ? (
         <div className="qa-empty-card">
-          <h3 className="qa-empty-title">Suggested questions to ask:</h3>
-          <div className="suggestion-pills-grid" aria-label="Suggested inquiries">
+          <h3 className="qa-empty-title">Suggested questions</h3>
+          <div className="suggestion-pills-grid" aria-label="Suggested questions">
             {SUGGESTIONS.map((item) => (
               <button
                 key={item}
@@ -201,7 +201,7 @@ export function AskTab({ schoolId }: { schoolId: string }) {
 
               <div className="ai-answer-bubble">
                 <div className="ai-bubble-header">
-                  <span className="bubble-speaker">SchoolLens Grounded AI</span>
+                  <span className="bubble-speaker">SchoolLens</span>
                 </div>
 
                 {!turn.answer && !turn.error ? (
@@ -211,7 +211,7 @@ export function AskTab({ schoolId }: { schoolId: string }) {
                       <span />
                       <span />
                     </div>
-                    <span className="retrieving-text">Retrieving citations from verified database…</span>
+                    <span className="retrieving-text">Retrieving evidence…</span>
                   </div>
                 ) : null}
 
@@ -220,7 +220,7 @@ export function AskTab({ schoolId }: { schoolId: string }) {
 
                 {turn.citations.length > 0 ? (
                   <div className="answer-citations-wrap">
-                    <span className="citations-header-label">Retrieved Evidence Sources:</span>
+                    <span className="citations-header-label">Sources</span>
                     <div className="citations-cards-grid">
                       {turn.citations.map((citation) => (
                         <div key={citation.id} className="citation-evidence-card">
@@ -248,7 +248,7 @@ export function AskTab({ schoolId }: { schoolId: string }) {
       )}
 
       <form className="qa-composer-panel" onSubmit={onSubmit}>
-        <label htmlFor="qa-question" className="composer-label">Ask a custom question</label>
+        <label htmlFor="qa-question" className="composer-label">Question</label>
         <div className="composer-input-row">
           <textarea
             id="qa-question"
@@ -268,7 +268,7 @@ export function AskTab({ schoolId }: { schoolId: string }) {
           />
           <button type="submit" disabled={pending || !question.trim()} className="btn btn-primary composer-submit-btn">
             {pending ? (
-              <span>Inquiring…</span>
+              <span>Asking…</span>
             ) : (
               <>
                 <span>Ask</span>

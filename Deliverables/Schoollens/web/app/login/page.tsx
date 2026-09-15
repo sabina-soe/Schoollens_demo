@@ -123,17 +123,17 @@ export default function LoginPage() {
             </div>
 
             <button type="submit" disabled={busy} className="btn btn-primary btn-full">
-              {busy ? "Sending verification code…" : "Send One-Time Code →"}
+              {busy ? "Sending code…" : "Send code"}
             </button>
           </form>
         ) : (
           <form className="auth-form-body" onSubmit={verifyCode}>
             <div className="code-sent-banner">
-              <span>Code sent to <strong>{contact}</strong>. Please check your {channel}.</span>
+              <span>Code sent to <strong>{contact}</strong>. Check your {channel}.</span>
             </div>
 
             <div className="form-group">
-              <label htmlFor="code" className="form-label">6-Digit Verification Code</label>
+              <label htmlFor="code" className="form-label">Verification code</label>
               <input
                 id="code"
                 inputMode="numeric"
@@ -147,7 +147,7 @@ export default function LoginPage() {
             </div>
 
             <button type="submit" disabled={busy} className="btn btn-primary btn-full">
-              {busy ? "Verifying code…" : "✓ Verify & Sign In"}
+              {busy ? "Checking code…" : "Verify and sign in"}
             </button>
 
             <button

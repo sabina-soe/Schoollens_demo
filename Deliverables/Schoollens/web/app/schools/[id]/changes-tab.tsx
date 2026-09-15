@@ -102,8 +102,8 @@ export function ChangesTab({ schoolId }: { schoolId: string }) {
   if (rows.length === 0) {
     return (
       <div className="empty-state-card">
-        <h2>No timeline changes recorded</h2>
-        <p>No new evidence alterations or source contradictions have been logged for this school.</p>
+        <h2>No changes yet</h2>
+        <p>Nothing new has been logged for this school.</p>
       </div>
     );
   }
@@ -111,10 +111,10 @@ export function ChangesTab({ schoolId }: { schoolId: string }) {
   return (
     <div className="changes-tab-container">
       <div className="timeline-header">
-        <span className="section-kicker">Audit Trail</span>
-        <h2>Evidence Evolution Timeline</h2>
+        <span className="section-kicker">History</span>
+        <h2>What's changed</h2>
         <p className="section-lead">
-          Chronological log of newly crawled records, verified modifications, and source discrepancies detected across public crawls.
+          New crawls, updates, and source disagreements.
         </p>
       </div>
 

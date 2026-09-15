@@ -96,10 +96,10 @@ export function SchoolsList() {
   return (
     <main className="wide directory-page">
       <header className="page-intro">
-        <div className="page-intro-badge">Public Database</div>
-        <h1>Myanmar School Registry</h1>
+        <div className="page-intro-badge">Directory</div>
+        <h1>Schools</h1>
         <p className="page-lead">
-          An objective, evidence-linked directory of private and international schools. Filter by curriculum, township, or inspection confidence status.
+          Filter by name, curriculum, or conflicting evidence.
         </p>
       </header>
 
@@ -179,7 +179,7 @@ export function SchoolsList() {
 
         <div className="filter-status-bar">
           <p className="result-count" aria-live="polite">
-            {loading ? "Scanning registry…" : `${filtered.length.toLocaleString()} school${filtered.length === 1 ? "" : "s"} found`}
+            {loading ? "Loading…" : `${filtered.length.toLocaleString()} school${filtered.length === 1 ? "" : "s"} found`}
           </p>
           {hasActiveFilters ? (
             <button type="button" className="btn-text-sm" onClick={resetFilters}>
@@ -207,8 +207,8 @@ export function SchoolsList() {
               <path d="M21 21l-4.35-4.35" />
             </svg>
           </div>
-          <h2>No matching schools found</h2>
-          <p>We couldn't find any registered schools matching your filter criteria. Try adjusting your query or resetting filters.</p>
+          <h2>No schools match these filters</h2>
+          <p>Try a different name, curriculum, or reset the filters.</p>
           <button type="button" className="btn btn-secondary" onClick={resetFilters}>
             Clear all filters
           </button>
@@ -251,7 +251,7 @@ export function SchoolsList() {
                 {school.school_group_id ? (
                   <div className="school-card-footer">
                     <Link href={`/schools/network/${school.school_group_id}`} className="network-link">
-                      <span>View campus network map →</span>
+                      <span>Network map</span>
                     </Link>
                   </div>
                 ) : null}

@@ -86,7 +86,7 @@ export function ConflictView({ schoolId, groupId }: { schoolId: string; groupId:
   if (loading) {
     return (
       <main className="wide">
-        <p>Loading contradiction…</p>
+        <p>Loading…</p>
       </main>
     );
   }

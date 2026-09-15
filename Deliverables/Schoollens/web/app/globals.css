@@ -1,7 +1,7 @@
-/* SchoolLens Design System & Bilingual UI Stylesheet */
+/* SchoolLens styles */
 
 :root {
-  /* Surface & Background Colors */
+  /* Surfaces */
   --bg: #f5f7f6;
   --bg-subtle: #edf1ef;
   --surface: #ffffff;
@@ -9,7 +9,7 @@
   --surface-elevated: #ffffff;
   --surface-inset: #f0f4f2;
 
-  /* Ink & Typography Colors */
+  /* Text */
   --ink: #11223f;
   --ink-light: #20345a;
   --body: #1c2623;
@@ -18,12 +18,12 @@
   --link: #144f82;
   --link-hover: #0c3355;
 
-  /* Line & Border Colors */
+  /* Borders */
   --line: #d6deda;
   --line-subtle: #e6ece9;
   --line-strong: #b5c2bd;
 
-  /* Semantic Confidence Palette */
+  /* Confidence */
   --supported: #156656;
   --supported-bg: #e6f5f1;
   --supported-border: #bce4da;
@@ -44,7 +44,7 @@
   --unknown-bg: #eff2f4;
   --unknown-border: #cfd8dc;
 
-  /* Sizing & Radius Tokens */
+  /* Radius */
   --header-h: 60px;
   --radius-xs: 4px;
   --radius-sm: 6px;
@@ -53,7 +53,7 @@
   --radius-xl: 18px;
   --radius-full: 9999px;
 
-  /* Box Shadows */
+  /* Shadows */
   --shadow-xs: 0 1px 2px rgba(17, 34, 63, 0.04);
   --shadow-sm: 0 1px 3px rgba(17, 34, 63, 0.06), 0 1px 2px rgba(17, 34, 63, 0.03);
   --shadow-md: 0 4px 8px -2px rgba(17, 34, 63, 0.06), 0 2px 4px -2px rgba(17, 34, 63, 0.03);
@@ -120,7 +120,7 @@ body {
 }
 
 /* ----------------------------------------------------
-   Typography Safeguards for Bilingual Myanmar + English
+/* Myanmar + English type */
 ---------------------------------------------------- */
 h1, h2, h3, h4, h5, h6 {
   color: var(--ink);
@@ -639,8 +639,7 @@ main.auth-page {
 
 .workspace-badge {
   font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 600;
   background: var(--ink);
   color: #fff;
   padding: 3px 8px;
@@ -737,9 +736,8 @@ main.auth-page {
 .section-kicker {
   display: block;
   font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   color: var(--supported);
   margin-bottom: 4px;
 }
@@ -1325,9 +1323,7 @@ main.auth-page {
 .confidence-panel-label {
   display: block;
   font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-weight: 600;
   color: var(--muted);
   margin-bottom: 12px;
 }
@@ -1378,7 +1374,6 @@ main.auth-page {
   font-size: 11px;
   font-weight: 600;
   color: var(--muted);
-  text-transform: uppercase;
   margin-bottom: 2px;
 }
 
@@ -1558,9 +1553,8 @@ main.auth-page {
   align-items: center;
   gap: 6px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--supported);
-  text-transform: uppercase;
   margin-bottom: 10px;
 }
 
@@ -1998,7 +1992,7 @@ main.auth-page {
 }
 
 /* ----------------------------------------------------
-   Ask AI Grounded Q&A View
+   Ask tab
 ---------------------------------------------------- */
 .qa-tab-container {
   display: flex;
@@ -2129,9 +2123,7 @@ main.auth-page {
 .bubble-speaker {
   display: block;
   font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  font-weight: 600;
   opacity: 0.8;
   margin-bottom: 4px;
 }
@@ -2208,8 +2200,7 @@ main.auth-page {
 .citations-header-label {
   display: block;
   font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 600;
   color: var(--muted);
   margin-bottom: 10px;
 }
