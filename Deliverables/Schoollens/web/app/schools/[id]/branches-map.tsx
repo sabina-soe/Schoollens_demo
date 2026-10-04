@@ -13,9 +13,11 @@ type Branch = {
 export function BranchesMap({
   branches,
   activeId,
+  compact = false,
 }: {
   branches: Branch[];
   activeId?: string;
+  compact?: boolean;
 }) {
   const pins = toPins(branches);
   const mapSrc = staticMapSrc(pins.map((pin) => pin.coord));
@@ -24,9 +26,11 @@ export function BranchesMap({
   if (!branches.length) return null;
 
   return (
-    <section className="profile-map" aria-label="Branch locations">
-      <h2>Locations</h2>
-      <p className="directory-meta">Every campus in this network. A pin is city-level when the street address could not be geocoded.</p>
+    <section className={compact ? "profile-map profile-map-compact" : "profile-map"} aria-label="Branch locations">
+      {compact ? null : <h2>Locations</h2>}
+      {compact ? null : (
+        <p className="directory-meta">Every campus in this network. A pin is city-level when the street address could not be geocoded.</p>
+      )}
       {mapSrc ? (
         <div className="pin-map">
           {/* OSM static tiles; pins are the tap targets */}

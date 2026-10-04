@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Noto_Sans, Noto_Sans_Myanmar } from "next/font/google";
+import { Merriweather, Open_Sans, Noto_Sans_Myanmar } from "next/font/google";
 import { SessionProvider } from "./session-context";
 import { SiteFooter } from "./site-footer";
 import { SiteHeader } from "./site-header";
 import "./globals.css";
 
-const notoSans = Noto_Sans({
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-display",
+});
+
+const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-latin",
@@ -20,11 +26,15 @@ const notoMyanmar = Noto_Sans_Myanmar({
 export const metadata: Metadata = {
   title: "SchoolLens",
   description: "Evidence-linked school facts for Myanmar. AI reconciles sources. It does not rank schools.",
+  icons: {
+    icon: "/logo-mark.png",
+    apple: "/logo-mark.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${notoSans.variable} ${notoMyanmar.variable}`}>
+    <html lang="en" className={`${merriweather.variable} ${openSans.variable} ${notoMyanmar.variable}`}>
       <body>
         <SessionProvider>
           <a className="skip-link" href="#main">

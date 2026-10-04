@@ -1,31 +1,49 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { FormEvent, useEffect, useState } from "react";
+import { BrandLogo } from "./brand-logo";
 import { SiteNav } from "./site-nav";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     setMenuOpen(false);
   }, [pathname]);
 
+  function onSearch(event: FormEvent) {
+    event.preventDefault();
+    const next = query.trim();
+    router.push(next ? `/schools?q=${encodeURIComponent(next)}` : "/schools");
+  }
+
   return (
     <header className="site-header">
       <div className="site-header-inner">
-        <Link href="/" className="site-logo" aria-label="SchoolLens Home">
-          <span className="site-mark-wrap">
-            <svg className="site-mark" viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" strokeWidth="2.2" />
-              <path d="M14.5 14.5L20 20" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+        <div className="header-brand-row">
+          <Link href="/" className="site-logo" aria-label="SchoolLens Home">
+            <BrandLogo />
+          </Link>
+          {pathname === "/" ? null : (
+          <form className="header-search" onSubmit={onSearch} role="search">
+            <svg className="header-search-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
             </svg>
-          </span>
-          <span className="site-title">SchoolLens</span>
-          <span className="site-tag">Myanmar</span>
-        </Link>
+            <input
+              name="q"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Search schools, areas, curricula..."
+              aria-label="Search schools"
+            />
+          </form>
+          )}
+        </div>
         <button
           type="button"
           className="nav-toggle"

@@ -6,3 +6,11 @@ __pycache__/
 *.pyc
 .venv/
 .DS_Store
+.vercel
+raw-crawls/fb-group/dataset_*.json
+web/tsconfig.tsbuildinfo
+demo-video/output/chk-*.jpg
+demo-video/output/enq-*.jpg
+demo-video/output/ok-*.jpg
+demo-video/output/page@*.webm
+2026-10-02-ai-solution-live-briefing/~*

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { isRegisterUnreachable } from "@/lib/public-register";
 import { Skeleton } from "../../components/ui/skeleton";
 
 const CHANGE_TYPES = ["new", "removed", "contradicted", "updated"] as const;
@@ -81,7 +82,8 @@ export function ChangesTab({ schoolId }: { schoolId: string }) {
         .eq("school_id", schoolId)
         .order("detected_at", { ascending: false });
       if (queryError) {
-        setError(queryError.message);
+        if (!isRegisterUnreachable(queryError)) setError(queryError.message);
+        setRows([]);
         setLoading(false);
         return;
       }

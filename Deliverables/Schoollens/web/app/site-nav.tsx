@@ -17,7 +17,7 @@ export function SiteNav({ open }: { open: boolean }) {
   return (
     <nav id="site-nav" className={open ? "site-nav site-nav-open" : "site-nav"} aria-label="Site">
       <Link href="/schools" className={navClass("/schools", pathname)}>
-        Schools
+        Directory
       </Link>
       <Link href="/questionnaire" className={navClass("/questionnaire", pathname)}>
         Priorities

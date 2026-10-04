@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { withTimeout, isRegisterUnreachable } from "@/lib/public-register";
 import {
   CATEGORY_SECTIONS,
   categoryId,
@@ -42,35 +43,107 @@ type StoredSummary = {
   }[] | null;
 };
 
+type FeePoster = {
+  file: string;
+  label?: string;
+  claims: string[];
+};
+
 function fallbackSummary(texts: string[]) {
   const unique = [...new Set(texts.map((text) => text.trim()).filter(Boolean))];
   if (!unique.length) return "";
   return unique.slice(0, 3).join(" ");
 }
 
-export function OverviewTab({ schoolId }: { schoolId: string }) {
+export function OverviewTab({
+  schoolId,
+  schoolName,
+  moeRange,
+  supportedShare,
+  totalGroups,
+}: {
+  schoolId: string;
+  schoolName: string;
+  moeRange: string;
+  supportedShare: number | null;
+  totalGroups: number;
+}) {
   const [sections, setSections] = useState<Section[]>([]);
   const [stored, setStored] = useState<StoredSummary | null>(null);
   const [media, setMedia] = useState<MediaItem[]>([]);
+  const [feePosters, setFeePosters] = useState<FeePoster[]>([]);
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
     const supabase = createClient();
-    (async () => {
-      const { data: groups, error: groupError } = await supabase
-        .from("claim_groups")
-        .select("id, category, confidence_label, last_updated")
-        .eq("school_id", schoolId);
-      if (groupError) {
-        setError(groupError.message);
-        setLoading(false);
-        return;
+    const extras = new AbortController();
+
+    function loadExtras(hasStored: boolean) {
+      if (!hasStored) {
+        fetch(`/api/schools/${schoolId}/summarize`, { signal: extras.signal })
+          .then((response) => response.json())
+          .then((payload) => {
+            if (cancelled) return;
+            if (payload?.summary_text || (payload?.things_to_verify || []).length) {
+              setStored(payload);
+            }
+          })
+          .catch(() => {});
       }
-      if (!groups?.length) {
+      fetch(`/api/schools/${schoolId}/media`, { signal: extras.signal })
+        .then((response) => response.json())
+        .then((payload) => {
+          if (!cancelled) setMedia(payload.items ?? []);
+        })
+        .catch(() => {
+          if (!cancelled) setMedia([]);
+        });
+      fetch("/school-fees/by-school.json", { signal: extras.signal })
+        .then((response) => response.json())
+        .then((payload) => {
+          if (!cancelled) setFeePosters(payload[schoolId]?.posters ?? []);
+        })
+        .catch(() => {
+          if (!cancelled) setFeePosters([]);
+        });
+    }
+
+    (async () => {
+      loadExtras(false);
+      setLoading(false);
+      try {
+      const [groupsRes, storedRes] = await Promise.all([
+        withTimeout(
+          supabase.from("claim_groups").select("id, category, confidence_label, last_updated").eq("school_id", schoolId),
+        ),
+        withTimeout(
+          supabase
+            .from("school_summaries")
+            .select("summary_text, key_stats, things_to_verify")
+            .eq("school_id", schoolId)
+            .maybeSingle(),
+        ),
+      ]);
+      if (cancelled) return;
+      if (storedRes.data) setStored(storedRes.data);
+      if (groupsRes.error) {
+        if (!isRegisterUnreachable(groupsRes.error)) {
+          setError(groupsRes.error.message);
+        }
         setSections([]);
         setLoading(false);
+        loadExtras(Boolean(storedRes.data));
+        return;
+      }
+
+      const groups = groupsRes.data ?? [];
+      if (!groups.length) {
+        setSections([]);
+        setLoading(false);
+        loadExtras(Boolean(storedRes.data));
         return;
       }
 
@@ -79,38 +152,23 @@ export function OverviewTab({ schoolId }: { schoolId: string }) {
         .from("claim_group_members")
         .select("claim_group_id, claim_id")
         .in("claim_group_id", groupIds);
+      if (cancelled) return;
       const claimIds = [...new Set((members ?? []).map((member) => member.claim_id))];
-      const { data: claims } = claimIds.length
-        ? await supabase.from("claims").select("id, claim_text, category, source_type, source_trust_tier").in("id", claimIds)
-        : { data: [] };
-      const { data: evidence } = claimIds.length
-        ? await supabase.from("evidence").select("claim_id, source_excerpt").in("claim_id", claimIds)
-        : { data: [] };
+      const [claimsRes, evidenceRes] = await Promise.all([
+        claimIds.length
+          ? supabase.from("claims").select("id, claim_text, category, source_type, source_trust_tier").in("id", claimIds)
+          : Promise.resolve({ data: [] as { id: string; claim_text: string | null; category: string | null; source_type: string | null; source_trust_tier: string | null }[] }),
+        claimIds.length
+          ? supabase.from("evidence").select("claim_id, source_excerpt").in("claim_id", claimIds)
+          : Promise.resolve({ data: [] as { claim_id: string; source_excerpt: string | null }[] }),
+      ]);
+      if (cancelled) return;
 
-      const claimById = Object.fromEntries((claims ?? []).map((claim) => [claim.id, claim]));
+      const claimById = Object.fromEntries((claimsRes.data ?? []).map((claim) => [claim.id, claim]));
       const excerptByClaim = new Map<string, string>();
-      for (const row of evidence ?? []) {
+      for (const row of evidenceRes.data ?? []) {
         if (row.source_excerpt && !excerptByClaim.has(row.claim_id)) {
           excerptByClaim.set(row.claim_id, row.source_excerpt);
-        }
-      }
-
-      const { data: storedRow } = await supabase
-        .from("school_summaries")
-        .select("summary_text, key_stats, things_to_verify")
-        .eq("school_id", schoolId)
-        .maybeSingle();
-      if (storedRow) {
-        setStored(storedRow);
-      } else {
-        try {
-          const response = await fetch(`/api/schools/${schoolId}/summarize`);
-          const payload = await response.json();
-          if (payload?.summary_text || (payload?.things_to_verify || []).length) {
-            setStored(payload);
-          }
-        } catch {
-          setStored(null);
         }
       }
 
@@ -159,87 +217,138 @@ export function OverviewTab({ schoolId }: { schoolId: string }) {
           };
         }),
       );
-
-      try {
-        const response = await fetch(`/api/schools/${schoolId}/media`);
-        const payload = await response.json();
-        setMedia(payload.items ?? []);
-      } catch {
-        setMedia([]);
-      }
       setLoading(false);
+      loadExtras(Boolean(storedRes.data));
+      } catch {
+        if (cancelled) return;
+        setSections([]);
+        setLoading(false);
+        loadExtras(false);
+      }
     })();
+
+    return () => {
+      cancelled = true;
+      extras.abort();
+    };
   }, [schoolId]);
 
   if (loading) {
     return (
-      <div className="tab-loading-state" aria-hidden="true">
-        <Skeleton style={{ width: "100%", height: "80px", marginBottom: "16px", borderRadius: "12px" }} />
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "12px", marginBottom: "24px" }}>
-          <Skeleton style={{ height: "64px", borderRadius: "8px" }} />
-          <Skeleton style={{ height: "64px", borderRadius: "8px" }} />
-          <Skeleton style={{ height: "64px", borderRadius: "8px" }} />
-        </div>
+      <div className="overview-tab-content" aria-hidden="true">
+        <section className="profile-section" id="overview">
+          <Skeleton style={{ width: "40%", height: "28px", marginBottom: "16px", borderRadius: "8px" }} />
+          <Skeleton style={{ width: "100%", height: "80px", borderRadius: "8px" }} />
+        </section>
+        <section className="profile-section" id="verification-hub">
+          <Skeleton style={{ width: "50%", height: "28px", marginBottom: "16px", borderRadius: "8px" }} />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+            <Skeleton style={{ height: "72px", borderRadius: "8px" }} />
+            <Skeleton style={{ height: "72px", borderRadius: "8px" }} />
+          </div>
+        </section>
+        <section className="profile-section" id="educational-stages">
+          <Skeleton style={{ width: "45%", height: "28px", borderRadius: "8px" }} />
+        </section>
+        <section className="profile-section" id="facilities">
+          <Skeleton style={{ width: "45%", height: "28px", borderRadius: "8px" }} />
+        </section>
       </div>
     );
   }
   if (error) return <div className="error-banner">{error}</div>;
-  if (sections.length === 0 && !stored?.summary_text) {
-    return (
-      <div className="empty-state-card">
-        <div className="empty-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
-          </svg>
-        </div>
-        <h2>No evidence on file yet</h2>
-        <p>This campus is registered, but no reconciled claims have been recorded. Questions will also say that sources are silent.</p>
-      </div>
-    );
-  }
 
   const stats = (stored?.key_stats ?? []).filter((item) => item.label && item.value);
   const verify = stored?.things_to_verify ?? [];
+  const curriculum = sections.find((section) => section.key === "curriculum");
+  const facilities = sections.find((section) => section.key === "facilities");
+  const languages = sections.find((section) => /language|diploma/.test(section.key));
+  const rest = sections.filter(
+    (section) =>
+      section.key !== "curriculum" &&
+      section.key !== "facilities" &&
+      section !== languages &&
+      !(feePosters.length && section.key === "fees"),
+  );
+  const summaryParagraphs = (stored?.summary_text || "")
+    .split(/\n+/)
+    .map((part) => part.trim())
+    .filter(Boolean);
 
   return (
     <div className="overview-tab-content">
-      {stored?.summary_text ? (
-        <div className="executive-summary-card">
-          <div className="summary-card-badge">
-            <svg viewBox="0 0 16 16" fill="currentColor" className="summary-icon">
-              <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 6.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-5 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM8 12a3.5 3.5 0 0 1-3.26-2.22.5.5 0 0 1 .92-.38A2.5 2.5 0 0 0 8 11a2.5 2.5 0 0 0 2.34-1.6.5.5 0 0 1 .92.38A3.5 3.5 0 0 1 8 12z" />
-            </svg>
-            <span>Summary</span>
-          </div>
-          <p className="executive-summary-text">{stored.summary_text}</p>
+      <section className="profile-section" id="overview">
+        <div className="profile-section-head">
+          <h2 className="profile-section-title">Institutional profile</h2>
+          {curriculum?.updated && freshnessLabel(curriculum.updated) ? (
+            <span className="profile-section-meta">{freshnessLabel(curriculum.updated)}</span>
+          ) : null}
         </div>
-      ) : null}
+        {summaryParagraphs.length ? (
+          summaryParagraphs.map((paragraph) => (
+            <p key={paragraph.slice(0, 48)} className="executive-summary-text">
+              {paragraph}
+            </p>
+          ))
+        ) : (
+          <p className="executive-summary-text">
+            <strong className="profile-school-name">{schoolName}</strong> is listed in the public register.
+            No reconciled institutional summary is on file yet.
+          </p>
+        )}
+        {stats.length ? (
+          <div className="stats-metric-grid">
+            {stats.map((item) => (
+              <div key={`${item.label}-${item.value}`} className="stat-metric-card">
+                <span className="metric-label">{item.label}</span>
+                <strong className="metric-value">{item.value}</strong>
+              </div>
+            ))}
+          </div>
+        ) : null}
+      </section>
 
-      {stats.length ? (
-        <div className="stats-metric-grid">
-          {stats.map((item) => (
-            <div key={`${item.label}-${item.value}`} className="stat-metric-card">
-              <span className="metric-label">{item.label}</span>
-              <strong className="metric-value">{item.value}</strong>
+      <section className="profile-section profile-section-trust" id="verification-hub">
+        <div className="profile-section-head">
+          <div>
+            <span className="profile-section-kicker">Public records</span>
+            <h2 className="profile-section-title">Data source and trust</h2>
+          </div>
+          {supportedShare != null ? (
+            <span className="trust-overall-badge">{supportedShare}% supported</span>
+          ) : (
+            <span className="trust-overall-badge trust-overall-muted">No claim groups yet</span>
+          )}
+        </div>
+        <p className="profile-section-lead">
+          Confidence comes from claim groups on file. SchoolLens does not rank this campus.
+        </p>
+        <div className="trust-score-grid">
+          <div className="trust-score-item">
+            <div className="trust-score-copy">
+              <h3>Ministry of Education</h3>
+              <p>{moeRange ? "Registered dates on file" : "No MOE dates on file"}</p>
+            </div>
+            <span className="trust-score-value">{moeRange || "Not listed"}</span>
+          </div>
+          <div className="trust-score-item">
+            <div className="trust-score-copy">
+              <h3>Claim groups</h3>
+              <p>Reconciled records from public sources</p>
+            </div>
+            <span className="trust-score-value">{totalGroups}</span>
+          </div>
+          {sections.map((section) => (
+            <div key={section.key} className="trust-score-item">
+              <div className="trust-score-copy">
+                <h3>{categoryTitle(section.key)}</h3>
+                <p>{freshnessLabel(section.updated) || "From public sources"}</p>
+              </div>
+              <ConfidenceChip label={section.confidence} size="sm" />
             </div>
           ))}
         </div>
-      ) : null}
-
-      {verify.length ? (
-        <section className="verify-alert-panel" aria-labelledby="things-to-verify">
-          <div className="verify-panel-header">
-            <svg className="verify-alert-icon" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
-            <div>
-              <h2 id="things-to-verify" className="verify-title">Worth checking</h2>
-              <p className="verify-lead">
-                These topics disagree across the register, school websites, and Facebook.
-              </p>
-            </div>
-          </div>
+        {verify.length ? (
           <div className="verify-items-list">
             {verify.map((item, index) => (
               <div key={item.claim_group_id || `${item.category}-${index}`} className="verify-item-card">
@@ -256,79 +365,160 @@ export function OverviewTab({ schoolId }: { schoolId: string }) {
               </div>
             ))}
           </div>
+        ) : null}
+      </section>
+
+      {feePosters.length ? (
+        <section className="profile-section" id="fees">
+          <div className="profile-section-head">
+            <div>
+              <span className="profile-section-kicker">Posted announcement</span>
+              <h2 className="profile-section-title">Fees</h2>
+            </div>
+            <ConfidenceChip label="likely" size="sm" />
+          </div>
+          <p className="profile-section-lead">
+            Read from a school fee poster. This is one source, so the label is likely until another independent record agrees.
+          </p>
+          {feePosters.map((poster) => (
+            <article key={poster.file} className="fee-poster-block">
+              <h3 className="fee-poster-title">{poster.label || "Fee announcement"}</h3>
+              <ul className="fee-poster-claims">
+                {poster.claims.map((claim) => (
+                  <li key={claim}>{claim}</li>
+                ))}
+              </ul>
+              <a className="fee-poster-link" href={`/school-fees/${encodeURIComponent(poster.file)}`} target="_blank" rel="noreferrer">
+                View the posted announcement
+              </a>
+            </article>
+          ))}
         </section>
       ) : null}
 
-      <MediaGallery items={media} />
-
-      <nav className="section-jump-nav" aria-label="Section shortcuts">
-        <span className="jump-title">Jump to section:</span>
-        <div className="jump-pills">
-          {sections.map((section) => (
-            <a key={section.key} href={`#${categoryId(section.key)}`} className="jump-pill">
-              {categoryTitle(section.key)}
-            </a>
-          ))}
+      <section className="profile-section" id="educational-stages">
+        <div className="profile-section-head">
+          <h2 className="profile-section-title">Educational stages</h2>
+          {curriculum ? <ConfidenceChip label={curriculum.confidence} size="sm" /> : null}
         </div>
-      </nav>
+        {curriculum ? (
+          <CategoryEvidence
+            schoolId={schoolId}
+            section={curriculum}
+            openKey={openKey}
+            setOpenKey={setOpenKey}
+          />
+        ) : (
+          <p className="profile-empty-copy">No curriculum evidence on file yet.</p>
+        )}
+      </section>
 
-      <div className="category-sections-stack">
-        {sections.map((section) => (
-          <article key={section.key} id={categoryId(section.key)} className="category-section-card">
-            <div className="section-card-header">
-              <div className="section-title-wrap">
-                <h3 className="section-card-title">{categoryTitle(section.key)}</h3>
-                {freshnessLabel(section.updated) ? (
-                  <span className="section-freshness">{freshnessLabel(section.updated)}</span>
-                ) : null}
-              </div>
-              <ConfidenceChip label={section.confidence} size="sm" />
+      {languages ? (
+        <section className="profile-section" id="languages-programs">
+          <div className="profile-section-head">
+            <h2 className="profile-section-title">Languages and programmes</h2>
+            <ConfidenceChip label={languages.confidence} size="sm" />
+          </div>
+          <CategoryEvidence
+            schoolId={schoolId}
+            section={languages}
+            openKey={openKey}
+            setOpenKey={setOpenKey}
+          />
+        </section>
+      ) : null}
+
+      <section className="profile-section" id="facilities">
+        <div className="profile-section-head">
+          <h2 className="profile-section-title">Campus and facilities</h2>
+          {facilities ? <ConfidenceChip label={facilities.confidence} size="sm" /> : null}
+        </div>
+        {facilities ? (
+          <CategoryEvidence
+            schoolId={schoolId}
+            section={facilities}
+            openKey={openKey}
+            setOpenKey={setOpenKey}
+          />
+        ) : (
+          <p className="profile-empty-copy">No facilities evidence on file yet.</p>
+        )}
+        <MediaGallery items={media} />
+      </section>
+
+      {rest.map((section) => (
+        <section key={section.key} className="profile-section" id={categoryId(section.key)}>
+          <div className="profile-section-head">
+            <div>
+              <h2 className="profile-section-title">{categoryTitle(section.key)}</h2>
+              {freshnessLabel(section.updated) ? (
+                <span className="profile-section-meta">{freshnessLabel(section.updated)}</span>
+              ) : null}
             </div>
-
-            <p className="section-summary-text">{section.summary}</p>
-
-            <div className="section-sources-toggle">
-              <button
-                type="button"
-                className="btn-sources-toggle"
-                aria-expanded={openKey === section.key}
-                onClick={() => setOpenKey(openKey === section.key ? null : section.key)}
-              >
-                <svg className={`toggle-chevron ${openKey === section.key ? "toggle-chevron-open" : ""}`} viewBox="0 0 16 16" fill="currentColor">
-                  <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" clipRule="evenodd" />
-                </svg>
-                <span>{openKey === section.key ? "Hide source documentation" : `Inspect sources (${section.sources.length})`}</span>
-              </button>
-            </div>
-
-            {openKey === section.key ? (
-              <div className="source-drawer">
-                {section.sources.length === 0 ? (
-                  <p className="source-empty-msg">No direct source excerpts attached to this section.</p>
-                ) : (
-                  <ul className="source-items-list">
-                    {section.sources.map((source, index) => (
-                      <li key={`${source.groupId}-${index}`} className="source-item-row">
-                        <div className="source-row-top">
-                          <span className="source-badge">{source.tag}</span>
-                          {source.conflicting ? (
-                            <Link href={`/schools/${schoolId}/conflict/${source.groupId}`} className="conflict-badge-link">
-                              ⚠ Disputed in records
-                            </Link>
-                          ) : null}
-                        </div>
-                        <blockquote className="source-blockquote">
-                          “{source.excerpt}”
-                        </blockquote>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ) : null}
-          </article>
-        ))}
-      </div>
+            <ConfidenceChip label={section.confidence} size="sm" />
+          </div>
+          <CategoryEvidence
+            schoolId={schoolId}
+            section={section}
+            openKey={openKey}
+            setOpenKey={setOpenKey}
+          />
+        </section>
+      ))}
     </div>
+  );
+}
+
+function CategoryEvidence({
+  schoolId,
+  section,
+  openKey,
+  setOpenKey,
+}: {
+  schoolId: string;
+  section: Section;
+  openKey: string | null;
+  setOpenKey: (key: string | null) => void;
+}) {
+  return (
+    <>
+      <p className="section-summary-text">{section.summary}</p>
+      <div className="section-sources-toggle">
+        <button
+          type="button"
+          className="btn-sources-toggle"
+          aria-expanded={openKey === section.key}
+          onClick={() => setOpenKey(openKey === section.key ? null : section.key)}
+        >
+          <svg className={`toggle-chevron ${openKey === section.key ? "toggle-chevron-open" : ""}`} viewBox="0 0 16 16" fill="currentColor">
+            <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z" clipRule="evenodd" />
+          </svg>
+          <span>{openKey === section.key ? "Hide source documentation" : `Inspect sources (${section.sources.length})`}</span>
+        </button>
+      </div>
+      {openKey === section.key ? (
+        <div className="source-drawer">
+          {section.sources.length === 0 ? (
+            <p className="source-empty-msg">No direct source excerpts attached to this section.</p>
+          ) : (
+            <ul className="source-items-list">
+              {section.sources.map((source, index) => (
+                <li key={`${source.groupId}-${index}`} className="source-item-row">
+                  <div className="source-row-top">
+                    <span className="source-badge">{source.tag}</span>
+                    {source.conflicting ? (
+                      <Link href={`/schools/${schoolId}/conflict/${source.groupId}`} className="conflict-badge-link">
+                        Disputed in records
+                      </Link>
+                    ) : null}
+                  </div>
+                  <blockquote className="source-blockquote">“{source.excerpt}”</blockquote>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ) : null}
+    </>
   );
 }

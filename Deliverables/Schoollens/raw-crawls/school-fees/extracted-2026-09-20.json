@@ -1,0 +1,306 @@
+{
+  "extracted_at": "2026-09-20",
+  "note": "OCR from School_fee posters. Amounts are as printed; currency mixed MMK/USD/lakhs. Myanmar International School (MIS, mis-edu.com) is not MISY.",
+  "posters": [
+    {
+      "file": "ILBC.jpg",
+      "label": "ILBC Yangon / Nay Pyi Taw and ILBC Monywa",
+      "match": ["ILBC International School"],
+      "prefer_id": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+      "source_type": "website",
+      "claims": [
+        "ILBC IGCSE and A Level School publishes an on-campus and online school fee table for ILBC Yangon / Nay Pyi Taw.",
+        "ILBC Yangon / Nay Pyi Taw Kindergarten on-campus fee is MMK 1,249,000; online fee is MMK 694,000.",
+        "ILBC Yangon / Nay Pyi Taw Primary I–III on-campus fee is MMK 1,285,000; online fee is MMK 730,000.",
+        "ILBC Yangon / Nay Pyi Taw Secondary VI on-campus fee is MMK 1,365,000; online fee is MMK 810,000.",
+        "ILBC Monywa publishes online school fees, including Kindergarten MMK 744,000 and Primary I MMK 780,000 (table crop is incomplete)."
+      ]
+    },
+    {
+      "file": "ILBC Parami.jpg",
+      "label": "ILBC Parami preschool, Hlaing",
+      "match": ["ILBC", "Parami"],
+      "prefer_id": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+      "address_hint": ["Hlaing", "Parami"],
+      "source_type": "website",
+      "claims": [
+        "ILBC Parami (No.1, Parami Road, 16 Quarter, Hlaing Township) announced preschool fee changes dated 17.3.2026, effective 1.6.2026.",
+        "Regular classes (Mon–Fri 9:00 a.m.–2:00 p.m.) new fee is MMK 900,000.",
+        "Online junior/senior classes fee is MMK 500,000; KG preparation online is MMK 600,000.",
+        "Part-time classes and play group (age 2.6 to 3 years) fees are MMK 600,000.",
+        "Move & Groove classes fee is MMK 500,000; admission fee for that slot is MMK 150,000.",
+        "Admission fees: new student MMK 200,000; rejoined student MMK 50,000."
+      ]
+    },
+    {
+      "file": "Yangon International School.jpg",
+      "label": "YIS Yangon Campus 2026-2027",
+      "match": ["Yangon International School (YIS)", "Yangon International School"],
+      "prefer_id": "038e4ef9-a8a3-4dca-9ea9-aad223fc71c5",
+      "source_type": "website",
+      "claims": [
+        "Yangon International School published School Fees for the 2026-2027 academic year for Yangon Campus, reviewed annually, in MMK.",
+        "Early Childhood half-day total tuition is MMK 14,400,000; full-day is MMK 28,800,000.",
+        "KG total tuition is MMK 54,093,600; Grade 1 is MMK 62,748,000; Grades 11–12 is MMK 99,766,800.",
+        "Annual Capital Levy Fee is MMK 4,320,000 for students enrolling in the K-12 programme and is non-refundable."
+      ]
+    },
+    {
+      "file": "Myanmar International School.jpg",
+      "label": "Myanmar International School (MIS), Yankin — not MISY",
+      "match": ["Myanmar International School"],
+      "exclude": ["MISY", "Myanmar International School Yangon"],
+      "website_hint": "mis-edu.com",
+      "source_type": "website",
+      "claims": [
+        "Myanmar International School (No. 20, Pyin Nya Waddy St., Yankin Township; website https://mis-edu.com) issued 2026-2027 academic year school fees on 24 February 2026.",
+        "Nursery normal whole-year fee is MMK 12,600,000; Year 13 is MMK 64,000,000.",
+        "Registration fee for new students is MMK 2,400,000 and is non-refundable.",
+        "A 10% discount applies if a 10% deposit is paid by 31 March 2026; an extra 5% is offered if the full year is paid in a lump sum by 31 July 2026.",
+        "A 5% sibling discount applies to the second youngest child and consecutive younger siblings; the eldest child is not eligible."
+      ]
+    },
+    {
+      "file": "The British School Yangon.jpg",
+      "label": "The British School Yangon 2025/2026",
+      "match": ["British School Yangon", "The British School Yangon"],
+      "source_type": "website",
+      "claims": [
+        "The British School Yangon (a Nord Anglia Education school) published a Schedule of Fees for the 2025/2026 academic year in USD.",
+        "Pre-Nursery and Nursery annual fee is USD 20,097; Reception is USD 24,833; Years 1–6 is USD 28,529.",
+        "Year 13 annual fee is USD 36,186. Amounts do not include registration fees for external exams (IGCSE, AS and A Levels).",
+        "Application fee is USD 250, non-refundable. Enrolment fee is USD 3,500 plus a refundable deposit of USD 1,500 per family."
+      ]
+    },
+    {
+      "file": "Kings Yangon.jpg",
+      "label": "Kings Yangon 2025-2027",
+      "match": ["Kings Yangon International School", "Kings Yangon"],
+      "source_type": "website",
+      "claims": [
+        "Kings Yangon published 2025-2027 academic year fees with campuses in Bahan Township (Inya Myaing Road / Shwe Taung Kyar).",
+        "Admission fee is 90 lakhs MMK, payable with the application, and is non-refundable.",
+        "Tuition fees (MMK lakhs): Pre-School Rising 2 is 510; Nursery 563; Reception 607; Primary Years 1–6 is 717; A Level Years 12–13 is 1,049.",
+        "Tuition does not cover textbooks, uniforms, exams, trips, bus, ECA, or SEN support."
+      ]
+    },
+    {
+      "file": "Kings INternational School.jpg",
+      "label": "KINGS International School 2026-2027",
+      "match": ["KINGS International School", "Kings International School", "KIS"],
+      "email_hint": "kis-mm.com",
+      "source_type": "website",
+      "claims": [
+        "KINGS International School announced 2026-2027 admissions across six campuses, with re-enrolment options due by 30 March 2026.",
+        "Re-enrolment deposit is MMK 1,500,000 by 30 March 2026; non-refundable but credited to next year fees.",
+        "Early-bird rebate: MMK 600,000 for annual payment or MMK 300,000 for termly payment by 30 March 2026.",
+        "From 1 June onwards, Nursery annual fee is MMK 19,250,000; Year 10 is MMK 30,800,000; Year 11 is MMK 23,100,000."
+      ]
+    },
+    {
+      "file": "Network.jpg",
+      "label": "Network International School 2026-2027",
+      "match": ["Network International School"],
+      "source_type": "website",
+      "claims": [
+        "Network International School published a 2026-2027 schedule of tuition fees in USD and describes itself as not-for-profit.",
+        "EYFS Foundation 1 (3 days) annual fee is USD 6,500; Foundation 3 is USD 11,800.",
+        "Primary Years 1–4 annual fee is USD 12,600; Years 5–6 is USD 13,000.",
+        "Sixth Form Years 12–13 annual fee is USD 17,000. The school reserves the right to amend the schedule."
+      ]
+    },
+    {
+      "file": "Pride International School.jpg",
+      "label": "Pride International School Myanmar Year 2 2025-2026",
+      "match": ["Pride International School"],
+      "source_type": "website",
+      "claims": [
+        "Pride International School Myanmar published Year 2 tuition fees for academic year 2025-2026.",
+        "Plan A in-person/blended programme is MMK 8,700,000; Plan B online is MMK 8,265,000.",
+        "Whole-year lump sum for Plan A is MMK 8,265,000 (5% discount) in cash before 1 August 2025.",
+        "Payments are cash only at the Primary School main reception, 8:00 a.m. to 3:30 p.m."
+      ]
+    },
+    {
+      "file": "Crane International School.jpg",
+      "label": "Quarter school fees nursery to Year 12 (filename: Crane)",
+      "match": ["Crane International School", "Crane"],
+      "source_type": "website",
+      "claims": [
+        "A quarterly fee table (four instalments) covers Nursery to Year 12, with first payment due 1–14 August 2025.",
+        "Nursery payment total is USD 3,850; Year 12 payment total is USD 8,900.",
+        "A 5% discount applies if the first quarter is paid before 31 July 2025."
+      ]
+    },
+    {
+      "file": "Yangon Academy.jpg",
+      "label": "Yangon Academy fee note",
+      "match": ["Yangon Academy"],
+      "source_type": "fb_page",
+      "claims": [
+        "KG whole-year school fee is listed as USD 9,100, plus registration USD 600, textbook USD 200, and annual service fee MMK 400,000.",
+        "G1–G5 fee is listed as USD 11,500; G6–G8 USD 13,200; G9–G10 USD 14,100; G11–G12 USD 14,300.",
+        "The note states a sibling discount exists (Burmese line); no percentage is printed in English."
+      ]
+    },
+    {
+      "file": "ALBA.jpg",
+      "label": "ALBA 2026-2027 per semester",
+      "match": ["ALBA"],
+      "source_type": "website",
+      "claims": [
+        "A 2026-2027 per-semester table lists Nursery at MMK 1,250,000 and Foundation at MMK 2,200,000.",
+        "Year 10 and Year 11 are listed at MMK 2,300,000 per semester.",
+        "Year 1 is listed as 1380 and Years 2–4 as 1580 without a currency label on those rows (Nursery rows are MMK)."
+      ]
+    },
+    {
+      "file": "IIP International School.jpg",
+      "label": "IIP 2026-27",
+      "match": ["IIP International School"],
+      "source_type": "website",
+      "claims": [
+        "IIP International School published 2026-27 fees in MMK: Year 1–3 annual school fee MMK 7,670,000 plus documentation MMK 1,000,000 (total MMK 8,670,000).",
+        "Year 9 annual school fee is MMK 8,890,000 plus documentation MMK 1,500,000 (total MMK 10,390,000).",
+        "IGCSE Years 10–11 monthly school fee is MMK 150,000 per subject, plus documentation MMK 1,000,000."
+      ]
+    },
+    {
+      "file": "NIEC.jpg",
+      "label": "NIEC 2026-2027",
+      "match": ["NIEC"],
+      "source_type": "website",
+      "claims": [
+        "NIEC International School (Nursery to IGCSE) published 2026-2027 fees for 1 June 2026 to 16 March 2027, with Yankin, Thuwana, and Tachileik campuses listed.",
+        "Nursery to Year 1 course fee is MMK 7,000,000 in 3 instalments; Years 10–11 IGCSE course fee is MMK 9,800,000 in 4 instalments.",
+        "Registration fee is MMK 150,000; placement test fee is MMK 30,000. Late payment fee is MMK 5,000 per day.",
+        "10% discount for one-year school fee payment; sibling discounts 3%/5%/8% for second/third/fourth sibling."
+      ]
+    },
+    {
+      "file": "HELIX.jpg",
+      "label": "HELIX Primary 1 to 6",
+      "match": ["HELIX", "Helix International"],
+      "source_type": "fb_page",
+      "claims": [
+        "HELIX International School listed Primary 1–6 fees for a 10-month duration at No.15(D), Padonmar Street, Dagon Township.",
+        "Campus monthly fee is MMK 750,000 (yearly MMK 6,750,000); online monthly fee is MMK 550,000 (yearly MMK 5,000,000).",
+        "Registration fee is MMK 300,000 (campus or online). Campus documentation fee is MMK 600,000; online documentation fee is MMK 300,000.",
+        "Sibling discount 5% for the second child and 10% for the third child."
+      ]
+    },
+    {
+      "file": "WARRIORS.jpg",
+      "label": "Warriors 2026-2027",
+      "match": ["WARRIORS", "Warriors International"],
+      "source_type": "website",
+      "claims": [
+        "Warriors published 2026-2027 fees: registration MMK 200,000, documentation MMK 500,000 for Years 1–7, uniform MMK 25,000.",
+        "Years 1–7 monthly school fee is MMK 425,000 and annual fee is MMK 4,250,000 for 10 months (Mon–Fri 10:00 a.m.–4:00 p.m.).",
+        "Pre IGCSE monthly fee is MMK 445,000 (annual MMK 4,450,000). IGCSE O level monthly fee is MMK 545,000 (annual MMK 9,810,000 over 18 months).",
+        "IGCSE documentation fee is listed as MMK 600,000 on the lower block of the same poster."
+      ]
+    },
+    {
+      "file": "Hallway International School.jpg",
+      "label": "Hallway Yangon on-campus 2026-2027",
+      "match": ["Hallway International School"],
+      "source_type": "website",
+      "claims": [
+        "Hallway International School Yangon (on campus) published 2026-2027 fees in MMK with termly (5%) and yearly (7%) discounts.",
+        "Preschool (Nursery 1/2, K1, K2) monthly fee is MMK 225,000; yearly discounted fee is MMK 2,092,500.",
+        "P6 monthly fee is MMK 430,000; yearly discounted fee is MMK 3,999,000.",
+        "One-time registration is MMK 50,000; documentation and material fees MMK 150,000. Younger-sibling discount is 7%."
+      ]
+    },
+    {
+      "file": "Pumpkin International School.jpg",
+      "label": "Pumpkin 2026-2027",
+      "match": ["Pumpkin International School"],
+      "source_type": "website",
+      "claims": [
+        "Pumpkin International School listed centres in Mayangone, Kamayut, and Hlaing Tharyar for the 2026-2027 academic year.",
+        "Total school fees for 2026-2027 are MMK 6,000,000. Cash-down plan with 10% discount is MMK 5,400,000.",
+        "Nursery/PreKG seat fee is MMK 200,000 to confirm the place."
+      ]
+    },
+    {
+      "file": "EDUSN.jpg",
+      "label": "EDUSN Year 4 to 6",
+      "match": ["EDUSN"],
+      "source_type": "fb_page",
+      "claims": [
+        "EDUSN International Digital School (edusn.co.uk Facebook) lists Year 4 to 6 total fees as MMK 5,900,000 plus MMK 700,000 material fees.",
+        "Instalments: first MMK 2,360,000; second MMK 1,770,000; third MMK 1,770,000."
+      ]
+    },
+    {
+      "file": "EGIS.jpg",
+      "label": "EGIS Primary 2026-2027",
+      "match": ["EGIS"],
+      "source_type": "website",
+      "claims": [
+        "EGIS published 2026-2027 primary school fees with monthly, term (3 months), and annual (10 months, 15% off) columns.",
+        "Year 1 monthly fee is MMK 350,000; annual listed as MMK 3,500,000 / discounted MMK 2,975,000, plus book and test fees MMK 500,000.",
+        "Year 6 monthly fee is MMK 450,000; annual listed as MMK 4,500,000 / discounted MMK 3,825,000, plus book and test fees MMK 600,000."
+      ]
+    },
+    {
+      "file": "ISE International School of Education.jpg",
+      "label": "ISE 2026-2027",
+      "match": ["ISE International", "International School of Education"],
+      "source_type": "website",
+      "claims": [
+        "ISE International School of Education published a 2026-2027 fee structure from Mayangone Township (Pyay Road).",
+        "Reception 1–2 school fee is MMK 5,500,000; Years 8–9 is MMK 6,500,000.",
+        "New-student registration fee is MMK 200,000 (non-refundable); material fee is MMK 350,000.",
+        "Quoted school fees are valid for six months only."
+      ]
+    },
+    {
+      "file": "Concept X.jpg",
+      "label": "Concept X campus annual fees",
+      "match": ["Concept X", "ConceptX"],
+      "source_type": "fb_page",
+      "claims": [
+        "Campus annual fees: Pre-Primary MMK 3,000,000; Primary 6 MMK 3,600,000; IGCSE Year 1 MMK 4,200,000.",
+        "Registration fee MMK 150,000; documentation fee MMK 300,000.",
+        "Registration/admission sibling amounts: MMK 100,000 for a sibling who is a student, MMK 150,000 for a sibling who is not (as printed in the Burmese/English note)."
+      ]
+    },
+    {
+      "file": "Milestone International School.jpg",
+      "label": "Milestone Yangon promotion 2026-2027",
+      "match": ["Milestone International School"],
+      "source_type": "website",
+      "claims": [
+        "Milestone International School Yangon advertised 2026-2027 school fees with a special promotion.",
+        "Reception listed fee is MMK 5,400,000 (promotional MMK 4,640,000).",
+        "Years 1–6 listed fee is MMK 6,960,000 (promotional MMK 5,796,000)."
+      ]
+    },
+    {
+      "file": "ACAE International School.jpg",
+      "label": "ACAE August intake 2026-2027",
+      "match": ["ACAE"],
+      "source_type": "fb_page",
+      "claims": [
+        "ACAE International School messaged 2026-2027 (August intake) registration fees of MMK 500,000.",
+        "Standard academic-year school fees: Preschool MMK 9,600,000; Primary MMK 10,800,000; Secondary MMK 12,000,000.",
+        "20% off standard school fees if paid by 31 May 2026."
+      ]
+    },
+    {
+      "file": "LFIR.jpg",
+      "label": "LFIR / French School of Yangon 2026-2027",
+      "match": ["French School", "LFIR", "Lycée", "Rangoun"],
+      "source_type": "website",
+      "claims": [
+        "Lycée Français International de Rangoun published 2026-2027 registration/initial enrolment fee of USD 1,700 (one-time; TPS fee suspended until the following year).",
+        "Maternelle TPS half-day personal payment is USD 3,700; full day USD 5,800.",
+        "Élémentaire (Grades 1–5) personal payment is USD 11,700; collège (Grades 6–9) personal payment is USD 12,100.",
+        "Employer participation rates are higher (for example collège USD 16,700)."
+      ]
+    }
+  ]
+}

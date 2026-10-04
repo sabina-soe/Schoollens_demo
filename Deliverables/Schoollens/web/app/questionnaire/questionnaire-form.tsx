@@ -3,11 +3,11 @@
 import Link from "next/link";
 import { FormEvent, useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { CITIES } from "@/lib/places";
 import { SignInControl } from "../sign-in-control";
 import { Skeleton } from "../components/ui/skeleton";
 
 const BUDGETS = ["Under MMK 500,000", "MMK 500,000–1,000,000", "MMK 1,000,000–3,000,000", "Over MMK 3,000,000"];
-const CITIES = ["Yangon", "Mandalay", "Naypyidaw", "Taunggyi", "Mawlamyine", "Pathein", "Other"];
 const PRIORITY_KEYS = [
   { key: "fees", label: "Tuition & Fees" },
   { key: "curriculum", label: "Curriculum & Accreditation" },

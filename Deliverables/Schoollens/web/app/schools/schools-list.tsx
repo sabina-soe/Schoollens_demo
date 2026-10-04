@@ -1,11 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { CONFIDENCE_LABELS, type ConfidenceLabel } from "@/lib/confidence";
+import { isRegisterUnreachable, loadLocalSchools, withTimeout } from "@/lib/public-register";
 import { headlineConfidence } from "@/lib/row-confidence";
 import { ConfidenceChip } from "./[id]/confidence-chip";
 import { SchoolCardSkeleton } from "../components/ui/skeleton";
+import { placeMatchesAddress } from "@/lib/places";
 
 type School = {
   id: string;
@@ -13,49 +17,134 @@ type School = {
   address: string | null;
   curriculum_type: string | null;
   school_group_id: string | null;
+  moe_approved_from: string | null;
 };
 
 type SortKey = "name" | "concern" | "supported";
 
+const CONFIDENCE_TITLES: Record<ConfidenceLabel, string> = {
+  supported: "Supported",
+  likely: "Likely",
+  conflicting: "Conflicting",
+  outdated: "Outdated",
+  unknown: "Unknown",
+};
+
+function schoolMonogram(name: string) {
+  const letters = name
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((word) => word[0])
+    .join("")
+    .replace(/[^A-Za-z]/g, "")
+    .slice(0, 3)
+    .toUpperCase();
+  return letters || name.slice(0, 3).toUpperCase();
+}
+
+function placeLabel(address: string | null) {
+  if (!address) return "";
+  const parts = address.split(/[,/]/).map((part) => part.trim()).filter(Boolean);
+  return parts[parts.length - 1] || "";
+}
+
 export function SchoolsList() {
+  const searchParams = useSearchParams();
   const [schools, setSchools] = useState<School[]>([]);
   const [labelsBySchool, setLabelsBySchool] = useState<Record<string, string[]>>({});
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
-  const [query, setQuery] = useState("");
-  const [curriculum, setCurriculum] = useState("");
-  const [onlyConflicts, setOnlyConflicts] = useState(false);
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
+  const [location, setLocation] = useState(searchParams.get("location") ?? "");
+  const [selectedCurricula, setSelectedCurricula] = useState<string[]>([]);
+  const [selectedConfidences, setSelectedConfidences] = useState<ConfidenceLabel[]>([]);
   const [sort, setSort] = useState<SortKey>("name");
 
   useEffect(() => {
     const supabase = createClient();
     (async () => {
-      const { data, error: queryError } = await supabase
-        .from("schools")
-        .select("id, name, address, curriculum_type, school_group_id")
-        .order("name");
-      if (queryError) {
-        setError(queryError.message);
+      const local = await loadLocalSchools();
+      if (local.length) {
+        setSchools(local);
         setLoading(false);
-        return;
       }
-      const rows = data ?? [];
-      setSchools(rows);
-      const { data: groups } = await supabase.from("claim_groups").select("school_id, confidence_label");
-      const next: Record<string, string[]> = {};
-      for (const group of groups ?? []) {
-        const list = next[group.school_id] ?? [];
-        list.push(group.confidence_label ?? "unknown");
-        next[group.school_id] = list;
+      try {
+        const { data, error: queryError } = await withTimeout(
+          supabase
+            .from("schools")
+            .select("id, name, address, curriculum_type, school_group_id, moe_approved_from")
+            .order("name"),
+        );
+        if (queryError) throw new Error(queryError.message);
+        const rows = data ?? [];
+        if (!rows.length) return;
+        setSchools(rows);
+        const { data: groups } = await supabase.from("claim_groups").select("school_id, confidence_label");
+        const next: Record<string, string[]> = {};
+        for (const group of groups ?? []) {
+          const list = next[group.school_id] ?? [];
+          list.push(group.confidence_label ?? "unknown");
+          next[group.school_id] = list;
+        }
+        setLabelsBySchool(next);
+        setError(null);
+      } catch (caught) {
+        if (!local.length && !isRegisterUnreachable(caught)) {
+          setError(caught instanceof Error ? caught.message : "Could not load the register.");
+        }
+      } finally {
+        setLoading(false);
       }
-      setLabelsBySchool(next);
-      setLoading(false);
     })();
   }, []);
 
+  useEffect(() => {
+    setQuery(searchParams.get("q") ?? "");
+    setLocation(searchParams.get("location") ?? "");
+  }, [searchParams]);
+
   const curricula = useMemo(
-    () => [...new Set(schools.map((school) => school.curriculum_type).filter((value): value is string => Boolean(value)))],
+    () => [...new Set(schools.map((school) => school.curriculum_type).filter((value): value is string => Boolean(value)))].sort(),
     [schools],
+  );
+
+  const places = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const school of schools) {
+      const place = placeLabel(school.address);
+      if (!place) continue;
+      counts.set(place, (counts.get(place) ?? 0) + 1);
+    }
+    return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  }, [schools]);
+
+  const curriculumCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const school of schools) {
+      if (!school.curriculum_type) continue;
+      counts.set(school.curriculum_type, (counts.get(school.curriculum_type) ?? 0) + 1);
+    }
+    return counts;
+  }, [schools]);
+
+  const confidenceCounts = useMemo(() => {
+    const next: Record<ConfidenceLabel, number> = {
+      supported: 0,
+      likely: 0,
+      conflicting: 0,
+      outdated: 0,
+      unknown: 0,
+    };
+    for (const school of schools) {
+      const labels = labelsBySchool[school.id] ?? [];
+      next[headlineConfidence(labels)] += 1;
+    }
+    return next;
+  }, [schools, labelsBySchool]);
+
+  const topCurricula = useMemo(
+    () => [...curriculumCounts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([name]) => name),
+    [curriculumCounts],
   );
 
   const filtered = useMemo(() => {
@@ -63,10 +152,14 @@ export function SchoolsList() {
     const rows = schools.filter((school) => {
       const labels = labelsBySchool[school.id] ?? [];
       const headline = headlineConfidence(labels);
-      if (curriculum && school.curriculum_type !== curriculum) return false;
-      if (onlyConflicts && headline !== "conflicting") return false;
-      if (!needle) return true;
-      return `${school.name} ${school.address ?? ""}`.toLowerCase().includes(needle);
+      if (selectedCurricula.length && (!school.curriculum_type || !selectedCurricula.includes(school.curriculum_type))) {
+        return false;
+      }
+      if (selectedConfidences.length && !selectedConfidences.includes(headline)) return false;
+      const haystack = `${school.name} ${school.address ?? ""}`.toLowerCase();
+      if (needle && !haystack.includes(needle)) return false;
+      if (location.trim() && !placeMatchesAddress(school.address, location.trim())) return false;
+      return true;
     });
     return rows.sort((a, b) => {
       const aLabels = labelsBySchool[a.id] ?? [];
@@ -82,184 +175,353 @@ export function SchoolsList() {
       }
       return a.name.localeCompare(b.name);
     });
-  }, [schools, labelsBySchool, query, curriculum, onlyConflicts, sort]);
+  }, [schools, labelsBySchool, query, location, selectedCurricula, selectedConfidences, sort]);
 
   function resetFilters() {
     setQuery("");
-    setCurriculum("");
-    setOnlyConflicts(false);
+    setLocation("");
+    setSelectedCurricula([]);
+    setSelectedConfidences([]);
     setSort("name");
   }
 
-  const hasActiveFilters = Boolean(query || curriculum || onlyConflicts || sort !== "name");
+  function toggleCurriculum(value: string) {
+    setSelectedCurricula((current) =>
+      current.includes(value) ? current.filter((item) => item !== value) : [...current, value],
+    );
+  }
+
+  function toggleConfidence(value: ConfidenceLabel) {
+    setSelectedConfidences((current) =>
+      current.includes(value) ? current.filter((item) => item !== value) : [...current, value],
+    );
+  }
+
+  function onFilterSubmit(event: FormEvent) {
+    event.preventDefault();
+    document.getElementById("directory-results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  const hasActiveFilters = Boolean(
+    query || location || selectedCurricula.length || selectedConfidences.length || sort !== "name",
+  );
+  const allActive = selectedCurricula.length === 0 && selectedConfidences.length === 0 && !location;
+  const heroCurriculum = selectedCurricula.length === 1 ? selectedCurricula[0] : "";
 
   return (
-    <main className="wide directory-page">
-      <header className="page-intro">
-        <div className="page-intro-badge">Directory</div>
-        <h1>Schools</h1>
-        <p className="page-lead">
-          Filter by name, curriculum, or conflicting evidence.
-        </p>
-      </header>
+    <main className="directory-page">
+      <section className="dir-strip">
+        <div className="dir-inner">
+          <nav className="breadcrumb" aria-label="Breadcrumb">
+            <Link href="/" className="breadcrumb-link">
+              Home
+            </Link>
+            <span className="breadcrumb-separator" aria-hidden="true">
+              /
+            </span>
+            <span className="breadcrumb-current">Directory</span>
+          </nav>
+          <div className="profile-ticker">
+            <span className="profile-ticker-dot" aria-hidden="true" />
+            <span className="profile-ticker-text">Public records · not a ranking</span>
+          </div>
+        </div>
+      </section>
 
-      <div className="filter-card">
-        <form className="filter-bar" onSubmit={(event) => event.preventDefault()}>
-          <div className="filter-field filter-search">
-            <label htmlFor="q">Search by name or address</label>
-            <div className="input-search-wrap">
-              <svg className="input-search-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
-              </svg>
-              <input
-                id="q"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="e.g. Yangon, Cambridge, International…"
-                autoComplete="off"
-                className="input-search"
-              />
-              {query ? (
-                <button
-                  type="button"
-                  className="input-clear-btn"
-                  onClick={() => setQuery("")}
-                  aria-label="Clear search query"
+      <section className="dir-hero">
+        <div className="dir-inner">
+          <div className="page-intro-badge">Independent evidence ledger</div>
+          <h1>Schools in the public register</h1>
+          <p className="page-lead">
+            {loading
+              ? "Search MOE-registered private and international schools. Each campus shows a confidence label, not a ranking."
+              : `Search ${schools.length.toLocaleString()} campuses. Claims are reconciled from the MOE register, school websites, and Facebook.`}
+          </p>
+
+          <form className="dir-filter-card" onSubmit={onFilterSubmit}>
+            <div className="dir-filter-grid">
+              <div className="filter-field dir-filter-query">
+                <label htmlFor="q">Institution or keyword</label>
+                <div className="input-search-wrap">
+                  <svg className="input-search-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path
+                      fillRule="evenodd"
+                      d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <input
+                    id="q"
+                    value={query}
+                    onChange={(event) => setQuery(event.target.value)}
+                    placeholder="e.g. Yangon, Cambridge, International…"
+                    autoComplete="off"
+                    className="input-search"
+                  />
+                  {query ? (
+                    <button type="button" className="input-clear-btn" onClick={() => setQuery("")} aria-label="Clear search query">
+                      ✕
+                    </button>
+                  ) : null}
+                </div>
+              </div>
+
+              <div className="filter-field">
+                <label htmlFor="curriculum">Curriculum</label>
+                <select
+                  id="curriculum"
+                  value={heroCurriculum}
+                  onChange={(event) => setSelectedCurricula(event.target.value ? [event.target.value] : [])}
+                  className="select-custom"
                 >
-                  ✕
+                  <option value="">All curricula</option>
+                  {curricula.map((item) => (
+                    <option key={item} value={item}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="dir-filter-actions">
+                <button type="submit" className="btn btn-primary">
+                  Filter
                 </button>
-              ) : null}
+                <button type="button" className="btn btn-secondary" onClick={resetFilters} title="Reset filters">
+                  Reset
+                </button>
+              </div>
             </div>
-          </div>
+          </form>
+        </div>
+      </section>
 
-          <div className="filter-field">
-            <label htmlFor="curriculum">Curriculum</label>
-            <select
-              id="curriculum"
-              value={curriculum}
-              onChange={(event) => setCurriculum(event.target.value)}
-              className="select-custom"
+      <section className="dir-toolbar">
+        <div className="dir-inner dir-toolbar-inner">
+          <div className="dir-pills" role="tablist" aria-label="Quick filters">
+            <button
+              type="button"
+              className={`dir-pill ${allActive ? "dir-pill-active" : ""}`}
+              onClick={() => {
+                setSelectedCurricula([]);
+                setSelectedConfidences([]);
+                setLocation("");
+              }}
             >
-              <option value="">All Curricula</option>
-              {curricula.map((item) => (
-                <option key={item} value={item}>
-                  {item}
-                </option>
-              ))}
-            </select>
+              All institutions
+              <span className="dir-pill-count">{schools.length}</span>
+            </button>
+            <button
+              type="button"
+              className={`dir-pill ${selectedConfidences.length === 1 && selectedConfidences[0] === "conflicting" ? "dir-pill-active" : ""}`}
+              onClick={() => setSelectedConfidences(["conflicting"])}
+            >
+              Conflicting evidence
+              <span className="dir-pill-count">{confidenceCounts.conflicting}</span>
+            </button>
+            {topCurricula.map((item) => (
+              <button
+                key={item}
+                type="button"
+                className={`dir-pill ${selectedCurricula.length === 1 && selectedCurricula[0] === item ? "dir-pill-active" : ""}`}
+                onClick={() => setSelectedCurricula([item])}
+              >
+                {item}
+                <span className="dir-pill-count">{curriculumCounts.get(item)}</span>
+              </button>
+            ))}
           </div>
-
-          <div className="filter-field">
-            <label htmlFor="sort">Sort by</label>
-            <select
-              id="sort"
-              value={sort}
-              onChange={(event) => setSort(event.target.value as SortKey)}
-              className="select-custom"
-            >
+          <label className="dir-sort">
+            <span>Sort</span>
+            <select value={sort} onChange={(event) => setSort(event.target.value as SortKey)} className="select-custom">
               <option value="name">Alphabetical (A–Z)</option>
               <option value="concern">Most conflicting first</option>
               <option value="supported">Most supported first</option>
             </select>
-          </div>
-
-          <div className="filter-toggle-wrap">
-            <label className={`filter-toggle-pill ${onlyConflicts ? "filter-toggle-pill-active" : ""}`}>
-              <input
-                type="checkbox"
-                checked={onlyConflicts}
-                onChange={(event) => setOnlyConflicts(event.target.checked)}
-                className="sr-only"
-              />
-              <span className="toggle-indicator" />
-              <span>Conflicts Only</span>
-            </label>
-          </div>
-        </form>
-
-        <div className="filter-status-bar">
-          <p className="result-count" aria-live="polite">
-            {loading ? "Loading…" : `${filtered.length.toLocaleString()} school${filtered.length === 1 ? "" : "s"} found`}
-          </p>
-          {hasActiveFilters ? (
-            <button type="button" className="btn-text-sm" onClick={resetFilters}>
-              Reset all filters
-            </button>
-          ) : null}
+          </label>
         </div>
-      </div>
+      </section>
 
-      {error ? <div className="error-banner">{error}</div> : null}
+      <section className="dir-body" id="directory-results">
+        <div className="dir-inner dir-layout">
+          <aside className="dir-aside">
+            <div className="dir-aside-head">
+              <h2>Filters</h2>
+              <button type="button" className="btn-text-sm" onClick={resetFilters} disabled={!hasActiveFilters}>
+                Reset all
+              </button>
+            </div>
+            <div className="dir-aside-note">
+              <strong>Evidence on file</strong>
+              <p>Confidence comes from claim groups. SchoolLens does not rank these campuses.</p>
+            </div>
 
-      {loading ? (
-        <div className="schools-grid" aria-hidden="true">
-          {Array.from({ length: 6 }, (_, index) => (
-            <SchoolCardSkeleton key={index} />
-          ))}
-        </div>
-      ) : null}
+            <fieldset className="dir-facet">
+              <legend>Confidence</legend>
+              {CONFIDENCE_LABELS.map((label) => (
+                <label key={label} className="dir-check">
+                  <span>
+                    <input
+                      type="checkbox"
+                      checked={selectedConfidences.includes(label)}
+                      onChange={() => toggleConfidence(label)}
+                    />
+                    {CONFIDENCE_TITLES[label]}
+                  </span>
+                  <span className="dir-check-count">{confidenceCounts[label]}</span>
+                </label>
+              ))}
+            </fieldset>
 
-      {!loading && !error && filtered.length === 0 ? (
-        <div className="empty-state-card">
-          <div className="empty-icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-              <circle cx="11" cy="11" r="8" />
-              <path d="M21 21l-4.35-4.35" />
-            </svg>
-          </div>
-          <h2>No schools match these filters</h2>
-          <p>Try a different name, curriculum, or reset the filters.</p>
-          <button type="button" className="btn btn-secondary" onClick={resetFilters}>
-            Clear all filters
-          </button>
-        </div>
-      ) : null}
+            {curricula.length ? (
+              <fieldset className="dir-facet">
+                <legend>Curriculum</legend>
+                {curricula.map((item) => (
+                  <label key={item} className="dir-check">
+                    <span>
+                      <input
+                        type="checkbox"
+                        checked={selectedCurricula.includes(item)}
+                        onChange={() => toggleCurriculum(item)}
+                      />
+                      {item}
+                    </span>
+                    <span className="dir-check-count">{curriculumCounts.get(item) ?? 0}</span>
+                  </label>
+                ))}
+              </fieldset>
+            ) : null}
 
-      {!loading ? (
-        <div className="schools-grid">
-          {filtered.map((school) => {
-            const labels = labelsBySchool[school.id] ?? [];
-            const headline = labels.length ? headlineConfidence(labels) : "unknown";
-            return (
-              <div key={school.id} className="school-card">
-                <Link href={`/schools/${school.id}`} className="school-card-link">
-                  <div className="school-card-header">
-                    <h2 className="school-card-title">{school.name}</h2>
-                    <ConfidenceChip label={headline} size="sm" />
-                  </div>
+            {places.length ? (
+              <fieldset className="dir-facet">
+                <legend>Listed places</legend>
+                {places.slice(0, 8).map(([place, count]) => (
+                  <label key={place} className="dir-check">
+                    <span>
+                      <input
+                        type="checkbox"
+                        checked={location.toLowerCase() === place.toLowerCase()}
+                        onChange={() => setLocation(location.toLowerCase() === place.toLowerCase() ? "" : place)}
+                      />
+                      {place}
+                    </span>
+                    <span className="dir-check-count">{count}</span>
+                  </label>
+                ))}
+              </fieldset>
+            ) : null}
+          </aside>
 
-                  <div className="school-card-meta">
-                    {school.curriculum_type ? (
-                      <span className="meta-badge meta-badge-curriculum">
-                        <svg className="meta-icon" viewBox="0 0 16 16" fill="currentColor">
-                          <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm14 0c-.885-.37-2.154-.769-3.388-.893-1.33-.134-2.458.063-3.112.752v9.746c.935-.53 2.12-.603 3.213-.493 1.18.12 2.37.461 3.287.811V2.828z" />
-                        </svg>
-                        {school.curriculum_type}
-                      </span>
-                    ) : null}
-                    {school.address ? (
-                      <span className="meta-badge meta-badge-address">
-                        <svg className="meta-icon" viewBox="0 0 16 16" fill="currentColor">
-                          <path fillRule="evenodd" d="M8 1a5 5 0 00-5 5c0 3.5 5 9 5 9s5-5.5 5-9a5 5 0 00-5-5zm0 7a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
-                        </svg>
-                        {school.address}
-                      </span>
-                    ) : null}
-                  </div>
-                </Link>
+          <div className="dir-results">
+            <div className="dir-results-bar">
+              <p className="result-count" aria-live="polite">
+                {loading
+                  ? "Loading…"
+                  : `Showing ${filtered.length.toLocaleString()} of ${schools.length.toLocaleString()} schools`}
+              </p>
+              {hasActiveFilters ? (
+                <button type="button" className="btn-text-sm" onClick={resetFilters}>
+                  Clear filters
+                </button>
+              ) : null}
+            </div>
 
-                {school.school_group_id ? (
-                  <div className="school-card-footer">
-                    <Link href={`/schools/network/${school.school_group_id}`} className="network-link">
-                      <span>Network map</span>
-                    </Link>
-                  </div>
-                ) : null}
+            {error ? <div className="error-banner">{error}</div> : null}
+
+            {loading ? (
+              <div className="dir-list" aria-hidden="true">
+                {Array.from({ length: 4 }, (_, index) => (
+                  <SchoolCardSkeleton key={index} />
+                ))}
               </div>
-            );
-          })}
+            ) : null}
+
+            {!loading && !error && filtered.length === 0 ? (
+              <div className="empty-state-card">
+                <h2>No schools match these filters</h2>
+                <p>Try a different name, curriculum, or place.</p>
+                <button type="button" className="btn btn-secondary" onClick={resetFilters}>
+                  Clear all filters
+                </button>
+              </div>
+            ) : null}
+
+            {!loading ? (
+              <div className="dir-list">
+                {filtered.map((school) => {
+                  const labels = labelsBySchool[school.id] ?? [];
+                  const headline = labels.length ? headlineConfidence(labels) : "unknown";
+                  const groupCount = labels.length;
+                  return (
+                    <article key={school.id} className="dir-card">
+                      <div className={`dir-card-accent dir-card-accent-${headline}`} />
+                      <div className="dir-card-body">
+                        <div className="dir-card-top">
+                          <div className="dir-card-identity">
+                            <div className="dir-card-crest" aria-hidden="true">
+                              {schoolMonogram(school.name)}
+                            </div>
+                            <div>
+                              <h2 className="dir-card-title">
+                                <Link href={`/schools/${school.id}`}>{school.name}</Link>
+                              </h2>
+                              {school.address ? (
+                                <p className="dir-card-address">
+                                  <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M8 1a5 5 0 00-5 5c0 3.5 5 9 5 9s5-5.5 5-9a5 5 0 00-5-5zm0 7a2 2 0 100-4 2 2 0 000 4z"
+                                      clipRule="evenodd"
+                                    />
+                                  </svg>
+                                  <span>{school.address}</span>
+                                </p>
+                              ) : null}
+                            </div>
+                          </div>
+                          <div className="dir-card-score">
+                            <ConfidenceChip label={headline} size="sm" />
+                            <span className="dir-card-groups">
+                              {groupCount} claim group{groupCount === 1 ? "" : "s"}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="dir-card-tags">
+                          {school.curriculum_type ? (
+                            <span className="meta-badge meta-badge-curriculum">{school.curriculum_type}</span>
+                          ) : null}
+                          {school.moe_approved_from ? <span className="meta-badge">MOE registered</span> : null}
+                          {school.school_group_id ? <span className="meta-badge">Network campus</span> : null}
+                        </div>
+                      </div>
+                      <div className="dir-card-footer">
+                        <div className="dir-card-footer-meta">
+                          {school.school_group_id ? (
+                            <Link href={`/schools/network/${school.school_group_id}`} className="network-link">
+                              Network map
+                            </Link>
+                          ) : (
+                            <span>Public register record</span>
+                          )}
+                        </div>
+                        <div className="dir-card-actions">
+                          <Link href={`/schools/${school.id}#ask`} className="btn btn-primary btn-sm">
+                            Ask
+                          </Link>
+                          <Link href={`/schools/${school.id}`} className="dir-card-profile">
+                            View profile
+                          </Link>
+                        </div>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            ) : null}
+          </div>
         </div>
-      ) : null}
+      </section>
     </main>
   );
 }

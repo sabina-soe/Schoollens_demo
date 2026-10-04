@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { isRegisterUnreachable } from "@/lib/public-register";
 import {
   CATEGORY_SECTIONS,
   categoryId,
@@ -48,7 +49,8 @@ export function EvidenceTab({ schoolId }: { schoolId: string }) {
         .eq("school_id", schoolId)
         .order("category");
       if (groupError) {
-        setError(groupError.message);
+        if (!isRegisterUnreachable(groupError)) setError(groupError.message);
+        setRows([]);
         setLoading(false);
         return;
       }

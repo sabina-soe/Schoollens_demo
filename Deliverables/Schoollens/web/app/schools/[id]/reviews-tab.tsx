@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { isRegisterUnreachable } from "@/lib/public-register";
 import { ConfidenceChip } from "./confidence-chip";
 import { Skeleton } from "../../components/ui/skeleton";
 
@@ -76,7 +77,11 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
   useEffect(() => {
     const supabase = createClient();
     (async () => {
-      const { data: sessionData } = await supabase.auth.getSession();
+      try {
+      const [{ data: groups, error: groupError }, { data: sessionData }] = await Promise.all([
+        supabase.from("claim_groups").select("id, category, confidence_label").eq("school_id", schoolId).order("category"),
+        supabase.auth.getSession(),
+      ]);
       const user = sessionData.session?.user;
       setSignedIn(Boolean(user));
       if (user) {
@@ -84,13 +89,8 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
         setCanVerify(profile?.role === "parent");
       }
 
-      const { data: groups, error: groupError } = await supabase
-        .from("claim_groups")
-        .select("id, category, confidence_label")
-        .eq("school_id", schoolId)
-        .order("category");
       if (groupError) {
-        setError(groupError.message);
+        if (!isRegisterUnreachable(groupError)) setError(groupError.message);
         setLoading(false);
         return;
       }
@@ -100,15 +100,20 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
         ? await supabase.from("claim_group_members").select("claim_group_id, claim_id").in("claim_group_id", groupIds)
         : { data: [] };
       const claimIds = [...new Set((members ?? []).map((member) => member.claim_id))];
-      const { data: claimRows } = claimIds.length
-        ? await supabase.from("claims").select("id, claim_text").in("id", claimIds)
-        : { data: [] };
-      const { data: evidence } = claimIds.length
-        ? await supabase.from("evidence").select("claim_id, raw_source_id").in("claim_id", claimIds)
-        : { data: [] };
-      const { data: votes } = groupIds.length
-        ? await supabase.from("claim_verifications").select("claim_group_id, vote").in("claim_group_id", groupIds)
-        : { data: [] };
+      const [claimRowsRes, evidenceRes, votesRes] = await Promise.all([
+        claimIds.length
+          ? supabase.from("claims").select("id, claim_text").in("id", claimIds)
+          : Promise.resolve({ data: [] as { id: string; claim_text: string | null }[] }),
+        claimIds.length
+          ? supabase.from("evidence").select("claim_id, raw_source_id").in("claim_id", claimIds)
+          : Promise.resolve({ data: [] as { claim_id: string; raw_source_id: string | null }[] }),
+        groupIds.length
+          ? supabase.from("claim_verifications").select("claim_group_id, vote").in("claim_group_id", groupIds)
+          : Promise.resolve({ data: [] as { claim_group_id: string; vote: string | null }[] }),
+      ]);
+      const claimRows = claimRowsRes.data;
+      const evidence = evidenceRes.data;
+      const votes = votesRes.data;
 
       const textsByClaim = Object.fromEntries((claimRows ?? []).map((row) => [row.id, row.claim_text]));
       const textsByGroup = new Map<string, string[]>();
@@ -141,20 +146,53 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
       const sourceIds = [
         ...new Set((evidence ?? []).map((row) => row.raw_source_id).filter((id): id is string => Boolean(id))),
       ];
-      const { data: commentRows, error: commentError } = sourceIds.length
-        ? await supabase
-            .from("comment_analysis")
-            .select("id, comment_excerpt, sentiment_label, mentioned_claim_category, created_at")
-            .in("raw_source_id", sourceIds)
-            .order("created_at", { ascending: false })
-        : { data: [], error: null };
-      if (commentError) {
-        setError(commentError.message);
-        setLoading(false);
-        return;
+      let commentRows: CommentRow[] = [];
+      if (sourceIds.length) {
+        const { data, error: commentError } = await supabase
+          .from("comment_analysis")
+          .select("id, comment_excerpt, sentiment_label, mentioned_claim_category, created_at")
+          .in("raw_source_id", sourceIds)
+          .order("created_at", { ascending: false });
+        if (commentError && !isRegisterUnreachable(commentError)) {
+          setError(commentError.message);
+          setLoading(false);
+          return;
+        }
+        commentRows = data ?? [];
       }
-      setComments(commentRows ?? []);
-      setLoading(false);
+      try {
+        const response = await fetch("/group-reviews/by-school.json", { cache: "no-store" });
+        if (response.ok) {
+          const payload = await response.json();
+          const local = payload?.schools?.[schoolId]?.comments ?? [];
+          const seen = new Set(commentRows.map((row) => row.comment_excerpt));
+          for (const row of local) {
+            if (row?.comment_excerpt && !seen.has(row.comment_excerpt)) {
+              commentRows.push(row);
+              seen.add(row.comment_excerpt);
+            }
+          }
+        }
+      } catch {
+        /* local group crawl is optional */
+      }
+      setComments(commentRows);
+      } catch (caught) {
+        if (!isRegisterUnreachable(caught)) {
+          setError(caught instanceof Error ? caught.message : "Could not load reviews.");
+        }
+        try {
+          const response = await fetch("/group-reviews/by-school.json", { cache: "no-store" });
+          if (response.ok) {
+            const payload = await response.json();
+            setComments(payload?.schools?.[schoolId]?.comments ?? []);
+          }
+        } catch {
+          /* local group crawl is optional */
+        }
+      } finally {
+        setLoading(false);
+      }
     })();
   }, [schoolId]);
 
@@ -217,7 +255,7 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
           <span className="section-kicker">Reviews</span>
           <h2>Public comments</h2>
           <p className="section-lead">
-            Public parent comments. Sentiment does not change confidence labels.
+            Public posts from International School Review. Sentiment does not change confidence labels.
           </p>
         </div>
 
