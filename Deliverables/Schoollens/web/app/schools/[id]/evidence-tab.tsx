@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { isRegisterUnreachable } from "@/lib/public-register";
+import { loadClaimOverlay, type OverlayGroup } from "@/lib/claim-overlay";
 import {
   CATEGORY_SECTIONS,
   categoryId,
@@ -44,19 +45,47 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
   useEffect(() => {
     const supabase = createClient();
     (async () => {
+      const ledgerIds = networkIds?.length ? networkIds : [schoolId];
+      function rowsFromOverlay(overlay: OverlayGroup[]) {
+        return overlay
+          .map((group) => ({
+            id: group.id,
+            category: group.category,
+            confidence_label: group.confidence_label,
+            reconciliation_note: group.reconciliation_note,
+            last_updated: group.last_updated,
+            claim_texts: [...new Set(group.claims.map((claim) => claim.claim_text).filter(Boolean))] as string[],
+            evidence: group.evidence.map((item) => {
+              const claim = group.claims.find((row) => row.id === item.claim_id);
+              return {
+                source_excerpt: item.source_excerpt,
+                evidence_type: item.evidence_type ?? null,
+                uploaded_at: item.uploaded_at ?? null,
+                original_url: item.original_url ?? null,
+                source_type: claim?.source_type ?? null,
+                source_trust_tier: claim?.source_trust_tier ?? null,
+              };
+            }),
+          }))
+          .filter((row) =>
+            isParentDecisionTopic({
+              category: row.category,
+              confidence_label: row.confidence_label,
+              reconciliation_note: row.reconciliation_note,
+              claim_texts: row.claim_texts,
+            }),
+          );
+      }
+      try {
       const { data: groups, error: groupError } = await supabase
         .from("claim_groups")
         .select("id, category, confidence_label, reconciliation_note, last_updated")
-        .in("school_id", networkIds?.length ? networkIds : [schoolId])
+        .in("school_id", ledgerIds)
         .order("category");
-      if (groupError) {
-        if (!isRegisterUnreachable(groupError)) setError(groupError.message);
-        setRows([]);
-        setLoading(false);
-        return;
-      }
+      if (groupError && !isRegisterUnreachable(groupError)) setError(groupError.message);
+
       if (!groups?.length) {
-        setRows([]);
+        setRows(rowsFromOverlay(await loadClaimOverlay(ledgerIds)));
         setLoading(false);
         return;
       }
@@ -136,6 +165,10 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
           ),
       );
       setLoading(false);
+      } catch {
+        setRows(rowsFromOverlay(await loadClaimOverlay(ledgerIds)));
+        setLoading(false);
+      }
     })();
   }, [schoolId, networkIds?.join("|")]);
 

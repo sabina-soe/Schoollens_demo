@@ -27,8 +27,8 @@ import requests
 from supabase import create_client
 
 EXTRACT_URL = os.environ.get("RAG_SERVICE_URL", "http://localhost:8000/rag/extract")
-SUPABASE_URL = os.environ["https://vhvrlrfoapwkgochxinl.supabase.co"]
-SUPABASE_KEY = os.environ["sb_secret_66ejO-HuTfP1oHVXL2pfYw_jFSlySXc"]
+SUPABASE_URL = os.environ["SUPABASE_URL"]
+SUPABASE_KEY = os.environ["SUPABASE_SERVICE_ROLE_KEY"]
 
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 

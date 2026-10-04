@@ -39,6 +39,7 @@ import { FacilityList } from "./facility-list";
 import { IsdListing } from "./isd-listing";
 import { profileLead, splitProfileStats } from "@/lib/profile-snapshot";
 import { firstOkJson, pickBySchoolIds } from "@/lib/school-network";
+import { loadClaimOverlay } from "@/lib/claim-overlay";
 import type { IsdRecord } from "@/lib/school-isd";
 import { Skeleton } from "../../components/ui/skeleton";
 
@@ -239,47 +240,59 @@ export function OverviewTab({
         (row) => row?.summary_text || (row?.key_stats || []).length,
       );
       if (storedRow) setStored(storedRow);
-      if (groupsRes.error) {
-        if (!isRegisterUnreachable(groupsRes.error)) {
-          setError(groupsRes.error.message);
-        }
-        setSections([]);
-        setLoading(false);
-        loadExtras(Boolean(storedRow));
-        return;
+      if (groupsRes.error && !isRegisterUnreachable(groupsRes.error)) {
+        setError(groupsRes.error.message);
       }
 
-      const groups = groupsRes.data ?? [];
+      let groups = groupsRes.data ?? [];
+      let members: { claim_group_id: string; claim_id: string }[] = [];
+      let claimById: Record<string, { id: string; claim_text: string | null; category: string | null; source_type: string | null; source_trust_tier: string | null }> = {};
+      const excerptByClaim = new Map<string, string>();
+
+      if (groups.length) {
+        const groupIds = groups.map((group) => group.id);
+        const membersRes = await supabase
+          .from("claim_group_members")
+          .select("claim_group_id, claim_id")
+          .in("claim_group_id", groupIds);
+        if (cancelled) return;
+        members = membersRes.data ?? [];
+        const claimIds = [...new Set(members.map((member) => member.claim_id))];
+        const [claimsRes, evidenceRes] = await Promise.all([
+          claimIds.length
+            ? supabase.from("claims").select("id, claim_text, category, source_type, source_trust_tier").in("id", claimIds)
+            : Promise.resolve({ data: [] as { id: string; claim_text: string | null; category: string | null; source_type: string | null; source_trust_tier: string | null }[] }),
+          claimIds.length
+            ? supabase.from("evidence").select("claim_id, source_excerpt").in("claim_id", claimIds)
+            : Promise.resolve({ data: [] as { claim_id: string; source_excerpt: string | null }[] }),
+        ]);
+        if (cancelled) return;
+        claimById = Object.fromEntries((claimsRes.data ?? []).map((claim) => [claim.id, claim]));
+        for (const row of evidenceRes.data ?? []) {
+          if (row.source_excerpt && !excerptByClaim.has(row.claim_id)) {
+            excerptByClaim.set(row.claim_id, row.source_excerpt);
+          }
+        }
+      } else {
+        const overlay = await loadClaimOverlay(ledgerIds);
+        if (cancelled) return;
+        groups = overlay;
+        members = overlay.flatMap((group) => group.claims.map((claim) => ({ claim_group_id: group.id, claim_id: claim.id })));
+        claimById = Object.fromEntries(overlay.flatMap((group) => group.claims.map((claim) => [claim.id, claim])));
+        for (const group of overlay) {
+          for (const row of group.evidence) {
+            if (row.source_excerpt && !excerptByClaim.has(row.claim_id)) {
+              excerptByClaim.set(row.claim_id, row.source_excerpt);
+            }
+          }
+        }
+      }
+
       if (!groups.length) {
         setSections([]);
         setLoading(false);
         loadExtras(Boolean(storedRow));
         return;
-      }
-
-      const groupIds = groups.map((group) => group.id);
-      const { data: members } = await supabase
-        .from("claim_group_members")
-        .select("claim_group_id, claim_id")
-        .in("claim_group_id", groupIds);
-      if (cancelled) return;
-      const claimIds = [...new Set((members ?? []).map((member) => member.claim_id))];
-      const [claimsRes, evidenceRes] = await Promise.all([
-        claimIds.length
-          ? supabase.from("claims").select("id, claim_text, category, source_type, source_trust_tier").in("id", claimIds)
-          : Promise.resolve({ data: [] as { id: string; claim_text: string | null; category: string | null; source_type: string | null; source_trust_tier: string | null }[] }),
-        claimIds.length
-          ? supabase.from("evidence").select("claim_id, source_excerpt").in("claim_id", claimIds)
-          : Promise.resolve({ data: [] as { claim_id: string; source_excerpt: string | null }[] }),
-      ]);
-      if (cancelled) return;
-
-      const claimById = Object.fromEntries((claimsRes.data ?? []).map((claim) => [claim.id, claim]));
-      const excerptByClaim = new Map<string, string>();
-      for (const row of evidenceRes.data ?? []) {
-        if (row.source_excerpt && !excerptByClaim.has(row.claim_id)) {
-          excerptByClaim.set(row.claim_id, row.source_excerpt);
-        }
       }
 
       const byCategory = new Map<string, { texts: string[]; labels: string[]; updated: string | null; sources: Source[] }>();
@@ -290,7 +303,7 @@ export function OverviewTab({
         if (!bucket.updated || (group.last_updated && group.last_updated > bucket.updated)) {
           bucket.updated = group.last_updated;
         }
-        for (const member of members ?? []) {
+        for (const member of members) {
           if (member.claim_group_id !== group.id) continue;
           const claim = claimById[member.claim_id];
           if (claim?.claim_text) bucket.texts.push(claim.claim_text);
@@ -331,7 +344,56 @@ export function OverviewTab({
       loadExtras(Boolean(storedRow));
       } catch {
         if (cancelled) return;
-        setSections([]);
+        const overlay = await loadClaimOverlay(ledgerIds);
+        if (cancelled) return;
+        if (!overlay.length) {
+          setSections([]);
+          setLoading(false);
+          loadExtras(false);
+          return;
+        }
+        const byCategory = new Map<string, { texts: string[]; labels: string[]; updated: string | null; sources: Source[] }>();
+        for (const group of overlay) {
+          const key = String(group.category || "other").toLowerCase();
+          const bucket = byCategory.get(key) ?? { texts: [], labels: [], updated: null, sources: [] };
+          bucket.labels.push(group.confidence_label ?? "unknown");
+          if (!bucket.updated || (group.last_updated && group.last_updated > bucket.updated)) {
+            bucket.updated = group.last_updated;
+          }
+          for (const claim of group.claims) {
+            if (claim.claim_text) bucket.texts.push(claim.claim_text);
+          }
+          for (const row of group.evidence) {
+            if (!row.source_excerpt) continue;
+            const claim = group.claims.find((item) => item.id === row.claim_id);
+            bucket.sources.push({
+              tag: sourceTag(claim?.source_type, claim?.source_trust_tier),
+              excerpt: row.source_excerpt,
+              groupId: group.id,
+              conflicting: normalizeConfidence(group.confidence_label) === "conflicting",
+            });
+          }
+          byCategory.set(key, bucket);
+        }
+        const ordered = [
+          ...CATEGORY_SECTIONS.map((section) => section.key),
+          ...[...byCategory.keys()].filter((key) => !CATEGORY_SECTIONS.some((section) => section.key === key)),
+        ].filter((key) => byCategory.has(key));
+        setSections(
+          ordered.map((key) => {
+            const bucket = byCategory.get(key)!;
+            const uniqueSources = bucket.sources.filter(
+              (item, index, list) => list.findIndex((other) => other.excerpt === item.excerpt) === index,
+            );
+            return {
+              key,
+              summary: fallbackSummary(bucket.texts),
+              confidence: headlineConfidence(bucket.labels),
+              updated: bucket.updated,
+              sources: uniqueSources.slice(0, 8),
+            };
+          }),
+        );
         setLoading(false);
         loadExtras(false);
       }

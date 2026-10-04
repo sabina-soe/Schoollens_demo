@@ -1,0 +1,43 @@
+{
+  "bySchool": {
+    "b0595924-73f7-49c4-94b0-b05017d77ef8": "/school-claims/b0595924-73f7-49c4-94b0-b05017d77ef8.json",
+    "f6c7b97d-8959-4d0c-841f-8148d10dcd4d": "/school-claims/f6c7b97d-8959-4d0c-841f-8148d10dcd4d.json",
+    "d1e8deee-ed2c-43fb-a382-c3adb5d06861": "/school-claims/d1e8deee-ed2c-43fb-a382-c3adb5d06861.json",
+    "ba3c6f02-961b-42e1-8ef9-21d872abbda7": "/school-claims/ba3c6f02-961b-42e1-8ef9-21d872abbda7.json",
+    "5d88ea9c-c422-4696-88f3-5f2afb315530": "/school-claims/5d88ea9c-c422-4696-88f3-5f2afb315530.json"
+  },
+  "aliases": {
+    "b0595924-73f7-49c4-94b0-b05017d77ef8": "b0595924-73f7-49c4-94b0-b05017d77ef8",
+    "02a23e61-90aa-49cb-a409-7b406d97d7f8": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "a5a3e2ea-0b3d-42e2-abbb-a7041bbc656e": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "50b3cab8-c195-4ff0-8b48-8ae3624398ec": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "357341ed-9a49-4dc3-b09f-42b53f9cb578": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "f6c7b97d-8959-4d0c-841f-8148d10dcd4d": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "97f0a1d0-0b28-4eb3-b32f-62890ea1ab0d": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "ff03aa68-b939-433b-b891-2bd93a811a98": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "419cdae5-eff6-49f4-ae07-18d67b8c3919": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "2a16ccc9-b807-4f5e-b24f-2fdbad4538e7": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "7011e231-1206-430e-9dfd-314296a11661": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "0b0c7264-bf80-4eb0-960d-624226b94d3b": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "19e88b10-84af-4d8e-a9cb-f04dff7ce6c8": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "bbd85d3f-43fe-4629-9dc8-ccb67cd43b83": "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+    "d1e8deee-ed2c-43fb-a382-c3adb5d06861": "d1e8deee-ed2c-43fb-a382-c3adb5d06861",
+    "0f45fa4f-eb90-4440-8c46-786267524ec1": "d1e8deee-ed2c-43fb-a382-c3adb5d06861",
+    "251bd4f1-e785-41d9-b28b-ca80de4ee262": "ba3c6f02-961b-42e1-8ef9-21d872abbda7",
+    "ba3c6f02-961b-42e1-8ef9-21d872abbda7": "ba3c6f02-961b-42e1-8ef9-21d872abbda7",
+    "9546511b-bdbc-4141-ad0b-25a73f8500db": "ba3c6f02-961b-42e1-8ef9-21d872abbda7",
+    "b6a2f126-a0a0-44c5-b375-cfc7b422ee1b": "ba3c6f02-961b-42e1-8ef9-21d872abbda7",
+    "55c0f8dd-811f-411d-8ba4-42722361e71e": "ba3c6f02-961b-42e1-8ef9-21d872abbda7",
+    "81245ced-501b-4127-affd-3d8ff4599584": "ba3c6f02-961b-42e1-8ef9-21d872abbda7",
+    "f4f8922f-93f7-468c-a882-2349d4c0d139": "5d88ea9c-c422-4696-88f3-5f2afb315530",
+    "9e67a1f6-863a-4e73-9864-e404d342808a": "5d88ea9c-c422-4696-88f3-5f2afb315530",
+    "5d88ea9c-c422-4696-88f3-5f2afb315530": "5d88ea9c-c422-4696-88f3-5f2afb315530"
+  },
+  "counts": {
+    "ISY": 112,
+    "ILBC": 159,
+    "PISM": 68,
+    "Kings": 44,
+    "Helix": 25
+  }
+}

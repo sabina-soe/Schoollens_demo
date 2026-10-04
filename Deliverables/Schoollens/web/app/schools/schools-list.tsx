@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { CONFIDENCE_LABELS, type ConfidenceLabel } from "@/lib/confidence";
 import { isRegisterUnreachable, loadLocalSchools, withTimeout } from "@/lib/public-register";
+import { loadKnownClaimOverlays, overlayLabels } from "@/lib/claim-overlay";
 import { headlineConfidence } from "@/lib/row-confidence";
 import { ConfidenceChip } from "./[id]/confidence-chip";
 import { SchoolCardSkeleton } from "../components/ui/skeleton";
@@ -78,6 +79,16 @@ export function SchoolsList() {
       if (local.length) {
         setSchools(local);
         setLoading(false);
+        const seeded = await loadKnownClaimOverlays();
+        if (seeded.groups.length) {
+          const next = overlayLabels(seeded.groups);
+          for (const school of local) {
+            const aliasId = seeded.index.aliases?.[school.id];
+            if ((next[school.id] ?? []).length || !aliasId || !next[aliasId]) continue;
+            next[school.id] = next[aliasId];
+          }
+          setLabelsBySchool(next);
+        }
       }
       try {
         const { data, error: queryError } = await withTimeout(
@@ -96,6 +107,10 @@ export function SchoolsList() {
           const list = next[group.school_id] ?? [];
           list.push(group.confidence_label ?? "unknown");
           next[group.school_id] = list;
+        }
+        if (!groups?.length) {
+          const overlay = await loadKnownClaimOverlays();
+          Object.assign(next, overlayLabels(overlay.groups));
         }
         const byGroup: Record<string, string[]> = {};
         for (const school of rows) {

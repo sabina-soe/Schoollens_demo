@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { normalizeConfidence, type ConfidenceLabel } from "@/lib/confidence";
-import { isRegisterUnreachable, loadLocalSchool, withTimeout } from "@/lib/public-register";
+import { isRegisterUnreachable, loadLocalSchools, withTimeout } from "@/lib/public-register";
+import { loadClaimOverlay, localNetworkIds } from "@/lib/claim-overlay";
 import { networkIds, pickBySchoolIds } from "@/lib/school-network";
 import { moeBadgeLabel, moeRangeLabel, type MoeRecord } from "@/lib/moe-register";
 import { DeferredSection } from "../../components/deferred-section";
@@ -100,19 +101,23 @@ export function SchoolProfile({ id }: { id: string }) {
     const schoolSelect =
       "id, name, address, school_group_id, official_website_url, official_facebook_url, curriculum_type, moe_approved_from, moe_approved_to, location, geocode_confidence";
     (async () => {
-      const local = await loadLocalSchool(id);
+      const localAll = await loadLocalSchools();
+      const local = localAll.find((row) => row.id === id) ?? null;
+      const seededIds = localNetworkIds(id, localAll, local?.name);
       if (cancelled) return;
+      setLedgerIds(seededIds);
       fetch("/moe-register/by-school.json")
         .then((response) => response.json())
         .then((payload) => {
-          if (!cancelled) setMoeRecord(pickBySchoolIds(payload, [id]) ?? payload[id] ?? null);
+          if (!cancelled) setMoeRecord(pickBySchoolIds(payload, seededIds) ?? payload[id] ?? null);
         })
         .catch(() => {
           if (!cancelled) setMoeRecord(null);
         });
       if (local) {
         setSchool(local);
-        setBranches([local]);
+        const localBranches = localAll.filter((row) => row.school_group_id && row.school_group_id === local.school_group_id);
+        setBranches(localBranches.length ? localBranches : [local]);
         setLoading(false);
       }
       try {
@@ -140,19 +145,26 @@ export function SchoolProfile({ id }: { id: string }) {
             : Promise.resolve({ data: [schoolRow] }),
         ]);
         if (cancelled) return;
-        const ids = networkIds(schoolRow.id, networkRes.data ?? [schoolRow]);
-        setLedgerIds(ids);
-        setBranches(networkRes.data ?? [schoolRow]);
+        const ids = localNetworkIds(schoolRow.id, [...localAll, ...((networkRes.data ?? []) as typeof localAll)], schoolRow.name);
+        const liveIds = networkIds(schoolRow.id, networkRes.data ?? [schoolRow]);
+        const mergedIds = [...new Set([...ids, ...liveIds])];
+        setLedgerIds(mergedIds);
+        setBranches(networkRes.data?.length ? networkRes.data : localAll.filter((row) => mergedIds.includes(row.id)));
         fetch("/moe-register/by-school.json")
           .then((response) => response.json())
           .then((payload) => {
-            if (!cancelled) setMoeRecord(pickBySchoolIds(payload, ids));
+            if (!cancelled) setMoeRecord(pickBySchoolIds(payload, mergedIds));
           })
           .catch(() => {});
-        const groupsRes = await supabase.from("claim_groups").select("confidence_label").in("school_id", ids);
+        const groupsRes = await supabase.from("claim_groups").select("confidence_label").in("school_id", mergedIds);
         if (cancelled) return;
+        let labels = groupsRes.data ?? [];
+        if (!labels.length) {
+          const overlay = await loadClaimOverlay(mergedIds);
+          labels = overlay.map((group) => ({ confidence_label: group.confidence_label }));
+        }
         const next = { ...EMPTY_COUNTS };
-        for (const group of groupsRes.data ?? []) {
+        for (const group of labels) {
           next[normalizeConfidence(group.confidence_label)] += 1;
         }
         setCounts(next);
@@ -170,6 +182,14 @@ export function SchoolProfile({ id }: { id: string }) {
         if (!cancelled) setOwnStatus(own?.status ?? null);
       } catch (caught) {
         if (cancelled) return;
+        const overlay = await loadClaimOverlay(seededIds);
+        if (overlay.length) {
+          const next = { ...EMPTY_COUNTS };
+          for (const group of overlay) {
+            next[normalizeConfidence(group.confidence_label)] += 1;
+          }
+          setCounts(next);
+        }
         if (!local) {
           setError(isRegisterUnreachable(caught) ? null : caught instanceof Error ? caught.message : "Failed to fetch");
           setLoading(false);
