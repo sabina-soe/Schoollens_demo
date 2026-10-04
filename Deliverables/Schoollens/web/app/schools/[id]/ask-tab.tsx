@@ -81,7 +81,7 @@ const SUGGESTIONS = [
   "What average class size is reported?",
 ];
 
-export function AskTab({ schoolId }: { schoolId: string }) {
+export function AskTab({ schoolId, networkIds }: { schoolId: string; networkIds?: string[] }) {
   const [question, setQuestion] = useState("");
   const [turns, setTurns] = useState<Turn[]>([]);
   const [pending, setPending] = useState(false);
@@ -97,7 +97,7 @@ export function AskTab({ schoolId }: { schoolId: string }) {
       const { count, error: countError } = await supabase
         .from("claim_groups")
         .select("id", { count: "exact", head: true })
-        .eq("school_id", schoolId);
+        .in("school_id", networkIds?.length ? networkIds : [schoolId]);
       if (countError) throw new Error(countError.message);
       if (!count) {
         setTurns((current) => {

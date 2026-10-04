@@ -1,8 +1,2194 @@
 {
-  "source": "International School Review (မိဘများရင်ဖွင့်ရာ)",
-  "crawled_at": "2026-10-02",
-  "posts": 63,
-  "comments_in_export": 0,
-  "note": "This Apify group export has 63 posts and no comment threads. Tutor ads that listed many school names were not attached to profiles.",
-  "schools": {}
+  "source": "International School Review Myanmar",
+  "source_url": "https://www.facebook.com/groups/237771859200599",
+  "crawled_at": "2026-10-04",
+  "posts": 484,
+  "comments_in_export": 110,
+  "note": "Only parent-review posts that name a SchoolLens school. Ads were skipped.",
+  "schools": {
+    "d1e8deee-ed2c-43fb-a382-c3adb5d06861": {
+      "school_name": "Pride ISM Pride International School Myanmar",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/916442924666819/-0",
+          "comment_excerpt": "Hallway နဲ့ PISM ကျောင်းအကြောင်းလေး Honest Review ‌လေးများ သိချင်ပါတယ် ကလေးကို လာမယ့်နှစ်ထားဖို့ waiting list ပေးရသေးလား ကလေးက 4နှစ်ကျော်ပါပြီ။ တခြားကျောင်းလေးတွေ ကိုလဲ အကြံပေးပါဦးရှင် သားဦးမို့ မသိနားမလည်လို့ပါ။ သိတဲ့မေမေများ ရှင်းပြပေးပါဦး။ လှိုင်မြို့နယ်တဝှိုက်သိချင်ပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-10-04T00:17:34.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/916442924666819/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/916442924666819/-1",
+          "comment_excerpt": "PISM မပြေပါ ဆရာမတွေ က မိဘတွေ ပြန်ကြောက်နေရ။ ကလေးတွေရိုင်း။ Bully case များ။ လူမျိုးရေးခွဲ ခြား။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "safety",
+          "created_at": "2026-10-04T00:17:34.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/916442924666819/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/908911612086617/-2",
+          "comment_excerpt": "အကူအညီလေး တောင်းချင်လို့ပါရှင် သားသားကို PISM ကနေ Winston Bridge မြောက်ဒဂုံကို ပြောင်းချင်လို့ပါ ကျောင်းရဲ့ review လေးရယ် အတန်းတွင်း english only ပဲ ပြောရတာလားဆိုတာလေးရယ် စာအသင်အပြ အခြေအနေလေးရယ် သိချင်လို့ပါရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:00:38.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/908911612086617/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/908911612086617/-3",
+          "comment_excerpt": "ညီမလဲ ပြောင်းချင်နေတာ pism က အိမ်​ဝေးနေလိူ့။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:00:38.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/908911612086617/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/908911612086617/-4",
+          "comment_excerpt": "သင်ရိုးတော့ကွဲသွားမယ်နော် PISM Cambridge Wisdom bridge edexcel",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-25T15:00:38.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/908911612086617/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/906178562359922/-5",
+          "comment_excerpt": "PISM ကျောင်း ရဲ့ review လေးသိပါရစေ နောင်နှစ် သားသား ကို ကျောင်းပြောင်းမှာ မို့ပါ ကလေးက year 9 တက်မှာပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:02:22.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/906178562359922/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/900668506244261/-6",
+          "comment_excerpt": "PISM အဆင်မပြေပါ bully case များတယ် NIEC အဆင်ပြေပါတယ် စျေးသင့်ပြီး ကလေးတွေကို မရိုင်းအောင်Control လုပ်နိူင်ပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "safety",
+          "created_at": "2026-09-17T20:33:25.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/900668506244261/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884995564478222/-7",
+          "comment_excerpt": "PISM မှာ အသားကျနေရင် ဆက်ထားလိုက်ပါ.. ပြောင်းလိုက်ရင် ကလေး အသမကျတော့ စိတ်မပျော်ဖြစ်ရမှာစိုးရတယ်ရှင့်.. PISM လဲ result ကောင်းပါတယ်.. အဓိက ကလေးပေါ်ပဲ မူတည်တာပါ..",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-26T08:38:33.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884995564478222/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/879639225013856/-8",
+          "comment_excerpt": "တကယ်က PISM ကမှ registered Cambridge IS ပါ ကိုယ့်ကလေးလည်း IIP တက်နေတာပါ PISM ပြောင်းမလားလို့စဉ်းစားနေတာ ဝေးပီးတော့ ကျောင်းခွဲတွေ မတွေ့လို့သာ IIP ပဲဆက်ထားနေရတာ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-21T17:38:23.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/879639225013856/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "ff40e933-2c42-48ab-95d9-73a107d00976": {
+      "school_name": "Hallway International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/916442924666819/-0",
+          "comment_excerpt": "Hallway နဲ့ PISM ကျောင်းအကြောင်းလေး Honest Review ‌လေးများ သိချင်ပါတယ် ကလေးကို လာမယ့်နှစ်ထားဖို့ waiting list ပေးရသေးလား ကလေးက 4နှစ်ကျော်ပါပြီ။ တခြားကျောင်းလေးတွေ ကိုလဲ အကြံပေးပါဦးရှင် သားဦးမို့ မသိနားမလည်လို့ပါ။ သိတဲ့မေမေများ ရှင်းပြပေးပါဦး။ လှိုင်မြို့နယ်တဝှိုက်သိချင်ပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-10-04T00:17:34.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/916442924666819/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/916442924666819/-1",
+          "comment_excerpt": "သင်ရိုးမတူ Hallwayမှာထားရင် ကျောင်းနေရာ ခဏခဏပြောင်းတာ ခံနိုင်ရပါမယ် နေရာက ၂နှစ်တခါလောက်ပြောင်းနေတာမို့လို့😅",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-10-04T00:17:34.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/916442924666819/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/914901204820991/-2",
+          "comment_excerpt": "မေမေတို့ရှင့် ! ကလေးက ၃ နှစ်ပြည့်မှာပါ။ preschool ကို IS preschool ထားပြီး နောက်ပိုင်း PS ဘဲ join ဖို့တွေးထားတဲ့မေမေပါ။ ဒီလိုကလေးလေးအတွက် ဗိုလ်တထောင်မြို့နယ်တဝိုက် preschool ကောင်းတာလေးတွေ recommend ပေးကြပါအုံးနော်။ လောလောဆယ် လေ့လာထားတာတော့ .. Pumpkin International preschool (BAK branch), NELC ( BAK branch ) , Hallway ( Botahtaung campus ) .. ဒီ ၃ ခုပါ။ ကလေးပျော်တာရော စည်းကမ်းပိုင်း ကောင်းပြီး ကလေး improvement ကောင်…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-10-02T06:06:27.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/914901204820991/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/914901204820991/-3",
+          "comment_excerpt": "NELC နဲ့ Hallway ကတော့ School Fees သိပ်မကွာပါဘူး။Pumpkin ကတော့အဲ့ (၂)ကျောင်းထက် Fees နည်းနည်းမြင့်ပါတယ်။ အိမ်ကကလေးကလက်ရှိ Hallway (BTH) Campus မှာ Nursery တက်နေပါတယ်။ အိမ်မှာပဲစကားတွေပြောပြီး လူစိမ်းနဲ့ပတ်ဝန်းကျင်အသစ်ဆိုကြေအဆင်မပြေတဲ့သားသားတောင် ကျောင်းပျော်ပါတယ်။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-10-02T06:06:27.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/914901204820991/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/909305262047252/-4",
+          "comment_excerpt": "တူတူဘဲမေမေ ၊ ကျွန်မက ဗိုလ်တထောင်မှာနေတာ .. လောလောဆယ် ကလေးကို တပတ် ၂ ရက် play date အတန်းလေးထားပြီး .. nursery .. 3 နှစ်ကျရင် ပုစွန်တောင် hallway ဖြစ်ဖြစ် ၊ NELC ဗိုလ်အောင်ကျော်ဖြစ်ဖြစ်ထားဖို့စိတ်ကူးထားပါတယ်။ PS ကိုတော့ Kaung Htet Kyaw ထားဖို့တွေးထားပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-27T16:18:47.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/909305262047252/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/907949398849505/-5",
+          "comment_excerpt": "မြောက်ဒဂုံထဲက ကိုယ့်budget အရနိုင်တာ မေးကြည့်တာပါ Elite.Myanmar Flower. Marvellous Myanmar .Hallway.Bright Light.WEC.ပင်လုံcitymart နားကကျောင်းကနာမည်မေ့နေလို့ အဲ့ထဲက ဘယ်ကျောင်းကောင်းလည်းရှင့် ကလေးက လက်ရှိ Y4ပါ လာမယ့်နှစ် Y5တက်မှာပါ သင်ရိုးတွေကတော့မတူတာသိပေမယ့် ထားဖူးတဲ့မေမေတွေ ပြောပြပေးပါလားနော် စာသင်ကောင်းတာရယ် ကလေးချင်း bully မရှိတာ ဆရာဆရာမတွေနဲ့ ကလေးအခြေအနေသိချင်ရင် ဆွေးနွေးလို့ကောင်းတာ ပြောပြပေးပါလားနော်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "safety",
+          "created_at": "2026-09-25T15:01:25.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/907949398849505/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/907949398849505/-6",
+          "comment_excerpt": "Hallway လက်ရှိတက်နေတာ ကောင်းတယ်၊",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:01:25.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/907949398849505/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/907949398849505/-7",
+          "comment_excerpt": "Hallway",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:01:25.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/907949398849505/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/904761112501667/-8",
+          "comment_excerpt": "SIS ဘဲ ကြိုက်တယ် မတက်ရသေးဘူး နှစ်ခုလုံး school tour ကြည့်ထားတာ တ/ဥ Brainswork ကြီးက ဟောင်းနေပြီ နေ့လည်ခန်းဆို ညော်နေတာဘဲ kitchen က Hallway တွေမှာကော ထမင်းစားခန်းကလဲ အနံ့အသက် မကောင်းဘူး အဲ့ အချက်တွေ လုံးဝ မကြိုက်ဘူး ညော်တာကလေးတွေ အတွက် နေ့တိုင်းဆိုမကောင်းဘူးလေ ကိုယ်က ခဏလေးကြည့်တာတော့ အဲ့လိုခံစားရတော့ အဆင်မပြေဘူးထင်တာဘဲ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:03:04.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/904761112501667/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/853045347673244/-9",
+          "comment_excerpt": "အခုကျောင်းတွေကို အဆောက်အဦးပုံစံတွေနဲ့ပတ်သက်ပြီး စည်းကမ်းသစ်တွေထုတ်တော့လေ ကလေးကိုရှေ့နှစ် hallway international school မှာ ထည်မလို့စဉ်းစားထားတာ အဆင်ပြေပါ့မလားရှင် Hallway က ကျောင်းကကျဉ်းတော့လေ သမီးလေးထားပြီးမှ တခုခု ပြောင်းလဲဖြစ်မှာစိတ်ပူလို့ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-16T08:15:02.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/853045347673244/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/853045347673244/-10",
+          "comment_excerpt": "Hallway botataung review လေး သိချင်ပါတယ် နောက်နှစ်အတွက် ဆို ဘယ်အချိန် waiting list ပေးရပါသလဲ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-16T08:15:02.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/853045347673244/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/894260973551681/-11",
+          "comment_excerpt": "A4 International Schoolနဲ့ Hallway ရဲ့ Review လေး သိချင်ပါတယ် ရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:16:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/894260973551681/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890070137304098/-12",
+          "comment_excerpt": "မြို့ထဲမှာနေတာဆိုတော့ Hallway ဗိုလ်တထောင် Campus နဲ့ Warrior ဒဂုံ Campus ကိုယှဉ်ကြည့်မိတာ သင်ရိုးကိုတော့ Hallway ကိုသိပ်မရှင်းဘူးဖြစ်နေတာ လက်ရှိထားနေကြတဲ့မိဘများ ဝင်ရောက်ဆွေးနွေးပေးလို့ရမလားရှင် ConceptX နဲ့ Acorn ကရော သင်ရိုးနဲ့ ကျောင်းလခ ဘယ်လောက်ရှိမလဲဟင် လေ့လာစုံစမ်းဖူးတဲ့မိဘများရှိရင်လေ လမ်းညွှန်ဆွေးနွေးပေးပါလားရှင် လေးနှစ်ကလေးအတွက်ပါရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-02T16:48:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890070137304098/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890070137304098/-13",
+          "comment_excerpt": "Hallway က ခု ပုဇွန်ထောင်ရောက်နေပြီ sg သင်ရိုးဖြစ်နေတယ် ၄ ကျောင်းရှိတယ် ကြားတယ် gov မှာက ၂ နေရာပဲ စာရင်းဝင်နေတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-02T16:48:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890070137304098/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890070137304098/-14",
+          "comment_excerpt": "Hallwayက ဘာcourseမှန်းကို မသိ ရောနှောနေတာ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-02T16:48:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890070137304098/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/881658341478611/-15",
+          "comment_excerpt": "Year 1 ရောက်ရင် Warrior International school မှာထားချင်တာပါ။ ကလေးက အခု၃နှစ်ပြည့်ပါပြီ။ Preschool ကို NELC, HALLWAY ဘယ်ကျောင်းလေးအဆင်ပြေမလဲရှင် နေတာက ကျောက်မြောင်းမှာပါ။ Senior မေမေတို့အကြံလေး ပေးပေးကြပါအုံးနော် ကျောင်းမြောင်းနဲ့နီးတဲ့ Preschool ကောင်းလေးတွေရှိရင်လည်း ညွှန်ပေးကြပါအုံးနော် Thanks in advance ♥️",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:02:02.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/881658341478611/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880572804920498/-16",
+          "comment_excerpt": "Hallway Botahtaung campus မှာ ထားနေတဲ့မေမေတွေရှိကြလားရှင့်။ ကျောင်းရဲ့ location နဲ့ review လေးသိချင်လို့ပါ။ Chinese ရော second language အနေနဲ့ပါလားရှင့် ကလေးက ၂ နှစ်ခွဲပါ။ nursery စထားဖို့စဉ်းစားနေလို့ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-08-20T16:32:24.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880572804920498/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880572804920498/-17",
+          "comment_excerpt": "လက်ရှိသားသားက Hallway Botahtaung Campus မှာ Nursery 1 တက်ပါတယ် ကျောင်းစတက်တဲ့ ၁ ပတ်တော့မသွားချင်လို့ငိုပါတယ် ၃ ပတ်မြောက်လောက်မှာတော်တော်လေးအဆင်ပြေလာပါတယ် သူ့တီချယ်တွေကိုလဲတဖြည်းဖြည်းရင်းနှီးပြီးချစ်လာပါတယ် နိုင်ငံတော်သီချင်း/ဘုရားစာ အကုန်ဆိုတတ်လာပါတယ် စာနဲ့ပတ်သက်ပြီးလဲတိုးတက်မှုလေးတွေရှိလာပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-08-20T16:32:24.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880572804920498/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/854566074187838/-18",
+          "comment_excerpt": "My Orchard နဲ့ Hallway ဆို ဘယ်ဟာပိုကောင်းမလဲရှင့် ကလေးက လေးနှစ်ပြည့်ပြီးပါပြီ လက်ရှိတက်နေတဲ့ IS က ရုတ်တရက်ပိတ်ရမယ်ဆိုလို့ ဒီလကုန်မတိုင်ခင် ကျောင်းတက်ဖို့ရှာနေရတာမို့ပါ တောင်ဥက္ကလာကပါရှင့်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-21T17:15:45.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/854566074187838/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/854566074187838/-19",
+          "comment_excerpt": "My orchard က မြန်မာသင်ရိုး Hallway က International သင်ရိုး မတူဘူး ကလေးကိုဘယ်သင်ရိုးထားချင်တာလဲ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-21T17:15:45.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/854566074187838/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "5d88ea9c-c422-4696-88f3-5f2afb315530": {
+      "school_name": "Helix International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/916240354687076/-0",
+          "comment_excerpt": "IISY.....Helix......MLA Honest reviews လေး လိုချင်လို့ပါ တက်နေတဲ့မေမေတွေရှိရင် ပြောပေးပါလို့ ကျေးဇူးပါ ❤️",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-10-03T17:29:28.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/916240354687076/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/916240354687076/-1",
+          "comment_excerpt": "Helix တော့ No ပါ ကျန်တာတော့မသိပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-10-03T17:29:28.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/916240354687076/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/904174992560279/-2",
+          "comment_excerpt": "Middle Class (လူလတ်တန်းစား) Helix ကျောင်းနဲ့ ပတ်သတ်ပြီး honest reviews လေး လိုချင်ပါတယ် ..... Helix ကျောင်းသားတွေက အိမ်မှာ Guide ပြန်ထားဖို့ လိုလား သိချင်ပါတယ် ..... Private ကျောင်း မြန်မာသင်ရိုးကနေ international ပြောင်းထားမလို့ပါ ကလေးက G5 ပါ ..စာတော်တဲ့ကလေးပါ ... Screenလုံး၀မသုံးတဲ့ကလေးပါ ...... လိုက်နိုင်ပါ့မလားဟင် ...... ကလေးနောင်ရေးအတွက်ပါ uni တက်တဲ့အခါ Asia ဘက် မဆို urope ဘက်မဆို ကျောင်းသွားတက်နိုင်အောင် 500/60…",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-09-25T15:03:18.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/904174992560279/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/904174992560279/-3",
+          "comment_excerpt": "သမီး ၂ယောက်လုံး Helix မှာတက်နေတာပါ အကြီးက IGCSE ဖြေတော့မှာပါ အငယ်ကတော့ Year 7 ကနေ စထားလာတာ အခုလက်ရှိ Yr 9 တက်နေပါတယ် ကျောင်းရဲ့ Founder, principal တွေ ,admin တွေ တကယ် အလုပ်လုပ်ကြတာပါ ကလေးတွေအပေါ် စာနဲ့ ပတ်သတ်ပြီး သင်တာလည်း တော်တော်ကောင်းပါတယ် စည်းကမ်းတင်းကျပ်တဲ့ထဲလည်းပါတယ် သမီးတွေကအစိုးရကျောင်းက ပြောင်းရတာဆိုတော့ Maths ကိုတော့ tution ထားပါတယ်။ English အတွက်တော့ Bristish council library မှာ self study လုပ်ခဲ့ကြတယ်။ လ…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-25T15:03:18.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/904174992560279/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/893153813662397/-4",
+          "comment_excerpt": "IGCSE O level အတွက် Ascend Helix GIC ကို ဘာရွေးရမလဲ ဝေခွဲမရဖြစ်နေလို့ပါ လက်ရှိတက်နေသူများ review လေးပေးပါဦးနော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-12T12:14:01.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/893153813662397/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/893502416960870/-5",
+          "comment_excerpt": "လာမည့်နှစ်ကို Helix နဲ့ Tr Thuzar ကို Y 8 ထားမလို့စဉ်းစားနေတာပါ တက်နေတဲ့ သူတွေရဲ့ review လေးလိုချင်လို့ပါရှင့် လက်ရှိတက်နေတဲ့ကျောင်းက Singapore Curriculum ပါ။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-12T12:15:44.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/893502416960870/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/893502416960870/-6",
+          "comment_excerpt": "Helix ဆို နာမည်တောင်မကြားချင်ဘူး 😖",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:15:44.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/893502416960870/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/893502416960870/-7",
+          "comment_excerpt": "Helix မသွားနဲ့ ဝန်ထမ်းတွေကိုတောင် လူလိုဆက်ဆံကြတာမဟုတ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:15:44.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/893502416960870/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/900931756217936/-8",
+          "comment_excerpt": "Brain Work Kings ,SKT ,Helix Years 6 အတွက် ကျောင်းလခ လေးတွေ သိချင်လို့ပါ တက်နေတဲ့မေမေတွေ sharing လုပ်ပေးပါလို 🙏🙏 ဘယ်ကျောင်းက ပိုအဆင်ပြေနိုင်လဲရှင့် 🙏🙏",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-15T14:01:30.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/900931756217936/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899947412983037/-9",
+          "comment_excerpt": "Acorn..Helix...warrior..heroရယ်။။ အတန်းကြီးတွက်ဘယ်ကျောင်းအဆင်ပြေမလဲရှင့်။။ထားဖူးတဲ့မေမေများ review လေးပေးပါအုံးနော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-14T08:58:30.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899947412983037/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899947412983037/-10",
+          "comment_excerpt": "Helix က အတန်းကြီး ကျန်တာ အတန်းငယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-14T08:58:30.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899947412983037/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899947412983037/-11",
+          "comment_excerpt": "Helix (အတန်းကြီးရှိ) and Acorn (year8 အထိအတန်းရောက်လာပီ) System ကောင်း။ ကျန်နစ်ကျောင်းတော့မသိပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-14T08:58:30.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899947412983037/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/882454498065662/-12",
+          "comment_excerpt": "အတန်းကြီးအတွက် acorn နဲ့ Helix ဘာဟာပိုအဆင်ပြေလဲရှင့်။။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:05:32.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/882454498065662/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/882454498065662/-13",
+          "comment_excerpt": "နစ်ကျောင်းလုံး ပေးရတဲ့ကျောင်းလခ နဲ့ ဆိုရင် ကောင်းတယ်ပြောရမယ်။ ဘယ်ကျောင်းမှ all perfect မဖြစ်တာမို့ အိမ်နဲ့နိးတာ ရွေးပါ။ - Acorn လူနည်းနည်းနဲ့ ဖိဖိစီးစိးသင်တယ်စည်းကမ်းကောင်းတယ်။ year 8 အထိပဲ အတန်ူးကြီးရှိသေးတော့ IG Results တွေ စောင့်ကြည့်နေဆဲကာလ -Helix အတန်းကြီး experience တွေရှိပီးသား။ ဒါမယ့် လိုင်းပေါ်မှာ bully case တွေမြင်ရတယ်။ အဆင်ပြေတဲ့ကလေးတွေလည်းပြေကြပါတယ်။ သေချာ လေ့လာသုံးသပ်ပီးရွေးချယ်ပါနော်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "safety",
+          "created_at": "2026-08-28T10:05:32.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/882454498065662/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884931521151293/-14",
+          "comment_excerpt": "Yangon မှာ A level သင်တဲ့ Helix Hinthar C.E.C SCA Ascend TZEC တို့မှာတက်နေကျတဲ့ students တွေရဲ့ honest reviews လိုချင်တာပါခမျာ၊ ကျနော်က (EDEXCEL) science subjects တွေရယ် maths ရယ်ယူမှာပါ။ science ကတော့ ခက်တယ်ဆိုပင်မယ့် အိမ်က budget အနေနဲ့ အပြင်မှာ guide ပြန်ယူဖို့ မစဥ်းစားထားပါဘူးဗျာ၊ ဒါကြောင့် ဘယ် ကျောင်းတွေက အသင်အပြအဆင်ပြေလည်းဆိုတာလေးသိချင်လို့ပါဗျ၊ ကျေးဇူးတင်ပါတယ်။ P.s No hate towards any school.",
+          "sentiment_label": "negative",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-28T10:03:20.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884931521151293/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/887617160882729/-15",
+          "comment_excerpt": "Hi Admins ရှင့်post လေးလက်ခံပေးပါရှင် International school တွေမှာတစ်လတစ်ခါ Report card ပေးတာလားရှင့် အမှတ်နဲ့လား A,B,Cနဲ့လားသိချင်ပါတယ် ကျောင်းလေးပြောင်းချင်လို့စုံစမ်းနေတာပါ လေ့လာထားတဲ့ကျောင်းလေးတစ်ချို့ရှိပါတယ် ALBA, Helix, ACAE, City school yangon ပါ ကျွန်မတစ်ခုလောက်သိချင်ပါတယ်အဲ့ကျောင်းမှာလက်ရှိတက်နေတဲ့မေမေတွေရှိရင် ကလေးတွေရတဲ့ Report card လေးတွေပြပေးပါလားရှင့် သားသားကyear2 တက်မှာပါ တစ်လတခါပေးတဲ့ Report card လေး…",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-29T15:51:10.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/887617160882729/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/885933727717739/-16",
+          "comment_excerpt": "မင်္ဂလာပါ မေမေတို့ရှင့် ကျွန်မသမီးလေးကို ဒီနှစ်Secondary 1 ကို B နဲ့စတဲ့ကျောင်းတခုမှထားထားပါတယ် management ရော စာပိုင်းရော သိပ်အဆင်မပြေလို့Secondary 2 အတွက် နောက်နှစ်ကျောင်းပြောင်းချင်တာ Helix ကိုတော့စဉ်းစားထားပါတယ် IGSCE Pearson အတွက်ကိုထားချင်တာပါschool fee ကအရမ်းများလားရှင့် သင်ကြားရေးပိုင်းလည်း အဆင်ပြေမပြေသိချင်လို့ပါ Helix ကျောင်းမှာထားဖူးတဲ့မေမေများရှိရင်ဖြေပေးပါဦးနော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-08-27T13:35:23.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/885933727717739/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880457681598677/-17",
+          "comment_excerpt": "မေမေတို့ရှင့် IGCSE အတွက် ဘယ်ကျောင်းလေး recommend ပေးပါလဲရှင့် …. လက်ရှိ သားလေးကတော့ NIEC မှာတက်နေတာပါ yr 7 ပါ အောက်ကကျောင်းလေးတွေထဲက မေမေတို့ ဘယ်ကျောင်း​လေး recommend လဲလို့ မေမေတို့ အကြံလေးတောင်းတာပါရှင့်… ဒီထဲမှာမပါလဲ မေမေတို့ရွေးတဲ့ကျောင်းလေးရှိရင် သိပါရစေရှင့် Helix, GIC , TZEC , IIP , Hinthar",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-20T13:27:52.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880457681598677/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880457681598677/-18",
+          "comment_excerpt": "ကျွန်မကတော့ IIP Helix GIC မှာ waiting list တွေတင်ထားတယ် 🥹 သားသားကပုံမှန် year 7 ပဲ အတန်းကျော်လိုက်လို့ အခု year 8 မှာ 🫣",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-20T13:27:52.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880457681598677/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "3d1593e7-5f61-4b29-b0ab-c70aab49514f": {
+      "school_name": "IIP International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/916532184657893/-0",
+          "comment_excerpt": "ခလေးကလာမဲ့နှစ်year1တတ်ရမာပါ IIP တော့waiting list တင်ထားတယ် မြောက်ဥက္ကလာကမို့ရွေးစရာနီးတဲ့isကမရှိလို့အနီးဆံုးကောင်းတာ reviewပေးကြပါမေမေတို့ရှင့် ရှိတဲ့KBTCက မကြိုက်လို့",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-10-04T03:11:50.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/916532184657893/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/916532184657893/-1",
+          "comment_excerpt": "IIP. တတ်ပါရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-10-04T03:11:50.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/916532184657893/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/907758378868607/-2",
+          "comment_excerpt": "IIP မှာwaiting list တင်ထားပြီးသားပါရှင် Back up Plan လေး လုပ်ထားချင်လို့ …. မြောက်ဒဂုံ International School တွေထဲက ကျောင်းကောင်းလေးတွေသိရင် အကြံဥာဏ်ပေးကြပါအုံးရှင့် Year 5 အတွက်ပါ။ ဘယ်ကျောင်းပိုအဆင်ပြေမလဲ Waiting List ပေးထားချင်လို့ပါ။ ကျေးဇူးတင်ပါတယ်နော် ….",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:04:30.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/907758378868607/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/906364645674647/-3",
+          "comment_excerpt": "IG results အရမ်း ကောင်း တာ တွေ့ရတာ KIS နဲ့ IIP ပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:02:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/906364645674647/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/892865217024590/-4",
+          "comment_excerpt": "NIEC နဲ့ IIP ဘယ်ကျောင်းက ပိုအဆင်ပြေလဲရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-05T16:14:33.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/892865217024590/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/892865217024590/-5",
+          "comment_excerpt": "NIEC က စာအရမ်းများပါတယ် စာမှစာဆို ထားပါ မိဘကလည်း လုပ်ပေးနိုင်တယ် ဆရာမလည်း သေချာခေါ်ပေးနနိုင်တယ်ဆို ထားပါ testတွေ Quizတွေ CRT တွေ အရမ်းများပါတယ် သင်ခန်းစာသင်တာလည်းမြန်ပါတယ် စာသင်တာ ကြိုက်ရင်ထားပါ ။happy learning တော့မဖြစ်ပါဘူး ကလေးရော မိဘရော စာပိပါတယ် IIP တော့မထားဖူးတော့ မသိပါဘူးရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-09-05T16:14:33.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/892865217024590/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891294800514965/-6",
+          "comment_excerpt": "NIEC က Cambridge school လားရှင့် IIP နဲ့ဆိုဘယ်ကျောင်းထားရမလဲစဉ်းစားနေလို့ပါရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-05T16:17:22.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891294800514965/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891294800514965/-7",
+          "comment_excerpt": "IIP က ခုလက်ရှိမှာ ပေးရတဲ့ ဈေးနဲ့ တန်တယ်လို့ ပြောလို့ရတဲ့ ကျောင်းတစ်ကျောင်းပါ သင်ကြားမှုပိုင်းမှာ သူကပိုပြီးအားထည့်ထားပါတယ် နှစ်ကုန်တာနဲ့ သင်ကြားမှုအားလုံး ပြီးပါတယ် ကျန်ခဲ့တာမျိုး စာမပြီးတာမျိုးမရှိပါဘူး ကလေးပေါ်လဲ မူတည်ပါတယ် ကျောင်းအားလုံးမှာတော့ အားနည်းချက် အားသာချက်တော့ရှိကြပါတယ် ကိုယ်နဲ့ နီးတဲ့ ကျောင်းကိုတော့ ဦးစားပေးရွေးချယ်တာ အကောင်းဆုံးလို့ ပြောချင်ပါတယ်ရှင့် အဆင်ပြေပါစေ မေမေရေ 🥰",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-05T16:17:22.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891294800514965/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891294800514965/-8",
+          "comment_excerpt": "NIEC ကတော့ A level ထိ Cambridge(CIE) ပါ IIP ကတော့ အတန်းကြီးရင် edxcel လိုကြားပါတယ် Year 7မှာပြောင်းတယ်လို့ပြောပါတယ် ကျောင်းအားလုံးမှာအရမ်းသာလွန်နေတာမျိုးတော့မတွေ့ဘူးပါဘူး လိုအပ်ချက်တွေနဲပဲမို့ အဓိကအချက် *ဘတ်ဂျက် *အိမ်နဲ့အကွာအဝေး *ကိုယ်ရဲ့ယုံကြည်မှုပေါ်မူတည်ပီးရွေးချယ်ပါ ဥပမာ အနေနဲ့ပြောရရင် IIP မှာ bad review ရှိလည်း IIP မှ IIP အမာခံ မိဘတွေရှိသလို NIEC က bad review များနေလည်း NIEC မှ NIEC ဆိုတဲ့မိဘတွေလည်းရှိနေတာမို့ …",
+          "sentiment_label": "negative",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-05T16:17:22.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891294800514965/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/848913544753091/-9",
+          "comment_excerpt": "IIP north dagon Campus Kings International School My Myanmar ဘယ်ကျောင်းလေးထားသက့်လဲရှင့် school feeလေးသိချင်ပါတယ် ခဏခဏ ကျောင်းမပြောင်းဘဲ ရေရှည် အတွက်ပါအဆင်ပြေမှာမျိုး ပြောပြပေးပါအုံးရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-07-10T14:16:36.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/848913544753091/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/848913544753091/-10",
+          "comment_excerpt": "IIP My Myanmar အာ့နှစ်ကျောင်းကို school visit သွားပြီး က်ိုယ်သဘောကျတဲ့ကျောင်းက်ုရွေးချယ်ပါ KINGS ကိုတော့ recommend မပေးပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-10T14:16:36.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/848913544753091/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/877233808587731/-11",
+          "comment_excerpt": "Hi နောက်နှစ်ကို year 10 တက်မှာပါ TZEC ကနေပြောင်းချင်လို့ပါရှင့် စာသင်တာက အဆင်ပြေပေမဲ့ ကလေးက activities ကြိုက်သူမို့ သိပ်အဆင်မပြေလို့ပါ ALBA, King international တို့ကိုတော့ ကြည့်ထားပါတယ် ၊ north Dagon ကပါ ဘယ်ကျောင်းလေးတွေ မြန်း အဆင်ပြေနိုင်မလဲရှင့် IIP ကတော့ မမှီလိုက်လို့ပါရှင် အကြံလေးပေးကြပါအံုးနော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-19T10:40:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/877233808587731/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/877233808587731/-12",
+          "comment_excerpt": "KIS နော် Activities လဲမျာ IGCSE results လဲကောင်းတယ် Alba က IGCSE results သိပ်မကောင်းဖူး IIP လဲ activities နည်းပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-19T10:40:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/877233808587731/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880457681598677/-13",
+          "comment_excerpt": "မေမေတို့ရှင့် IGCSE အတွက် ဘယ်ကျောင်းလေး recommend ပေးပါလဲရှင့် …. လက်ရှိ သားလေးကတော့ NIEC မှာတက်နေတာပါ yr 7 ပါ အောက်ကကျောင်းလေးတွေထဲက မေမေတို့ ဘယ်ကျောင်း​လေး recommend လဲလို့ မေမေတို့ အကြံလေးတောင်းတာပါရှင့်… ဒီထဲမှာမပါလဲ မေမေတို့ရွေးတဲ့ကျောင်းလေးရှိရင် သိပါရစေရှင့် Helix, GIC , TZEC , IIP , Hinthar",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-20T13:27:52.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880457681598677/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880457681598677/-14",
+          "comment_excerpt": "ကျွန်မကတော့ IIP Helix GIC မှာ waiting list တွေတင်ထားတယ် 🥹 သားသားကပုံမှန် year 7 ပဲ အတန်းကျော်လိုက်လို့ အခု year 8 မှာ 🫣",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-20T13:27:52.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880457681598677/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880513188259793/-15",
+          "comment_excerpt": "GIC ALBA IIP Kings ထဲက👇 IGCSE CIE အတွက် ဘယ်ကျောင်းရွေးတက်ရမလဲမသိဖြစ်နေလို့ recommend ပေးကြပါဦးရှင့် ဒီထက်ကောင်းတဲ့ ကျောင်းတွေရှိရင်လည်းပြောပြပါရှင့် ALBA က CIE နဲ့သင်ပြီး Edexel နဲ့ဖြေတာလားမသိဘူး",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-21T17:37:02.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880513188259793/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880513188259793/-16",
+          "comment_excerpt": "King ပဲပေါ့ IIP နဲ့မယှဉ်ပါနဲ့",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T17:37:02.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880513188259793/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/879639225013856/-17",
+          "comment_excerpt": "တကယ်က PISM ကမှ registered Cambridge IS ပါ ကိုယ့်ကလေးလည်း IIP တက်နေတာပါ PISM ပြောင်းမလားလို့စဉ်းစားနေတာ ဝေးပီးတော့ ကျောင်းခွဲတွေ မတွေ့လို့သာ IIP ပဲဆက်ထားနေရတာ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-21T17:38:23.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/879639225013856/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/801234982854281/-18",
+          "comment_excerpt": "၄ နှစ်အရွယ်အတွက် စမ်းချောင်းတစ်ဝှိုက် ကျောင်းကောင်းလေးများအတွက် အကြံဉာဏ်လေး ပေးကြပါအုံးနော်။ Alba,ACAE,AIM,Thalun မှာ review တွေလည်းမွှေနှောက်ဖတ်ပြီးပါပြီရှင်။ IIP အတွက်လည်း waiting list ကိုစောင့်နေပါတယ်။ Dual ပဲထားရင်လည်းကလေးစာအရမ်းပိမှာလည်းစိတ်ကပူပြန်ပါတယ်။ အခြေခံခိုင်သွားစေပြီး နဲနဲကြောက်တက်တာမျိုးရှိတော့ ဂရုစိုက်ပေးတဲ့ကျောင်းမျိုးလည်းဖြစ်စေချင်တာပါ။ အားတဲ့မေမေများ အကြံဥာဏ်လေးပါပါအုံးရှင့်🤗",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-05-12T10:02:27.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/801234982854281/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/875670018744110/-19",
+          "comment_excerpt": "လက်ရှိ iip တက်နေတာလား",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-19T10:42:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/875670018744110/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/876350908676021/-20",
+          "comment_excerpt": "ILBC/IIP အတူတူပဲကြိုက်ကိုမကြိုင်တာ။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-19T10:42:05.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/876350908676021/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/879644341680011/-21",
+          "comment_excerpt": "Is ကျောင်းတွေက မလိုလောက်ပါဘူးနော် အဓိက PT က အဆုံးအဖြတ်ပေးတာပါ ကိုယ်တွေပြောင်းတာတော့ တစ်ခါမှ မပေးရပါဘူး အခုလက်ရှိ IIP တက်နေပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T17:38:17.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/879644341680011/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/859287443715701/-22",
+          "comment_excerpt": "အလုံထဲမှာ IIP နဲ့ Acorn international နှစ်ခုထဲက တခု စဉ်းစားထားပါတယ်။ တက်နေတဲ့မေမေများ review လေးသိချင်ပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-24T16:15:07.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/859287443715701/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/864590003185445/-23",
+          "comment_excerpt": "နောက်နှစ်Year1 ကို အိမ်နဲ့နီးတဲ့ IIP နဲ့ Acorn 2ခုထဲကစဉ်းစားနေတာ IIP ကစာအရမ်းများတယ်ဆိုလို့ စာအရမ်းများတော့လဲ ကလေးအရမ်းstress များပီး ဝန်ပိမှာမကြိုက်လို့ Acorn ပဲရွေးလိုက်ပါတယ်ရှင့် Acorn မှာလက်ရှိထားနေတဲ့မိဘများ သင်ကြားမှုအဆင်ပြေလားရှင့် အပြင်မှာclass မျိုးတွေရောမဖြစ်မနေထပ်ပီးsupport လုပ်ဖို့ရောလိုလားရှင့် ထားဖူးတဲ့မေမေများ Review အကောင်းအဆိုးလေးပြောပေးပါဦးနော်😁",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-31T10:22:38.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/864590003185445/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/865368313107614/-24",
+          "comment_excerpt": "IIP 2027-2028 အတွက်ဖောင်တင်ထားတယ် သားအသက်က နောက်နှစ်ဆိုရင် 5နှစ်နဲ့ 9လ ရှိပြီး year 1ကို join ရမှာလား 2ကို join ရမှာလား Placement test ဖြေရင် ဘာတွေကိုပြင်ဆင်ပေးထားရမလဲ သိတဲ့စီနီယာမေမေတို့ရေ ပြောပြပေးကြပါနော်😊",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-12T18:06:45.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/865368313107614/",
+          "source_kind": "post"
+        }
+      ]
+    },
+    "ba3c6f02-961b-42e1-8ef9-21d872abbda7": {
+      "school_name": "Kings International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/911428021834976/-0",
+          "comment_excerpt": "Pls Admin, Kings international school(Star City Campus)မှာ ကလေးကို ၃နှစ်လောက်ထဲက စထားတဲ့ မိဘတွေရှိကြလားဟင်။အခြေခံကောင်းလား သိချင်ပါတယ် မေမေတို့ရယ် (အပြင်ကျူရှင်တွေထပ်ထားရလားရော သိချင်ပါတယ်ရှင်) သူကIGCSE resultတွေလဲကောင်းတော့လေ ကလေးကို ခဏခဏကျောင်းမပြောင်းချင်လို့ပါ။",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-10-02T09:43:56.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/911428021834976/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/909686628675782/-1",
+          "comment_excerpt": "City School Yangon က မြယမုံအိမ်ယာထဲ Campus အသစ်ဖွင့်မယ်ဆိုလို့ Secondary Year 8 အတွက်လက်ရှိထားနေတဲ့မိဘတွေ review လေးသိပါရစေရှင့် အစက Kings International School Thuwana Campus ကိုပြောင်းဖို့လုပ်ထားတာပါ မြယမုံကျ အိမ်နဲ့ပိုနီးလို့အဆင်ပြေရင် CSY ကိုပြောင်းမလားလို့ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-27T16:19:38.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/909686628675782/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/909305262047252/-2",
+          "comment_excerpt": "Nusery ဆို သာ​ကေတ အနီးဆို Brain Work /SKT/ Kings International School Star City Campus ​တေ ရှိပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-27T16:18:47.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/909305262047252/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/909318085379303/-3",
+          "comment_excerpt": "မေမေတို့ရေ Kings international school(StarCity Campus)နဲ့ Brainworksနှစ်ကျောင်းထဲက ရွေးရခက်နေလို့ပါ။ကလေးအသက်၂နှစ်ခွဲအတွက်ပါ။အခြေခံကောင်းစေစချင်လို့ပါ…. NIECရဲ့pageမှာ ဝင်ကြည့်တော့လဲ မိဘတွေရဲ့reviewတွေကောင်းနေတော့ စိတ်ဝင်စားနေပါတယ်.. feesတွေမတူတာသိပါတယ် တကယ်ကို ကလေးအတွက် အဆင်ပြေမဲ့ တခြားကျောင်းလေးတွေရှိရင်လဲ recommendပေးပါဦးနော် သန်လျင်မှာနေတာမို့ နီးပီးအဆင်ပြေမဲ့ကျောင်းလေး",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-09-27T16:18:57.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/909318085379303/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/910207668623678/-4",
+          "comment_excerpt": "Brainworks နဲ့ Kings international schoolရဲ့ school feesတွေသိချင်ပါတယ်… ရေရှည်ထားရမှာမို့ အခုထဲကကြိုသိချင်တာပါ အတန်းတိုင်းရဲ့ school feesလေးတွေ shareပေးပါဦးနော်…please အဲ့ဒါမှ ကိုယ့်ဘတ်ဂျက်လေးနဲ့ ချိန်လို့ရမှာမို့ပါ ကျောင်းကိုဖုန်းဆက်မေးတာ သိပ်ပြီးမပြောပြလို့ပါရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-09-27T16:17:40.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/910207668623678/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/493565300287919/-5",
+          "comment_excerpt": "Kings international school ရဲ့ review လေးပြောပြပေးပါလားရှင်၊လာမယ့်academic မှာသမီးလေးကို year 7ထားဖို့စဉ်းစားလို့ပါရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2025-03-04T15:22:24.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/493565300287919/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/904182155892896/-6",
+          "comment_excerpt": "ရေရှည်အတွက်ဆို ဘယ်ကျောင်းက ပိုကောင်းလဲဆိုတာ အကြံပေးလို့ရမလား။ Kings International နဲ့ Stardom International မှာ ဘယ်ဟာပိုကောင်းလဲ။ ပညာအရည်အချင်းပြည့်ဝပြီး ကျောင်းသားတွေကို သေချာဂရုစိုက်ပေးနိုင်တဲ့ ဆရာကောင်းတွေရှိတဲ့ကျောင်း လိုချင်လို့ပါ Please approve",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-09-25T15:03:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/904182155892896/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/904182155892896/-7",
+          "comment_excerpt": "Kings International က ပိုကောင်းပါတယ်။ ဆရာ/ဆရာမ တွေရဲ့ profile တွေနဲ့ သင်ရိုးကို သာ အဓိကကြည့်ပါ။ Kings International က ပိုပြီး International school ပြီသပါတယ်၊ သူ့ရဲ့ activities တွေ၊ event တွေ၊ facilities တွေက အသာကြီးပါ။",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-09-25T15:03:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/904182155892896/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/829846739993105/-8",
+          "comment_excerpt": "Kings International School က ကလေးအရမ်းများတော့ တန်းခွဲတွေများတယ်၊ ဆရာတွေမနိုင်ဘူး၊ ခုလိုမိုးရာသီဆို ကျောင်းရှေ့ ရေပြင်ကြီးဖြတ်မောင်းရတယ်၊ Local ဆရာတွေနဲ့ပဲ အသင်အပြမကောင်းဘူး၊ အတန်းကြီးလာရင် ကျောင်းသားချင်း Bully လုပ်တာတွေရှိတယ်၊ သား၂ယောက်ကိုတောင်အဲ့ကျောင်းအပ်ပြီး နှစ်ဝက်မှာတင် ပြန်ထုတ်လိုက်ရတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "safety",
+          "created_at": "2026-06-16T07:45:24.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/829846739993105/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/882467414731037/-9",
+          "comment_excerpt": "မေမေတို့ခင်ဗျာ သမီးလေးက ILBC မှာP6 တက်နေတာပါနောက်နှစ်ကို Kings International School ကိုပြောင်းချင်တာစာအရမ်းမလုပ်ပဲပေါ့ပေါ့ပါးပါးဆို Brainworks နဲ့ Kings ဘယ်ကျောင်းကိုပြောင်းသင့်လဲခင်ဗျာ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:10:06.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/882467414731037/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/900668506244261/-10",
+          "comment_excerpt": "NIEC မှာ ထားဖူးပါတယ် Cambridge သင်ရိုးအတိုင်းသင်ပါတယ်။ အငယ်တန်းကလေးတွေ စာတစ်အားများပါတယ်။ မိဘကူပေးမှ ကလေးက လိုက်နိုင်ပါမယ်။ မကူပေးနိုင်ရင် ကလေးက အတန်းထဲ စာမရဘူးဖြစ်ပါမယ်။ စာမှစာ သင်ပြီး မေးခွန်းတွေကလည်း ခပ်မြင့်မြင့်မေးတော့ ကျူရှင်တွေ ဘက်စုံကြိုထားတာရင် ကလေးက လိုက်နိုင်ပါလိမ့်မယ်။ အကြီးတန်းတွေလည်း ကျူရှင်မထားအောင် စာဖိသင်ပေးပါတယ်။ သင်ရိုးကောင်းပါတယ်။ တစ်ချို့ ဆရာဆရာမတွေ IS သင်တဲ့ စိတ်ဓါတ်မရှိဘူး GS ကျောင်းဆန်ဆန် ကျေ…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-17T20:33:25.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/900668506244261/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899816249662820/-11",
+          "comment_excerpt": "တောင်ကြီးမှာ ကလေးကို Nursery ထားဖို့ ကျောင်းလေ့လာနေတာပါရှင့်။ City School - Taunggyi/ Kings International School - Taunggyi/ Brainwork - Taunggyi Campus ဒီ ၃ ကျောင်းရဲ့ review သိချင်လို့ပါ။ တောင်ကြီးက International School တွေရဲ့ review လေးတွေ လေ့လာလို့ရမယ့် group ရှိရင်လည်း ပြောပြပေးကြပါဦးရှင့်။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-14T05:01:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899816249662820/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891078047203307/-12",
+          "comment_excerpt": "Primary အတွက်ဆိုရင် Brainworks နဲ့ Kings International School ဘယ်ဟာကပိုကောင်းလဲရှင့်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-05T16:17:45.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891078047203307/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/883148491329596/-13",
+          "comment_excerpt": "KINGS International ကတော့ မဆိုးဘူး တခြားကျောင်းတွေထပ်စရင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T09:59:54.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/883148491329596/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884012607909851/-14",
+          "comment_excerpt": "IGCSE CIE အတွက် kings international school ကို ရွေးထားတဲ့ (သို့) တက်တဲ့မေမေရှိရင် အားသာချက် အားနည်းချက် လေးတွေ ပြောပြပေးပါအုန်း",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-28T09:58:32.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884012607909851/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884995564478222/-15",
+          "comment_excerpt": "Kings International ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-26T08:38:33.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884995564478222/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/848913544753091/-16",
+          "comment_excerpt": "IIP north dagon Campus Kings International School My Myanmar ဘယ်ကျောင်းလေးထားသက့်လဲရှင့် school feeလေးသိချင်ပါတယ် ခဏခဏ ကျောင်းမပြောင်းဘဲ ရေရှည် အတွက်ပါအဆင်ပြေမှာမျိုး ပြောပြပေးပါအုံးရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-07-10T14:16:36.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/848913544753091/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/883640531280392/-17",
+          "comment_excerpt": "Star city ထဲမှာဘဲ .. Kings international ရယ် ၊ ka gyi kha kway learning hub ရယ်ရှိတယ်နော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-24T15:17:57.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/883640531280392/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/876502225327556/-18",
+          "comment_excerpt": "Kings International School မှာ ESL သင်တာလား EFL လားရှင့် academic result တွေအရမ်းကောင်းလို့ကျောင်းပြောင်းဖို့စိတ်ဝင်စားနေလို့ပါ အတန်းကြီးထိထားဖို့လည်းရည်ရွယ်ထားပါတယ် Year 7 အတန်းတွက်ပါ စီနီယာမေမေတွေရှိရင်ပြောပေးကြပါအုံးနော်ကျေးဇူးပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-19T10:42:39.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/876502225327556/",
+          "source_kind": "post"
+        }
+      ]
+    },
+    "d286f5bb-2db7-5108-aca0-b7f742cdf56a": {
+      "school_name": "Yangon American International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/912295961748182/-0",
+          "comment_excerpt": "ကျွန်မသားသားအတွက်ကျောင်းရွေးနေလို့ပါ တစ်ကျောင်တော့စုံစမ်းထားပါတယ် yangon American school က တစ်နှစ်ကို ကျောင်းဝင်ကြေးကဒေါ်လာ2500 ကျောင်းလခကတစ်နှစ်ဒေါ်လာ15000မြန်မာငွေနဲ့သိန်း600,700ပတ်ချာလည်ကျပါတယ် ကလေးတယောက်ရဲ့ပညာသင်စရိတ်ကလဲရင်မောရပါတယ် King international school ကတော့မစုံစမ်းရသေးတော့ဈေးလေးမသိသေးပါဖူး လက်ရှိအဲ့ကျောင်းလေးကောင်းလားသိချင်ပါတယ် ဈေးကြီးပေးရတိုင်းကျောင်းတိုင်းကမကောင်းကျဖူးမဟုတ်လား နိုင်ငံခြားသားဆရာတွေပဲသင်…",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-10-02T09:16:57.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/912295961748182/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/912340695077042/-1",
+          "comment_excerpt": "ကျွန်မသားသားအတွက်ကျောင်းရွေးနေလို့ပါ တစ်ကျောင်တော့စုံစမ်းထားပါတယ် yangon American school က တစ်နှစ်ကို ကျောင်းဝင်ကြေးကဒေါ်လာ2500 ကျောင်းလခကတစ်နှစ်ဒေါ်လာ15000မြန်မာငွေနဲ့သိန်း600,700ပတ်ချာလည်ကျပါတယ် ကလေးတယောက်ရဲ့ပညာသင်စရိတ်ကလဲရင်မောရပါတယ် King international school ကတော့မစုံစမ်းရသေးတော့ဈေးလေးမသိသေးပါဖူး လက်ရှိအဲ့ကျောင်းလေးကောင်းလားသိချင်ပါတယ် ဈေးကြီးပေးရတိုင်းကျောင်းတိုင်းကမကောင်းကျဖူးမဟုတ်လား နိုင်ငံခြားသားဆရာတွေပဲသင်…",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-10-02T09:16:54.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/912340695077042/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/912340695077042/-2",
+          "comment_excerpt": "YAIS ပါ။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-10-02T09:16:54.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/912340695077042/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/898651083112670/-3",
+          "comment_excerpt": "ရန်ကုန်ဆိုရင် ကလေးငယ်လေးအတွက်က Yangon American International School တစ်ခုပဲ PYP သင်တာရှိတယ်နော် ပိစိလေးကစထားလို့ရတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T16:23:54.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/898651083112670/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/895302866780825/-4",
+          "comment_excerpt": "Kings Yangon vs Yangon American International School အခုလက်ရှိ ကလေးက ၅နှစ်… Kings Yangon မှာ တက်နေတာပါရှင့်… တော်တော်အဆင်မပြေနေတော့လို့ ကျောင်းပြောင်းဖို့ရှာနေတာ… YA ဆိုရင်ရော ဘယ်လိုနေလဲလေး သိချင်ပါတယ်ရှင့်… ပြီးတော့ တခြား အလားတူ range ထဲက recommend လုပ်ပေးချင်တဲ့ ကျောင်းလေးတွေရှိရင်လဲ ပြောပေးပါဦးရှင့်…. 🙏🏻🙏🏻🙏🏻",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T11:47:58.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/895302866780825/",
+          "source_kind": "post"
+        }
+      ]
+    },
+    "f6c7b97d-8959-4d0c-841f-8148d10dcd4d": {
+      "school_name": "ILBC International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/889102580734187/-0",
+          "comment_excerpt": "ကျမ ကလေးကို warriors မှာ ဒီနှစ်မှစထားကြည့်တာ အဆင်မပြေဘူးရှင် ကျောင်းမှာစာသင်လားမသင် လားတော့မသိဘူး စာအုပ်ထဲဘာစာမှ ပါမလာဘူး ဘာမေးမေးလဲမသိဘူး Trs နဲ့တွေ့ပြီးဆွေးနွေးကြည့်ပေါင်းလဲများပြီ နောက်နှစ်တော့ စျေးကွာချင်ကွာပါစေ ကျိတ်မှိတ်ပြီး ILBC ပြန်ပြောင်းတော့မယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-13T14:51:06.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/889102580734187/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/915679691409809/-1",
+          "comment_excerpt": "ILBC 30th campus မှာ ဘယ်အတန်းကစရှိတာလဲ year 7 ကလေးနောက်နှစ်ကျထားမလို့ ဘာတွေပြင်ဆင်ထားဖို့လိုအပ်မလဲရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-10-03T02:04:33.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/915679691409809/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/903384902639288/-2",
+          "comment_excerpt": "Nursery ထားဖို့ Milestones , Nelc , ILBC ဘယ်ဟာအဆင်ပြေလဲရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:07:42.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/903384902639288/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/903384902639288/-3",
+          "comment_excerpt": "ILBC က တစ်လ၉သိန်း NELC က တစ်လ 3သိန်း8​သောင်း ၂​​​ကျောင်းလုံးထားဖူးပါတယ် ဘာကွာလဲဆို facility ကွာပါတယ် Playground ကွာပါတယ် စာတတ်တာ​တော့တူတူပါပဲ NELC က ​ပေးရတာနဲ့ပြန်ရတာတန်တယိလို့ခံစားရပါတယ် တတ်နိူင်ရင်​တော့ ILBCထားပါ ​ရေရှည်ထားရင်Speakingပို​ကောင်းပါမယ် တခုပဲCCTVမရှိပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-09-25T15:07:42.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/903384902639288/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/903384902639288/-4",
+          "comment_excerpt": "အခြေခံကောင်းကောင်းလေးနဲ့ သွားချင်တယ်ဆို ILBC ကိုပိုကြိုက်ပါတယ်။ အိမ်က သားလေးလည်းထားနေတာအဆင်ပြေတယ် Activities လေးတွေလည်းများပြီး play and learn ပုံစံမျိုးလေးနဲ့ဆိုတော့ ကလေးတွေလည်းကျောင်းပျော်တယ်ရှင့်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:07:42.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/903384902639288/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/905721945738917/-5",
+          "comment_excerpt": "သမီးလေး ၃ နှစ်ပြည့်ရင် ILBC ထားဖို့စဉ်းစားထားပါတယ် ထားဖူးတဲ့မေမေတို့ရဲ့ review လေးသိပါရစေရှင် ကလေးက နေ့လည်အိပ်တတ်တော့ ပေးအိပ်လားသိပါရစေရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:04:43.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/905721945738917/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/903967422581036/-6",
+          "comment_excerpt": "သမီးလေးက အခု pre kg ကို ILBC International School မှာတက်နေတာပါ လာမယ့်နှစ် kg ကို ကျောင်းပြောင်းချင်တာ ဈေးလည်းသင့်ပီး ကလေးလည်းစိတ်ချရတဲ့ တခြား international school ကျောင်းလေးရှိရင် ညွန်ပေးပါအုံရှင့် စဉ်းစားရခက်နေလို့ပါ မြောက်ဒဂုံ အနီးတဝိုက်မှာ ထားချင်တာပါရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:08:01.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/903967422581036/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899409339703511/-7",
+          "comment_excerpt": "Preschool ကို ILBC မှာထားပြီး kg ရောက်ရင် private school ပြောင်းထားရင် ကလေးအတွက်အဆင်ပြေပါ့မလား သိချင်လို့ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-17T20:33:57.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899409339703511/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899409339703511/-8",
+          "comment_excerpt": "ကျမ​တော့အဲ့လိုကို အားမ​ပေးပါဘူး ILBC ထားမယ်ဆို ILBC ဆက်ထားပါ ILBC မှာ preschool ထားပြီးမှ private school ​ပြောင်းမယ်ဆို က​လေးအတွက် အ​ပြောင်းအလဲ​တွေ များနိုင်ပါတယ် KG ကစပြီး private school ထားဖို့ အစီအစဥ်ရှိရင် preschool ​ကောင်းတာ​လေးရှာထားလို့ရပါတယ် ILBC ​လောက်​စျေးမများပဲ ​က​လေးဂရုစိုက်တဲ့ preschool ​တွေရှိပါတယ် ILBC preschool က ဒီနှစ်ကို တစ်လ ၉သိန်းကျော်ပါ ​​နောက်နှစ်ဆို ၁၀သိန်းအထက်ပါ ILBC က တစ်နှစ်တခါ ​ကျောင်းလခ …",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-09-17T20:33:57.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899409339703511/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/882467414731037/-9",
+          "comment_excerpt": "မေမေတို့ခင်ဗျာ သမီးလေးက ILBC မှာP6 တက်နေတာပါနောက်နှစ်ကို Kings International School ကိုပြောင်းချင်တာစာအရမ်းမလုပ်ပဲပေါ့ပေါ့ပါးပါးဆို Brainworks နဲ့ Kings ဘယ်ကျောင်းကိုပြောင်းသင့်လဲခင်ဗျာ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:10:06.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/882467414731037/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899824556328656/-10",
+          "comment_excerpt": "ဒီ Group ထဲမှာ နေပြည်တော်မိဘတွေများရှိကြလားရှင့် နေပြည်တော်မှာ ILBC/NISA/Teacher su ဘယ်ဟာကောင်းလဲရှင့် ကိုယ်ကနယ်ခံလည်းမဟုတ်တော့ဘယ်ကျောင်းထားရမလဲဝေခွဲမရဖြစ်နေလို့ပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-09-17T20:31:20.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899824556328656/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899824556328656/-11",
+          "comment_excerpt": "ILBC တော့မရွေးနဲ့မကောင်းပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-17T20:31:20.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899824556328656/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899423699702075/-12",
+          "comment_excerpt": "King international ကျောင်း နဲ့ ILbC ဘာထားရမလဲ ဝေခွဲမရဖြစ်နေလို့ပါ review လေးပြောပြပါဦးမေမေတို့ရေ year 2 ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-17T20:33:50.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899423699702075/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899423699702075/-13",
+          "comment_excerpt": "ရေရှည်ကိုကြည့်ပါ ကိုယ့်ရဲ့ဝင်ငွေရော ကလေးရဲ့ပျော်ရွှင်မှုရော King ကကောင်းတယ် ဈေးကော သင်ရိုး‌ေကာမြင့်တယ် ကိုယ့်ရဲ့ကလေး‌ကလဲ ဒီစာတွေကိုလိုက်နိုင်ရင်ကောင်းတယ် ILBC ကတော့ ဈေးကော သင်ရိုးကော သင့်တင့်တယ် မိဘတွေရဲ့စိတ်နဲ့မရွေးစေချင်ပါ ကလေးရဲ့စိတ်ထဲဝင်ကြည့်ပီး ကလေးနေရာကနေစဉ်းစားပြီးရွေးစေလိုပါတယ် (ဆရာမတစ်ယောက်ရဲ့အတွေ့အကြုံအရပြောပြတာပါ)",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-09-17T20:33:50.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899423699702075/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/900602609584184/-14",
+          "comment_excerpt": "Milestones International School နဲ့ ILBC review လေးတွေ ပြော‌ပြပေးလို့ရမလားရှင် 3 နှစ်ကလေးအတွက် ကျောင်း မပြောင်းပဲ တစ်ကျောင်းထဲ ပဲ တောက်လျောက် ထားချင်လို့ပါရှင် Budget ကတော့တစ်နှစ်ကို 100 ကျော် ဝန်းကျင်နိုင်ပါတယ် အဲ့ဈေး ပတ်ဝနးကျင်က ကောင်းတာလေးတွေလဲ ညွှန်းပေးပါအုန်းရှင်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-16T09:31:38.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/900602609584184/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/900602609584184/-15",
+          "comment_excerpt": "သားသားက ILBC မှာ ထားပြီးမှ milestones ကိုပြောင်းတာပါ ခုတတ်နေတာ nursery ပါ ခလေးက။ ၂ ခုလုံးထားတဲ့အတွေ့အကြုံ အရ milestone ကိုပိုကြိုက်ပါတယ်။ CCTV ရှိတာရော class teacher တွေနဲ့ ခလေးအကြောင်းသေချာဆွေးနွေးရတာရော activities photo လေးတွေ share ပေးတာရောပို သဘောကျမိပါတယ်။ ဆရာမကလည်း ကလေးအပေါ် အတော် ဂရုစိုက်ပါတယ်။တစ်ကျောင်းတည်းတောက်လျှောက်ထားချင်တာဆိုရင် ILBC က အတန်းကြီးရင်တော့ parami campus တော့ မရလောက်ဘူးထင်တယ်နော်မေမေ။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-16T09:31:38.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/900602609584184/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/900602609584184/-16",
+          "comment_excerpt": "Milestone ကသူစျေးလေးနဲ့သူမစိုးပါဘူး။ ILBC ကျမတန်ဘူး သင်တော့ local တွေ အသံထွတ်လည်းအတော်စိုးပါတယ်။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-16T09:31:38.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/900602609584184/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/898644866446625/-17",
+          "comment_excerpt": "ILBC YIS Marketingလုပ်နေကြတာလား",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-13T14:47:53.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/898644866446625/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890267697284342/-18",
+          "comment_excerpt": "လက်ရှိကျောင်းမကောင်းလို့ ဟိုကျောင်းနာမည်ကြီးလို့စာလိုက်နိုင်မလားဆိုမျှော်လင့်ချက်ကြီးနဲ့ကျောင်းပြောင်းရမလားဖြစ်နေတဲ့ဘဝတူမေမေတွေအတွက်အတွေ့ကြုံလေးပါ ဘယ်လောက်ကောင်းကောင်းကျူရှင်ထားရတာပါပဲ ကိုယ့်ကလေးညံ့လို့လဲမဟုတ်ဘူး အများစုထားကြတော့ ကလေးတွေကသိပီးတတ်ပီးသားတွေ အတန်းထဲဆရာမကကျူရှင်မယူတဲ့ကိုယ့်ကလေးတယောက်ထဲစိတ်ရှည်ရှည်ဆွဲခေါ်မယ်မထင်ဘူး ကိုယ့်တူမပါ ilbc ထားတုန်းက mathတွေမလိုက်နိုင်လို့ဆိုပြီး Extremely မှာထားတယ် သူကလဲစျေးမသေး…",
+          "sentiment_label": "negative",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-09-13T14:50:54.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890267697284342/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890409987270113/-19",
+          "comment_excerpt": "မေမေတို့ရေ!! ပြောပြပေးပါဦး!! မြောက်ဒဂုံ ILBC မှာထားတဲ့သူတွေရှိလားရှင်.. အဆင်ပြေ/မပြေလေး သိချင်လို့ပါရှင်.. ကလေး၃နှစ်ပြည့်ရင် ILBC မှာထားဖို့ စီစဉ်ထားလို့ပါရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-02T16:47:57.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890409987270113/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899816249662820/-20",
+          "comment_excerpt": "ပိုက်ဆံတတ်နိုင်ရင် Total ပေါ့ အဲ​လောက်မတတ်နိုင်ရင် ILBC ထားပြီး ကြီးမှ King ကိုပြောင်း သူက IGCSE Result ကောင်းတယ် City School တော့ မကြိုက်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-14T05:01:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899816249662820/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/894357536875358/-21",
+          "comment_excerpt": "နောက်နှစ်ကျ ILBC ကို သမီးလေးကတက်ချင်တယ်ဆိုလို့ ကျောင်းပြောင်းရမှာမို့ ကျမသိထားတာ Payment က တစ်လချင်းပေးလို့ရတယ်သိထားလို့ အဖေအမေကလဲ လခစားမို့ တစ်လခါပေးလို့ရတာ ဟုတ်ပါသလားရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:16:11.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/894357536875358/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/898186899825755/-22",
+          "comment_excerpt": "ILBC က ဘာသင််ရိုးလဲရှင့် သမီးခုတက်နေတဲ့ကျောင်းနဲ့ သင်ရိုးတူရင် လာမယ့်နှစ်ကိုပြောင်းထားရမလားလို့ ဒီဘက်ကျောင်းမှာ အဆင်မပြေတာလေးတွေရှိနေလို့",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:14:38.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/898186899825755/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/895248573452921/-23",
+          "comment_excerpt": "နောက်နှစ် ILBC မှာ ကလေးကို ကျောင်းထားဖို့ စိတ်ဝင်စားနေလို့ပါ။ ဒီ Group ထဲမှာ ILBC မှာ ကလေးတက်နေတဲ့ မိဘတွေရှိရင် ကျောင်းရဲ့ သင်ကြားရေးပိုင်းနဲ့ ပတ်ဝန်းကျင်အခြေအနေ၊ ဆရာ/ဆရာမတွေရဲ့ သင်ကြားပုံလေးတွေ အဆင်ပြေကြလားဆိုတာ အတွေ့အကြုံလေး မျှဝေပေးကြပါဦးနော် 🙏 ပြီးတော့ ကျောင်းလခနဲ့ တခြားကုန်ကျစရိတ်တွေကရော ဘယ်လောက်လောက်ရှိလဲ သိချင်ပါတယ်ရှင့်။ နောက်နှစ်အတွက် ကျောင်းအပ်တာ ဘယ်အချိန်လောက်က စလက်ခံလဲဆိုတာလည်း သိရင် ပြောပြပေးကြပါဦးနော်။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-09-12T12:15:01.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/895248573452921/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/896701606640951/-24",
+          "comment_excerpt": "ILBC မိဘများရှိကြလားနော် အဲ့ဘက်ကို ပြောင်းလာချင်တာ ဝင်ခွင့်ရအောင်ဘယ်လိုလုပ်ရမလဲဖြေပေးလို့ရလားရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:12:09.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/896701606640951/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/894728100171635/-25",
+          "comment_excerpt": "မေမေတို့ရေ ဖြေပေးပါအုံးရှင့် သက်န်းကျွန်းက ILBC က အဆင်ပြေလားရှင့်သမီးလေးကိုထားချင်တာ(အခုတလော ကလေးချင်းကိုက်ခံရတယ်ဘာညာတွေ့ရလို့ စိတ်ပူလို့ပါ)",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:15:22.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/894728100171635/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/892038260440619/-26",
+          "comment_excerpt": "မေမေတို့ရေ အကြံလေးပေးကြပါအုံး🙏 ညီမက နယ်မြို့လေးတစ်မြို့မှာနေပြီး အဲမှာ အစိုးရကျောင်းပဲရှိပါတယ်.စီးပွါးရေးကလည်း ဘယ်လိုမှ ရွှေ့လို့အဆင်မပြေလို့ပါ.အစကတော့ ကလေးအဖေကိုနယ်မှာထားပြီး သားအမိ နှစ်ယောက် Ygn မှာကျောင်းထားမို့ စီစဥ်ထားပါတယ်.ခုက သူ့အဖေကလည်း သမီးကိုမခွဲနိုင် သူ့ကိုတစ်ယောက်တည်း နယ်မှာထားရင်လည်း စားဝတ်နေရေး အိမ်မှူကိစ္စလည်းရှိတော့ ဘယ်လိုမှ အဆင်မပြေလို နယ်မှာပဲ နေရမယ့်သဘော ဖြစ်နေပါတယ်.သမီးလေးကိုလည်း GS လုံးဝမထားချင…",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-05T16:15:56.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/892038260440619/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/867608149550297/-27",
+          "comment_excerpt": "ကလေးက 2 နှစ်နဲ့ 4 လ tututat မှာ play date ထားတာ 1 လရှိပါပြီ အတန်းထဲမှာအချို့ကလေးတွေကပြေးပြီး အော်နေကြတော့ တီချယ်ပြောတာ သင်တာတွေကို သိပ်ပြီး focus မလုပ်နိုင်ဘူး တီချယ်ကလဲ သူပြောရမှာ လုပ်ရမှာတွေကိုပဲ တစ်ခုပြီးတစ်ခုဆက်လုပ်သွားတာဆိုတော့ အချို့နေ့တွေမှာ အခြားကလေးတွေပြေးနေတာ ဆော့နေတာကို ငေးရင်းနဲ့ပြီးသွားတယ် .. play date အတန်းတွေက အခြားကျောင်းတွေလဲအဲ့လိုပဲလားရှင့် .. tututat မှာထားတာ ကလေးမတိုးတက်လာဘူး eng လိုလဲသိပ်မပြောနိ…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-05T17:30:22.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/867608149550297/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/755720834072363/-28",
+          "comment_excerpt": "ILBC ရော? အဲ့မှာလဲ ကောင်းတယ် စာချည်းမဟုတ်ပဲ activity တွေနဲ့ ရော‌သင်တော့ ကလေးတွေလဲကျောင်းပျော်တယ် ကျောင်းခွဲတွေလဲ ရှိတယ် တချက်မေးရင်မေးကြည့်ပါလား",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-03-10T11:36:13.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/755720834072363/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/893020223675756/-29",
+          "comment_excerpt": "လက်ရှိ သား​လေးက ILBC online P4 joinပါတယ်ရှင့်နယ်က​နေ joinတာပါရှင့် ရန်ကုန်အိမ်က ကမာရွတ်မှာမိုလို့ အိမ်နဲ့နီးတဲ့ ​ကျောင်း EDUSN မှာ ​နောင်နှစ် P5 ကို on campus ​​ပြောင်းထားချင်လို့ပါရှင့် EDUSN မှာ တက်​နေတဲ့ ​ကျောင်းသား​တွေရဲ့ ​​ဖေ​ဖေ​မေ​​မေ​တွေ ​ကျောင်းရဲ့ review ​လေး ​​ကျေးဇူးပြုပြီး​ပြော​ပေးကြပါအုံးရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-05T16:14:28.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/893020223675756/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/893020223675756/-30",
+          "comment_excerpt": "ILBC online အဆင်ပြေလားသိချင်လို့ပါ။နယ်ကမိုလို့နောက်နှစ်P5 onlineထားချင်လို့ပါ။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-05T16:14:28.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/893020223675756/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/889668614010917/-31",
+          "comment_excerpt": "\"မင်္ဂလာပါရှင့်... ​မေမေတို့/ဖေဖေတို့ထဲမှာ တခြား International School ကနေ ILBC ကို ကျောင်းပြောင်းထားတဲ့သူများ ရှိကြလားဟင်။ ​အခု ကလေးက တခြား IS တစ်ခုမှာ တက်နေတာပါ။ ကျောင်းစရိတ်ကလည်း တကယ်မသေးသလို၊ နာမည်လည်း ရှိပေမဲ့ တကယ်တမ်း စာသင်နှစ် ဝက်လောက်ရောက်တော့မှ အဆင်မပြေတာတွေ အများကြီး ကြုံလာရလို့ပါ။ အဓိက ကလေးရဲ့ စာပညာပိုင်း (Academic) မှာ အားနည်းလာတာ သတိထားမိတယ်။ စာသင်တာ စနစ်တကျ မရှိသလို ခံစားရပြီး၊ discipline ပိုင်းမှာလည်း …",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-02T16:52:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/889668614010917/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/889668614010917/-32",
+          "comment_excerpt": "ကျမလည်းအစကအဲ့လိုစဉ်းစားနေတာပါ ဒါပေမယ့်လေ ILBC ကတီချယ် တယောက်ကို guide ခေါ်တာ အင်္ဂလိပ်အသံထွက်တွေကလည်းမှား မြန်မာစာ စာလုံးပေါင်းတွေကလည်းမှားနဲ့ စာရေးနည်းကလည်း ကလေးကမှန်နေတဲ့ဟာတောင်သူကအမှားရေးနည်းကြီးရေးခိုင်းတယ်ရှင် အဲ့ဒါနဲ့ ILBC ကို ထားဖို့ မစဉ်းစားတော့တာ (ILBC ဆရာမအားလုံးကိုအဆိုလိုပါဘူးရှင် အားလုံးနဲ့လည်းမသင်ဖူးပါဘူး ကိုယ် ကြုံရတဲ့သူတယောက်ကိုကြည့်ပြီး ကိုယ့်ကလေး အတန်းပိုင်သာ ဖြစ်ခဲ့ရင်လို့တွေးမိလို့ပါ)",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-09-02T16:52:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/889668614010917/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890550487256063/-33",
+          "comment_excerpt": "မဂ်လာပါမေမေတို့ရေ ကျမသမီးလေးကို နောက်နှစ်အတွက် is ဈေးသင့်တာလေးရှာနေတာပါ မြောက်ဥက္ကလာအနီးတဝိုက်ပါ သမီးလေးက Is တစ်ခုမှာ P1 တက်နေတာပါရှင့် အဓိက သင်ရိုးလေးကောင်းပြီး ကလေးအပေါ် care လုပ်တဲ့ is လေး မေမေတို့ သိရင် မျှဝေကြပါဦးရှင့် Ilbc ကနေပြောင်းမှာပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-02T16:52:06.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890550487256063/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890617107249401/-34",
+          "comment_excerpt": "သားလေးကို ဒီနှစ် ILBC Weekend Program မှာ တက်ခိုင်းဖြစ်ပါတယ်။ Weekend တက်ပြီးနောက် သားလေးရဲ့ စာပိုင်းနဲ့ သင်ယူပုံမှာ သိသိသာသာ တိုးတက်လာတာကို တွေ့ရလို့ ILBC ကို သဘောကျမိပါတယ်။ နောက်နှစ်ကို ILBC မှာပြောင်းထားချင်လို့ပါ ILBC မှာထားထားတဲ့ မိဘတွေရဲ့ review လေးလည်းပြောပေးကြပါအုံးခင်ဗျာ။🙏",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-02T16:54:51.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890617107249401/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890617107249401/-35",
+          "comment_excerpt": "Study guideအနေနဲ့ပြောရရင် ကျောင်းက သင်ရိုးကောင်းတယ်။ သင်ကြားရေးလည်းကောင်းပြီး စနစ်ကျတယ်။ ကျောင်းသက်တမ်းကြာလို့ပဲလား မသိဘူး Department တစ်ခုချင်းစီက အတော် တိတိကျကျရှိတယ် အဆင်ပြေတယ်။ Exam ၂ကြိမ်( main) စစ်တယ်။ အတန်းတွင်း tutorial လေးတွေရှိတယ်။ exam နီး ရှေ့တစ်လအလိုဆို tutorial တွေဘာသာရပ်အလိုက်အမြဲရှိတယ် ။ ကလေးအတွက်ဝန်မလေးစေဘူး။ Assignments တွေလည်း နေ့တိုင်းရှိနေတာမို့ ကလေး က နေ့တိုင်းစာကြည့်ဖြစ်တယ် ။ အဲအချက်အရမ်းကောင်…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-02T16:54:51.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890617107249401/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/888868304090948/-36",
+          "comment_excerpt": "Preschool က နေ စပြီး Primary တန်း ထိ ဘယ် IS ကောင်းလဲ ရှင့်။ Brainworks တော့ အရမ်း သဘောကျပါတယ်။ ဒါပေမဲ့ ရေရှည် ကျတော့ မနိုင်လောက်လို့ပါ။ 😔 တစ်နှစ်ကို သိန်း ၁၅၀ - ၂၀၀ ဝန်းကျင်လောက်ထဲ က ညွှန်းပေးပါဦးနော် သုဝဏ္ဏ၊ သင်္ဃန်းကျွန်း၊ မြောက်ဒဂုံ၊ သာကေတ ၊ တာမွေ ဗဟန်း အနီးတဝိုက်ပါ။ ILBC တော့ သိပ်မကြိုက်လို့ပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-09-01T08:03:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/888868304090948/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884305044547274/-37",
+          "comment_excerpt": "ALBA ဈေးများလာပြီး ဖိလစ်ပိုင်တွေ ပိုထည့်လာတော့ ကလေးကို ILBC ပဲ ပြောင်းထားလိုက်တော့တယ်။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:03:32.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884305044547274/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/816919054619207/-38",
+          "comment_excerpt": "8 မိုင်မှာ ILBC ရှိပါတယ် 1 လ 9 သိန်းပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-06-01T07:09:50.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/816919054619207/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/816919054619207/-39",
+          "comment_excerpt": "ILBC ဆိုရင်ရော ကျောင်းခွဲတွေအများကြီးရှိလို့ အိမ်နဲ့နီးတဲ့ကျောင်းလဲရွေးလို့ရတယ် သင်ကြားရေးပိုင်းလဲကောင်းတယ်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-06-01T07:09:50.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/816919054619207/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/887275500916895/-40",
+          "comment_excerpt": "မြောက်ဒဂုံ နောက်နှစ် year 1 ILBC ကနေပြောင်းမလားလို့ အဆင်ပြေမယ့် ISလေး recommend ပေးကြပါဦး 200 လောက်ထိတော့တတ်နိုင်ပါတယ်ရှင့်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-31T08:13:00.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/887275500916895/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/887275500916895/-41",
+          "comment_excerpt": "ILBC ကျောင်းသားမိဘမဟုတ်လောက်ဘူးထင်တယ် ILBC အခေါ်ဝေါ်က year နဲ့ခေါ်တာမှမဟုတ်တာ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-31T08:13:00.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/887275500916895/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/887194784258300/-42",
+          "comment_excerpt": "သင်္ကန်းကျွန်းမှာတော့ ILBC International School ကျောင်းရှိတယ်။ ILBC က ကျောင်းခွဲတွေလည်း များတယ်။ စုံစမ်းကြည့်လိုက်နော်။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-31T08:10:32.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/887194784258300/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884345871209858/-43",
+          "comment_excerpt": "ကျောင်းပြောင်းတာ ဟုတ်တယ် ALBA ကနေ ILBC ပြောင်းဖြစ်သွားတယ်။ ကျောင်းမှာ ဖိလစ်ပိုင်တွေပိုများများလာလို့။ ဈေးနဲ့ အရမ်းမကွာတဲ့ကျောင်းရှာလိုက်တာ။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:07:47.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884345871209858/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/887271444250634/-44",
+          "comment_excerpt": "မူကြို အတွက် ဆို ရင် ကိုယ်သုံးနိုင်တဲ့ budget ရဲ့ 80% လောက် school fees ရှိတဲ့ ကျောင်းထဲ က ရွေးပါနော် ILBC ဆို ရနိုင်သေးတယ် Kg ကနေ အတန်း ကြီး တက်ပြီဆို ရင်တော့ ကိုယ် သုံးမယ့် budget ရဲ့ 50-60% ရှိတဲ့ school fees ရှိတဲ့ ကျောင်းထဲက ရှာပါ ကျောင်း အပြင် တခြား သင်တန်းတွေ ကျောင်းကားခ အထွေထွေ က လဲ အများ ကြီး ကုန်လို့ ပါ နောက်ပြီး နှစ်စဉ်တက်လာတဲ့ ကျောင်း စရိတ်လဲ ရှိပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-08-29T05:57:28.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/887271444250634/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/868859126091866/-45",
+          "comment_excerpt": "KINGS ALBA The one world City school My Myanmar ILBC ဒီကျောင်းတွေရဲ့ Reviews တွေ သိချင်ပါတယ်ရှင်။ လက်ရှိ ဒီကျောင်းတွေကို စိတ်ဝင်စားနေလို့ပါ ဖေဖေမေမေတို့ရဲ့ အတွေ့ကြုံလေးတွေမျှဝေပေးကြပါအုံးရှင်။ တစ်ခြားကျောင်းကောင်းတာလေးတွေရှိရင်လည်း ညွန်ပေးကြပါအုံးရှင်🙏",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-12T18:04:54.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/868859126091866/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884882351156210/-46",
+          "comment_excerpt": "လှိုင်၊ ပါရမီ ဘက်မှာရှိတဲ့ ILBC International School ကိုတစ်ချက်စုံစမ်းကြည်ပါလားနော်။ ကလေးအသက် 2 နှစ်ခွဲကို မိခင်နို့ခွဲ​ပြီးတာ နဲ Diaper လွတ်ရင် စလက်ခံပေးနေပြီတဲ့နော်။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-26T05:00:56.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884882351156210/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/883197921324653/-47",
+          "comment_excerpt": "မြောက်ဒဂုံထဲက ဖေဖေတို့ မေမေတို့ အကြံပေးကြပါဦး. သမီးလေးက ခု ၃ နှစ်ပါ.. Pre KG စထားမှာပါ ILBC က pre KG ferry မရှိဘူးဆိုတော့ ferry ရှိတဲ့ EFG မှာထားမလားလို့ စဥ်းစားနေတာ.. အလုပ်တစ်ဖက်နဲ့မို့ ကျောင်းပ်ု့ကျောင်းကြိုအဆင်မပြေဖြစ်နေလ်ု့ပါ.. အခုလက်ရှိ ILBC မှာ ရော pre KG ferry ကို စုပီးငှားတဲ့ လူတွေများရှိလား? အတန်းကြီးမှ EFG ကနေ ILBC ပြောင်းရင်ရော အဆင်ပြေနိုင်လား? အကြံပေးကြဦး... 🙏",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-24T02:18:31.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/883197921324653/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884914181153027/-48",
+          "comment_excerpt": "သားသားကိုလက်ရှိ ILBC မှာ preschool ထား ထားတာပါ weekends မှာ (music-art-English-Maths)လေးထားချင်တာပါ screen timeများမှာစိုးလို့ပါ မြောက်ဒဂံုနားမှာ weekends အတန်းလေးတွေ ပြောပြပေးပါရှင့် အသက်၄နှစ်ခွဲပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-26T06:02:12.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884914181153027/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/883602154617563/-49",
+          "comment_excerpt": "မေမေတို့ရှင့် သားသားက ၃နှစ်ပါ ၂နှစ်ခွဲကစပြီးမေမေနဲ့တူတူ play date စjoin ပါတယ် ခု pre school ထားချင်တာပါ အတန်းကြီးတဲ့အထိထားချင်တာမို့ ILBC အပြင် တခြားအဆင်ပြေတဲ့ကျောင်းလေးတွေ ပြောပြပေးကြပါအုံးနော် School Fees က ၁၅-၂၀ ဝန်းကျင်အထိပဲနိုင်ပါတယ်ရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-08-24T14:21:57.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/883602154617563/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/883725387938573/-50",
+          "comment_excerpt": "သားလေးက၃နှစ်ပြည့်တော့မှာမို့ Preschool ထားဖို့ကို ILBC ကိုရွေးထားပေမဲ့ အခန်းထဲ cctv မရှိတာရယ် တီချယ်နဲ့ကျောင်းသားဦးရေမမျှပဲ ကလေးကို သေချာမကြည့်ပေးနိုင်မှာလဲ စိတ်ပူနေမိလို့ပါရှင့်.. Preschool ထားနေတဲ့မေမေတေရှိရင် အတွေ့အကြုံလေးပြောပေးပါအုံးနော်.. နောက်တခုက ၃-၅ နှစ်ကို montessori အရင်join ပီး ၅နှစ်မှ IS ထားကြတာလဲတွေ့မိတော့ အဲ့လိုလေးလဲစိတ်ဝင်စားလို့ သင်္ကန်းကျွန်းတဝိုက် Montessori school ကောင်း၂ဆိုရင်ရော ဘာတေရှိလဲရှင့်.…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-24T17:33:11.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/883725387938573/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/883725387938573/-51",
+          "comment_excerpt": "ILBC မှာ အကောင်းဆုံးက Preschool ပါ။ ဝါရင့်ဆရာမတွေ စိတ်ရှည်သီးခံတတ်တာကြောင့် ကလေးက ခဏလေးနဲ့ သိသိသာသာတိုးတက်ပါတယ်။ preschool ကောင်းတော့ ‌အတန်းကြီးပါဆက်ထားလိုက်တော့မှ ဂွမ်းစိန်ဖြစ်တာ့ပါ။😁",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-08-24T17:33:11.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/883725387938573/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884196931224752/-52",
+          "comment_excerpt": "သုဝဏ္ဏဘက်မှာတော့ ILBC International School တော့ရှိတယ်။ အိမ်က တူလေးလည်းအဲမှာ Pre အတန်းလေးတတ်နေတာ အဆင်ပြေတယ်။ သင်ကြားရေးပိုင်းလည်း မဆိုးဘူး တူလေးဆို အဲ့မှာထားလိုက်တာ ကလေးက သွက်လည်းသွက်လာတယ်၊ Activities လေးလည်းများတော့ ကလေးလည်း ကျောင်းနေပျော်တာမလို့ အချိန်ရတဲ့တစ်ရက်လောက်ဆို School tour လုပ်ရင်း စုံစမ်းကြည့်ကြည့်နော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-25T08:53:36.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884196931224752/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/883369781307467/-53",
+          "comment_excerpt": "Hi မေမေတို့ရှင့် ၃နှစ်ကလေးကို preschool လေး စထားချင်လို့ပါ - Pumpkin international preschool - Myanmar Orchard - ILBC - Stanford canadian international school ဒီကျောင်းလေးတွေထဲက ဘယ်တခုအဆင်ပြေမလဲရှင့် ကလေးကို English အခြေခံကောင်းကောင်းလေးလဲ ရချင်ပါတယ်ရှင့် မေမေတို့ ဖြေပေးကြပါဦးနော်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-24T08:06:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/883369781307467/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/883369781307467/-54",
+          "comment_excerpt": "ILBC အဆင်ပြေတယ် လက်ရှိသားလေးတော့ထားထားပါတယ် Tr တွေလဲ ကလေးတွေအပေါ်ဂရုစိုက်ကြတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-24T08:06:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/883369781307467/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/883369781307467/-55",
+          "comment_excerpt": "အမလဲရှာနေတာ school visit သွားတာတော့ ILBC အဆင်ပြေဆုံးပါပဲ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-24T08:06:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/883369781307467/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/879817098329402/-56",
+          "comment_excerpt": "ILBC International School မှာ page ကနေဆက်သွယ်ပြီး စုံစမ်းကြည့်လိုက်နော်။ သင်ကြားရေးကောင်းပြီး ကလေးအတွက် တိုးတက်ကောင်းမွန်မှုရှိတယ်။လုံခြုံစိတ်ချရတဲ့ ကျောင်းပါ။ ကျောင်းမှာလည်း school visit သွားကြည့်လိုက်နော်။",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T17:37:45.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/879817098329402/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/870903169220795/-57",
+          "comment_excerpt": "YIS နဲ့ ILBC က owner နဲ့ management တွေက အတူတူပဲလားရှင်..YIS page မှာ ILBC teams ဆိုပြီး post တင်ထားတာတွေ့လို့ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-08T14:25:53.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/870903169220795/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/879703681674077/-58",
+          "comment_excerpt": "Ism လှိုင်ဘက်ကိုပြောင်းရမှာမို့ ism ကျောင်း honest review လေးသိချင်လို့ပါမေမေတို့ရေ။ တခြားကျောင်း is ကျောင်းတွေရှိရင်လည်းပြောပေးကြပါ။ ခုတော့ ilbc မှာတတ်နေတာပါရှင့်။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T17:38:42.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/879703681674077/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/876350908676021/-59",
+          "comment_excerpt": "တစ်ခု​လောက်​ဝေဖန်ချင်လို့ပါ ကျမ​လေ သားကို တစ်လ ၁၂ သိန်း​ကျော်​ပေးပြီး ILBC မှာ KGထားမိတာ တအား​နောင်တရတာပဲ။ English လို အသံထွက်မှန်မှန်​လေး ​ပြောတတ်မလား လို့ရင်းလိုက်ရတာ။ English ဆရာမက လွဲလို ကျန်တဲ့ဆရာမ​တွေက လုံးဝ ငပိသံ။ က​လေးက အခုစာ​တော့ဖတ်တတ်ပါတယ် သူပါငပိသံဖြစ်သွားတယ့်အပြင် S အသံ​တွေ တစ်လုံးမှ မပါလာဘူး။ သူကို အခု ကျမကပဲ အသံထွက်မှားတာ​တွေ လိုက်ပြင်​​​ပေး​နေရတယ်။ ​​နောက်နှစ်​​တော့ ILBC ဆို sorry ပဲ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-08-19T10:42:05.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/876350908676021/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/876350908676021/-60",
+          "comment_excerpt": "ILBC/IIP အတူတူပဲကြိုက်ကိုမကြိုင်တာ။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-19T10:42:05.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/876350908676021/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/874645295513249/-61",
+          "comment_excerpt": "Please admin 🙏 5နှစ်ကလေးအတွက် စာအရမ်းမများတဲ့ ISကျောင်းလေးသိချင်ပါတယ် အိမ်စာလည်းမပေးတဲ့ကျောင်းမျိုး တစ်လ5သိန်း6သိန်းဝန်းကျင်လောက်ပဲနိုင်လို့ ကြည့်မြင်တိုင် စမ်းချောင်း အလုံအနီးဆို ပိုအဆင်ပြေပါတယ် လက်ရှိကျောင်းက အမြဲ အိမ်စာပေးတော့စိတ်ညစ်လို့ပါရှင် ကလေးလည်းအရမ်းဝန်ပိပါတယ် ilbc ရဲ့ reviews လေးလည်းသိချင်ပါတယ်ရှင် 🙏🙏🙏",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-08-19T10:41:36.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/874645295513249/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/875574408753671/-62",
+          "comment_excerpt": "ILBC online class P1 to P5 math and Science သင်ကြားပေးလျှက်ရှိပါတယ်ရှင့် 09682903205ကို စုံစမ်းနိုင်ပါတယ်ရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-19T10:42:36.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/875574408753671/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/877962958514816/-63",
+          "comment_excerpt": "ပန်းလှိုင်က KIS လေး review လေးပေးကြပါအုံး ညမ က ILBC ကနေ ပြောင်းထားမှာပါ အိမ်နဲ့နီးလို့ ILBC က အတန်းကြီးရင် ပိုဝေးနေလို့ ဆက်ထားဖို့အဆင်မပြေလို့ပါ 🤘",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-19T10:39:59.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/877962958514816/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/871225182521927/-64",
+          "comment_excerpt": "ဟလို အခုက ILBC မှာထားနေပါတယ် KG ပါရှင် တစ်နှစ်ကို ၃၀၀ လောက်နိုင်ပါတယ် နောက်နှစ်ဘယ်ကျောင်းရွေးရမလဲ မြောက်ဒဂုံကပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-12T18:02:44.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/871225182521927/",
+          "source_kind": "post"
+        }
+      ]
+    },
+    "9e523ef5-6ea0-42a5-bd93-14346a9afbc8": {
+      "school_name": "Warriors International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/889102580734187/-0",
+          "comment_excerpt": "ကျမ ကလေးကို warriors မှာ ဒီနှစ်မှစထားကြည့်တာ အဆင်မပြေဘူးရှင် ကျောင်းမှာစာသင်လားမသင် လားတော့မသိဘူး စာအုပ်ထဲဘာစာမှ ပါမလာဘူး ဘာမေးမေးလဲမသိဘူး Trs နဲ့တွေ့ပြီးဆွေးနွေးကြည့်ပေါင်းလဲများပြီ နောက်နှစ်တော့ စျေးကွာချင်ကွာပါစေ ကျိတ်မှိတ်ပြီး ILBC ပြန်ပြောင်းတော့မယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-13T14:51:06.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/889102580734187/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880920394885739/-1",
+          "comment_excerpt": "Warriors ဒီနှစ်မှ စထားတာ တော်တော် အဆင်ပြေတယ် Maths English အပြင်စာပဲထားပီး ကျူရှင်မယူပဲတော့ လုပ်ကြည့်တာအဆင်ပြေနေသေးတယ် မေမေတော့ နည်းနည်းပန်းတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T03:53:51.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880920394885739/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880920394885739/-2",
+          "comment_excerpt": "Warriors က ကျူရှင်မလိုဘူးနော် ကလေးကစာမရလည်း စိတ်မညစ်ဘူး၊ သူတို့ကို သင်တဲ့ဆရာမသာ worksheets အမျိုးမျိုးနဲ့တတ်အောင် သင်သွားလိမ့်မယ်။ ဒါပေမယ့် အမေက all A ရချင်နေလို့တော့မရဘူးပေါ့",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-08-21T03:53:51.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880920394885739/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899081739736271/-3",
+          "comment_excerpt": "မေမေတို့ရှင့် Warrior သုဝဏ္ဏ campus လေးသင်ကြားရေး အဆင်ပြေလားရှင့် year 1 အတွက်ကြိုမေးထားတာပါရှင့် term အလိုက် examလဲဖြေရတော့လေ main subject အနေနဲ့ဘာတွေဖြေရတာလဲရှင့်extra curriculum ရောဘာတွေပါလဲထားဖူးတဲ့မေမေတို့infoလေးshareပေးပါဦးနော်ကျေးဇူးပါရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-13T06:42:13.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899081739736271/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899497013028077/-4",
+          "comment_excerpt": "warriors က သက်တန်းနုတယ် စာသင်တာလေးတော့မဆိုးဘူး cambridge စာအုပ်အတိုင်းသင်ပါတယ် Niec သင်ရိုးကကျောင်းကထုတ်ထားတဲ့အတိုင်းသင်တယ် တခြားကျောင်းကိုပြောင်းရင် အတန်းတွေညှိရတယ်လို့တက်ခဲ့တဲ့မေမေပြောတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-13T18:09:47.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899497013028077/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/895804660063979/-5",
+          "comment_excerpt": "Warriors Dagon Campus မှာ တက်ကြတာ အဆင်ပြေရဲ့လားရှင့် ကလေး ၂၅ ယောက်ဆိုတော့ ဆရာမငယ်ငယ်လေးတွေနဲ့ စာအသင်အပြနိုင်နင်းရဲ့လားရှင် course ပြတ်အောင်သင်ရဲ့လားရှင် ဂရုတွေထဲဝင်ဖတ်ရသလောက် သတင်းစာမှာ မိဘတယောက်တောင်းပန်ထားရတယ်လို့ တွေ့လိုက်ပါတယ် တကယ်တက်နေတဲ့ မေမေဖေဖေတို့ရဲ့ honest reviews လေးသိချင်ပါတယ်ရှင် Please 🙏",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-12T12:15:11.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/895804660063979/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/764554583188988/-6",
+          "comment_excerpt": "Warriors နဲ့Concept X ဘယ်ကျောင်း ပို အဆင်ပြေလဲရှင့် p 6 အတွက်ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-03-22T12:56:59.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/764554583188988/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/764554583188988/-7",
+          "comment_excerpt": "International school ဖစ်ရင် ပြီးရော ဆို warriors ပါ သူက အကုန်လက်ခံတာဆိုတော့",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-03-22T12:56:59.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/764554583188988/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/858896330421479/-8",
+          "comment_excerpt": "ကလေးက အခု ConceptX မှာ Primary 6 တက်နေပါတယ်။ နောက်နှစ် Warriors ပြောင်းမှာပါရှင်။ Warriors မှာဆို Year 8 (Primary 7) အတွက် Placement test ဖြေရမှာလားရှင်။ တနှစ်နောက်ကျသွားမှာစိုးလို့ပါ။ ပြောပြပေးကြပါဦးနော် 🙏",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-24T04:33:27.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/858896330421479/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/858896330421479/-9",
+          "comment_excerpt": "Conceptx P6 သင်ရိုးက Warriors Y6 သင်ရိုးနဲ့တူတူပါဘဲ အတန်းအရဆို Y8တက်ရမှာဆိုပေမယ့် သင်ရိုးကတတန်းနိမ့်ခံထားရတော့ တဖက်ကိုပြန်ဝင်ရင် တတန်းနိမ့်ပြီး ဝင်ရမယ်ထင်တယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-24T04:33:27.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/858896330421479/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/468332512811198/-10",
+          "comment_excerpt": "ကလေးက အသက် ၄နှစ်ပါ ခု preschool စထားမို့ပါ ကိုယ့် မြို့နယ်နဲ့ အနီးဆုံးရယ် ကိုယ်နိုင်တဲ့ အမောက်ရယ်မှာ ရွေးထားတာ ၂ကျောင်းရှိပါတယ် Warriors ရယ် SDEC ရယ် ဘယ်ကျောင်းပိုကောင်းလဲရှင့်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2025-01-23T11:46:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/468332512811198/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/468332512811198/-11",
+          "comment_excerpt": "Warriors က preschool မရှိဘူးနော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2025-01-23T11:46:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/468332512811198/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "9c5928e5-b6da-4648-bb21-10dea2844346": {
+      "school_name": "ConceptX International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880920394885739/-0",
+          "comment_excerpt": "Concept X နဲ့ Warrior ဆို ဘယ်ကျောင်းရွေးသင့်လည်းရှင့် လက်ရှိတက်နေတဲ့ သားသားမီးမီးတွေရှိရင် reviews လေးတွေ သိချင်ပါတယ် ကလေးက အခု Dual ကျောင်းမှာ grade 2 ဆို year 2 လား year 3လား ရှင့် Dual က အတန်းကြီးလာရင် စာများလာမှာစိုးလို့ IS ပြောင်းထားမလို့ပါ နောင်နှစ်ဆို ဘယ် year ကို တက်ရမှာလဲ သိချင်ပါတယ် ဖြေပေးကြပါအုံးနော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T03:53:51.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880920394885739/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899724333005345/-1",
+          "comment_excerpt": "Concept X Viriya လည်းရှိတယ် Eng အပြင်သင်တန်းကတော့ VELC",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-17T20:33:39.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899724333005345/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890070137304098/-2",
+          "comment_excerpt": "မြို့ထဲမှာနေတာဆိုတော့ Hallway ဗိုလ်တထောင် Campus နဲ့ Warrior ဒဂုံ Campus ကိုယှဉ်ကြည့်မိတာ သင်ရိုးကိုတော့ Hallway ကိုသိပ်မရှင်းဘူးဖြစ်နေတာ လက်ရှိထားနေကြတဲ့မိဘများ ဝင်ရောက်ဆွေးနွေးပေးလို့ရမလားရှင် ConceptX နဲ့ Acorn ကရော သင်ရိုးနဲ့ ကျောင်းလခ ဘယ်လောက်ရှိမလဲဟင် လေ့လာစုံစမ်းဖူးတဲ့မိဘများရှိရင်လေ လမ်းညွှန်ဆွေးနွေးပေးပါလားရှင် လေးနှစ်ကလေးအတွက်ပါရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-02T16:48:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890070137304098/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/764554583188988/-3",
+          "comment_excerpt": "Warriors နဲ့Concept X ဘယ်ကျောင်း ပို အဆင်ပြေလဲရှင့် p 6 အတွက်ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-03-22T12:56:59.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/764554583188988/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/858896330421479/-4",
+          "comment_excerpt": "ကလေးက အခု ConceptX မှာ Primary 6 တက်နေပါတယ်။ နောက်နှစ် Warriors ပြောင်းမှာပါရှင်။ Warriors မှာဆို Year 8 (Primary 7) အတွက် Placement test ဖြေရမှာလားရှင်။ တနှစ်နောက်ကျသွားမှာစိုးလို့ပါ။ ပြောပြပေးကြပါဦးနော် 🙏",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-24T04:33:27.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/858896330421479/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/858896330421479/-5",
+          "comment_excerpt": "Conceptx P6 သင်ရိုးက Warriors Y6 သင်ရိုးနဲ့တူတူပါဘဲ အတန်းအရဆို Y8တက်ရမှာဆိုပေမယ့် သင်ရိုးကတတန်းနိမ့်ခံထားရတော့ တဖက်ကိုပြန်ဝင်ရင် တတန်းနိမ့်ပြီး ဝင်ရမယ်ထင်တယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-24T04:33:27.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/858896330421479/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "3a7850e4-c67a-4754-8b2f-3e055893f972": {
+      "school_name": "NIEC International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/903042296006882/-0",
+          "comment_excerpt": "NIEC international school reviewလေးသိချင်ပါတယ်… ထားဖူးတဲ့ ဖေဖေ မေမေရဲ့ honest reviewပဲသိချင်တာပါ ကလေးကို ၃နှစ်ကစထားမှာပါ အခြေခံကောင်းစေချင်တာပါ အဆင်ပြေနိုင်လား အကြံပေးပါဦးရှင့်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:07:08.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/903042296006882/",
+          "source_kind": "post"
+        }
+      ]
+    },
+    "6d0e010f-b869-4350-ae90-5a30f531d22d": {
+      "school_name": "Myanmar International School Yangon (MISY)",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884227671221678/-0",
+          "comment_excerpt": "Network MISY King yangon YA ဘယ်ကျောင်း အဆင်မပြေလည်းရှင့် ကျောင်းရဲ့ review ပြောပြလို့ရမလားရှင့် review လေး သိချင်လို့ပါ ရှင့်။ grade1 grade3 grade6 ၃ယောက် ထားချင်လို့ပါ။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-25T09:50:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884227671221678/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/881259018185210/-1",
+          "comment_excerpt": "KIS က ၂၀၀ ဝန်းကျင် , BW က၄၀၀ ဝန်းကျင် ပါ ... ၂ကျောင်းလုံး Local teachers တွေဘဲ အဓိက ထားသင်ကြတာပါ... သုံးနိုင်တယ်ဆိုရင် native teachers တွေ များတဲ့ကျောင်းကောင်းတွေရွေးစေခြင်ပါတယ် ... ကျောင်းကောင်းရင် phonic အိမ်မှာ ထပ်ခေါ်သင်စရာ လည်း မလိုပါဘူးရှင့်... Network , MISY, KingYangon , ISM တို့ကောင်းပါတယ် School vist ကိုယ်တိုင် သွားကြည့်ပြီး ဆုံးဖြတ်ပါနော်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-08-21T14:11:28.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/881259018185210/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/905523165758795/-2",
+          "comment_excerpt": "ဟုတ်တယ် တူတူပါပဲ Brainwork နဲ့ SIS ကို သဘောကျနေတာ MISY ကတော့ အိမ်နဲ့ ဝေးလို့ရယ် BW ကြိုက်ပေမယ့် campus ကိုကျ SIS ကို ပိုသဘောကျနေလို့ရယ် SIS က ကျောင်းသားဦးရေကျ ဘာလို့လဲမသိ အရမ်းနဲနေတော့ စဉ်းစားရပြန်ရော 🫩",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "facilities",
+          "created_at": "2026-09-21T14:23:49.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/905523165758795/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899592306351881/-3",
+          "comment_excerpt": "MISY review လေးသိပါရစေ. Year 10 အတွက်ပါရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-17T20:33:53.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899592306351881/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/881813574796421/-4",
+          "comment_excerpt": "Kings Yangon လည်း လက်ရှိ results ကောင်းနေတာပါပဲ CISM,ISM,MISY,SKT လည်းစုံစမ်းကြည့်ပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:06:06.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/881813574796421/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/885541611090284/-5",
+          "comment_excerpt": "မေမေတို့ရေ MISY ကျောင်းမှာထားနေတဲ့မေမေတွေရှိရင် Review လေးတွေသိချင်လို့ပါ .ပြောပေးကြပါအုံးနော်🙏🏻",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:12:26.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/885541611090284/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/875028272141618/-6",
+          "comment_excerpt": "MISY",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-19T10:41:27.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/875028272141618/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/875028272141618/-7",
+          "comment_excerpt": "MISY စျေးလဲ ပိုတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-19T10:41:27.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/875028272141618/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "87df4adc-698a-51b6-8f59-e7117549b453": {
+      "school_name": "Yangon Academy International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/884227671221678/-0",
+          "comment_excerpt": "YA ကတော့ ကြာပြီ နာမည်ကောင်းတဲ့ကျောင်းမို့ ခု တူလေး လည်း G3 ပါ တက်နေပါပြီ။ တခြားကျောင်းတွေ school visit သွားပြီး စုံစမ်းပြီးမှ facebook ကနေ ပဲ YA ကိုဆက်သွယ်ခဲ့တာ။ principal နဲ့တွေ့ပြီးစကားပြောရတာ ဆွေးနွေးရတာ အဆင်ပြေတယ်။ ကလေးက ရှေ့မှာ ကျောငိးတွေပြောင်းခဲ့တာများပြီး အခြားကျောင်းက အသက်နဲ့ grade ကို ညှိပြီး အတန်းကို skip ပေးမယိပြောပေမယ့် တစ်ကယ်တော့ ကလေးအတွက် သေချာရှင်းပြပြီး အတန်းကိုဖြစ်သင့်တာကို နားလည်အောင်ရှင်းပြတဲ့အတွ…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-25T09:50:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/884227671221678/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/898635206447591/-1",
+          "comment_excerpt": "Yangon Academy International School ဒီနှစ် အတန်းလိုက် school fees လေးများ သိရမလားရှင်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-09-13T14:48:54.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/898635206447591/",
+          "source_kind": "post"
+        }
+      ]
+    },
+    "3f96414d-5543-45ee-85da-16856c784bbe": {
+      "school_name": "Kings Yangon International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/882937661350679/-0",
+          "comment_excerpt": "Brainworks-Totalကို အခုကလေး၂နှစ်ခွဲမှာ tenderfoot class ကို 9am-12pm စထားကြည့်မလို့ပါ အချိန်က8weeks ထဲဆိုတော့ အဲ့ဒါပြီးရင်pre-nusery နဲ့ nuseryကိုဘယ်မှာထားရင်ကောင်းမလဲဟင် အတန်းကြီးလာရင်BWကစာအတွက်pressureများပြီးကလေးအတွက်under pressureဖြစ်တယ်တွေကြားလို့ speaking accentအတွက်လဲကောင်းစေချင်တော့ ဘယ်ကျောင်းတွေကောင်းမလဲရှင် ALBAရောဘယ်လိုနေမလဲဟင် Kings Yangonတို့ကျတော့လဲစျေးအရမ်းများတော့ရေရှည်အတွက်အဲ့လောက်ကြီးမထားနိုင်လို့ပ…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-23T17:41:00.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/882937661350679/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/829846739993105/-1",
+          "comment_excerpt": "Kings က တစ်နှစ်ကိူ ၁၅၀-၂၀၀ ဝန်းကျင်ပါ Kings Yangonကတော့စျေးပိုများသလို ပိုကောင်းပါတယ်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-06-16T07:45:24.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/829846739993105/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/899423699702075/-2",
+          "comment_excerpt": "ဟိုရက်က King International မှာထားပြီး Nursery လေးကို ထောင်ကျော်လို့ရေးထားတာတွေ့တယ်။ မဟုတ်ပါဘူးနော်။ တကယ်ထောင်ပိုင်းသွားတာ Kings YANGON ပါ။ Not King International. FYI💜",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-17T20:33:50.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/899423699702075/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/895302866780825/-3",
+          "comment_excerpt": "Kings Yangon vs Yangon American International School အခုလက်ရှိ ကလေးက ၅နှစ်… Kings Yangon မှာ တက်နေတာပါရှင့်… တော်တော်အဆင်မပြေနေတော့လို့ ကျောင်းပြောင်းဖို့ရှာနေတာ… YA ဆိုရင်ရော ဘယ်လိုနေလဲလေး သိချင်ပါတယ်ရှင့်… ပြီးတော့ တခြား အလားတူ range ထဲက recommend လုပ်ပေးချင်တဲ့ ကျောင်းလေးတွေရှိရင်လဲ ပြောပေးပါဦးရှင့်…. 🙏🏻🙏🏻🙏🏻",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T11:47:58.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/895302866780825/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/895302866780825/-4",
+          "comment_excerpt": "မကောင်းဘူးသာစွတိအော်နေတာ အရင် နစ်တွေ က ၅၀၀ ကျော် အခု ကျော်ငး သား ၇၀၀ ကျော် ရှိနေပါပြီ အဆင်ပြေတဲ့ kings yangon မိဘက ရှိပါတယ် ရှင် ကလေး လဲကျောင်းပျော် ပြီး စာလုပ်ပါတယိ ၊ လိုင်းပေါ်မြင်မကောင်းလို့ ပါကျောင်းကို တိူက်ခိူက်ထားတာ ၊ တခြား ကျောင်းတွေ လံ ခုလိုပြောတဲ့လိုအပ်ချက် ရှိကြတာပါပဲ ၊ ကိုယ် မကြိုက်လဲ ပြောင်းပေါ့နော် ကျောင်းကို အဲ လို နာမည်ဖျက်တာတော့ မကောင်းဘူးပေါ့နော် ကြည့်ရတာ ကလေးကလဲ အငယ်တန်းထင် ပါတယိ နောိ ၊ ဒီလောက် အရ…",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T11:47:58.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/895302866780825/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/895302866780825/-5",
+          "comment_excerpt": "Kings Yangon က ကြော်ငြာအရမ်းသုံးပါတယ် ကျောင်းသားခ သိန်း500 ဆိုရင် သိန်း100လောက်က ကြော်ငြာခ ပြန်သုံးလိုက်သလား အောင့်မေ့ရတယ် မကြော်ငြာတဲ့ကျောင်းပဲရှာပါ ( ကောင်းလို့ အမြဲပြည့်တယ်။ လူမပြည့်လို့။ ထပ်ဖြည့်ဖို့ ကြော်ငြာစရာမလို့။",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "fees",
+          "created_at": "2026-09-12T11:47:58.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/895302866780825/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/893616470282798/-6",
+          "comment_excerpt": "ကလေးက ၂ နှစ်ခွဲပါရှင် Brainwork,CISM,Kings Yangon က Preschool ကနေ စလက်ခံတာလား ကျောင်းစျေးနှုန်းလဲသိချင်ပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:18:01.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/893616470282798/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/889605470683898/-7",
+          "comment_excerpt": "Hi ရွှေတောင်ကြားထဲက Kings Yangon နဲ့ Sedona အနောက်က MIS နဲ့ဆို ဘယ်ဟာ ရွေးသင့်လဲဗျ .. အိမ်နဲ့ လမ်းအသင့်ဆုံး ၂ ကျောင်း ရွေးထားတာပါ သွားတော့ မကြည့်ရသေးဘူးဗျ review မကောင်းတာတွေလည်း တွေ့နေလို့ ..ထားနေကြတဲ့ မိဘတွေဆီက review လေးတွေ share ပေးနိုင်ရင် သိချင်ပါတယ် 🙏",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-02T16:48:43.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/889605470683898/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/889605470683898/-8",
+          "comment_excerpt": "Kings Yangon ပါ စျေးလဲကွာပါတယ်။ MIS ကဒီတလော bad review များနေတာပါ။",
+          "sentiment_label": "negative",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-02T16:48:43.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/889605470683898/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/838467875797658/-9",
+          "comment_excerpt": "Kings yangon",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-06-28T04:28:04.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/838467875797658/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/881813574796421/-10",
+          "comment_excerpt": "ကလေးကအခု၁၂နှစ်ပါဒါပေမဲ့အခုထဲကသေချာလေးလုပ်ပေးထားချင်လို့ပါအမေကပညာရေးလဲဘာမှသိပ်မသိတော့လက်ရှိkings yangonမှာတက်နေတာပါအခုIGအတွက်စိုSISM KINGS YANGON MISအဲ့ဒါတွေစိုဘယ်ဟာကပိုအဆင်ပြေမလဲအမေမေတို့ရေကျေးဇူးပြုပီးဖြေပေးကြပါနော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:06:06.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/881813574796421/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/881813574796421/-11",
+          "comment_excerpt": "Kings Yangon လည်း လက်ရှိ results ကောင်းနေတာပါပဲ CISM,ISM,MISY,SKT လည်းစုံစမ်းကြည့်ပါ",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-28T10:06:06.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/881813574796421/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/879659988345113/-12",
+          "comment_excerpt": "Kings Yangon CISM Brainwork Total ကျောင်း reviews လေးတွေ သိချင်ပါတယ် ကျောင်းတိုင်း 100% မကောင်းပါဘူး လက်ခံပါတယ် သိတဲ့ မေမေတို့ တချက်ပြောပြပေးပါ ရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T17:38:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/879659988345113/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/879659988345113/-13",
+          "comment_excerpt": "Kings Yangon ပေါ့ Brainwork နဲ့ကတန်းကိုမတူတာပါ။ Brainwork ကတအားမြန်မာဆန်ပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T17:38:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/879659988345113/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/879659988345113/-14",
+          "comment_excerpt": "Brainworks ကနေ Kings Yangon ကို ပြောင်းထားတာပါ။ Brainworks ထားတုန်းကလည်း brainworks ကို သဘောကျခဲ့ပါတယ်။ Kings Yangon ကိုပြောင်းပြီးသွားတော့ Kings Yangon ကို ပိုကြိုက်ပါတယ်ရှင့်။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T17:38:14.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/879659988345113/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/882143178096794/-15",
+          "comment_excerpt": "မေမေတို့ရှင့် Kings Yangon နဲ့ Thalun က သင်ရိုးတူလားရှင့် ၅-၆နှစ်ကလေးအတွက်ဘယ်ကျောင်းလေးပိုကောင်းလည်းရှင့် ကလေးကိုဂရုတစိုက်ရှိတာလေး လိုချင်တာက ကလေးကငယ်နေသေးလို့ပါ။ သိတဲ့မေမေများ အဆင်ပြေရင်ပြောပြပေးပါဦးနော် ။ ကျေးဇူးပါရှင့်။",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-22T17:07:00.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/882143178096794/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880446518266460/-16",
+          "comment_excerpt": "Data လေးယူ ထားတာပါ ကလေး ကို IGCSE အတွက် ကျောင်းပြင်ဆင် လို့ ရအောင်ပါ ဗဟုသုတ အနေ နဲ့ မျှဝေပေးပါရှင်💓 ဘယ်ကျောငိးက အခု IGCSE မှာ အောင်ချက် အကောင်းဆုံးပါလဲ Brainwork နဲ့ Kings Yangon တော့ အောင်ချက်ကောင်းတယ် ပြောပါတယ် Network နဲ့ The British School အောင်ချက်ကောင်းမကောင်းလဲ သိချင်ပါတယ်",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-21T17:37:13.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880446518266460/",
+          "source_kind": "post"
+        }
+      ]
+    },
+    "22b3784f-3e04-4153-80e0-abe3000fe273": {
+      "school_name": "The British School Yangon",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/882937661350679/-0",
+          "comment_excerpt": "Kg ထိ BW မှာထားတာပါ ခု Year-2 ကျမှ BSY ပြောင်းလိုက်တာ BWမှာထားတဲ့အတွက် ဘယ်ကျောင်းပြောင်းပြောင်း ကလေးက အခြေခိုင်သွားပါတယ်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-23T17:41:00.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/882937661350679/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/-1",
+          "comment_excerpt": "သားလေးက အသက် ၄ နှစ်ပါ ကျောင်းလေးစ Join ချင်လို့ ISY, BSY, Network ရဲ့ review လေးတွေသိချင်လို့ပါ။ curriculum ရော US ရွေးရင် ကောင်းမလား UK ရွေးရင်ကောင်းမလား။ ကျူရှင်တွေနဲ့ပြည့်ပြီး အချိန်လည်မကုန်စေချင်ပါဘူး။ မေမေတို့တက်ဖူးရင်ပြောပြပေးစေချင်ပါတယ်။ ကျေးဇူးပါ။",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-05T16:16:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/-2",
+          "comment_excerpt": "ISY ဝင်ရခက်လို့ BSY ထားခဲ့ပါတယ် BSYလဲကျူရှင်တက်ရတာပါပဲ ဘယ်ကျောင်းနေနေကျူရှင်တွေနဲ့မလွတ်ပါဘူး တခြားကလေးတွေအကုန်ကြိုသင်ထားကြတော့ ကျူရှင်မတက်တဲ့ကိုယ့်ကလေးကအားလုံးနဲ့ယှဉ်ရင်ထူးပြီးညံ့နေသလိုကိုဖြစ်လာတာပါ ဒါတောင်အတန်းကြီးမဟုတ်သေးဘူး",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-05T16:16:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/-3",
+          "comment_excerpt": "BSY A-Levels သို့ ဦးတည်သင့်သူ: တက္ကသိုလ်တက်ရောက်မည့် မေဂျာ (ဥပမာ- ဆေးပညာ၊ စက်မှုအင်ဂျင်နီယာ၊ ဥပဒေ သို့မဟုတ် စီးပွားရေး) ကို စောစီးစွာ တိကျစွာ ရွေးချယ်ထားပြီး၊ မိမိအားနည်းသော သို့မဟုတ် ဝါသနာမပါသော အခြားဘာသာရပ်များကို ဆက်မသင်လိုသည့် ကျောင်းသားများအတွက် အထိရောက်ဆုံးဖြစ်သည်။ ISY IB Diploma သို့ ဦးတည်သင့်သူ: အနာဂတ်မေဂျာ မသေချာသေးဘဲ ဘာသာရပ်စုံ (စာပေ၊ ဘာသာစကား၊ သိပ္ပံ၊ လူမှုရေး၊ သင်္ချာ) ဆက်လက်လေ့လာလိုသူများ၊ အချိန်စီမံခန့…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-05T16:16:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "4dd4da53-4a6f-4bac-aca9-0fd9955e8bfc": {
+      "school_name": "Myanmar International School (MIS)",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/905362719108173/-0",
+          "comment_excerpt": "၃ နှစ်ခွဲ မူကြိုလေးထားချင်လို့ myanmar international school myanmar brightkidz review လေးသိချင်လို့ပါရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-25T15:08:15.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/905362719108173/",
+          "source_kind": "post"
+        }
+      ]
+    },
+    "3614fda1-f393-5f35-ba21-e158bb6c38c0": {
+      "school_name": "Royal British International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/902285299415915/-0",
+          "comment_excerpt": "Royal British International School.",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-17T20:29:23.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/902285299415915/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "038e4ef9-a8a3-4dca-9ea9-aad223fc71c5": {
+      "school_name": "Yangon International School (YIS)",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/898644866446625/-0",
+          "comment_excerpt": "YIS ကျောင်းပဲ စိတ်အချရဆုံးလို့မြင်တယ် 🥰🥰🥰🥰🥰",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-13T14:47:53.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/898644866446625/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/898644866446625/-1",
+          "comment_excerpt": "ILBC YIS Marketingလုပ်နေကြတာလား",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-13T14:47:53.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/898644866446625/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/898644866446625/-2",
+          "comment_excerpt": "YGN လား MDYလား မသိပေမယ့် ကျွန်မကတော့ MDYက YIS ဆိုရင်တော့ သဘောမကျပါဘူးရှင့် School Visit သွားတုန်းက ကိုယ့်ကလေးက G-4မို့ G-4 ဆရာတွေကို လိုက်ပြတာ တချို့ဆရာတွေက မိဘတွေကြည့်နေတာမြင်မှ ခန္ဓကိုယ်ကိုပြင်ထိုင်ပြီး စာကြည့်ဖို့ ပြောလိုက်တာမျိုးဖြတ်ကနဲမြင်ရပါတယ် Canteen မှာလည်းရောင်းတဲ့မုန့်တွေကိုလည်း သဘောမကျခဲ့ပါဘူး receptionist ကစပြီး သဘောမကျခဲ့တာပါ (စုံစမ်းခဲ့တာကတော့ ဒီနှစ် Marchလောက်ကပါရှင့်)",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-09-13T14:47:53.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/898644866446625/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/897357446575367/-3",
+          "comment_excerpt": "YIS မေးကြည့်ပါလား။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:11:56.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/897357446575367/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/890977293880049/-4",
+          "comment_excerpt": "Preschool ထားဖို့ စုံစမ်းနေတာပါရှင့် Mdy က YIS Qudee MISA Review သိချင်လို့ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-05T16:18:18.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/890977293880049/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/867980046179774/-5",
+          "comment_excerpt": "မေမေတို့ရေ IS တွေထဲမှာ YIS ၊ MIS နဲ့ Totalbrain works ဘယ် ကျောင်းက အဆင်ပြေလဲရှင့်။ တခြားကျောင်းတွေက IGCSE scholar ပေးတယ်လဲ ကြားလို့ပါ။ အိမ်ကတူမလေးက အခု ကျောင်းပြောင်းဖို့လုပ်နေလို့ ဘယ်ကျောင်းက အဆင်ပြေမလဲရှင့် ။",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-08-04T16:22:22.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/867980046179774/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/867980046179774/-6",
+          "comment_excerpt": "YIS",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-04T16:22:22.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/867980046179774/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/870903169220795/-7",
+          "comment_excerpt": "YIS နဲ့ ILBC က owner နဲ့ management တွေက အတူတူပဲလားရှင်..YIS page မှာ ILBC teams ဆိုပြီး post တင်ထားတာတွေ့လို့ပါ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-08T14:25:53.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/870903169220795/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/870903169220795/-8",
+          "comment_excerpt": "YIS က အတော်ကိုသိသာတိုးတက်တယ် စျေးလဲ ကွာပါတယ်။ ကလေးတွေအတွက် အတော်ကို လုံခြုံစိတ်ချရတယ်၊ အတော်လေးလဲ ဂရုစိုက်မှုရှိပါတယ်၊ owner အတူတူပါပဲ။ ဆရာတွေ အရမ်းတော်တယ်၊ အတန်းကြီးကလေးတွေက အငယ်တန်းလေးတွေကို လက်တွဲခေါ်ဆောင်ဖေးမသွားတတ်တဲ့ အကျင့်ကောင်းလေးကို တကယ်သဘောကျမိတယ်။ အတန်းဖော်အချင်းချင်းလဲ သင့်မြတ်ကြတာတွေ့ရပါတယ်။",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "teachers",
+          "created_at": "2026-08-08T14:25:53.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/870903169220795/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "fc9735e2-9a8f-4e77-8970-c9244283fa18": {
+      "school_name": "ISE International School of Education",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/861930083451437/-0",
+          "comment_excerpt": "မဂ်လာပါရှင်။ ကလေးက ၄နှစ် ၅ လပါ။ ခုလက်ရှိ TuTuTat မှာ pre-kg တက်နေပါတယ်။ စာသင်ကြားရေးရော တခြားတိုးတက်မှုတွေရော အကုန်လုံးအရမ်းအဆင်ပြေပါတယ်။ သွားရတာ ဝေးနေတာကြောင့် နောက်နှစ် kg ကို ကျောင်းပြောင်းထားမှာမို့ မရန်းကုန်း အနီးတဝိုက်မှာ ဘယ်ကျောင်းများ အဆင်ပြေမလဲ အကြံတောင်းပါရစရှင်။ ခုလက်ရှိ 1. Milestone International 2. Executive Garden International School 3. ISE International School of Education ၃ ကျောင်းကြည့်ထားတဲ့ထဲက ဘယ်…",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-07-29T15:47:29.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/861930083451437/",
+          "source_kind": "post"
+        }
+      ]
+    },
+    "d54db63e-01d3-57f0-a330-b7a2308a13ab": {
+      "school_name": "SIS Myanmar",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/893266580317787/-0",
+          "comment_excerpt": "ဒီ gp ထဲမှာလေ SIS Myanmar ထားဖူးတဲ့မေမေတွေရှိလားရှင့် ကျောင်း reviews လေးသိချင်လို့ပါရှင့် ဖြေပေးကြပါဦးနော်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-12T12:17:56.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/893266580317787/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/879726745005104/-1",
+          "comment_excerpt": "Sis Myanmar",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T17:37:56.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/879726745005104/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "b0595924-73f7-49c4-94b0-b05017d77ef8": {
+      "school_name": "The International School Yangon (ISY)",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/-0",
+          "comment_excerpt": "သားလေးက အသက် ၄ နှစ်ပါ ကျောင်းလေးစ Join ချင်လို့ ISY, BSY, Network ရဲ့ review လေးတွေသိချင်လို့ပါ။ curriculum ရော US ရွေးရင် ကောင်းမလား UK ရွေးရင်ကောင်းမလား။ ကျူရှင်တွေနဲ့ပြည့်ပြီး အချိန်လည်မကုန်စေချင်ပါဘူး။ မေမေတို့တက်ဖူးရင်ပြောပြပေးစေချင်ပါတယ်။ ကျေးဇူးပါ။",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-05T16:16:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/-1",
+          "comment_excerpt": "ISY ဝင်ရခက်လို့ BSY ထားခဲ့ပါတယ် BSYလဲကျူရှင်တက်ရတာပါပဲ ဘယ်ကျောင်းနေနေကျူရှင်တွေနဲ့မလွတ်ပါဘူး တခြားကလေးတွေအကုန်ကြိုသင်ထားကြတော့ ကျူရှင်မတက်တဲ့ကိုယ့်ကလေးကအားလုံးနဲ့ယှဉ်ရင်ထူးပြီးညံ့နေသလိုကိုဖြစ်လာတာပါ ဒါတောင်အတန်းကြီးမဟုတ်သေးဘူး",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-09-05T16:16:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/",
+          "source_kind": "comment"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/-2",
+          "comment_excerpt": "BSY A-Levels သို့ ဦးတည်သင့်သူ: တက္ကသိုလ်တက်ရောက်မည့် မေဂျာ (ဥပမာ- ဆေးပညာ၊ စက်မှုအင်ဂျင်နီယာ၊ ဥပဒေ သို့မဟုတ် စီးပွားရေး) ကို စောစီးစွာ တိကျစွာ ရွေးချယ်ထားပြီး၊ မိမိအားနည်းသော သို့မဟုတ် ဝါသနာမပါသော အခြားဘာသာရပ်များကို ဆက်မသင်လိုသည့် ကျောင်းသားများအတွက် အထိရောက်ဆုံးဖြစ်သည်။ ISY IB Diploma သို့ ဦးတည်သင့်သူ: အနာဂတ်မေဂျာ မသေချာသေးဘဲ ဘာသာရပ်စုံ (စာပေ၊ ဘာသာစကား၊ သိပ္ပံ၊ လူမှုရေး၊ သင်္ချာ) ဆက်လက်လေ့လာလိုသူများ၊ အချိန်စီမံခန့…",
+          "sentiment_label": "positive",
+          "mentioned_claim_category": "curriculum",
+          "created_at": "2026-09-05T16:16:19.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/891499863827792/",
+          "source_kind": "comment"
+        }
+      ]
+    },
+    "d44ccf32-12c8-5c24-966c-1832b4488f26": {
+      "school_name": "Thalun International School",
+      "comments": [
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/886722797638832/-0",
+          "comment_excerpt": "Thalun International school review လေးသိချင်ပါတယ်ရှင့်",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-31T08:13:42.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/886722797638832/",
+          "source_kind": "post"
+        },
+        {
+          "id": "https://www.facebook.com/groups/237771859200599/permalink/880388608272251/-1",
+          "comment_excerpt": "Thalun International School review လေးသိပါရစေ",
+          "sentiment_label": "neutral",
+          "mentioned_claim_category": null,
+          "created_at": "2026-08-21T17:37:05.000Z",
+          "source_url": "https://www.facebook.com/groups/237771859200599/permalink/880388608272251/",
+          "source_kind": "post"
+        }
+      ]
+    }
+  }
 }

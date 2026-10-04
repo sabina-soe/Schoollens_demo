@@ -3,7 +3,7 @@
 import { FormEvent, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
-const CATEGORIES = ["fees", "curriculum", "safety", "facilities", "class size", "contact info"] as const;
+const CATEGORIES = ["fees", "curriculum", "cca", "safety", "facilities", "class size", "contact info"] as const;
 
 export function CorrectionForm({
   schoolId,

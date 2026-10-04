@@ -1,0 +1,622 @@
+{
+  "6c78977f-de06-4078-bbd2-570e303276ae": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/network-international-school-yangon",
+    "source_updated": "2026-09-17",
+    "isd_slug": "network-international-school-yangon",
+    "isd_list_order": null,
+    "name": "Network International School",
+    "address": "23 Inya Myaing Road, Bahan Township, Yangon, 11201, Myanmar",
+    "ages": "2-18",
+    "student_count": 800,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": "20",
+    "maximum_class_size": "24",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "A-Levels Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.networkinternationalschool.com/",
+    "official_facebook_url": "https://www.facebook.com/NetworkInternationalSchool"
+  },
+  "32c57574-25e9-43ec-82b6-76310ab44bbd": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/french-international-school-of-yangon",
+    "source_updated": "2026-09-22",
+    "isd_slug": "french-international-school-of-yangon",
+    "isd_list_order": null,
+    "name": "French International School of Yangon Joseph Kessel",
+    "address": "2, Ou Yin Street Kamaryut township Yangon, Myanmar",
+    "ages": "2-15",
+    "student_count": 60,
+    "curriculum": [
+      "French"
+    ],
+    "average_class_size": "14",
+    "maximum_class_size": "20",
+    "languages": [
+      "English",
+      "French"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "French Baccalaureate Programme",
+      "Brevet Programme",
+      "Bilingual Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://lfir-yangon.com/",
+    "official_facebook_url": "https://www.facebook.com/LFIR.Yangon/"
+  },
+  "cf00dc95-940d-507e-988b-916043e530d4": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/skt-international-school-riverside-campus-yangon",
+    "source_updated": "2026-09-17",
+    "isd_slug": "skt-international-school-riverside-campus-yangon",
+    "isd_list_order": null,
+    "name": "SKT International School Riverside Campus",
+    "address": "No.235, Shu Khinn Thar Myo Pat Rd, Thaketa Tsp, Yangon, Myanmar",
+    "ages": "3-18",
+    "student_count": 200,
+    "curriculum": [
+      "IB",
+      "British"
+    ],
+    "average_class_size": "18",
+    "maximum_class_size": "24",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "IB Diploma Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://skt.edu.mm/skt-riverside-campus",
+    "official_facebook_url": "https://www.facebook.com/SKTinternationalCollege/"
+  },
+  "22b3784f-3e04-4153-80e0-abe3000fe273": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/the-british-school-yangon",
+    "source_updated": "2026-09-22",
+    "isd_slug": "the-british-school-yangon",
+    "isd_list_order": null,
+    "name": "The British School Yangon",
+    "address": "Taw Win Street, Mayangone, Yangon, Myanmar.",
+    "ages": "2-18",
+    "student_count": 219,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": "12",
+    "maximum_class_size": "24",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "A-Levels Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.nordangliaeducation.com/bsy-yangon",
+    "official_facebook_url": "https://www.facebook.com/britishschoolyangon/"
+  },
+  "d54db63e-01d3-57f0-a330-b7a2308a13ab": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/sis-myanmar-yangon",
+    "source_updated": "2026-09-22",
+    "isd_slug": "sis-myanmar-yangon",
+    "isd_list_order": null,
+    "name": "SIS Myanmar",
+    "address": "29 Quarter Thuwunna Villa, Previous(1)/Present (6A) Paw San Hmwe Road, Thingangyun Township, Yangon, Myanmar",
+    "ages": "2-16",
+    "student_count": 120,
+    "curriculum": [
+      "British",
+      "Singaporean"
+    ],
+    "average_class_size": "15",
+    "maximum_class_size": "20",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://sisschools.org/sis-myanmar",
+    "official_facebook_url": "https://www.facebook.com/sismyanmar.school/"
+  },
+  "c2d5e457-39df-5aa7-8f41-b45ef3fcb3dd": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/brainworks-international-school-yangon",
+    "source_updated": "2026-09-22",
+    "isd_slug": "brainworks-international-school-yangon",
+    "isd_list_order": null,
+    "name": "Brainworks International School Yangon",
+    "address": "No 1, Thumingalar Street, 16/4 Quarter, Thingangyun Township Yangon, Myanmar",
+    "ages": "2-18",
+    "student_count": 3000,
+    "curriculum": [
+      "British",
+      "IB"
+    ],
+    "average_class_size": "20",
+    "maximum_class_size": "24",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "A-Levels Programme",
+      "IB Diploma Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.brainworks-total.com/",
+    "official_facebook_url": "https://www.facebook.com/Brainworksintegratedschoolyangon/"
+  },
+  "8baaac50-0f6c-5fee-942a-42ebf8562176": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/wells-international-school-yangon-campus",
+    "source_updated": "2026-09-17",
+    "isd_slug": "wells-international-school-yangon-campus",
+    "isd_list_order": null,
+    "name": "Wells International School - Yangon Campus",
+    "address": "N0.50, Pyay Road, 6.5 Miles, 11 Ward, Hlaing Township, Yangon, Myanmar",
+    "ages": "2-11",
+    "student_count": 400,
+    "curriculum": [
+      "American"
+    ],
+    "average_class_size": null,
+    "maximum_class_size": null,
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "AP Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://wells.edu.mm/",
+    "official_facebook_url": "https://www.facebook.com/WellsInternationalSchoolYangonCampus/"
+  },
+  "683baada-1a26-558c-88f6-8d464685b370": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/international-school-of-myanmar-yangon",
+    "source_updated": "2026-09-17",
+    "isd_slug": "international-school-of-myanmar-yangon",
+    "isd_list_order": null,
+    "name": "International School of Myanmar",
+    "address": "W-22, Mya Kan Thar Main Road, Mya Kan Thar Housing, 5th Quarter, Hlaing Township, Yangon, Myanmar",
+    "ages": "3-18",
+    "student_count": 450,
+    "curriculum": [
+      "American"
+    ],
+    "average_class_size": "18",
+    "maximum_class_size": "24",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "AP Programme",
+      "SAT Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.ismyanmar.com/",
+    "official_facebook_url": "https://www.facebook.com/weareism/"
+  },
+  "b0595924-73f7-49c4-94b0-b05017d77ef8": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/the-international-school-yangon",
+    "source_updated": "2026-09-17",
+    "isd_slug": "the-international-school-yangon",
+    "isd_list_order": null,
+    "name": "The International School Yangon",
+    "address": "20, Shwe Taungyar, Bahan Township, Yangon, Myanmar",
+    "ages": "4-18",
+    "student_count": 400,
+    "curriculum": [
+      "IB",
+      "American"
+    ],
+    "average_class_size": "20",
+    "maximum_class_size": "22",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IB Diploma Programme",
+      "SAT Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.isyedu.org/",
+    "official_facebook_url": "https://www.facebook.com/ISY.officialpage/"
+  },
+  "1254e3cd-5600-4fe5-bc9f-740995cc1f74": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/crane-international-school-yangon",
+    "source_updated": "2026-09-22",
+    "isd_slug": "crane-international-school-yangon",
+    "isd_list_order": null,
+    "name": "Crane International School",
+    "address": "No:1, Taw Win Cherry Estate, Win Hlaing Street, Off Mindama Road, Mayangone Township, Yangon 11061, Myanmar",
+    "ages": "3-16",
+    "student_count": 200,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": "16",
+    "maximum_class_size": "25",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.cismyangon.com/",
+    "official_facebook_url": "https://www.facebook.com/CISMYANGON/"
+  },
+  "26b13622-e17d-5800-9a44-06ded1015b3c": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/skt-international-school-city-campus-yangon",
+    "source_updated": "2026-09-17",
+    "isd_slug": "skt-international-school-city-campus-yangon",
+    "isd_list_order": null,
+    "name": "SKT International School City Campus",
+    "address": "No.25, Po Sein Road, Bahan Tsp, Yangon, Myanmar",
+    "ages": "3-16",
+    "student_count": 300,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": "18",
+    "maximum_class_size": "22",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://skt.edu.mm/skt-city-campus",
+    "official_facebook_url": "https://www.facebook.com/BahanInternationalScienceAcademy/"
+  },
+  "3614fda1-f393-5f35-ba21-e158bb6c38c0": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/royal-british-international-school-yangon",
+    "source_updated": "2026-09-22",
+    "isd_slug": "royal-british-international-school-yangon",
+    "isd_list_order": null,
+    "name": "Royal British International School",
+    "address": "15 Thukhitar Street, , Moe Kaung Road, Yankin Township, Yangon Myanmar",
+    "ages": "6-18",
+    "student_count": 90,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": null,
+    "maximum_class_size": null,
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://royalbritishinternationalschool.com/",
+    "official_facebook_url": "https://www.facebook.com/royalbritishinternational"
+  },
+  "d1e8deee-ed2c-43fb-a382-c3adb5d06861": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/pride-international-school-myanmar-yangon",
+    "source_updated": "2026-09-22",
+    "isd_slug": "pride-international-school-myanmar-yangon",
+    "isd_list_order": null,
+    "name": "Pride International School Myanmar",
+    "address": "Aung Chan Thar 4th Street, Aung Myay Thar Zi, Kamayut, Yangon, Myanmar",
+    "ages": "3-18",
+    "student_count": 1200,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": "24",
+    "maximum_class_size": "25",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "A-Levels Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.pismmyanmar.com/",
+    "official_facebook_url": "https://www.facebook.com/pismofficial"
+  },
+  "4e837ccd-73af-5c06-bc04-a37daaa366ba": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/khayay-international-school-yangon",
+    "source_updated": "2026-09-17",
+    "isd_slug": "khayay-international-school-yangon",
+    "isd_list_order": null,
+    "name": "Khayay International School",
+    "address": "16 Inya Road Kamayut Township, Yangon, Myanmar",
+    "ages": "3-14",
+    "student_count": 100,
+    "curriculum": [
+      "International"
+    ],
+    "average_class_size": "12",
+    "maximum_class_size": "20",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.khayayschool.org/",
+    "official_facebook_url": "https://www.facebook.com/thekhayayschool"
+  },
+  "3f96414d-5543-45ee-85da-16856c784bbe": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/kings-yangon-international-school",
+    "source_updated": "2026-09-17",
+    "isd_slug": "kings-yangon-international-school",
+    "isd_list_order": null,
+    "name": "Kings Yangon International School",
+    "address": "No. 24 & 61, Inya Myaing Road, Bahan Township Yangon 11201, Myanmar",
+    "ages": "3-18",
+    "student_count": 500,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": "20",
+    "maximum_class_size": "24",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "A-Levels Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.kingseducation.com/partner-schools/kings-yangon",
+    "official_facebook_url": "https://www.facebook.com/KingsYangon"
+  },
+  "d44ccf32-12c8-5c24-966c-1832b4488f26": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/thalun-international-school-yangon",
+    "source_updated": "2026-09-22",
+    "isd_slug": "thalun-international-school-yangon",
+    "isd_list_order": null,
+    "name": "Thalun International School",
+    "address": "108 Hnin Si Street, Yangon, Myanmar",
+    "ages": "3-17",
+    "student_count": 160,
+    "curriculum": [
+      "American"
+    ],
+    "average_class_size": null,
+    "maximum_class_size": "20",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "AP Programme",
+      "SAT Programme",
+      "PSAT Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.thaluninternationalschool.com/",
+    "official_facebook_url": "https://www.facebook.com/ThalunInternationalSchoolYangon/"
+  },
+  "87df4adc-698a-51b6-8f59-e7117549b453": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/yangon-academy-international-school",
+    "source_updated": "2026-09-17",
+    "isd_slug": "yangon-academy-international-school",
+    "isd_list_order": null,
+    "name": "Yangon Academy International School",
+    "address": "35 (B) University Avenue Housing New University Avenue Road, Bahan Township Yangon, Myanmar",
+    "ages": "2-18",
+    "student_count": null,
+    "curriculum": [
+      "American"
+    ],
+    "average_class_size": null,
+    "maximum_class_size": null,
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "AP Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://www.yangonacademy.com/",
+    "official_facebook_url": "https://www.facebook.com/yangonacademy2004"
+  },
+  "038e4ef9-a8a3-4dca-9ea9-aad223fc71c5": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/yangon-international-school",
+    "source_updated": "2026-09-17",
+    "isd_slug": "yangon-international-school",
+    "isd_list_order": null,
+    "name": "Yangon International School",
+    "address": "No. 117 Thumingalar Housing Thingangyun Township Yangon, Myanmar",
+    "ages": "4-18",
+    "student_count": 300,
+    "curriculum": [
+      "American",
+      "IB"
+    ],
+    "average_class_size": "16",
+    "maximum_class_size": "22",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IB Diploma Programme",
+      "SAT Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://yis.edu.mm/",
+    "official_facebook_url": "https://www.facebook.com/yangoninternationalschool"
+  },
+  "d716bdc9-39a6-50f3-8adc-756c9103d88f": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/singapore-international-school-yangon",
+    "source_updated": "2026-09-17",
+    "isd_slug": "singapore-international-school-yangon",
+    "isd_list_order": null,
+    "name": "Singapore International School",
+    "address": "72 Chin Dwin Street,Kamaryut Township, Yangon, Myanmar",
+    "ages": "2-18",
+    "student_count": null,
+    "curriculum": [
+      "British",
+      "Singaporean"
+    ],
+    "average_class_size": null,
+    "maximum_class_size": "20",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "A-Levels Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://sites.google.com/sismyanmar.com/rviacademyygn/about-us",
+    "official_facebook_url": "https://www.facebook.com/Singapore.School.Myanmar"
+  },
+  "6d0e010f-b869-4350-ae90-5a30f531d22d": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/myanmar-international-school-yangon",
+    "source_updated": "2026-09-17",
+    "isd_slug": "myanmar-international-school-yangon",
+    "isd_list_order": null,
+    "name": "Myanmar International School Yangon",
+    "address": "No. 24 Sae Myaung Street, 11th Quarter Yankin Township Yangon, Myanmar",
+    "ages": "3-18",
+    "student_count": 630,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": "20",
+    "maximum_class_size": "22",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "A-Levels Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://yangon.misy.edu.mm/",
+    "official_facebook_url": "https://www.facebook.com/misyedu"
+  },
+  "c11aa3bc-c91f-5ab9-ace9-0155fa831a8e": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/covenant-international-school-yangon",
+    "source_updated": "2026-09-17",
+    "isd_slug": "covenant-international-school-yangon",
+    "isd_list_order": null,
+    "name": "Covenant International School",
+    "address": "Yangon, Myanmar",
+    "ages": "3-18",
+    "student_count": 220,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": "15",
+    "maximum_class_size": null,
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "A-Levels Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://covenantyangon.com/",
+    "official_facebook_url": "https://www.facebook.com/promiseyangon/"
+  },
+  "4dd4da53-4a6f-4bac-aca9-0fd9955e8bfc": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/myanmar-international-school",
+    "source_updated": "2026-09-17",
+    "isd_slug": "myanmar-international-school",
+    "isd_list_order": null,
+    "name": "Myanmar International School",
+    "address": "No 20 Pyin Nya Waddy Street, Yankin Township, Yangon, Myanmar",
+    "ages": "3-18",
+    "student_count": 700,
+    "curriculum": [
+      "British"
+    ],
+    "average_class_size": null,
+    "maximum_class_size": "20",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [
+      "IGCSE Programme",
+      "A-Levels Programme"
+    ],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://mis-edu.com/",
+    "official_facebook_url": "https://www.facebook.com/myanmarinternationalschool/"
+  },
+  "d286f5bb-2db7-5108-aca0-b7f742cdf56a": {
+    "source_name": "International Schools Database",
+    "source_url": "https://www.international-schools-database.com/in/yangon/yangon-american-international-school",
+    "source_updated": "2026-09-17",
+    "isd_slug": "yangon-american-international-school",
+    "isd_list_order": null,
+    "name": "Yangon American International School",
+    "address": "No. 2A, Yangon-Insein Road, Building (2) Hlaing Township, No. 9 Ward Yangon, Republic of the Union of Myanmar",
+    "ages": "2-14",
+    "student_count": 70,
+    "curriculum": [
+      "American",
+      "IB"
+    ],
+    "average_class_size": "8",
+    "maximum_class_size": "20",
+    "languages": [
+      "English"
+    ],
+    "extra_languages": null,
+    "programmes": [],
+    "yearly_fees": "Not published on ISD",
+    "official_website_url": "https://yangonamerican.edu.mm/",
+    "official_facebook_url": "https://www.facebook.com/YangonAmerican/"
+  }
+}

@@ -4,18 +4,405 @@
     "posters": [
       {
         "file": "ILBC.jpg",
-        "label": "ILBC Yangon / Nay Pyi Taw and ILBC Monywa",
-        "claims": [
-          "ILBC IGCSE and A Level School publishes an on-campus and online school fee table for ILBC Yangon / Nay Pyi Taw.",
-          "ILBC Yangon / Nay Pyi Taw Kindergarten on-campus fee is MMK 1,249,000; online fee is MMK 694,000.",
-          "ILBC Yangon / Nay Pyi Taw Primary I–III on-campus fee is MMK 1,285,000; online fee is MMK 730,000.",
-          "ILBC Yangon / Nay Pyi Taw Secondary VI on-campus fee is MMK 1,365,000; online fee is MMK 810,000.",
-          "ILBC Monywa publishes online school fees, including Kindergarten MMK 744,000 and Primary I MMK 780,000 (table crop is incomplete)."
+        "source_url": "https://ilbc.edu.mm/technology-integrated-learning/",
+        "label": "ILBC TIL monthly fees, 2026–2027",
+        "default_branch": "yangon",
+        "notes": [
+          "Published on the official Technology Integrated Learning page as monthly school fees.",
+          "Amounts on the page are unlabelled; they match the ILBC fee poster in MMK."
+        ],
+        "shared": [
+          {
+            "item": "Placement test",
+            "amount": "MMK 50,000"
+          },
+          {
+            "item": "Admission — new student",
+            "amount": "MMK 500,000"
+          },
+          {
+            "item": "Admission — old student",
+            "amount": "MMK 100,000"
+          },
+          {
+            "item": "Optional subject",
+            "amount": "MMK 165,000"
+          }
+        ],
+        "branches": [
+          {
+            "id": "yangon",
+            "name": "Yangon / Nay Pyi Taw",
+            "address": "Yangon-area campuses include Thuwana, Parami (Hlaing), North Dagon, Dagon Seikkan, and Thumingalar 123, plus Nay Pyi Taw.",
+            "moe_match": [
+              "ရန်ကုန်",
+              "Yangon",
+              "Hlaing",
+              "Tamwe",
+              "သုဝဏ္ဏ",
+              "တာမွေ",
+              "လှိုင်",
+              "နေပြည်တော်",
+              "Nay Pyi Taw",
+              "ဒက္ခိဏ"
+            ],
+            "programmes": [
+              {
+                "item": "Kindergarten",
+                "on_campus": "MMK 1,249,000",
+                "online": "MMK 694,000"
+              },
+              {
+                "item": "Primary 1",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 730,000"
+              },
+              {
+                "item": "Primary 2",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 730,000"
+              },
+              {
+                "item": "Primary 3",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 730,000"
+              },
+              {
+                "item": "Primary 4",
+                "on_campus": "MMK 1,302,000",
+                "online": "MMK 747,000"
+              },
+              {
+                "item": "Primary 5",
+                "on_campus": "MMK 1,302,000",
+                "online": "MMK 747,000"
+              },
+              {
+                "item": "Primary 6",
+                "on_campus": "MMK 1,302,000",
+                "online": "MMK 747,000"
+              },
+              {
+                "item": "Secondary 1",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 770,000"
+              },
+              {
+                "item": "Secondary 2",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 770,000"
+              },
+              {
+                "item": "Secondary 3",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 770,000"
+              },
+              {
+                "item": "Secondary 4",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 770,000"
+              },
+              {
+                "item": "Secondary 5",
+                "on_campus": "MMK 1,345,000",
+                "online": "MMK 790,000"
+              },
+              {
+                "item": "Secondary 6",
+                "on_campus": "MMK 1,365,000",
+                "online": "MMK 810,000"
+              }
+            ]
+          },
+          {
+            "id": "monywa",
+            "name": "Monywa",
+            "address": "ILBC Monywa. The official table lists online fees only, through Secondary 2.",
+            "moe_match": [
+              "မုံရွာ",
+              "Monywa"
+            ],
+            "programmes": [
+              {
+                "item": "Kindergarten",
+                "online": "MMK 744,000"
+              },
+              {
+                "item": "Primary 1",
+                "online": "MMK 780,000"
+              },
+              {
+                "item": "Primary 2",
+                "online": "MMK 780,000"
+              },
+              {
+                "item": "Primary 3",
+                "online": "MMK 780,000"
+              },
+              {
+                "item": "Primary 4",
+                "online": "MMK 797,000"
+              },
+              {
+                "item": "Primary 5",
+                "online": "MMK 797,000"
+              },
+              {
+                "item": "Primary 6",
+                "online": "MMK 797,000"
+              },
+              {
+                "item": "Secondary 1",
+                "online": "MMK 820,000"
+              },
+              {
+                "item": "Secondary 2",
+                "online": "MMK 820,000"
+              }
+            ]
+          },
+          {
+            "id": "mandalay",
+            "name": "Mandalay",
+            "address": "ILBC Mandalay campuses listed on the MOE approve list.",
+            "moe_match": [
+              "မန္တလေး",
+              "Mandalay"
+            ],
+            "programmes": [
+              {
+                "item": "Kindergarten",
+                "on_campus": "MMK 1,249,000",
+                "online": "MMK 630,000"
+              },
+              {
+                "item": "Primary 1",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 640,000"
+              },
+              {
+                "item": "Primary 2",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 640,000"
+              },
+              {
+                "item": "Primary 3",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 640,000"
+              },
+              {
+                "item": "Primary 4",
+                "on_campus": "MMK 1,302,000",
+                "online": "MMK 650,000"
+              },
+              {
+                "item": "Primary 5",
+                "on_campus": "MMK 1,302,000",
+                "online": "MMK 650,000"
+              },
+              {
+                "item": "Primary 6",
+                "on_campus": "MMK 1,302,000",
+                "online": "MMK 650,000"
+              },
+              {
+                "item": "Secondary 1",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 659,000"
+              },
+              {
+                "item": "Secondary 2",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 659,000"
+              },
+              {
+                "item": "Secondary 3",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 659,000"
+              },
+              {
+                "item": "Secondary 4",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 689,000"
+              },
+              {
+                "item": "Secondary 5",
+                "on_campus": "MMK 1,345,000",
+                "online": "MMK 699,000"
+              },
+              {
+                "item": "Secondary 6",
+                "on_campus": "MMK 1,365,000",
+                "online": "MMK 709,000"
+              }
+            ]
+          },
+          {
+            "id": "lashio-taunggyi-myeik",
+            "name": "Lashio / Taunggyi / Myeik",
+            "address": "Shared official fee table for Lashio, Taunggyi, and Myeik.",
+            "moe_match": [
+              "လားရှိုး",
+              "တောင်ကြီး",
+              "မြိတ်",
+              "Lashio",
+              "Taunggyi",
+              "Myeik",
+              "တနင်္သာရီ"
+            ],
+            "programmes": [
+              {
+                "item": "Kindergarten",
+                "on_campus": "MMK 1,249,000",
+                "online": "MMK 674,000"
+              },
+              {
+                "item": "Primary 1",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 702,000"
+              },
+              {
+                "item": "Primary 2",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 702,000"
+              },
+              {
+                "item": "Primary 3",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 702,000"
+              },
+              {
+                "item": "Primary 4",
+                "on_campus": "MMK 1,302,000",
+                "online": "MMK 727,000"
+              },
+              {
+                "item": "Primary 5",
+                "on_campus": "MMK 1,302,000",
+                "online": "MMK 727,000"
+              },
+              {
+                "item": "Primary 6",
+                "on_campus": "MMK 1,302,000",
+                "online": "MMK 727,000"
+              },
+              {
+                "item": "Secondary 1",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 750,000"
+              },
+              {
+                "item": "Secondary 2",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 750,000"
+              },
+              {
+                "item": "Secondary 3",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 750,000"
+              },
+              {
+                "item": "Secondary 4",
+                "on_campus": "MMK 1,325,000",
+                "online": "MMK 770,000"
+              },
+              {
+                "item": "Secondary 5",
+                "on_campus": "MMK 1,345,000",
+                "online": "MMK 790,000"
+              },
+              {
+                "item": "Secondary 6",
+                "on_campus": "MMK 1,365,000",
+                "online": "MMK 810,000"
+              }
+            ]
+          },
+          {
+            "id": "myitkyina",
+            "name": "Myitkyina",
+            "address": "ILBC Myitkyina, Kachin State.",
+            "moe_match": [
+              "မြစ်ကြီးနား",
+              "Myitkyina",
+              "ကချင်"
+            ],
+            "programmes": [
+              {
+                "item": "Kindergarten",
+                "on_campus": "MMK 1,165,000",
+                "online": "MMK 610,000"
+              },
+              {
+                "item": "Primary 1",
+                "on_campus": "MMK 1,185,000",
+                "online": "MMK 630,000"
+              },
+              {
+                "item": "Primary 2",
+                "on_campus": "MMK 1,185,000",
+                "online": "MMK 630,000"
+              },
+              {
+                "item": "Primary 3",
+                "on_campus": "MMK 1,185,000",
+                "online": "MMK 630,000"
+              },
+              {
+                "item": "Primary 4",
+                "on_campus": "MMK 1,205,000",
+                "online": "MMK 650,000"
+              },
+              {
+                "item": "Primary 5",
+                "on_campus": "MMK 1,205,000",
+                "online": "MMK 650,000"
+              },
+              {
+                "item": "Primary 6",
+                "on_campus": "MMK 1,205,000",
+                "online": "MMK 650,000"
+              },
+              {
+                "item": "Secondary 1",
+                "on_campus": "MMK 1,225,000",
+                "online": "MMK 670,000"
+              },
+              {
+                "item": "Secondary 2",
+                "on_campus": "MMK 1,225,000",
+                "online": "MMK 670,000"
+              },
+              {
+                "item": "Secondary 3",
+                "on_campus": "MMK 1,225,000",
+                "online": "MMK 670,000"
+              },
+              {
+                "item": "Secondary 4",
+                "on_campus": "MMK 1,245,000",
+                "online": "MMK 690,000"
+              },
+              {
+                "item": "Secondary 5",
+                "on_campus": "MMK 1,265,000",
+                "online": "MMK 710,000"
+              },
+              {
+                "item": "Secondary 6",
+                "on_campus": "MMK 1,285,000",
+                "online": "MMK 730,000"
+              }
+            ]
+          }
         ]
       },
       {
         "file": "ILBC Parami.jpg",
         "label": "ILBC Parami preschool, Hlaing",
+        "branch_ids": [
+          "yangon"
+        ],
         "claims": [
           "ILBC Parami (No.1, Parami Road, 16 Quarter, Hlaing Township) announced preschool fee changes dated 17.3.2026, effective 1.6.2026.",
           "Regular classes (Mon–Fri 9:00 a.m.–2:00 p.m.) new fee is MMK 900,000.",
@@ -93,12 +480,165 @@
     "posters": [
       {
         "file": "Kings INternational School.jpg",
-        "label": "KINGS International School 2026-2027",
-        "claims": [
-          "KINGS International School announced 2026-2027 admissions across six campuses, with re-enrolment options due by 30 March 2026.",
-          "Re-enrolment deposit is MMK 1,500,000 by 30 March 2026; non-refundable but credited to next year fees.",
-          "Early-bird rebate: MMK 600,000 for annual payment or MMK 300,000 for termly payment by 30 March 2026.",
-          "From 1 June onwards, Nursery annual fee is MMK 19,250,000; Year 10 is MMK 30,800,000; Year 11 is MMK 23,100,000."
+        "source_url": "https://www.kis-mm.com/admission-inquiry",
+        "source_label": "Posted 2026–2027 table · official site has no amounts",
+        "label": "KINGS International School 2026–2027",
+        "kicker": "Group poster",
+        "confidence": "likely",
+        "default_branch": "star-city",
+        "lead": "The live kis-mm.com pages do not publish tuition amounts. Figures below come from a 2026–2027 admissions poster that names six campuses.",
+        "notes": [
+          "Re-enrolment deposit MMK 1,500,000 by 30 March 2026; credited to next-year fees, not refundable.",
+          "Early-bird rebate: MMK 600,000 annual or MMK 300,000 termly if paid by 30 March 2026.",
+          "Campus addresses are from the official Contact page. Amounts are group-wide on the poster, not a per-campus table."
+        ],
+        "shared": [
+          {
+            "item": "Re-enrolment deposit",
+            "amount": "MMK 1,500,000 by 30 March 2026"
+          }
+        ],
+        "branches": [
+          {
+            "id": "thuwunna",
+            "name": "Thuwunna",
+            "address": "No. (6/A), Kyoe Sett Yone Street, B Quarter, Thuwunna, Thingangyun, Yangon",
+            "moe_match": [
+              "သင်္ဃန်းကျွန်း",
+              "သုဝဏ္ဏ",
+              "ကြိုးစက်"
+            ],
+            "programmes": [
+              {
+                "item": "Nursery",
+                "amount": "MMK 19,250,000 / year from 1 June"
+              },
+              {
+                "item": "Year 10",
+                "amount": "MMK 30,800,000 / year from 1 June"
+              },
+              {
+                "item": "Year 11",
+                "amount": "MMK 23,100,000 / year from 1 June"
+              }
+            ]
+          },
+          {
+            "id": "star-city",
+            "name": "Star City",
+            "address": "No.1/B, Plot No.2, Star City, Thanlyin Township, Yangon",
+            "moe_match": [
+              "သန်လျင်",
+              "Star City"
+            ],
+            "programmes": [
+              {
+                "item": "Nursery",
+                "amount": "MMK 19,250,000 / year from 1 June"
+              },
+              {
+                "item": "Year 10",
+                "amount": "MMK 30,800,000 / year from 1 June"
+              },
+              {
+                "item": "Year 11",
+                "amount": "MMK 23,100,000 / year from 1 June"
+              }
+            ]
+          },
+          {
+            "id": "pun-hlaing",
+            "name": "Pun Hlaing",
+            "address": "Pun Hlaing Estate Avenue, Hlaing Tharyar Township, Yangon",
+            "moe_match": [
+              "ပန်းလှိုင်",
+              "လှိုင်သာယာ"
+            ],
+            "programmes": [
+              {
+                "item": "Nursery",
+                "amount": "MMK 19,250,000 / year from 1 June"
+              },
+              {
+                "item": "Year 10",
+                "amount": "MMK 30,800,000 / year from 1 June"
+              },
+              {
+                "item": "Year 11",
+                "amount": "MMK 23,100,000 / year from 1 June"
+              }
+            ]
+          },
+          {
+            "id": "golden-valley",
+            "name": "Golden Valley",
+            "address": "No.43 Golden Valley Road, Yangon",
+            "moe_match": [
+              "အင်းယားမြိုင်",
+              "ဗဟန်း",
+              "Golden Valley"
+            ],
+            "programmes": [
+              {
+                "item": "Nursery",
+                "amount": "MMK 19,250,000 / year from 1 June"
+              },
+              {
+                "item": "Year 10",
+                "amount": "MMK 30,800,000 / year from 1 June"
+              },
+              {
+                "item": "Year 11",
+                "amount": "MMK 23,100,000 / year from 1 June"
+              }
+            ]
+          },
+          {
+            "id": "kic-bahan",
+            "name": "KIC Bahan",
+            "address": "Bahan, downtown Yangon (college campus). Contact page currently repeats the Taunggyi address.",
+            "moe_match": [
+              "ရွှေဂုံတိုင်",
+              "ဗဟန်း"
+            ],
+            "programmes": [
+              {
+                "item": "Nursery",
+                "amount": "MMK 19,250,000 / year from 1 June"
+              },
+              {
+                "item": "Year 10",
+                "amount": "MMK 30,800,000 / year from 1 June"
+              },
+              {
+                "item": "Year 11",
+                "amount": "MMK 23,100,000 / year from 1 June"
+              }
+            ]
+          },
+          {
+            "id": "taunggyi",
+            "name": "Taunggyi",
+            "address": "No. (70/10), Haw Sandar Road, Yay Aye Ward, Taunggyi, Shan State",
+            "moe_match": [
+              "တောင်ကြီး",
+              "ဟော်စန္ဒာ"
+            ],
+            "programmes": [
+              {
+                "item": "Nursery",
+                "amount": "MMK 19,250,000 / year from 1 June"
+              },
+              {
+                "item": "Year 10",
+                "amount": "MMK 30,800,000 / year from 1 June"
+              },
+              {
+                "item": "Year 11",
+                "amount": "MMK 23,100,000 / year from 1 June"
+              }
+            ]
+          }
         ]
       }
     ]
@@ -129,6 +669,16 @@
           "Plan A in-person/blended programme is MMK 8,700,000; Plan B online is MMK 8,265,000.",
           "Whole-year lump sum for Plan A is MMK 8,265,000 (5% discount) in cash before 1 August 2025.",
           "Payments are cash only at the Primary School main reception, 8:00 a.m. to 3:30 p.m."
+        ],
+        "source_url": "https://pismmyanmar.com/index.php/information/admissions",
+        "source_label": "Posted Year 2 table · official Admissions page has no amounts",
+        "kicker": "2025–2026 poster",
+        "confidence": "likely",
+        "lead": "The live Admissions page discusses tuition and transport but does not publish current fee amounts. Year 2 figures below come from a posted announcement.",
+        "notes": [
+          "Official Admissions: apply year-round; placement test in English and Mathematics; registration and placement-test fees are not refundable (FAQ).",
+          "2023 parent-student handbook: fees paid after admission are due in full within 7 days; later instalments have set dates; unpaid fees can block class and exams. That handbook does not replace a current fee table.",
+          "Contact Us on pismmyanmar.com is a dummy address and was ignored."
         ]
       }
     ]
@@ -194,13 +744,197 @@
     "school_name": "Helix International School",
     "posters": [
       {
-        "file": "HELIX.jpg",
-        "label": "HELIX Primary 1 to 6",
-        "claims": [
-          "HELIX International School listed Primary 1–6 fees for a 10-month duration at No.15(D), Padonmar Street, Dagon Township.",
-          "Campus monthly fee is MMK 750,000 (yearly MMK 6,750,000); online monthly fee is MMK 550,000 (yearly MMK 5,000,000).",
-          "Registration fee is MMK 300,000 (campus or online). Campus documentation fee is MMK 600,000; online documentation fee is MMK 300,000.",
-          "Sibling discount 5% for the second child and 10% for the third child."
+        "source_url": "https://www.helixuniversitycollege.com/programs/",
+        "source_label": "Official 2026 programme pamphlets",
+        "label": "Helix campus and online fees",
+        "kicker": "Official pamphlets",
+        "confidence": "likely",
+        "default_branch": "padonmar-1",
+        "lead": "Amounts below are from official 2026 pamphlets linked on the Programs page. The website HTML does not publish a fee table.",
+        "notes": [
+          "Sibling discount: 5% second child, 10% third child. Uniform and ferry are extra.",
+          "Registration is described as one-time. Transfer from online to campus requires paying the documentation and facility difference.",
+          "IGCSE pamphlet cells are partly unclear; only the readable registration and monthly figures are shown."
+        ],
+        "shared": [
+          {
+            "item": "Sibling discount",
+            "amount": "5% second child · 10% third child"
+          }
+        ],
+        "branches": [
+          {
+            "id": "padonmar-2",
+            "name": "Padonmar Campus-2 · Pre-School",
+            "address": "No.15(A), Padonmar Street, Dagon Township, Yangon",
+            "moe_match": [
+              "ပဒုမ္မာ"
+            ],
+            "one_time": [
+              {
+                "item": "Registration",
+                "amount": "MMK 300,000"
+              }
+            ],
+            "programmes": [
+              {
+                "item": "Pre-KG / KG school fee",
+                "amount": "MMK 1,800,000 per 3 months"
+              },
+              {
+                "item": "Material",
+                "amount": "MMK 180,000 per 3 months"
+              }
+            ]
+          },
+          {
+            "id": "padonmar-1",
+            "name": "Padonmar Campus-1 · Primary and Year 7",
+            "address": "No.15(D), Padonmar Street, Dagon Township, Yangon",
+            "moe_match": [
+              "၁၅ D",
+              "ပဒုမ္မာ"
+            ],
+            "one_time": [
+              {
+                "item": "Registration",
+                "amount": "MMK 300,000"
+              },
+              {
+                "item": "Documentation · campus",
+                "amount": "MMK 600,000"
+              },
+              {
+                "item": "Documentation · online",
+                "amount": "MMK 300,000"
+              }
+            ],
+            "programmes": [
+              {
+                "item": "Primary 1–6 monthly",
+                "on_campus": "MMK 750,000",
+                "online": "MMK 550,000"
+              },
+              {
+                "item": "Primary 1–6 yearly (10 months)",
+                "on_campus": "MMK 6,750,000",
+                "online": "MMK 5,000,000"
+              },
+              {
+                "item": "Year 7 monthly",
+                "on_campus": "MMK 750,000",
+                "online": "MMK 550,000"
+              },
+              {
+                "item": "Year 7 yearly (10 months)",
+                "on_campus": "MMK 6,750,000",
+                "online": "MMK 5,000,000"
+              },
+              {
+                "item": "Annual material / facilities (campus)",
+                "amount": "USD 500"
+              }
+            ]
+          },
+          {
+            "id": "campus-301",
+            "name": "301 Campus · Year 8–9",
+            "address": "No.301, Shwedagon Pagoda Road, Dagon Township, Yangon",
+            "moe_match": [
+              "၃၀၁",
+              "ရွှေတိဂုံ"
+            ],
+            "one_time": [
+              {
+                "item": "Registration",
+                "amount": "MMK 300,000"
+              },
+              {
+                "item": "Documentation · campus",
+                "amount": "MMK 600,000"
+              },
+              {
+                "item": "Documentation · online",
+                "amount": "MMK 400,000"
+              }
+            ],
+            "programmes": [
+              {
+                "item": "Year 8–9 / Pre-IGCSE monthly (8 months)",
+                "on_campus": "MMK 750,000",
+                "online": "MMK 550,000"
+              },
+              {
+                "item": "Year 8–9 yearly",
+                "on_campus": "MMK 5,580,000",
+                "online": "MMK 4,092,000"
+              },
+              {
+                "item": "Annual material / facilities (campus)",
+                "amount": "MMK 500,000"
+              }
+            ]
+          },
+          {
+            "id": "manawhari",
+            "name": "Manawhari · IGCSE and A Level",
+            "address": "No.9(B), Manawhari Street, Dagon Township, Yangon",
+            "moe_match": [
+              "မနော်ဟရီ",
+              "၉"
+            ],
+            "one_time": [
+              {
+                "item": "Registration",
+                "amount": "MMK 300,000"
+              },
+              {
+                "item": "A Level material and documentation",
+                "amount": "MMK 200,000"
+              }
+            ],
+            "programmes": [
+              {
+                "item": "IGCSE monthly (18–20 months)",
+                "on_campus": "MMK 150,000",
+                "online": "MMK 120,000",
+                "detail": "Pamphlet layout is per subject; 10% off is mentioned"
+              },
+              {
+                "item": "A Level monthly",
+                "amount": "MMK 220,000"
+              },
+              {
+                "item": "A Level monthly · Maths",
+                "amount": "MMK 270,000"
+              }
+            ]
+          },
+          {
+            "id": "campus-293",
+            "name": "293 Campus",
+            "address": "No.293, Shwedagon Pagoda Road, Dagon Township, Yangon",
+            "moe_match": [
+              "ရွှေတိဂုံ"
+            ],
+            "programmes": [
+              {
+                "item": "Tuition",
+                "detail": "No fee pamphlet for this campus on the Programs page."
+              }
+            ]
+          },
+          {
+            "id": "pyidaungsu",
+            "name": "Pyidaungsu Campus",
+            "address": "No.44, Pyidaungsu Yeiktha Street, Dagon Township, Yangon",
+            "programmes": [
+              {
+                "item": "Tuition",
+                "detail": "No fee pamphlet for this campus on the Programs page."
+              }
+            ]
+          }
         ]
       }
     ]
@@ -288,6 +1022,61 @@
           "Maternelle TPS half-day personal payment is USD 3,700; full day USD 5,800.",
           "Élémentaire (Grades 1–5) personal payment is USD 11,700; collège (Grades 6–9) personal payment is USD 12,100.",
           "Employer participation rates are higher (for example collège USD 16,700)."
+        ]
+      }
+    ]
+  },
+  "b0595924-73f7-49c4-94b0-b05017d77ef8": {
+    "school_name": "The International School Yangon (ISY)",
+    "posters": [
+      {
+        "source_url": "https://www.state.gov/wp-content/uploads/2025/06/Rangoon-Fact-Sheet-Burma.pdf",
+        "source_label": "State Department 2025 fact sheet",
+        "label": "Annual tuition · 2025 fact sheet",
+        "kicker": "Published source · tuition page has no amounts",
+        "confidence": "outdated",
+        "lead": "The 4 October 2026 recrawl of isyedu.org still finds no 2026–27 tuition table. Official pages publish an application fee and a deposit. Annual tuition amounts below are from the school’s 2025 U.S. State Department fact sheet (current as of December 2024).",
+        "notes": [
+          "Tuition and Fees: Enrollment Fees plus Tuition Fees, paid to a U.S. association and a Myanmar entity. Typical annual rise 3–5%. No schedule is published.",
+          "Apply 2026–27: application fee USD 300 (cash, bank transfer, or card). Admitted families pay a USD 1,000 admissions deposit.",
+          "FAQ: no tuition discounts; paying the full year before school starts costs less than paying by semester; refund only if the child never attends a day.",
+          "Scholarship page: two Grade 8 Myanmar-national awards a year, a full tuition and fee waiver through Grade 12. That is not a published fee table.",
+          "The 2023–2024 State Department sheet listed Pre-K USD 15,948; K–5 USD 24,994; 6–8 USD 27,696; 9–12 USD 28,358; and a one-time K–12 registration fee of USD 9,500. That registration amount is not on the 2025 sheet."
+        ],
+        "shared": [
+          {
+            "item": "Application fee (2026–27 apply page)",
+            "amount": "USD 300"
+          },
+          {
+            "item": "Admissions deposit after offer (apply page)",
+            "amount": "USD 1,000"
+          }
+        ],
+        "branches": [
+          {
+            "id": "yangon",
+            "name": "Yangon (Bahan)",
+            "address": "20 Shwe Taungyar Street, Bahan Township, Yangon",
+            "programmes": [
+              {
+                "item": "Pre-Kindergarten",
+                "amount": "USD 15,950"
+              },
+              {
+                "item": "Elementary (K–5)",
+                "amount": "USD 26,190"
+              },
+              {
+                "item": "Middle school (6–8)",
+                "amount": "USD 29,030"
+              },
+              {
+                "item": "High school (9–12)",
+                "amount": "USD 29,070"
+              }
+            ]
+          }
         ]
       }
     ]

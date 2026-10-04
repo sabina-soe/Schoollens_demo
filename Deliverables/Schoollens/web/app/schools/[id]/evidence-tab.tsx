@@ -13,6 +13,7 @@ import {
   normalizeConfidence,
   sourceTag,
 } from "@/lib/confidence";
+import { isParentDecisionTopic } from "@/lib/parent-claims";
 import { ConfidenceChip } from "./confidence-chip";
 import { Skeleton } from "../../components/ui/skeleton";
 
@@ -35,7 +36,7 @@ type LedgerRow = {
   evidence: EvidenceRow[];
 };
 
-export function EvidenceTab({ schoolId }: { schoolId: string }) {
+export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networkIds?: string[] }) {
   const [rows, setRows] = useState<LedgerRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -46,7 +47,7 @@ export function EvidenceTab({ schoolId }: { schoolId: string }) {
       const { data: groups, error: groupError } = await supabase
         .from("claim_groups")
         .select("id, category, confidence_label, reconciliation_note, last_updated")
-        .eq("school_id", schoolId)
+        .in("school_id", networkIds?.length ? networkIds : [schoolId])
         .order("category");
       if (groupError) {
         if (!isRegisterUnreachable(groupError)) setError(groupError.message);
@@ -94,40 +95,49 @@ export function EvidenceTab({ schoolId }: { schoolId: string }) {
       }
 
       setRows(
-        groups.map((group) => {
-          const ids = membersByGroup.get(group.id) ?? [];
-          const claimTexts: string[] = [];
-          const excerpts: EvidenceRow[] = [];
-          for (const claimId of ids) {
-            const claim = claimById[claimId];
-            if (claim?.claim_text && !claimTexts.includes(claim.claim_text)) {
-              claimTexts.push(claim.claim_text);
+        groups
+          .map((group) => {
+            const ids = membersByGroup.get(group.id) ?? [];
+            const claimTexts: string[] = [];
+            const excerpts: EvidenceRow[] = [];
+            for (const claimId of ids) {
+              const claim = claimById[claimId];
+              if (claim?.claim_text && !claimTexts.includes(claim.claim_text)) {
+                claimTexts.push(claim.claim_text);
+              }
+              for (const item of evidenceByClaim.get(claimId) ?? []) {
+                excerpts.push({
+                  source_excerpt: item.source_excerpt,
+                  evidence_type: item.evidence_type,
+                  uploaded_at: item.uploaded_at,
+                  original_url: item.original_url,
+                  source_type: claim?.source_type ?? null,
+                  source_trust_tier: claim?.source_trust_tier ?? null,
+                });
+              }
             }
-            for (const item of evidenceByClaim.get(claimId) ?? []) {
-              excerpts.push({
-                source_excerpt: item.source_excerpt,
-                evidence_type: item.evidence_type,
-                uploaded_at: item.uploaded_at,
-                original_url: item.original_url,
-                source_type: claim?.source_type ?? null,
-                source_trust_tier: claim?.source_trust_tier ?? null,
-              });
-            }
-          }
-          return {
-            id: group.id,
-            category: group.category,
-            confidence_label: group.confidence_label,
-            reconciliation_note: group.reconciliation_note,
-            last_updated: group.last_updated,
-            claim_texts: claimTexts,
-            evidence: excerpts,
-          };
-        }),
+            return {
+              id: group.id,
+              category: group.category,
+              confidence_label: group.confidence_label,
+              reconciliation_note: group.reconciliation_note,
+              last_updated: group.last_updated,
+              claim_texts: claimTexts,
+              evidence: excerpts,
+            };
+          })
+          .filter((row) =>
+            isParentDecisionTopic({
+              category: row.category,
+              confidence_label: row.confidence_label,
+              reconciliation_note: row.reconciliation_note,
+              claim_texts: row.claim_texts,
+            }),
+          ),
       );
       setLoading(false);
     })();
-  }, [schoolId]);
+  }, [schoolId, networkIds?.join("|")]);
 
   useEffect(() => {
     if (loading) return;

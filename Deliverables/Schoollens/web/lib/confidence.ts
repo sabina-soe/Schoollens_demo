@@ -31,6 +31,7 @@ export const CATEGORY_SECTIONS = [
   { key: "class size", title: "Class size", id: "class-size" },
   { key: "safety", title: "Culture & Safety", id: "culture-safety" },
   { key: "facilities", title: "Facilities", id: "facilities" },
+  { key: "cca", title: "CCA", id: "cca" },
   { key: "contact info", title: "Contact", id: "contact" },
 ] as const;
 

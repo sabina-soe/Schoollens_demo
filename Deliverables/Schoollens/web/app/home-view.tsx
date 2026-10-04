@@ -195,10 +195,6 @@ export function HomeView() {
         <h1 className="home-title">
           The evidence guide to schools <em>in Myanmar</em>
         </h1>
-        <p className="home-lead">
-          SchoolLens reconciles the MOE register, school websites, and Facebook into evidence-linked claims. No
-          sponsored listings. The AI does not pick a school.
-        </p>
 
         <form className="home-search-pill" onSubmit={onSearch} role="search">
           <label className="home-search-field">

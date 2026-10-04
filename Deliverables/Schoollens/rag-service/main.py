@@ -16,21 +16,27 @@ from pydantic import BaseModel
 from supabase import create_client
 
 
+def _read_env_file(env_path: Path, overwrite: bool):
+    if not env_path.exists():
+        return
+    for line in env_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if overwrite or key not in os.environ:
+            os.environ[key] = value
+
+
 def _load_local_env():
     root = Path(__file__).resolve().parents[1]
-    for env_path in (
-        root / "web" / ".env.local",
-        Path(__file__).resolve().parent / ".env",
-        Path(__file__).resolve().parent / ".env.example",
-    ):
-        if not env_path.exists():
-            continue
-        for line in env_path.read_text(encoding="utf-8").splitlines():
-            line = line.strip()
-            if not line or line.startswith("#") or "=" not in line:
-                continue
-            key, value = line.split("=", 1)
-            os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+    service_dir = Path(__file__).resolve().parent
+    # Example and Next env fill gaps. rag-service/.env wins for Gemini and the service role.
+    _read_env_file(service_dir / ".env.example", overwrite=False)
+    _read_env_file(root / "web" / ".env.local", overwrite=False)
+    _read_env_file(service_dir / ".env", overwrite=True)
     if not os.environ.get("SUPABASE_URL"):
         os.environ["SUPABASE_URL"] = os.environ.get("NEXT_PUBLIC_SUPABASE_URL", "")
 
@@ -41,6 +47,7 @@ _WEBSITE_CRAWL_LOCK = threading.Lock()
 CATEGORIES = (
     "fees",
     "curriculum",
+    "cca",
     "safety",
     "facilities",
     "class size",
@@ -84,8 +91,12 @@ EXTRACT_SCHEMA = {
 EXTRACT_PROMPT = """You extract discrete, structured factual claims from one school source.
 
 Rules:
-- Pull only concrete facts (e.g. "class size: 15 students"). Skip slogans, mood, and vague praise.
-- Tag each claim with exactly one category: fees, curriculum, safety, facilities, class size, contact info.
+- Prefer parent-decision facts: fees, curriculum stages and subjects, CCA programmes, location, facilities, class size, teacher quality, and academic outcomes.
+- Keep named programme lists. A subject list, fee table row, or CCA activity list is a fact, not a slogan.
+- Skip mood copy, ranking language, and one-off event dates (showcases, concerts, sports days) unless they state a standing programme.
+- Tag each claim with exactly one category: fees, curriculum, cca, safety, facilities, class size, contact info.
+- Use cca for extracurricular, co-curricular, music lessons, sports clubs, STEAM clubs, and similar activity lists.
+- Use curriculum for stages, subjects by year, exam frameworks (IGCSE, IAL, IB), medium of instruction, hours, and academic-year dates.
 - claim_text must be normalized into English, even if the source is Burmese or mixed. This is the comparable fact.
 - source_excerpt must be a short verbatim span copied from the source, in the original language. Never translate it. Burmese stays Burmese.
 - language is the detected language of the source excerpt (e.g. en, my), not of claim_text.
@@ -633,14 +644,44 @@ def _answer_question(question, retrieved):
     return answer, cited
 
 
+def _ledger_school_id(db, school_id: str):
+    school = (
+        db.table("schools")
+        .select("id, school_group_id")
+        .eq("id", school_id)
+        .limit(1)
+        .execute()
+        .data
+        or []
+    )
+    group_id = school[0].get("school_group_id") if school else None
+    ids = [school_id]
+    if group_id:
+        siblings = db.table("schools").select("id").eq("school_group_id", group_id).execute().data or []
+        ids = [row["id"] for row in siblings] or ids
+    for sibling_id in ids:
+        found = (
+            db.table("claim_groups")
+            .select("id")
+            .eq("school_id", sibling_id)
+            .limit(1)
+            .execute()
+            .data
+        )
+        if found:
+            return sibling_id
+    return school_id
+
+
 @app.post("/rag/qa")
 def qa(body: QaRequest):
     if not body.question.strip():
         raise HTTPException(status_code=400, detail="question is required")
 
     db = _supabase()
+    ledger_id = _ledger_school_id(db, body.school_id)
     retrieved = _retrieve_claim_groups(
-        db, body.school_id, _embed_claim_text(body.question)
+        db, ledger_id, _embed_claim_text(body.question)
     )
     answer, cited = _answer_question(body.question, retrieved)
     now = datetime.now(timezone.utc).isoformat()
@@ -720,7 +761,8 @@ _CAT_HINTS = {
     "facilities": ("lab", "library", "playground", "campus", "building"),
     "safety": ("safe", "bully", "security", "guard"),
     "class size": ("class size", "overcrowded", "students per"),
-    "curriculum": ("curriculum", "igcse", "cambridge", "ib "),
+    "curriculum": ("curriculum", "igcse", "cambridge", "ib ", "ial", "primary", "secondary"),
+    "cca": ("cca", "extracurricular", "co-curricular", "club", "swimming", "football", "robotics"),
 }
 
 

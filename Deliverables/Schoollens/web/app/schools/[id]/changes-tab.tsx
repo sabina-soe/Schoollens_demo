@@ -68,7 +68,7 @@ function detectedLabel(iso: string | null) {
   });
 }
 
-export function ChangesTab({ schoolId }: { schoolId: string }) {
+export function ChangesTab({ schoolId, networkIds }: { schoolId: string; networkIds?: string[] }) {
   const [rows, setRows] = useState<ChangeRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -79,7 +79,7 @@ export function ChangesTab({ schoolId }: { schoolId: string }) {
       const { data, error: queryError } = await supabase
         .from("claim_changes")
         .select("id, change_type, summary_text, detected_at")
-        .eq("school_id", schoolId)
+        .in("school_id", networkIds?.length ? networkIds : [schoolId])
         .order("detected_at", { ascending: false });
       if (queryError) {
         if (!isRegisterUnreachable(queryError)) setError(queryError.message);
@@ -90,7 +90,7 @@ export function ChangesTab({ schoolId }: { schoolId: string }) {
       setRows(data ?? []);
       setLoading(false);
     })();
-  }, [schoolId]);
+  }, [schoolId, networkIds?.join("|")]);
 
   if (loading) {
     return (

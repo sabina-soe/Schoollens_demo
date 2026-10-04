@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { isRegisterUnreachable } from "@/lib/public-register";
+import { isRegisterUnreachable, withTimeout } from "@/lib/public-register";
+import { isParentDecisionTopic, parentCategoryTitle } from "@/lib/parent-claims";
 import { ConfidenceChip } from "./confidence-chip";
 import { Skeleton } from "../../components/ui/skeleton";
 
@@ -15,6 +16,7 @@ type CommentRow = {
   sentiment_label: string | null;
   mentioned_claim_category: string | null;
   created_at: string | null;
+  source_url?: string | null;
 };
 
 type ClaimRow = {
@@ -63,7 +65,30 @@ function SentimentIcon({ value }: { value: Sentiment }) {
   );
 }
 
-export function ReviewsTab({ schoolId }: { schoolId: string }) {
+async function loadLocalComments(schoolIds: string[]): Promise<CommentRow[]> {
+  const response = await fetch("/group-reviews/by-school.json", { cache: "no-store" });
+  if (!response.ok) return [];
+  const payload = await response.json();
+  const comments: CommentRow[] = [];
+  for (const id of schoolIds) {
+    comments.push(...(payload?.schools?.[id]?.comments ?? []));
+  }
+  return comments;
+}
+
+function mergeComments(primary: CommentRow[], extra: CommentRow[]) {
+  const seen = new Set(primary.map((row) => row.comment_excerpt).filter(Boolean));
+  const merged = [...primary];
+  for (const row of extra) {
+    if (row?.comment_excerpt && !seen.has(row.comment_excerpt)) {
+      merged.push(row);
+      seen.add(row.comment_excerpt);
+    }
+  }
+  return merged;
+}
+
+export function ReviewsTab({ schoolId, networkIds }: { schoolId: string; networkIds?: string[] }) {
   const [comments, setComments] = useState<CommentRow[]>([]);
   const [claims, setClaims] = useState<ClaimRow[]>([]);
   const [signedIn, setSignedIn] = useState(false);
@@ -75,12 +100,21 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
   const [voteError, setVoteError] = useState<string | null>(null);
 
   useEffect(() => {
+    let cancelled = false;
     const supabase = createClient();
     (async () => {
+      const ledgerIds = networkIds?.length ? networkIds : [schoolId];
       try {
+      const localComments = await loadLocalComments(ledgerIds);
+      if (!cancelled && localComments.length) {
+        setComments(localComments);
+        setLoading(false);
+      }
       const [{ data: groups, error: groupError }, { data: sessionData }] = await Promise.all([
-        supabase.from("claim_groups").select("id, category, confidence_label").eq("school_id", schoolId).order("category"),
-        supabase.auth.getSession(),
+        withTimeout(
+          supabase.from("claim_groups").select("id, category, confidence_label").in("school_id", ledgerIds).order("category"),
+        ),
+        withTimeout(supabase.auth.getSession()),
       ]);
       const user = sessionData.session?.user;
       setSignedIn(Boolean(user));
@@ -90,25 +124,30 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
       }
 
       if (groupError) {
-        if (!isRegisterUnreachable(groupError)) setError(groupError.message);
-        setLoading(false);
+        if (!cancelled) {
+          if (!isRegisterUnreachable(groupError)) setError(groupError.message);
+          setComments(localComments);
+          setLoading(false);
+        }
         return;
       }
 
       const groupIds = (groups ?? []).map((group) => group.id);
       const { data: members } = groupIds.length
-        ? await supabase.from("claim_group_members").select("claim_group_id, claim_id").in("claim_group_id", groupIds)
+        ? await withTimeout(
+            supabase.from("claim_group_members").select("claim_group_id, claim_id").in("claim_group_id", groupIds),
+          )
         : { data: [] };
       const claimIds = [...new Set((members ?? []).map((member) => member.claim_id))];
       const [claimRowsRes, evidenceRes, votesRes] = await Promise.all([
         claimIds.length
-          ? supabase.from("claims").select("id, claim_text").in("id", claimIds)
+          ? withTimeout(supabase.from("claims").select("id, claim_text").in("id", claimIds))
           : Promise.resolve({ data: [] as { id: string; claim_text: string | null }[] }),
         claimIds.length
-          ? supabase.from("evidence").select("claim_id, raw_source_id").in("claim_id", claimIds)
+          ? withTimeout(supabase.from("evidence").select("claim_id, raw_source_id").in("claim_id", claimIds))
           : Promise.resolve({ data: [] as { claim_id: string; raw_source_id: string | null }[] }),
         groupIds.length
-          ? supabase.from("claim_verifications").select("claim_group_id, vote").in("claim_group_id", groupIds)
+          ? withTimeout(supabase.from("claim_verifications").select("claim_group_id, vote").in("claim_group_id", groupIds))
           : Promise.resolve({ data: [] as { claim_group_id: string; vote: string | null }[] }),
       ]);
       const claimRows = claimRowsRes.data;
@@ -133,14 +172,22 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
       }
 
       setClaims(
-        (groups ?? []).map((group) => ({
-          id: group.id,
-          category: group.category,
-          confidence_label: group.confidence_label,
-          claim_texts: textsByGroup.get(group.id) ?? [],
-          confirms: confirms.get(group.id) ?? 0,
-          disputes: disputes.get(group.id) ?? 0,
-        })),
+        (groups ?? [])
+          .map((group) => ({
+            id: group.id,
+            category: group.category,
+            confidence_label: group.confidence_label,
+            claim_texts: textsByGroup.get(group.id) ?? [],
+            confirms: confirms.get(group.id) ?? 0,
+            disputes: disputes.get(group.id) ?? 0,
+          }))
+          .filter((claim) =>
+            isParentDecisionTopic({
+              category: claim.category,
+              confidence_label: claim.confidence_label,
+              claim_texts: claim.claim_texts,
+            }),
+          ),
       );
 
       const sourceIds = [
@@ -148,53 +195,43 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
       ];
       let commentRows: CommentRow[] = [];
       if (sourceIds.length) {
-        const { data, error: commentError } = await supabase
-          .from("comment_analysis")
-          .select("id, comment_excerpt, sentiment_label, mentioned_claim_category, created_at")
-          .in("raw_source_id", sourceIds)
-          .order("created_at", { ascending: false });
+        const { data, error: commentError } = await withTimeout(
+          supabase
+            .from("comment_analysis")
+            .select("id, comment_excerpt, sentiment_label, mentioned_claim_category, created_at")
+            .in("raw_source_id", sourceIds)
+            .order("created_at", { ascending: false }),
+        );
         if (commentError && !isRegisterUnreachable(commentError)) {
-          setError(commentError.message);
-          setLoading(false);
+          if (!cancelled) {
+            setError(commentError.message);
+            setComments(localComments);
+            setLoading(false);
+          }
           return;
         }
         commentRows = data ?? [];
       }
-      try {
-        const response = await fetch("/group-reviews/by-school.json", { cache: "no-store" });
-        if (response.ok) {
-          const payload = await response.json();
-          const local = payload?.schools?.[schoolId]?.comments ?? [];
-          const seen = new Set(commentRows.map((row) => row.comment_excerpt));
-          for (const row of local) {
-            if (row?.comment_excerpt && !seen.has(row.comment_excerpt)) {
-              commentRows.push(row);
-              seen.add(row.comment_excerpt);
-            }
-          }
-        }
-      } catch {
-        /* local group crawl is optional */
-      }
-      setComments(commentRows);
+      if (!cancelled) setComments(mergeComments(commentRows, localComments));
       } catch (caught) {
-        if (!isRegisterUnreachable(caught)) {
-          setError(caught instanceof Error ? caught.message : "Could not load reviews.");
-        }
-        try {
-          const response = await fetch("/group-reviews/by-school.json", { cache: "no-store" });
-          if (response.ok) {
-            const payload = await response.json();
-            setComments(payload?.schools?.[schoolId]?.comments ?? []);
+        if (!cancelled) {
+          if (!isRegisterUnreachable(caught)) {
+            setError(caught instanceof Error ? caught.message : "Could not load reviews.");
           }
-        } catch {
-          /* local group crawl is optional */
+          try {
+            setComments(await loadLocalComments(ledgerIds));
+          } catch {
+            /* local group crawl is optional */
+          }
         }
       } finally {
-        setLoading(false);
+        if (!cancelled) setLoading(false);
       }
     })();
-  }, [schoolId]);
+    return () => {
+      cancelled = true;
+    };
+  }, [schoolId, networkIds?.join("|")]);
 
   async function submitVote(claimGroupId: string, vote: "confirm" | "dispute") {
     const reason = (reasonByGroup[claimGroupId] || "").trim();
@@ -255,7 +292,7 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
           <span className="section-kicker">Reviews</span>
           <h2>Public comments</h2>
           <p className="section-lead">
-            Public posts from International School Review. Sentiment does not change confidence labels.
+            Public posts from International School Review Myanmar. Sentiment does not change confidence labels.
           </p>
         </div>
 
@@ -282,6 +319,11 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
                     <blockquote className="sentiment-excerpt-quote">
                       “{comment.comment_excerpt}”
                     </blockquote>
+                  ) : null}
+                  {comment.source_url ? (
+                    <a className="isd-source-line" href={comment.source_url} target="_blank" rel="noreferrer">
+                      Facebook group
+                    </a>
                   ) : null}
                 </div>
               );
@@ -321,7 +363,11 @@ export function ReviewsTab({ schoolId }: { schoolId: string }) {
               <div key={claim.id} className="verification-item-card">
                 <div className="verification-card-header">
                   <ConfidenceChip label={claim.confidence_label} size="sm" />
-                  {claim.category ? <span className="verify-category-tag">{claim.category}</span> : null}
+                  {claim.category ? (
+                    <span className="verify-category-tag">
+                      {parentCategoryTitle({ category: claim.category, claim_texts: claim.claim_texts })}
+                    </span>
+                  ) : null}
                   <div className="vote-counts-badge">
                     <span className="count-confirm">{claim.confirms} Confirm{claim.confirms === 1 ? "" : "s"}</span>
                     <span className="count-divider">·</span>

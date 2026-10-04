@@ -1,7 +1,10 @@
 "use client";
 
-import { KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from "react";
+import { KeyboardEvent, PointerEvent as ReactPointerEvent, useEffect, useId, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { filterPlaceOptions, mergePlaceOptions, type PlaceOption } from "@/lib/places";
+
+type MenuBox = { top: number; left: number; width: number };
 
 export function PlaceCombobox({
   id,
@@ -24,9 +27,12 @@ export function PlaceCombobox({
   const inputId = id || generatedId;
   const listId = `${inputId}-list`;
   const rootRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
   const [highlight, setHighlight] = useState(0);
   const [filtering, setFiltering] = useState(false);
+  const [menuBox, setMenuBox] = useState<MenuBox | null>(null);
 
   const options = useMemo(() => mergePlaceOptions(extraPlaces), [extraPlaces]);
   const matches = useMemo(
@@ -39,12 +45,39 @@ export function PlaceCombobox({
     return { cities, townships };
   }, [matches]);
 
-  useEffect(() => {
-    function onPointerDown(event: PointerEvent) {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+  useLayoutEffect(() => {
+    if (!open) {
+      setMenuBox(null);
+      return;
     }
-    document.addEventListener("pointerdown", onPointerDown);
-    return () => document.removeEventListener("pointerdown", onPointerDown);
+    function placeMenu() {
+      const input = inputRef.current;
+      if (!input) return;
+      const rect = input.getBoundingClientRect();
+      setMenuBox({
+        top: rect.bottom + 8,
+        left: Math.max(8, rect.right - Math.max(rect.width, 264)),
+        width: Math.max(rect.width, 264),
+      });
+    }
+    placeMenu();
+    window.addEventListener("resize", placeMenu);
+    window.addEventListener("scroll", placeMenu, true);
+    return () => {
+      window.removeEventListener("resize", placeMenu);
+      window.removeEventListener("scroll", placeMenu, true);
+    };
+  }, [open, matches.length]);
+
+  useEffect(() => {
+    function onDocumentPointerDown(event: globalThis.PointerEvent) {
+      const path = event.composedPath();
+      if (rootRef.current && path.includes(rootRef.current)) return;
+      if (menuRef.current && path.includes(menuRef.current)) return;
+      setOpen(false);
+    }
+    document.addEventListener("pointerdown", onDocumentPointerDown);
+    return () => document.removeEventListener("pointerdown", onDocumentPointerDown);
   }, []);
 
   useEffect(() => {
@@ -84,10 +117,73 @@ export function PlaceCombobox({
   }
 
   let optionIndex = -1;
+  const menu = open && menuBox ? (
+    <div
+      ref={menuRef}
+      className="place-combobox-menu place-combobox-menu-portal"
+      id={listId}
+      role="listbox"
+      aria-label="Townships and cities"
+      style={{ top: menuBox.top, left: menuBox.left, width: menuBox.width }}
+    >
+      {value ? (
+        <button
+          type="button"
+          className="place-combobox-option"
+          onPointerDown={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            onChange("");
+            setFiltering(false);
+            setOpen(false);
+          }}
+        >
+          All townships and cities
+        </button>
+      ) : null}
+      {matches.length === 0 ? (
+        <p className="place-combobox-empty">No matching township or city</p>
+      ) : (
+        <>
+          {grouped.cities.length ? <div className="place-combobox-group">Cities</div> : null}
+          {grouped.cities.map((item) => {
+            optionIndex += 1;
+            const index = optionIndex;
+            return (
+              <OptionButton
+                key={item.value}
+                id={`${listId}-opt-${index}`}
+                option={item}
+                active={index === highlight}
+                onHighlight={() => setHighlight(index)}
+                onSelect={selectOption}
+              />
+            );
+          })}
+          {grouped.townships.length ? <div className="place-combobox-group">Townships</div> : null}
+          {grouped.townships.map((item) => {
+            optionIndex += 1;
+            const index = optionIndex;
+            return (
+              <OptionButton
+                key={item.value}
+                id={`${listId}-opt-${index}`}
+                option={item}
+                active={index === highlight}
+                onHighlight={() => setHighlight(index)}
+                onSelect={selectOption}
+              />
+            );
+          })}
+        </>
+      )}
+    </div>
+  ) : null;
 
   return (
     <div className={`place-combobox ${variant === "field" ? "place-combobox-field" : "place-combobox-plain"}`} ref={rootRef}>
       <input
+        ref={inputRef}
         id={inputId}
         role="combobox"
         aria-autocomplete="list"
@@ -119,51 +215,7 @@ export function PlaceCombobox({
           />
         </svg>
       ) : null}
-      {open ? (
-        <div className="place-combobox-menu" id={listId} role="listbox" aria-label="Townships and cities">
-          {value ? (
-            <button type="button" className="place-combobox-option" onMouseDown={(event) => event.preventDefault()} onClick={() => { onChange(""); setFiltering(false); setOpen(false); }}>
-              All townships and cities
-            </button>
-          ) : null}
-          {matches.length === 0 ? (
-            <p className="place-combobox-empty">No matching township or city</p>
-          ) : (
-            <>
-              {grouped.cities.length ? <div className="place-combobox-group">Cities</div> : null}
-              {grouped.cities.map((item) => {
-                optionIndex += 1;
-                const index = optionIndex;
-                return (
-                  <OptionButton
-                    key={item.value}
-                    id={`${listId}-opt-${index}`}
-                    option={item}
-                    active={index === highlight}
-                    onHighlight={() => setHighlight(index)}
-                    onSelect={selectOption}
-                  />
-                );
-              })}
-              {grouped.townships.length ? <div className="place-combobox-group">Townships</div> : null}
-              {grouped.townships.map((item) => {
-                optionIndex += 1;
-                const index = optionIndex;
-                return (
-                  <OptionButton
-                    key={item.value}
-                    id={`${listId}-opt-${index}`}
-                    option={item}
-                    active={index === highlight}
-                    onHighlight={() => setHighlight(index)}
-                    onSelect={selectOption}
-                  />
-                );
-              })}
-            </>
-          )}
-        </div>
-      ) : null}
+      {menu && typeof document !== "undefined" ? createPortal(menu, document.body) : null}
     </div>
   );
 }
@@ -188,9 +240,12 @@ function OptionButton({
       role="option"
       aria-selected={active}
       className={`place-combobox-option ${active ? "place-combobox-option-active" : ""}`}
-      onMouseDown={(event) => event.preventDefault()}
+      onPointerDown={(event: ReactPointerEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        event.stopPropagation();
+        onSelect(option);
+      }}
       onMouseEnter={onHighlight}
-      onClick={() => onSelect(option)}
     >
       {option.value}
     </button>

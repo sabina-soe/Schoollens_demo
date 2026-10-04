@@ -25,15 +25,91 @@ PRIORITY = (
     "fee",
     "tuition",
     "curriculum",
+    "preschool",
+    "kindergarten",
+    "primary",
+    "secondary",
+    "igcse",
+    "ial",
+    "ib",
+    "extracurricular",
+    "cca",
+    "co-curricular",
+    "til",
+    "technology-integrated",
     "contact",
     "branch",
     "campus",
     "academic",
+    "faculty",
+    "teacher",
+    "facilities",
+    "after-school",
+    "eca",
+    "early-years",
+    "early-childhood",
+    "elementary",
+    "middle-school",
+    "high-school",
+    "a-level",
+    "learning",
+    "life-at-isy",
+    "athletics",
+    "student-life",
+    "activities",
+    "arts",
+    "counseling",
+    "counselling",
+    "wellness",
+    "chinthe",
 )
-MAX_PAGES = 40
-MAX_SECONDS = 180
+
+SKIP = (
+    "apply-jobs",
+    "/jobs/",
+    "/job/",
+    "career-opportunit",
+    "vacancy",
+    "/news/",
+    "/blog",
+    "events_activities",
+    "privacy-policy",
+    "cookie",
+    "accessibility",
+    "photo-gallery",
+    "our-team",
+    "meet-the-team",
+    "enrollment/submit",
+    "preschool_enrollment",
+    "primary_secondary_enrollment",
+    "neweventimg",
+    "news-events",
+    "strategic-themes",
+    "celebrating-70",
+    "teachers-talking",
+    "library-highlights",
+    "social-media",
+    "isy-procurement",
+    "isy-tenders",
+)
+
+
+def _skip(url: str):
+    path = urllib.parse.urlparse(url).path.lower()
+    return any(token in path for token in SKIP)
+
+
+def _max_pages():
+    return int(os.environ.get("SCHOOLLENS_CRAWL_MAX_PAGES", "40"))
+
+
+def _max_seconds():
+    return int(os.environ.get("SCHOOLLENS_CRAWL_MAX_SECONDS", "180"))
+
+
 DELAY_SECONDS = 1.5
 USER_AGENT = "SchoolLensBot/1.0 (+https://schoollens.local; research crawl)"
+REGISTER_PATH = Path(__file__).resolve().parents[1] / "web" / "public" / "demo-register" / "schools.json"
 
 
 class _LinkParser(HTMLParser):
@@ -113,6 +189,16 @@ def _same_host(seed, url):
     ).netloc.lower().removeprefix("www.")
 
 
+def _same_scope(seed, url):
+    if not _same_host(seed, url):
+        return False
+    seed_path = urllib.parse.urlparse(seed).path.rstrip("/")
+    if len(seed_path) <= 1:
+        return True
+    path = urllib.parse.urlparse(url).path
+    return path == seed_path or path.startswith(seed_path + "/")
+
+
 def _is_asset(url):
     path = urllib.parse.urlparse(url).path.lower()
     return path.endswith(
@@ -152,7 +238,7 @@ def _sitemap_urls(seed):
         found.extend(re.findall(r"<loc>\s*([^<\s]+)\s*</loc>", text, flags=re.I))
         if found:
             break
-    return [url.strip() for url in found if _same_host(seed, url.strip())]
+    return [url.strip() for url in found if _same_scope(seed, url.strip())]
 
 
 def _looks_js_shell(html, extracted):
@@ -249,6 +335,36 @@ def _page_object(school_id, url, status, html, extracted, crawl_status, pdfs, em
     }
 
 
+EXTRA_SEEDS = {
+    "isyedu.org": (
+        "https://www.isyedu.org/learning/curriculum-assessment",
+        "https://www.isyedu.org/learning/ib-diploma-program",
+        "https://www.isyedu.org/learning/elementary-school",
+        "https://www.isyedu.org/learning/middle-school",
+        "https://www.isyedu.org/learning/high-school",
+        "https://www.isyedu.org/learning/service-learning",
+        "https://www.isyedu.org/learning/physical-education",
+        "https://www.isyedu.org/learning/the-arts/visual-arts",
+        "https://www.isyedu.org/learning/library",
+        "https://www.isyedu.org/life-at-isy/after-school-activities",
+        "https://www.isyedu.org/life-at-isy/athletics",
+        "https://www.isyedu.org/admissions/tuition-and-fees",
+        "https://www.isyedu.org/admissions/visit-isy",
+        "https://www.isyedu.org/admissions/apply-to-isy",
+        "https://www.isyedu.org/admissions",
+        "https://www.isyedu.org/about-isy",
+        "https://www.isyedu.org/about-isy/food-services",
+        "https://www.isyedu.org/about-isy/contact-us",
+        "https://www.isyedu.org/calendar",
+    )
+}
+
+
+def _extra_seeds(seed: str):
+    host = urllib.parse.urlparse(seed).netloc.lower().removeprefix("www.")
+    return [url for url in EXTRA_SEEDS.get(host, ()) if _same_scope(seed, url)]
+
+
 def crawl(seed, school_id):
     started = time.monotonic()
     robots = _robots(seed)
@@ -258,8 +374,11 @@ def crawl(seed, school_id):
     hit_cap = False
 
     sitemap = _sitemap_urls(seed)
-    start_urls = sitemap or [seed]
+    start_urls = _extra_seeds(seed) + (sitemap or [seed])
     for url in sorted(start_urls, key=_priority):
+        if not _same_scope(seed, url) or _skip(url):
+            seen.add(url)
+            continue
         if url not in seen:
             queued.append(url)
             seen.add(url)
@@ -271,7 +390,7 @@ def crawl(seed, school_id):
     for url in queued:
         depth.setdefault(url, 0 if url == seed else 1)
 
-    while queued and len(pages) < MAX_PAGES and (time.monotonic() - started) < MAX_SECONDS:
+    while queued and len(pages) < _max_pages() and (time.monotonic() - started) < _max_seconds():
         queued.sort(key=_priority)
         url = queued.pop(0)
         if robots is not None and not robots.can_fetch(USER_AGENT, url):
@@ -318,7 +437,7 @@ def crawl(seed, school_id):
         embeds = [{"url": src, "type": "iframe", "label": label, "found_on_page": final_url} for src, label in parser.iframes]
         for href in parser.hrefs:
             absolute = _norm_url(final_url, href)
-            if not absolute or not _same_host(seed, absolute) or _is_asset(absolute):
+            if not absolute or not _same_scope(seed, absolute) or _is_asset(absolute):
                 continue
             if absolute.lower().endswith(".pdf"):
                 pdfs.append({"url": absolute, "linked_from": final_url})
@@ -326,14 +445,37 @@ def crawl(seed, school_id):
             child_depth = depth.get(url, 0) + 1
             if child_depth <= 2 and absolute not in seen:
                 seen.add(absolute)
-                queued.append(absolute)
-                depth[absolute] = child_depth
+                if not _skip(absolute):
+                    queued.append(absolute)
+                    depth[absolute] = child_depth
 
         pages.append(_page_object(school_id, final_url, status, html, extracted, "success", pdfs, embeds))
 
-    if len(pages) >= MAX_PAGES or (time.monotonic() - started) >= MAX_SECONDS:
+    if len(pages) >= _max_pages() or (time.monotonic() - started) >= _max_seconds():
         hit_cap = True
     return pages, hit_cap
+
+
+def _is_website(url: str | None):
+    if not url:
+        return False
+    host = urllib.parse.urlparse(url).netloc.lower()
+    if "facebook.com" in host or "fb.com" in host:
+        return False
+    return url.startswith("http://") or url.startswith("https://")
+
+
+def load_local_schools():
+    payload = json.loads(REGISTER_PATH.read_text(encoding="utf-8"))
+    return [school for school in payload.get("schools", []) if _is_website(school.get("official_website_url"))]
+
+
+def write_crawl(school_id: str, pages: list[dict]):
+    out_dir = Path(__file__).resolve().parents[1] / "raw-crawls" / school_id
+    out_dir.mkdir(parents=True, exist_ok=True)
+    out_path = out_dir / f"{datetime.now(timezone.utc).date().isoformat()}.json"
+    out_path.write_text(json.dumps(pages, ensure_ascii=False, indent=2), encoding="utf-8")
+    return out_path
 
 
 def _resolve_school(name, school_id):
@@ -351,35 +493,77 @@ def _resolve_school(name, school_id):
     return db, row
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Generic Section 7.1 website crawl")
-    parser.add_argument("url")
-    parser.add_argument("--school", default="ILBC")
-    parser.add_argument("--school-id")
-    args = parser.parse_args()
-
-    _load_env()
-    if not os.environ.get("SUPABASE_URL") or not os.environ.get("SUPABASE_SERVICE_ROLE_KEY"):
-        sys.exit("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set")
-
-    db, school = _resolve_school(args.school, args.school_id)
-    seed = args.url.rstrip("/") + "/"
-    if school.get("official_website_url") != args.url:
-        db.table("schools").update({"official_website_url": args.url}).eq("id", school["id"]).execute()
-
-    pages, hit_cap = crawl(seed, school["id"])
-    out_dir = Path(__file__).resolve().parents[1] / "raw-crawls" / school["id"]
-    out_dir.mkdir(parents=True, exist_ok=True)
-    out_path = out_dir / f"{datetime.now(timezone.utc).date().isoformat()}.json"
-    out_path.write_text(json.dumps(pages, ensure_ascii=False, indent=2), encoding="utf-8")
-
+def _run_one(school_id: str, seed: str):
+    seed = seed.rstrip("/") + "/"
+    pages, hit_cap = crawl(seed, school_id)
+    out_path = write_crawl(school_id, pages)
     success = sum(1 for page in pages if page["crawl_status"] == "success" and page.get("extracted_text"))
     blocked = sum(1 for page in pages if page["crawl_status"] == "blocked")
     disallowed = sum(1 for page in pages if page["crawl_status"] == "disallowed")
     print(
         f"wrote {out_path} pages={len(pages)} success_with_text={success} "
-        f"blocked={blocked} disallowed={disallowed} hit_cap={hit_cap}"
+        f"blocked={blocked} disallowed={disallowed} hit_cap={hit_cap}",
+        flush=True,
     )
+    return {
+        "school_id": school_id,
+        "seed": seed,
+        "pages": len(pages),
+        "success_with_text": success,
+        "blocked": blocked,
+        "path": str(out_path),
+    }
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Generic Section 7.1 website crawl")
+    parser.add_argument("url", nargs="?")
+    parser.add_argument("--school", default="ILBC")
+    parser.add_argument("--school-id")
+    parser.add_argument("--local", action="store_true", help="Use demo-register instead of Supabase")
+    parser.add_argument("--all", action="store_true", help="Crawl every local school that has a website")
+    args = parser.parse_args()
+
+    _load_env()
+
+    if args.local or args.all:
+        schools = load_local_schools()
+        if args.school_id:
+            schools = [school for school in schools if school["id"] == args.school_id]
+        elif args.url:
+            schools = [school for school in schools if school.get("official_website_url", "").rstrip("/") == args.url.rstrip("/")]
+        elif not args.all:
+            schools = [school for school in schools if args.school.lower() in school["name"].lower()]
+        if not schools:
+            sys.exit("no local schools with a crawlable website matched")
+        summary = []
+        for school in schools:
+            print(f"crawl {school['name']} {school['official_website_url']}", flush=True)
+            summary.append(_run_one(school["id"], school["official_website_url"]))
+        index_path = Path(__file__).resolve().parents[1] / "raw-crawls" / "website-index.json"
+        existing = []
+        if index_path.exists() and not args.all:
+            try:
+                existing = json.loads(index_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                existing = []
+        by_id = {row["school_id"]: row for row in existing if isinstance(row, dict) and row.get("school_id")}
+        for row in summary:
+            by_id[row["school_id"]] = row
+        merged = list(by_id.values())
+        index_path.write_text(json.dumps(merged, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"index {index_path} schools={len(merged)}", flush=True)
+        return
+
+    if not args.url:
+        sys.exit("url is required unless --local/--all is set")
+    if not os.environ.get("SUPABASE_URL") or not os.environ.get("SUPABASE_SERVICE_ROLE_KEY"):
+        sys.exit("SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY must be set, or use --local")
+
+    db, school = _resolve_school(args.school, args.school_id)
+    if school.get("official_website_url") != args.url:
+        db.table("schools").update({"official_website_url": args.url}).eq("id", school["id"]).execute()
+    _run_one(school["id"], args.url)
 
 
 if __name__ == "__main__":

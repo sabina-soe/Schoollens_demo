@@ -1,25 +1,21 @@
 "use client";
 
 import { useState } from "react";
+import { type MediaItem, usableMedia } from "@/lib/campus-media";
 
-export type MediaItem = {
-  kind: "photo" | "video";
-  url: string;
-  thumb?: string | null;
-  source?: string;
-  embed?: string;
-};
+export type { MediaItem };
 
 export function MediaGallery({ items }: { items: MediaItem[] }) {
   const [active, setActive] = useState<MediaItem | null>(null);
-  if (!items.length) return null;
+  const visible = usableMedia(items);
+  if (!visible.length) return null;
 
   return (
     <section className="media-gallery" aria-label="Photos and videos">
-      <h2>Photos and videos</h2>
+      <h3 className="media-gallery-title">Photos and videos</h3>
       <p className="directory-meta">From the official website and official Facebook page.</p>
       <ul className="media-strip">
-        {items.map((item) => (
+        {visible.map((item) => (
           <li key={item.url}>
             <button type="button" className="media-thumb" onClick={() => setActive(item)}>
               {item.thumb || item.kind === "photo" ? (

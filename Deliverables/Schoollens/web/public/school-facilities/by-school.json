@@ -1,0 +1,298 @@
+{
+  "f6c7b97d-8959-4d0c-841f-8148d10dcd4d": {
+    "source_url": "https://ilbc.edu.mm/about/",
+    "source_label": "Official website — About",
+    "confidence": "likely",
+    "summary": "The About page lists these facilities for ILBC as a group. It does not say which campus has each room or service.",
+    "notes": [
+      "The same page says class sizes are small enough for individual attention, and that teachers include trained local and overseas staff."
+    ],
+    "groups": [
+      {
+        "id": "classrooms",
+        "name": "Classrooms",
+        "items": [
+          "Air-conditioned classrooms",
+          "Technology Integrated classroom",
+          "Teaching aids and resources for practical work"
+        ]
+      },
+      {
+        "id": "labs",
+        "name": "Laboratories and library",
+        "items": [
+          "General Science laboratory",
+          "Physics laboratory",
+          "Chemistry laboratory",
+          "Biology laboratory",
+          "Computer lab with one computer per student",
+          "Physical and online library"
+        ]
+      },
+      {
+        "id": "wellbeing",
+        "name": "Sport and wellbeing",
+        "items": [
+          "Large gymnasium",
+          "Canteen",
+          "School dispensary with professional doctors"
+        ]
+      },
+      {
+        "id": "site",
+        "name": "Site",
+        "items": [
+          "Large parking area"
+        ]
+      }
+    ]
+  },
+  "b0595924-73f7-49c4-94b0-b05017d77ef8": {
+    "source_url": "https://www.isyedu.org/learning/physical-education",
+    "source_label": "Official website — Physical Education, Visit ISY, and Food Services",
+    "confidence": "likely",
+    "summary": "PE lists current sports facilities. Visit ISY names the historic and SAS buildings. About says the board approved a new theatre, library, and cafeteria; the new-building page has drawings but no dates or costs in the extracted text.",
+    "groups": [
+      {
+        "id": "sport",
+        "name": "Sports and movement",
+        "items": [
+          "Gymnasium with two courts",
+          "Climbing wall",
+          "Swimming pool",
+          "Fitness centre",
+          "Outdoor playing field / re-surfaced football pitch",
+          "Outdoor tennis court",
+          "Covered basketball court"
+        ]
+      },
+      {
+        "id": "buildings",
+        "name": "Campus buildings named on official pages",
+        "items": [
+          "Colonial administration building",
+          "Science, Arts and Sports (SAS) building",
+          "Chinthe Cubs classrooms",
+          "A Building (Elementary School)",
+          "B Building (Chinthe Zay store on the first floor)",
+          "Clinic on the first floor of SAS, where it meets A Building"
+        ]
+      },
+      {
+        "id": "food",
+        "name": "Food services",
+        "items": [
+          "Meatless campus",
+          "Gusto — vegetarian options, now next to the gym",
+          "Nourish — vegan, upper court next to B Building",
+          "Cashless ID cards and bracelets, or cash"
+        ]
+      },
+      {
+        "id": "planned",
+        "name": "Board-approved building project (About)",
+        "items": [
+          "700-seat theatre",
+          "Expanded library",
+          "New cafeteria"
+        ]
+      }
+    ]
+  },
+  "22b3784f-3e04-4153-80e0-abe3000fe273": {
+    "source_url": "https://www.nordangliaeducation.com/bsy-yangon/campus",
+    "source_label": "Official website",
+    "confidence": "likely",
+    "summary": "Listed on the official website. The page may not say which campus has each room.",
+    "groups": [
+      {
+        "id": "campus",
+        "name": "Campus",
+        "items": [
+          "Library",
+          "Gymnasium",
+          "Cafeteria",
+          "Theatre",
+          "Basketball court"
+        ]
+      }
+    ]
+  },
+  "9c5928e5-b6da-4648-bb21-10dea2844346": {
+    "source_url": "https://conceptx.edu.mm/about-us",
+    "source_label": "Official website",
+    "confidence": "likely",
+    "summary": "Listed on the official website. The page may not say which campus has each room.",
+    "groups": [
+      {
+        "id": "campus",
+        "name": "Campus",
+        "items": [
+          "Canteen",
+          "Library",
+          "Clinic"
+        ]
+      }
+    ]
+  },
+  "6d0e010f-b869-4350-ae90-5a30f531d22d": {
+    "source_url": "https://yangon.misy.edu.mm/mandalay-campus/",
+    "source_label": "Official website",
+    "confidence": "likely",
+    "summary": "Listed on the official website. The page may not say which campus has each room.",
+    "groups": [
+      {
+        "id": "campus",
+        "name": "Campus",
+        "items": [
+          "Library"
+        ]
+      }
+    ]
+  },
+  "4dd4da53-4a6f-4bac-aca9-0fd9955e8bfc": {
+    "source_url": "http://www.sunflower.edu.mm/aboutus-page",
+    "source_label": "Official website",
+    "confidence": "likely",
+    "summary": "Listed on the official website. The page may not say which campus has each room.",
+    "groups": [
+      {
+        "id": "campus",
+        "name": "Campus",
+        "items": [
+          "Library"
+        ]
+      }
+    ]
+  },
+  "5d88ea9c-c422-4696-88f3-5f2afb315530": {
+    "source_url": "https://www.helixuniversitycollege.com/about-us/",
+    "source_label": "Official website — About and Student Life",
+    "confidence": "likely",
+    "summary": "About mentions amenities and double-layered security gates. Student Life names a library and laboratory. Online IGCSE students go to campus for practical experiments. The site does not list rooms per campus.",
+    "groups": [
+      {
+        "id": "learning",
+        "name": "Learning resources",
+        "items": [
+          "Library",
+          "Laboratory",
+          "Daily class recordings for online students"
+        ]
+      },
+      {
+        "id": "safety",
+        "name": "Safety",
+        "items": [
+          "Double-layered security gates"
+        ]
+      }
+    ]
+  },
+  "d1e8deee-ed2c-43fb-a382-c3adb5d06861": {
+    "source_url": "https://pismmyanmar.com/index.php/secondary-school",
+    "source_label": "Official website — Secondary and Mandalay overview",
+    "confidence": "likely",
+    "summary": "Yangon Secondary describes a newer building. Mandalay lists rooms on its overview page. The site does not publish a single facilities list for every Yangon campus.",
+    "notes": [
+      "Primary curriculum mentions well-resourced computer rooms. Contact Us on the official site is a placeholder address and was not used."
+    ],
+    "groups": [
+      {
+        "id": "yangon-secondary",
+        "name": "Yangon Secondary building",
+        "items": [
+          "Two science labs",
+          "Music rooms",
+          "Computer lab",
+          "Dance and drama studio",
+          "Art room",
+          "Outdoor recreation area",
+          "Roof garden"
+        ]
+      },
+      {
+        "id": "mandalay",
+        "name": "Mandalay campus",
+        "items": [
+          "22 general teaching rooms",
+          "Three libraries",
+          "ICT suite",
+          "Art and Design studio",
+          "Music room",
+          "Science lab",
+          "Sports hall",
+          "Multi-purpose hall",
+          "Small recreational pitch",
+          "Small swimming pool"
+        ]
+      }
+    ]
+  },
+  "ba3c6f02-961b-42e1-8ef9-21d872abbda7": {
+    "source_url": "https://www.kis-mm.com/starcity",
+    "source_label": "Official website — campus pages",
+    "confidence": "likely",
+    "summary": "Facilities are listed per campus. The official site does not publish one inventory for all six branches.",
+    "notes": [
+      "Thuwunna is described as three purpose-built buildings from Nursery to Key Stage 4.",
+      "Contact Us currently copies the Taunggyi address onto KINGS College. The Bahan college page says downtown Yangon."
+    ],
+    "groups": [
+      {
+        "id": "star-city",
+        "name": "Star City",
+        "items": [
+          "19 modern classrooms and extended Lower Secondary spaces",
+          "Multi-court",
+          "Computing room",
+          "Science lab",
+          "Music room",
+          "New library",
+          "Preschool playground",
+          "Spacious parking",
+          "Solar-powered facilities"
+        ]
+      },
+      {
+        "id": "pun-hlaing",
+        "name": "Pun Hlaing",
+        "items": [
+          "Spacious classrooms",
+          "Specialist rooms",
+          "Natural grass football pitch",
+          "Outdoor learning spaces"
+        ]
+      },
+      {
+        "id": "golden-valley",
+        "name": "Golden Valley",
+        "items": [
+          "Bamboo-structured campus",
+          "Nature play / outdoor preschool",
+          "Homework Club space"
+        ]
+      },
+      {
+        "id": "kic-bahan",
+        "name": "KIC Bahan",
+        "items": [
+          "Air-conditioned classrooms with smart boards",
+          "Library for A Level and NCUK",
+          "Science laboratory (Physics, Chemistry, Biology)",
+          "Student lounge",
+          "Indoor and outdoor sports including table tennis",
+          "Student support and counselling centre",
+          "24-hour security and CCTV"
+        ]
+      },
+      {
+        "id": "taunggyi",
+        "name": "Taunggyi",
+        "items": [
+          "Spacious grassy playground"
+        ]
+      }
+    ]
+  }
+}

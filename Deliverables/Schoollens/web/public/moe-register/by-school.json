@@ -1,0 +1,926 @@
+{
+  "f6c7b97d-8959-4d0c-841f-8148d10dcd4d": {
+    "campus_count": 12,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2030-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "1",
+        "listed_name": "ILBC International School",
+        "address": "JMK ၁၀/၂၅၁၊ ဂျန်မိုင်ကောင်၊မြို့သစ်ကြီးရပ်ကွက်၊ မြစ်ကြီးနားမြို့၊ ကချင်ပြည်နယ်",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "7",
+        "listed_name": "ILBC",
+        "address": "အမှတ်(၁၁) မဟာစည်သာသနာ့ရိပ်သာလမ်း၊ လမင်းရပ်၊ ရေပုန်းနယ်မြေ၊ မြိတ်မြို့၊ တနင်္သာရီတိုင်းဒေသကြီး",
+        "period": "2025-2026 to 2029-2030",
+        "moe_approved_from": "2025-06-01",
+        "moe_approved_to": "2030-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "22",
+        "listed_name": "ILBC International School (2)",
+        "address": "၆၄လမ်း၊ (၄၃လမ်းနှင့် သိပ္ပံလမ်းကြား)၊ မဟာမြိုင် (၂)ရပ်ကွက်၊ မဟာအောင်မြေမြို့နယ်၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "23",
+        "listed_name": "ILBC International School (1)",
+        "address": "၃၀ လမ်း၊ ၅၃လမ်းနှင့် ၅၄ လမ်းကြား၊ ကံကောက် ရပ်ကွက်၊ ချမ်းအေးသာစံမြို့နယ်၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "54",
+        "listed_name": "ILBC International School-3",
+        "address": "လမ်း၃၀၊ ၅၄လမ်းနှင့် ၅၄(အေ)လမ်းကြား၊ ကန်ကောက်ရပ်ကွက်၊ ချမ်းအေးသာစံမြို့နယ်၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "98",
+        "listed_name": "International Language & Business Centre (ILBC)",
+        "address": "သုဝဏ္ဏလူငယ်လေ့ကျင့်ရေး၊ လေးထောင့်ကန်လမ်း၊ နနွင်းကုန်းရပ်ကွက်၊",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "117",
+        "listed_name": "International Language & Business Centre (ILBC)",
+        "address": "အမှတ်(၅၁-G/၁)၊  တော်ဝင်ပုလဲ အိမ်ရာ၊ တာမွေမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "176",
+        "listed_name": "International Language & Business Centre (ILBC)",
+        "address": "အမှတ်(၁)၊ ပါရမီလမ်း၊ လှိုင်မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "221",
+        "listed_name": "ILBC International School (1)",
+        "address": "အမှတ်(၁၂/၂၇)၊ ကမ္ဘောဇလမ်း၊ ရေအေးကွင်းရပ်ကွက် တောင်ကြီးမြို့၊ ရှမ်းပြည်နယ်(တောင်ပိုင်း)",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "222",
+        "listed_name": "ILBC International School (2)",
+        "address": "ရွှေတောင်ကြားအိမ်ရာ၊ ၆/၇လမ်းကြား၊ တောင်ကြီးမြို့၊ ရှမ်းပြည်နယ်(တောင်ပိုင်း)",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "227",
+        "listed_name": "ILBC",
+        "address": "အမှတ်(ခ/၁၁)လွယ်ကန်မိန်းရပ်၊ ဓမ္မရိပ်သာလမ်း၊ ရပ်ကွက်(၈)၊ နယ်မြေ(၁၆)၊ လားရှိုးမြို့၊ ရှမ်းပြည်နယ်(မြောက်ပိုင်း)",
+        "period": "2024-2025 to 2025-2026",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2026-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      },
+      {
+        "moe_index": "235",
+        "listed_name": "International Language & Business Centre (ILBC)",
+        "address": "D.01 သဇင်လမ်း၊ ဒက္ခိဏသီရိရပ်ကွက်၊ ဒက္ခိဏသီရိ မြို့နယ်၊ နေပြည်တော်",
+        "period": "2024-2025 to 2025-2026",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2026-05-31",
+        "official_website_url": "https://ilbc.edu.mm/"
+      }
+    ]
+  },
+  "5d8dba5b-965e-4aad-931c-ab3b0839fff8": {
+    "campus_count": 4,
+    "moe_approved_from": "2025-06-01",
+    "moe_approved_to": "2030-05-31",
+    "period": "2025-2026 to 2029-2030",
+    "campuses": [
+      {
+        "moe_index": "12",
+        "listed_name": "EDUSN (IS)",
+        "address": "အမှတ်(၂/၃၀၆/၃၀၇)၊ ဗိုလ်မှူးဖိုးကွန်းလမ်း၊ တောင်ငူမြို့၊ ပဲခူးတိုင်းဒေသကြီး",
+        "period": "2025-2026 to 2029-2030",
+        "moe_approved_from": "2025-06-01",
+        "moe_approved_to": "2030-05-31",
+        "official_website_url": "https://www.edusn.uk/"
+      },
+      {
+        "moe_index": "66",
+        "listed_name": "EDUSN International School",
+        "address": "ခြံအမှတ်(၂၁၄)၊ အကွက်(၁၄/၆) သာယာကုန်းရပ်၊ သီရိမာလာအနောက်ရပ်ကွက်၊ ၂၂လမ်းနှင့် ၂၆လမ်းကြား၊ ၉၁လမ်း၊ ကမ်းနားလမ်းအနောက်၊ သင်္ဂဇာချောင်း လမ်း၊ အောင်မြေသာစံမြို့နယ်၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2025-2026 to 2029-2030",
+        "moe_approved_from": "2025-06-01",
+        "moe_approved_to": "2030-05-31",
+        "official_website_url": "https://www.edusn.uk/"
+      },
+      {
+        "moe_index": "105",
+        "listed_name": "EDUSN International Digital School (Thingangyun Campus)",
+        "address": "အမှတ်(A-33)၊ ပဒုမ္မာလမ်း၊ ၂၉ သုဝဏ္ဏ ရပ်ကွက်၊ သင်္ဃန်းကျွန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2025-2026 to 2029-2030",
+        "moe_approved_from": "2025-06-01",
+        "moe_approved_to": "2030-05-31",
+        "official_website_url": "https://edusn.co.uk/"
+      },
+      {
+        "moe_index": "198",
+        "listed_name": "EDUSN International Digital School (Kamayut Campus)",
+        "address": "အမှတ်(၆၃၅/၂)၊ ရိုးမရိပ်သာလမ်း၊ ကမာရွတ် မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2025-2026 to 2029-2030",
+        "moe_approved_from": "2025-06-01",
+        "moe_approved_to": "2030-05-31",
+        "official_website_url": "https://edusn.co.uk/"
+      }
+    ]
+  },
+  "038e4ef9-a8a3-4dca-9ea9-aad223fc71c5": {
+    "campus_count": 3,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "19",
+        "listed_name": "YIS (Mandalay) (Yangon International School)",
+        "address": "၅၂လမ်း၊ (၄၂လမ်းနှင့် ၄၃လမ်းကြား)၊ ရဲမွန်တောင် ရပ်ကွက်၊ မဟာအောင်မြေမြို့နယ်၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://mandalay.yismyanmar.com/"
+      },
+      {
+        "moe_index": "96",
+        "listed_name": "Yangon International School (YIS)",
+        "address": "အမှတ်(၁၁၇)၊ သုမင်္ဂလာအိမ်ယာ၊ သင်္ဃန်းကျွန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://yis.edu.mm/"
+      },
+      {
+        "moe_index": "206",
+        "listed_name": "Kings Yangon International School",
+        "address": "အမှတ်(၂၄)၊ အင်းယားမြိုင်လမ်း၊ ရွှေတောင်ကြား(၂) ရပ်ကွက်၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://kingsyangon.com/"
+      }
+    ]
+  },
+  "6d0e010f-b869-4350-ae90-5a30f531d22d": {
+    "campus_count": 2,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "29",
+        "listed_name": "Myanmar International School Yangon (MISY)",
+        "address": "၄၈လမ်း၊ ၁၀၉လမ်းနှင့် ၁၁၀ လမ်းကြား၊ ထွန်တုံး ရပ်ကွက်၊ ချမ်းမြသာစည်မြို့နယ်၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://yangon.misy.edu.mm/"
+      },
+      {
+        "moe_index": "115",
+        "listed_name": "Myanmar International School Yangon (MISY)",
+        "address": "အမှတ်(၂၄)၊ ဆည်မြောင်းလမ်း၊ (၁၁)ရပ်ကွက်၊ ရန်ကင်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://yangon.misy.edu.mm/"
+      }
+    ]
+  },
+  "d1e8deee-ed2c-43fb-a382-c3adb5d06861": {
+    "campus_count": 2,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "30",
+        "listed_name": "Pride ISM Pride International School Myanmar",
+        "address": "မ(၂၃)၊ ၆၇လမ်း၊ ၁၀၂ လမ်းနှင့် ၁၀၂(A)လမ်းကြား၊ မြို့သစ် အမှတ်(၁)ရပ်ကွက်၊ ချမ်းမြသာစည်မြို့နယ်၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://pismmyanmar.com/"
+      },
+      {
+        "moe_index": "188",
+        "listed_name": "Pride International School Myanmar (Pride ISM)",
+        "address": "အမှတ်(၁၀-၂၃)၊ အောင်ချမ်းသာ(၄)လမ်း၊ (၁)ရပ်ကွက်၊ ကမာရွတ်မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://pismmyanmar.com/"
+      }
+    ]
+  },
+  "4dd4da53-4a6f-4bac-aca9-0fd9955e8bfc": {
+    "campus_count": 6,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "32",
+        "listed_name": "SUNFLOWER MYANMAR International School",
+        "address": "၆၆ လမ်း၊ ၁၁၁လမ်းနှင့် ၁၁၂လမ်းကြား၊ ချမ်းမြသာစည်မြို့နယ်၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "http://www.sunflower.edu.mm/"
+      },
+      {
+        "moe_index": "35",
+        "listed_name": "LAMIS, Leading Asia Myanmar International School",
+        "address": "၁၂လမ်း၊ ၈၇လမ်းနှင့် ၈၈ လမ်းကြား၊ အောင်မြေသာစံမြို့နယ်၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://leadingasiamyanmar.edu.mm/"
+      },
+      {
+        "moe_index": "87",
+        "listed_name": "TARA British Myanmar International School",
+        "address": "အမှတ်(၈၂/၈၃)၊ ရွှေဘုံသာအိမ်ယာ၊ လှိုင်သာယာ(အရှေ့)မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://taraschool.net/"
+      },
+      {
+        "moe_index": "112",
+        "listed_name": "Myanmar International School (MIS)",
+        "address": "အမှတ်(၂၀/B)၊ ပညာ့ဝတီလမ်း၊ (၅)ရပ်ကွက်၊ ရန်ကင်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://mis-edu.com/"
+      },
+      {
+        "moe_index": "126",
+        "listed_name": "My Myanmar International School",
+        "address": "၅၂/A1/A2၊ ဧရာဝဏ်လမ်း၊ (၇)ရပ်ကွက်၊ သာကေတမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://mymyanmarschool.com/"
+      },
+      {
+        "moe_index": "137",
+        "listed_name": "My Myanmar International School",
+        "address": "အမှတ်(၃၁၆)၊ စိန္တကျော်သူဦးဩလမ်း၊ (၄၈)ရပ်ကွက်၊ ဒဂုံမြို့သစ်(မြောက်ပိုင်း) မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://mymyanmarschool.com/"
+      }
+    ]
+  },
+  "fc9735e2-9a8f-4e77-8970-c9244283fa18": {
+    "campus_count": 5,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "42",
+        "listed_name": "Education Paradise International School",
+        "address": "အမှတ်(၆၁)၊ ပြည်သာယာ (၅)လမ်း၊ မိတ္ထီလာမြို့၊ မန္တလေးတိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.facebook.com/p/Education-Paradise-International-School-61563496625281/"
+      },
+      {
+        "moe_index": "82",
+        "listed_name": "Promise International School Campus -1",
+        "address": "မ/၃၈/၃၀(ဂ)၊ သာယာအေး(၁)လမ်း၊",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://promiseyangon.com/"
+      },
+      {
+        "moe_index": "83",
+        "listed_name": "Promise International School Campus -2",
+        "address": "အမှတ်(၁၉၆၇)၊ နိဗ္ဗာန်လမ်းမကြီး၊ တောင်သူကုန်း ရပ်ကွက်၊ အင်းစိန်မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://promiseyangon.com/"
+      },
+      {
+        "moe_index": "163",
+        "listed_name": "Promise International School",
+        "address": "အမှတ်(၁၂၁) မစ်ရှင်ဝင်း၊ ကရင်ခြံ၊ အလုံမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://promise.edu.mm/"
+      },
+      {
+        "moe_index": "171",
+        "listed_name": "ISE International School of Education",
+        "address": "အမှတ်(၄၇/D)၊ (၇)မိုင်ခွဲ၊ မရမ်းကုန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://ise.com.mm/"
+      }
+    ]
+  },
+  "c11aa3bc-c91f-5ab9-ace9-0155fa831a8e": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "76",
+        "listed_name": "Covenant International School",
+        "address": "အမှတ်(၄၁၇)၊ ပန်းခြံစုဗဟိုလမ်း၊ ဇီးကုန်းရပ်ကွက်၊ ရွှေပြည်သာမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://covenantyangon.com/"
+      }
+    ]
+  },
+  "ba3c6f02-961b-42e1-8ef9-21d872abbda7": {
+    "campus_count": 6,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2030-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "90",
+        "listed_name": "KINGS International School",
+        "address": "ပန်းလှိုင်အိမ်ရာဝင်း၊ လှိုင်သာယာ(အရှေ့) မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.kis-mm.com/"
+      },
+      {
+        "moe_index": "103",
+        "listed_name": "Kings International School",
+        "address": "အမှတ်(၆-က၊ ခ)၊ ကြိုးစက်ရုံလမ်း၊ သင်္ဃန်းကျွန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.kis-mm.com/"
+      },
+      {
+        "moe_index": "148",
+        "listed_name": "KINGS  International School",
+        "address": "Star City ဝင်း၊ သန်လျင်မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.kis-mm.com/"
+      },
+      {
+        "moe_index": "213",
+        "listed_name": "KINGS  International School",
+        "address": "အမှတ်(၄၃)၊ အင်းယားမြိုင်လမ်း၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://kis-mm.com"
+      },
+      {
+        "moe_index": "226",
+        "listed_name": "KINGS International School",
+        "address": "အမှတ်(၇၀/၁၀)၊ ဟော်စန္ဒာလမ်း ရေအေးကွင်းရပ်ကွက်၊ တောင်ကြီးမြို့၊ ရှမ်းပြည်နယ်(တောင်ပိုင်း)",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.kis-mm.com/"
+      },
+      {
+        "moe_index": "248",
+        "listed_name": "KINGS International School",
+        "address": "အမှတ်(၁၅)၊ ရွှေဂုံတိုင်(၄)လမ်း၊အနောက်ရွှေဂုံတိုင် ရပ်ကွက်၊ ဗဟန်းမြို့နယ်",
+        "period": "2025-2026 to 2029-2030",
+        "moe_approved_from": "2025-06-01",
+        "moe_approved_to": "2030-05-31",
+        "official_website_url": "https://www.kis-mm.com/"
+      }
+    ]
+  },
+  "3a7850e4-c67a-4754-8b2f-3e055893f972": {
+    "campus_count": 3,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "93",
+        "listed_name": "Nelson International Education Centre (NIEC)",
+        "address": "အမှတ်(G-4/ခ)၊ ပဒုမ္မာလမ်း၊ သုဝဏ္ဏ၊ (၂၄)ရပ်ကွက်၊ သင်္ဃန်းကျွန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://niecinternational.com/"
+      },
+      {
+        "moe_index": "113",
+        "listed_name": "Nelson International Education Centre (NIEC)",
+        "address": "အမှတ်(၂၇)၊ ဓမ္မာရုံလမ်း၊ (၁၃)ရပ်ကွက်၊ ရန်ကင်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://niecinternational.com/"
+      },
+      {
+        "moe_index": "228",
+        "listed_name": "NIEC  International School",
+        "address": "အိမ်အမှတ် (ဝက(ခ)-၁၀၂) လမ်းသွယ်(၇)၊ ဝိန်းကျောက် ရပ်ကွက်၊ အာခါးဈေး၊ တာချီလိတ်မြို့၊ ရှမ်းပြည်နယ်(အရှေ့ပိုင်း)",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://niecinternational.com"
+      }
+    ]
+  },
+  "d716bdc9-39a6-50f3-8adc-756c9103d88f": {
+    "campus_count": 2,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "95",
+        "listed_name": "Singapore International School Myanmar (SIS Myanmar)",
+        "address": "အမှတ်(၆-အေ)၊ ပေါ်ဆန်းမွှေးလမ်း၊ (၂၉)ရပ်ကွက်၊ သင်္ဃန်းကျွန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://sisschools.org/sis-myanmar/"
+      },
+      {
+        "moe_index": "189",
+        "listed_name": "Singapore International School",
+        "address": "အမှတ်(၆၂/၇၂)၊ ချင်းတွင်းလမ်း၊ ကမာရွတ် မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "http://www.sismyanmar.com/"
+      }
+    ]
+  },
+  "c2d5e457-39df-5aa7-8f41-b45ef3fcb3dd": {
+    "campus_count": 2,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "97",
+        "listed_name": "Brainworks International School",
+        "address": "အမှတ်(၁)သုမင်္ဂလာလမ်း၊ ၁၆/၄ရပ်ကွက်၊ သင်္ဃန်းကျွန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.brainworks-total.com/"
+      },
+      {
+        "moe_index": "223",
+        "listed_name": "Brainworks  International School",
+        "address": "အမှတ်(၂၄/၁၂)၊ ကမ္ဘောဇလမ်း၊ ရေအေးကွင်းရပ်ကွက် တောင်ကြီးမြို့၊ ရှမ်းပြည်နယ်(တောင်ပိုင်း)",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://brainworks-total.com"
+      }
+    ]
+  },
+  "9c5928e5-b6da-4648-bb21-10dea2844346": {
+    "campus_count": 2,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "100",
+        "listed_name": "ConceptX International School",
+        "address": "အမှတ်(၁/က-၁)၊ (၂၉)ရပ်ကွက်၊ သုဝဏ္ဏ၊ ပေါ်ဆန်းမွှေး လမ်း၊ သင်္ဃန်းကျွန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://conceptx.edu.mm/"
+      },
+      {
+        "moe_index": "211",
+        "listed_name": "ConceptX International School",
+        "address": "အမှတ်(၉-က)၊ မင်္ဂလာလမ်း၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://conceptx.edu.mm/"
+      }
+    ]
+  },
+  "9e523ef5-6ea0-42a5-bd93-14346a9afbc8": {
+    "campus_count": 2,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2030-05-31",
+    "period": "2025-2026 to 2029-2030",
+    "campuses": [
+      {
+        "moe_index": "106",
+        "listed_name": "Warriors International School",
+        "address": "အမှတ်(၂၄၂)၊ ကမာကြည်လမ်း၊ ၂၉ ရပ်ကွက်၊ သုဝဏ္ဏ၊ သင်္ဃန်းကျွန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2025-2026 to 2029-2030",
+        "moe_approved_from": "2025-06-01",
+        "moe_approved_to": "2030-05-31",
+        "official_website_url": "https://warriorsedu.com/"
+      },
+      {
+        "moe_index": "210",
+        "listed_name": "Warriors International School",
+        "address": "အမှတ်(၈၉)၊ အနောက်‌ရွှေဂုံတိုင်လမ်း၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://warriorsedu.com/"
+      }
+    ]
+  },
+  "3614fda1-f393-5f35-ba21-e158bb6c38c0": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "114",
+        "listed_name": "Royal British International School",
+        "address": "အမှတ်(၁၅)၊ သုခိတာလမ်း၊ (၁၅)ရပ်ကွက်၊ ရန်ကင်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://royalbritishinternationalschool.com/"
+      }
+    ]
+  },
+  "cf00dc95-940d-507e-988b-916043e530d4": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "127",
+        "listed_name": "SKT Internatioanal School(Riverside Campus)",
+        "address": "အမှတ်(၂၃၅)၊ ရှုခင်းသာမြို့ပတ်လမ်း၊ သာကေတ မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://skt.edu.mm/"
+      }
+    ]
+  },
+  "3d1593e7-5f61-4b29-b0ab-c70aab49514f": {
+    "campus_count": 4,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "133",
+        "listed_name": "IIP International School",
+        "address": "အမှတ်(၃၄)၊ ငါးမာန်အောင်ဘုရားလမ်း၊ (၃၃)ရပ်ကွက်၊ ဒဂုံမြို့သစ်(မြောက်ပိုင်း) မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://iipschool.edu.mm/"
+      },
+      {
+        "moe_index": "166",
+        "listed_name": "IIP International School",
+        "address": "အမှတ်(၃၁)၊ ရှင်စောပုလမ်း၊ စမ်းချောင်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://iipschool.edu.mm/"
+      },
+      {
+        "moe_index": "185",
+        "listed_name": "IIP International School",
+        "address": "အမှတ်(၂၇/၄၈)၊ သီရိမင်္ဂလာလမ်း၊ ကမာရွတ် မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://iipschool.edu.mm/"
+      },
+      {
+        "moe_index": "201",
+        "listed_name": "IIP International School",
+        "address": "အမှတ်(၁/ခ)၊ ဝင်္ဂဘာလမ်း၊ ငါးထပ်ကြီးအနောက်၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://iipschool.edu.mm/"
+      }
+    ]
+  },
+  "d1ba7508-d79b-49a9-99aa-016c0e4a7728": {
+    "campus_count": 2,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "156",
+        "listed_name": "ALBA International School",
+        "address": "66/ ရွှေတိဂုံဘုရားလမ်း၊ ဒဂုံမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "http://www.alba-edu.com/"
+      },
+      {
+        "moe_index": "157",
+        "listed_name": "ALBA International School",
+        "address": "19-B, ပဒုမ္မာလမ်း၊ ဒဂုံမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "http://www.alba-edu.com/"
+      }
+    ]
+  },
+  "5d88ea9c-c422-4696-88f3-5f2afb315530": {
+    "campus_count": 3,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "159",
+        "listed_name": "Helix International School",
+        "address": "၁၅ D၊ ပဒုမ္မာလမ်း၊ ပြည်အရှေ့ရပ်ကွက်၊ ဒဂုံမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.helixuniversitycollege.com/"
+      },
+      {
+        "moe_index": "160",
+        "listed_name": "Helix International School",
+        "address": "၉/မနော်ဟရီလမ်း၊ ပြည်အနောက်ရပ်ကွက်၊ ဒဂုံမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.helixuniversitycollege.com/"
+      },
+      {
+        "moe_index": "161",
+        "listed_name": "Helix International School",
+        "address": "အမှတ်(၃၀၁)၊ ရွှေတိဂုံဘုရားလမ်း၊ ဘုရားကြီးရပ်ကွက်၊ ဒဂုံမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.helixuniversitycollege.com/"
+      }
+    ]
+  },
+  "d44ccf32-12c8-5c24-966c-1832b4488f26": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "164",
+        "listed_name": "Thalun International School",
+        "address": "အမှတ်(၁၀၈) နှင်းဆီလမ်း၊ စောရန်ပိုင်တောင်ရပ်ကွက်၊ အလုံမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.thaluninternationalschool.com/"
+      }
+    ]
+  },
+  "22b3784f-3e04-4153-80e0-abe3000fe273": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "168",
+        "listed_name": "The British School Yangon",
+        "address": "အမှတ်(၆၈/က)၊ တော်ဝင်လမ်း၊ (၄)ရပ်ကွက်၊ မရမ်းကုန်း မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.nordangliaeducation.com/bsy-yangon"
+      }
+    ]
+  },
+  "6c78977f-de06-4078-bbd2-570e303276ae": {
+    "campus_count": 2,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "169",
+        "listed_name": "Network International School",
+        "address": "အမှတ်(32)၊ ကုန်းမြင့်ရိပ်သာလမ်း၊ မရမ်းကုန်း",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.networkinternationalschool.com/"
+      },
+      {
+        "moe_index": "202",
+        "listed_name": "Network International School",
+        "address": "အမှတ်(23)၊ အင်းယားမြိုင်လမ်း၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.networkinternationalschool.com/"
+      }
+    ]
+  },
+  "1254e3cd-5600-4fe5-bc9f-740995cc1f74": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "172",
+        "listed_name": "Crane International School Myanmar (CISM)",
+        "address": "အမှတ်(၁)၊ တော်ဝင်ချယ်ရီအိမ်ယာ၊ ဝင်းလှိုင်လမ်း၊ မရမ်းကုန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.cismyangon.com/"
+      }
+    ]
+  },
+  "683baada-1a26-558c-88f6-8d464685b370": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "177",
+        "listed_name": "International School of  Myanmar (ISM)",
+        "address": "w22/မြနန္ဒာလမ်း၊ (၅)ရပ်ကွက်၊ လှိုင်မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.ismyanmar.com"
+      }
+    ]
+  },
+  "8baaac50-0f6c-5fee-942a-42ebf8562176": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "178",
+        "listed_name": "Wells International School",
+        "address": "အမှတ်(၅၀)၊ ပြည်လမ်း၊ လှိုင်မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://wells.edu.mm/"
+      }
+    ]
+  },
+  "d286f5bb-2db7-5108-aca0-b7f742cdf56a": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "181",
+        "listed_name": "Yangon American International School",
+        "address": "အမှတ်(၂)/(က)၊ အင်းစိန်လမ်းမကြီး၊ (၉)ရပ်ကွက်၊ လှိုင်မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://yangonamerican.edu.mm/"
+      }
+    ]
+  },
+  "32c57574-25e9-43ec-82b6-76310ab44bbd": {
+    "campus_count": 1,
+    "moe_approved_from": "2025-06-01",
+    "moe_approved_to": "2030-05-31",
+    "period": "2025-2026 to 2029-2030",
+    "campuses": [
+      {
+        "moe_index": "196",
+        "listed_name": "French International School of Yangon (LFIR)",
+        "address": "အမှတ်(၆)၊ ဥယျာဉ်လမ်း၊ ကမာရွတ်မြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2025-2026 to 2029-2030",
+        "moe_approved_from": "2025-06-01",
+        "moe_approved_to": "2030-05-31",
+        "official_website_url": "https://lfir-yangon.com"
+      }
+    ]
+  },
+  "b0595924-73f7-49c4-94b0-b05017d77ef8": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "204",
+        "listed_name": "The International School Yangon",
+        "address": "အမှတ်(၂၀)၊ ရွှေတောင်ကြားလမ်း၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://www.isyedu.org/"
+      }
+    ]
+  },
+  "26b13622-e17d-5800-9a44-06ded1015b3c": {
+    "campus_count": 1,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2029-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "208",
+        "listed_name": "SKT International School (City Campus)",
+        "address": "အမှတ်(၂၅)၊ ဖိုးစိန်လမ်း၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://skt.edu.mm/"
+      }
+    ]
+  },
+  "ff40e933-2c42-48ab-95d9-73a107d00976": {
+    "campus_count": 2,
+    "moe_approved_from": "2024-06-01",
+    "moe_approved_to": "2030-05-31",
+    "period": "2024-2025 to 2028-2029",
+    "campuses": [
+      {
+        "moe_index": "215",
+        "listed_name": "Hallway International School",
+        "address": "၁၂၄/C၊ ကမ္ဘာအေးဘုရားလမ်း၊ ဆရာစံ ရပ်ကွက်၊ ဗဟန်းမြို့နယ်၊ ရန်ကုန်တိုင်းဒေသကြီး",
+        "period": "2024-2025 to 2028-2029",
+        "moe_approved_from": "2024-06-01",
+        "moe_approved_to": "2029-05-31",
+        "official_website_url": "https://hallwayis.edu.sg/"
+      },
+      {
+        "moe_index": "250",
+        "listed_name": "Hallway(4) InternationalSchool",
+        "address": "အမှတ် ၇၀၁၊ ပုလဲလမ်း၊ ၃၆ ရပ်ကွက်၊ ဒဂုံမြိူ့သစ် (မြောက်ပိုင်း)မြို့နယ်",
+        "period": "2025-2026 to 2029-2030",
+        "moe_approved_from": "2025-06-01",
+        "moe_approved_to": "2030-05-31",
+        "official_website_url": "https://hallwayis.edu.sg/"
+      }
+    ]
+  }
+}

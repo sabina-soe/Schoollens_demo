@@ -1,0 +1,68 @@
+{
+  "school_id": "d1e8deee-ed2c-43fb-a382-c3adb5d06861",
+  "summary_text": "The official website states that Oxford Reading Tree is the core of the reading programme in Lower Primary, but this has no independent corroboration. The claim is sourced from the official school website and outlines the Year 1 and Year 2 science curriculum regarding living things, materials, and seasonal changes, but lacks independent corroboration. The official website indicates that all classes participate in Myanmar Language twice a week covering reading, writing, listening, speaking, and culture, but this is based on a single official source without independent corroboration. The curriculum details are provided by an official source but lack independent corroboration.",
+  "key_stats": [],
+  "things_to_verify": [
+    {
+      "claim_group_id": "b92b5762-9b35-4019-84ae-2c2337509e71",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "37b7529f-9e6c-4460-a55e-8f758b9baac8",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "dce3365d-1cb8-4cdb-ac35-7c93f643ba5f",
+      "category": "curriculum",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The claims differ regarding the total number of teaching days, citing approximately 184 days in two sources versus 185 teaching days in another source."
+    },
+    {
+      "claim_group_id": "fa2ec362-74d0-439f-858e-02bd8cf3f761",
+      "category": "curriculum",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources differ on the specific subjects included in the Key Stage 3 curriculum. While some list Accounting and general Science, others break Science down into Biology, Physics, and Chemistry, and additionally include Global Perspectives and PSHE."
+    },
+    {
+      "claim_group_id": "4a9d72c6-a0d1-47ca-b97c-e0140ea9651e",
+      "category": "curriculum",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources differ on the specific list of Cambridge IGCSE subjects offered at Key Stage 4. While core subjects like English, Maths, Physics, Chemistry, Biology, Business Studies, and ICT are consistently mentioned, variations exist regarding the inclusion of subjects such as Additional Maths, Accounting, Art and Design, History, Economics, and Pure Mathematics."
+    },
+    {
+      "claim_group_id": "45c090bb-8b62-4128-9ea0-fc7d9468d07d",
+      "category": "contact info",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources list different addresses and contact numbers across multiple locations in Yangon and Mandalay, and provide differing phone numbers for the same Yangon campus address."
+    },
+    {
+      "claim_group_id": "85048d2f-930b-4c0d-a3dc-02974f1756b8",
+      "category": "curriculum",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "d3866661-dfbc-4815-9fba-97420af37c0a",
+      "category": "facilities",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources disagree on the exact number of campuses operated by the school network, with official website claims varying between three total campuses and multiple campuses across Yangon and Mandalay."
+    },
+    {
+      "claim_group_id": "c8d5ba5c-af6b-4e47-b577-366822e82ef0",
+      "category": "facilities",
+      "confidence_label": "unknown",
+      "reconciliation_note": "Only one extracted claim mentions this. Gemini reconciliation did not return a label."
+    },
+    {
+      "claim_group_id": "cd7889b0-d5cf-488a-929d-bbb23566fcd4",
+      "category": "cca",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources disagree on the specific ECA activities offered on Monday, Tuesday, Thursday, and Friday, showing different lists of programs for each of these days."
+    }
+  ],
+  "generated_at": "2026-10-04T11:19:11.781917+00:00"
+}

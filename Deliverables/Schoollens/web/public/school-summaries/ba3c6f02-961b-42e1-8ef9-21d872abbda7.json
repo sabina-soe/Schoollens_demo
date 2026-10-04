@@ -1,0 +1,37 @@
+{
+  "school_id": "ba3c6f02-961b-42e1-8ef9-21d872abbda7",
+  "summary_text": "The school operates multiple campuses including Thuwunna Primary, Thuwunna Secondary, Golden Valley, Star City, Pun Hlaing, Taunggyi, and KIC Bahan. It offers educational programs ranging from preschool and primary to lower secondary and upper secondary IGCSE programmes.",
+  "key_stats": [
+    {
+      "label": "Campuses",
+      "value": "Thuwunna Primary, Thuwunna Secondary, Golden Valley, Star City, Pun Hlaing, Taunggyi, KIC Bahan"
+    },
+    {
+      "label": "Programmes",
+      "value": "Little KINGS Preschool, Primary (Year 1-6), Lower Secondary (Year 7-9), Upper Secondary IGCSE (Year 10-11)"
+    },
+    {
+      "label": "Contact Number",
+      "value": "01-7331245"
+    },
+    {
+      "label": "Scholarships",
+      "value": "Awarded to 10 percent of students from Years 9 to 11 based on academic merit and need"
+    }
+  ],
+  "things_to_verify": [
+    {
+      "claim_group_id": "34a93ce6-44db-45cb-b420-b46dd10c14d0",
+      "category": "facilities",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The sources disagree on the organizational structure of the Thuwunna campus: some official claims state that the campus houses students from Nursery to Key Stage 4 across three buildings, while other official claims refer separately to distinct Thuwunna Primary and Thuwunna Secondary campuses or specify that the campus houses only the secondary section."
+    },
+    {
+      "claim_group_id": "5017b6ca-3368-4cdd-9e24-a9f8cecd6081",
+      "category": "curriculum",
+      "confidence_label": "conflicting",
+      "reconciliation_note": "The official sources disagree on the specific IGCSE subjects offered. While some list Computer Science and specific English/Mathematics variants, others list Further Mathematics and Chinese instead."
+    }
+  ],
+  "generated_at": "2026-10-04T11:25:51.296198+00:00"
+}

@@ -10,6 +10,8 @@ import { headlineConfidence } from "@/lib/row-confidence";
 import { ConfidenceChip } from "./[id]/confidence-chip";
 import { SchoolCardSkeleton } from "../components/ui/skeleton";
 import { placeMatchesAddress } from "@/lib/places";
+import { schoolMatchesQuery } from "@/lib/school-search";
+import { type MoeRecord } from "@/lib/moe-register";
 
 type School = {
   id: string;
@@ -59,11 +61,20 @@ export function SchoolsList() {
   const [selectedCurricula, setSelectedCurricula] = useState<string[]>([]);
   const [selectedConfidences, setSelectedConfidences] = useState<ConfidenceLabel[]>([]);
   const [sort, setSort] = useState<SortKey>("name");
+  const [moeBySchool, setMoeBySchool] = useState<Record<string, MoeRecord>>({});
 
   useEffect(() => {
     const supabase = createClient();
     (async () => {
       const local = await loadLocalSchools();
+      fetch("/moe-register/by-school.json")
+        .then((response) => response.json())
+        .then((payload) => {
+          setMoeBySchool(payload ?? {});
+        })
+        .catch(() => {
+          setMoeBySchool({});
+        });
       if (local.length) {
         setSchools(local);
         setLoading(false);
@@ -85,6 +96,17 @@ export function SchoolsList() {
           const list = next[group.school_id] ?? [];
           list.push(group.confidence_label ?? "unknown");
           next[group.school_id] = list;
+        }
+        const byGroup: Record<string, string[]> = {};
+        for (const school of rows) {
+          if (!school.school_group_id) continue;
+          const labels = next[school.id] ?? [];
+          if (!labels.length) continue;
+          byGroup[school.school_group_id] = labels;
+        }
+        for (const school of rows) {
+          if (!school.school_group_id || (next[school.id] ?? []).length) continue;
+          if (byGroup[school.school_group_id]) next[school.id] = byGroup[school.school_group_id];
         }
         setLabelsBySchool(next);
         setError(null);
@@ -156,8 +178,7 @@ export function SchoolsList() {
         return false;
       }
       if (selectedConfidences.length && !selectedConfidences.includes(headline)) return false;
-      const haystack = `${school.name} ${school.address ?? ""}`.toLowerCase();
-      if (needle && !haystack.includes(needle)) return false;
+      if (needle && !schoolMatchesQuery(school, needle)) return false;
       if (location.trim() && !placeMatchesAddress(school.address, location.trim())) return false;
       return true;
     });
@@ -491,7 +512,13 @@ export function SchoolsList() {
                           {school.curriculum_type ? (
                             <span className="meta-badge meta-badge-curriculum">{school.curriculum_type}</span>
                           ) : null}
-                          {school.moe_approved_from ? <span className="meta-badge">MOE registered</span> : null}
+                          {school.moe_approved_from || moeBySchool[school.id] ? (
+                            <span className="meta-badge">
+                              {moeBySchool[school.id]?.campus_count > 1
+                                ? `MOE · ${moeBySchool[school.id].campus_count} campuses`
+                                : "MOE registered"}
+                            </span>
+                          ) : null}
                           {school.school_group_id ? <span className="meta-badge">Network campus</span> : null}
                         </div>
                       </div>

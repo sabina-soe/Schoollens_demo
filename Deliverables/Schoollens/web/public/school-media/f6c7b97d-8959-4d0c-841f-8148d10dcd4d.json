@@ -1,6 +1,27 @@
 {
   "items": [
     {
+      "kind": "video",
+      "url": "https://www.youtube.com/watch?v=u7FbdCkRGRc",
+      "embed": "https://www.youtube.com/embed/u7FbdCkRGRc",
+      "thumb": "https://img.youtube.com/vi/u7FbdCkRGRc/hqdefault.jpg",
+      "source": "Official website — ILBC Corporate Video"
+    },
+    {
+      "kind": "video",
+      "url": "https://www.youtube.com/watch?v=AlGQxLvFuHo",
+      "embed": "https://www.youtube.com/embed/AlGQxLvFuHo",
+      "thumb": "https://img.youtube.com/vi/AlGQxLvFuHo/hqdefault.jpg",
+      "source": "Official website"
+    },
+    {
+      "kind": "video",
+      "url": "https://www.youtube.com/watch?v=nnHPHo4BG0Q",
+      "embed": "https://www.youtube.com/embed/nnHPHo4BG0Q",
+      "thumb": "https://img.youtube.com/vi/nnHPHo4BG0Q/hqdefault.jpg",
+      "source": "Official website — Sports / campus"
+    },
+    {
       "kind": "photo",
       "url": "https://www.facebook.com/ILBCEDU/posts/pfbid046W4bK2zuZWBPH546uz2acDZSm1oJTmHFnr9jgM5CtfTts8zxXGXnVuUNCeq8e4vl",
       "thumb": "https://www.facebook.com/ILBCEDU/posts/pfbid046W4bK2zuZWBPH546uz2acDZSm1oJTmHFnr9jgM5CtfTts8zxXGXnVuUNCeq8e4vl",

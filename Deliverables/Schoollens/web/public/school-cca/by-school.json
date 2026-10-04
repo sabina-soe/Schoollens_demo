@@ -1,0 +1,289 @@
+{
+  "f6c7b97d-8959-4d0c-841f-8148d10dcd4d": {
+    "source_url": "https://ilbc.edu.mm/extracurricular/",
+    "source_label": "Official website — Extracurricular",
+    "confidence": "likely",
+    "summary": "ILBC lists extracurricular programmes in music, fine arts, sport, outdoor activity, and IT. The page does not say which campus offers which activity.",
+    "skills": [
+      "Critical thinking",
+      "Creativity",
+      "Communication",
+      "Collaboration",
+      "Leadership",
+      "Digital literacy",
+      "Problem-solving",
+      "Emotional intelligence"
+    ],
+    "groups": [
+      {
+        "id": "music",
+        "name": "Music lessons",
+        "items": [
+          "Piano (International and Myanmar)",
+          "Keyboard",
+          "Guitar",
+          "Violin",
+          "Xylophone"
+        ]
+      },
+      {
+        "id": "arts",
+        "name": "Fine arts",
+        "items": [
+          "Drawing and painting"
+        ]
+      },
+      {
+        "id": "indoor",
+        "name": "Indoor and fitness",
+        "items": [
+          "Aerobics",
+          "Badminton",
+          "Basketball",
+          "Table tennis"
+        ]
+      },
+      {
+        "id": "outdoor",
+        "name": "Outdoor and adventure",
+        "items": [
+          "Outdoor learning",
+          "Excursions",
+          "Hiking and mountaineering",
+          "Cycling"
+        ]
+      },
+      {
+        "id": "team",
+        "name": "Team sports and swimming",
+        "items": [
+          "Football",
+          "Swimming"
+        ]
+      },
+      {
+        "id": "it",
+        "name": "Information technology and innovation",
+        "items": [
+          "Robotics",
+          "Coding",
+          "Artificial intelligence",
+          "3D printing",
+          "STEAM programme"
+        ]
+      }
+    ]
+  },
+  "d1e8deee-ed2c-43fb-a382-c3adb5d06861": {
+    "source_url": "https://pismmyanmar.com/index.php/primary-school/eca",
+    "source_label": "Official website — ECA",
+    "confidence": "likely",
+    "summary": "Primary and Secondary ECA pages describe after-school programmes starting in September. Both published schedules are labelled Academic Year 2023–2024. Mandalay lists a separate Enrichment Programme.",
+    "groups": [
+      {
+        "id": "primary",
+        "name": "Primary ECA 2023–2024",
+        "items": [
+          "Art and design / arts and crafts",
+          "Badminton",
+          "Basketball",
+          "Football",
+          "Table tennis",
+          "Gymnastics",
+          "Karate",
+          "Chess",
+          "Drama club",
+          "Dancing club / Myanmar dance",
+          "Piano",
+          "Guitar",
+          "Violin",
+          "Ukulele",
+          "Singing",
+          "Fun with Maths"
+        ]
+      },
+      {
+        "id": "secondary",
+        "name": "Secondary ECA 2023–2024",
+        "items": [
+          "Badminton",
+          "Table tennis",
+          "Football",
+          "Basketball",
+          "Chess",
+          "Drama club",
+          "Dancing club",
+          "Arts and crafts",
+          "Piano",
+          "Violin",
+          "Guitar",
+          "Fun with Maths"
+        ]
+      },
+      {
+        "id": "mandalay",
+        "name": "Mandalay Enrichment Programme",
+        "items": [
+          "Art — painting",
+          "Art — needlework",
+          "Badminton",
+          "Football",
+          "Table tennis",
+          "Chess",
+          "Piano",
+          "Guitar",
+          "Beginner’s French",
+          "German",
+          "Chinese",
+          "Core-subject support",
+          "Extra IGCSE ICT option"
+        ]
+      }
+    ]
+  },
+  "ba3c6f02-961b-42e1-8ef9-21d872abbda7": {
+    "source_url": "https://www.kis-mm.com/goldenvalley",
+    "source_label": "Official website — campus pages",
+    "confidence": "likely",
+    "summary": "ECA lists are campus-specific. Golden Valley, Star City, and Thuwunna Secondary publish different activities. The site does not publish one group-wide CCA timetable.",
+    "groups": [
+      {
+        "id": "golden-valley",
+        "name": "Golden Valley ECAs",
+        "items": [
+          "Presentation Master",
+          "Little Chef",
+          "Young Scientist",
+          "Karate",
+          "Arts and crafts",
+          "Dance",
+          "Team projects",
+          "PE",
+          "STEAM",
+          "Music",
+          "Computing",
+          "Homework Club"
+        ]
+      },
+      {
+        "id": "star-city",
+        "name": "Star City enrichment",
+        "items": [
+          "Robotic STEM",
+          "Spelling Bee",
+          "Math, Computing, Myanmar and Chinese competitions",
+          "STEAM and Robotics fairs",
+          "Sports Day",
+          "Field trips",
+          "Weekly assemblies"
+        ]
+      },
+      {
+        "id": "thuwunna-secondary",
+        "name": "Thuwunna Secondary",
+        "items": [
+          "Sports programmes",
+          "Student Council and House Captains (five houses)",
+          "Podcasting",
+          "Newsletter team",
+          "AI Club",
+          "Content creation",
+          "Community service"
+        ]
+      },
+      {
+        "id": "taunggyi",
+        "name": "Taunggyi",
+        "items": [
+          "Art",
+          "Music",
+          "Dance",
+          "Sports",
+          "Simple engineering projects"
+        ]
+      }
+    ]
+  },
+  "5d88ea9c-c422-4696-88f3-5f2afb315530": {
+    "source_url": "https://www.helixuniversitycollege.com/student-life/",
+    "source_label": "Official website — Student Life",
+    "confidence": "likely",
+    "summary": "Student Life lists clubs and sports. The page does not say which of the six Dagon campuses runs each activity. Online students are also invited to clubs, parties, and day trips.",
+    "groups": [
+      {
+        "id": "clubs",
+        "name": "Clubs and activities",
+        "items": [
+          "Debate and public speaking",
+          "Coding club",
+          "Video project contests",
+          "Excursions and day trips",
+          "Art club",
+          "Music club",
+          "Student council",
+          "Magazine committee"
+        ]
+      },
+      {
+        "id": "sports",
+        "name": "Sports",
+        "items": [
+          "Soccer",
+          "Badminton",
+          "Table tennis",
+          "Chess"
+        ]
+      }
+    ]
+  },
+  "b0595924-73f7-49c4-94b0-b05017d77ef8": {
+    "source_url": "https://www.isyedu.org/life-at-isy/after-school-activities",
+    "source_label": "Official website — After School Activities and Athletics",
+    "confidence": "likely",
+    "summary": "After School Activities cover arts, athletics, and service learning in two ten-week rounds each year. FAQ instead says activities run twice a year by semester. ISY competes in SEASAC and the Yangon Athletic Conference. The home page claims 250+ activities and 17+ student-led service groups; those counts are not listed on the ASA page.",
+    "groups": [
+      {
+        "id": "asa",
+        "name": "After School Activities",
+        "items": [
+          "Creative arts",
+          "Athletics and sports skills",
+          "Drama club",
+          "Service learning initiatives",
+          "Two ten-week rounds (Athletics Office sign-up)"
+        ]
+      },
+      {
+        "id": "yac",
+        "name": "Yangon Athletic Conference (middle and high school)",
+        "items": [
+          "Volleyball",
+          "Soccer",
+          "Basketball",
+          "Badminton",
+          "Swimming",
+          "Table tennis"
+        ]
+      },
+      {
+        "id": "seasac",
+        "name": "SEASAC",
+        "items": [
+          "Interscholastic sports with schools in Hong Kong, Thailand, Singapore, Malaysia, Myanmar, and Indonesia",
+          "Fine arts conventions",
+          "Model United Nations conventions"
+        ]
+      },
+      {
+        "id": "expeditions",
+        "name": "Chinthe Expeditions",
+        "items": [
+          "Grades 5 to 12",
+          "Grade 5: two-night in-country trip",
+          "Grades 6 to 12: overseas expeditions",
+          "Service learning, physical activity, and academic exploration"
+        ]
+      }
+    ]
+  }
+}

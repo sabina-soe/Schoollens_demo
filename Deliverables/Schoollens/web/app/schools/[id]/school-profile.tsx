@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { normalizeConfidence, type ConfidenceLabel } from "@/lib/confidence";
 import { isRegisterUnreachable, loadLocalSchool, withTimeout } from "@/lib/public-register";
+import { networkIds, pickBySchoolIds } from "@/lib/school-network";
+import { moeBadgeLabel, moeRangeLabel, type MoeRecord } from "@/lib/moe-register";
 import { DeferredSection } from "../../components/deferred-section";
 import { AskTab } from "./ask-tab";
 import { BranchesMap } from "./branches-map";
@@ -17,9 +19,11 @@ import { ProfileHeaderSkeleton, Skeleton } from "../../components/ui/skeleton";
 
 const PROFILE_NAV = [
   { id: "overview", label: "Overview" },
+  { id: "directory-listing", label: "Directory listing" },
   { id: "verification-hub", label: "Evidence" },
   { id: "fees", label: "Fees" },
   { id: "educational-stages", label: "Curriculum" },
+  { id: "cca", label: "CCA" },
   { id: "facilities", label: "Facilities" },
   { id: "changes", label: "What's changed" },
   { id: "reviews", label: "Reviews" },
@@ -69,6 +73,8 @@ export function SchoolProfile({ id }: { id: string }) {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState<string>("overview");
+  const [moeRecord, setMoeRecord] = useState<MoeRecord | null>(null);
+  const [ledgerIds, setLedgerIds] = useState<string[]>([id]);
 
   function goToSection(id: string) {
     setActiveSection(id);
@@ -96,6 +102,14 @@ export function SchoolProfile({ id }: { id: string }) {
     (async () => {
       const local = await loadLocalSchool(id);
       if (cancelled) return;
+      fetch("/moe-register/by-school.json")
+        .then((response) => response.json())
+        .then((payload) => {
+          if (!cancelled) setMoeRecord(pickBySchoolIds(payload, [id]) ?? payload[id] ?? null);
+        })
+        .catch(() => {
+          if (!cancelled) setMoeRecord(null);
+        });
       if (local) {
         setSchool(local);
         setBranches([local]);
@@ -119,20 +133,29 @@ export function SchoolProfile({ id }: { id: string }) {
         const schoolRow = data ?? local;
         if (!schoolRow) return;
 
-        const [groupsRes, sessionRes, networkRes] = await Promise.all([
-          supabase.from("claim_groups").select("confidence_label").eq("school_id", id),
+        const [sessionRes, networkRes] = await Promise.all([
           supabase.auth.getSession(),
           schoolRow.school_group_id
             ? supabase.from("schools").select(schoolSelect).eq("school_group_id", schoolRow.school_group_id).order("name")
             : Promise.resolve({ data: [schoolRow] }),
         ]);
         if (cancelled) return;
+        const ids = networkIds(schoolRow.id, networkRes.data ?? [schoolRow]);
+        setLedgerIds(ids);
+        setBranches(networkRes.data ?? [schoolRow]);
+        fetch("/moe-register/by-school.json")
+          .then((response) => response.json())
+          .then((payload) => {
+            if (!cancelled) setMoeRecord(pickBySchoolIds(payload, ids));
+          })
+          .catch(() => {});
+        const groupsRes = await supabase.from("claim_groups").select("confidence_label").in("school_id", ids);
+        if (cancelled) return;
         const next = { ...EMPTY_COUNTS };
         for (const group of groupsRes.data ?? []) {
           next[normalizeConfidence(group.confidence_label)] += 1;
         }
         setCounts(next);
-        setBranches(networkRes.data ?? [schoolRow]);
         const user = sessionRes.data.session?.user;
         setSignedIn(Boolean(user));
         if (!user) return;
@@ -184,7 +207,9 @@ export function SchoolProfile({ id }: { id: string }) {
     );
   }
 
-  const moeRange = [school.moe_approved_from, school.moe_approved_to].filter(Boolean).join(" – ");
+  const fallbackRange = [school.moe_approved_from, school.moe_approved_to].filter(Boolean).join(" – ");
+  const moeRange = moeRangeLabel(moeRecord, fallbackRange);
+  const moeBadge = moeBadgeLabel(moeRecord, fallbackRange);
   const totalGroups = Object.values(counts).reduce((sum, value) => sum + value, 0);
   const supportedShare =
     totalGroups > 0 ? Math.round((counts.supported / totalGroups) * 100) : null;
@@ -220,7 +245,7 @@ export function SchoolProfile({ id }: { id: string }) {
             </div>
             <div className="profile-hero-copy">
               <div className="profile-badges-row">
-                {moeRange ? <span className="badge-moe-verified">MOE registered</span> : null}
+                {moeBadge ? <span className="badge-moe-verified">{moeBadge}</span> : null}
                 {school.curriculum_type ? (
                   <span className="meta-badge meta-badge-curriculum">{school.curriculum_type}</span>
                 ) : null}
@@ -322,8 +347,11 @@ export function SchoolProfile({ id }: { id: string }) {
           <div className="profile-main">
             <OverviewTab
               schoolId={school.id}
+              networkIds={ledgerIds}
               schoolName={school.name}
+              schoolAddress={school.address}
               moeRange={moeRange}
+              moeRecord={moeRecord}
               supportedShare={supportedShare}
               totalGroups={totalGroups}
             />
@@ -332,7 +360,7 @@ export function SchoolProfile({ id }: { id: string }) {
                 force={activeSection === "changes"}
                 placeholder={<Skeleton style={{ width: "100%", height: "96px", borderRadius: "8px" }} />}
               >
-                <ChangesTab schoolId={school.id} />
+                <ChangesTab schoolId={school.id} networkIds={ledgerIds} />
               </DeferredSection>
             </section>
             <section className="profile-section" id="reviews">
@@ -340,7 +368,7 @@ export function SchoolProfile({ id }: { id: string }) {
                 force={activeSection === "reviews"}
                 placeholder={<Skeleton style={{ width: "100%", height: "96px", borderRadius: "8px" }} />}
               >
-                <ReviewsTab schoolId={school.id} />
+                <ReviewsTab schoolId={school.id} networkIds={ledgerIds} />
               </DeferredSection>
             </section>
             <section className="profile-section" id="ask">
@@ -348,7 +376,7 @@ export function SchoolProfile({ id }: { id: string }) {
                 force={activeSection === "ask"}
                 placeholder={<Skeleton style={{ width: "100%", height: "96px", borderRadius: "8px" }} />}
               >
-                <AskTab schoolId={school.id} />
+                <AskTab schoolId={school.id} networkIds={ledgerIds} />
               </DeferredSection>
             </section>
           </div>

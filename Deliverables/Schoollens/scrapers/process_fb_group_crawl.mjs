@@ -6,10 +6,11 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
 const SOURCE =
   process.argv[2] ||
-  "C:\\Users\\VSK\\Downloads\\dataset_facebook-groups-scraper_2026-10-02_10-02-57-100.json";
+  "C:\\Users\\VSK\\Downloads\\dataset_facebook-groups-scraper_2026-10-04_07-51-58-664.json";
 const SCHOOLS_PATH = path.join(ROOT, "web", "public", "demo-register", "schools.json");
 const OUT_REVIEWS = path.join(ROOT, "web", "public", "group-reviews", "by-school.json");
-const OUT_SUMMARY = path.join(ROOT, "raw-crawls", "fb-group", "2026-10-02-mentions.json");
+const CRAWLED_ON = path.basename(SOURCE).includes("2026-10-04") ? "2026-10-04" : "2026-10-02";
+const OUT_SUMMARY = path.join(ROOT, "raw-crawls", "fb-group", `${CRAWLED_ON}-mentions.json`);
 
 const POS = ["good", "great", "excellent", "love", "proud", "recommend", "caring", "safe", "ကောင်း", "အကောင်း", "recommend"];
 const NEG = ["bad", "poor", "terrible", "hate", "unsafe", "expensive", "overcrowded", "cramped", "မကောင်း", "စျေးကြီး", "အန္တရာယ်"];
@@ -35,9 +36,23 @@ const EXTRA_ALIASES = {
   "d1e8deee-ed2c-43fb-a382-c3adb5d06861": ["pride international", " pism "],
   "b0595924-73f7-49c4-94b0-b05017d77ef8": ["international school yangon", " isy "],
   "6d0e010f-b869-4350-ae90-5a30f531d22d": ["misy"],
+  "d286f5bb-2db7-5108-aca0-b7f742cdf56a": ["yangon american", " yais ", "yangonamerican"],
 };
 
-const SKIP_IF = [/အိမ်ထောင်ရေး/, /marriage respect/, /octostudio/i, /phonics class/i, /boy black shoes/i];
+const SKIP_IF = [
+  /အိမ်ထောင်ရေး/,
+  /marriage respect/,
+  /octostudio/i,
+  /phonics class/i,
+  /boy black shoes/i,
+  /python with applied/i,
+  /printing service/i,
+  /zoom official/i,
+  /textbook book sale/i,
+  /hi q milk/i,
+  /dream tree international pre-school/i,
+  /htoo printing/i,
+];
 
 function isTutorList(text, hitCount) {
   return hitCount >= 3 || /igcseinternationalcourse/i.test(text);
@@ -68,9 +83,10 @@ function postText(page) {
   if (page.sharedPost && typeof page.sharedPost.text === "string" && page.sharedPost.text.trim()) {
     parts.push(page.sharedPost.text.trim());
   }
-  for (const media of page.media || page.sharedPost?.media || []) {
-    if (media && typeof media.ocrText === "string" && media.ocrText.trim() && media.ocrText !== "May be an image of text") {
-      parts.push(media.ocrText.trim());
+  for (const media of page.media || page.attachments || page.sharedPost?.media || []) {
+    const ocr = media && typeof media.ocrText === "string" ? media.ocrText.trim() : "";
+    if (ocr && !/^may be (an image|a doodle)|^no photo description/i.test(ocr)) {
+      parts.push(ocr);
     }
   }
   return parts.join("\n\n");
@@ -227,8 +243,11 @@ fs.writeFileSync(
   JSON.stringify(
     {
       source: "International School Review (မိဘများရင်ဖွင့်ရာ)",
-      crawled_at: "2026-10-02",
+      crawled_at: CRAWLED_ON,
       posts: raw.length,
+      comments_in_export: withComments,
+      note:
+        "Tutor ads, sales, and posts that did not name a SchoolLens school were not attached to profiles.",
       schools: bySchool,
     },
     null,
@@ -253,8 +272,7 @@ fs.writeFileSync(
   ),
 );
 
-const destRaw = path.join(ROOT, "raw-crawls", "fb-group", "dataset_facebook-groups-scraper_2026-10-02_10-02-57-100.json");
-if (!fs.existsSync(destRaw)) fs.copyFileSync(SOURCE, destRaw);
+// Keep the raw Apify dump out of git. Only the mention summary is stored.
 
 console.log(
   JSON.stringify(
