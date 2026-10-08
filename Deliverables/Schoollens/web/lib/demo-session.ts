@@ -37,15 +37,13 @@ export function clearLocalDemoSession() {
   window.localStorage.removeItem(STORAGE_KEY);
 }
 
-export async function withDeadline<T>(promise: Promise<T>, ms: number): Promise<T> {
+export async function withDeadline<T>(promise: PromiseLike<T>, ms: number): Promise<T> {
   let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => reject(new Error("auth timeout")), ms);
+  });
   try {
-    return await Promise.race([
-      promise,
-      new Promise<T>((_, reject) => {
-        timer = setTimeout(() => reject(new Error("auth timeout")), ms);
-      }),
-    ]);
+    return await Promise.race([Promise.resolve(promise), timeout]);
   } finally {
     if (timer) clearTimeout(timer);
   }
