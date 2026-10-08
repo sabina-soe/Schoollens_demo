@@ -18,7 +18,7 @@ import { MediaGallery, type MediaItem } from "./media-gallery";
 import { FeeTable } from "./fee-table";
 import { type CampusRecord, usableMedia } from "@/lib/campus-media";
 import { type MoeRecord } from "@/lib/moe-register";
-import { parentVerifyItems } from "@/lib/parent-claims";
+import { parentVerifyItems, type ParentClaimInput } from "@/lib/parent-claims";
 import {
   campusOptionsFromPosters,
   defaultCampusId,
@@ -436,11 +436,12 @@ export function OverviewTab({
       const label = String(poster.confidence || "").toLowerCase();
       return label === "outdated" || label === "conflicting";
     })
-    .map((poster) => ({
+    .map((poster): ParentClaimInput => ({
       category: "fees",
       confidence_label: poster.confidence,
       reconciliation_note: poster.lead || null,
       source_url: poster.source_url || (poster.file ? `/school-fees/${encodeURIComponent(poster.file)}` : null),
+      claim_group_id: null,
       claim_texts: [
         ...(poster.branches ?? []).flatMap((branch) =>
           (branch.programmes ?? []).map((row) => `${row.item}: ${row.amount || ""}`.trim()),
@@ -448,7 +449,10 @@ export function OverviewTab({
         ...(poster.shared ?? []).map((row) => `${row.item}: ${row.amount || ""}`.trim()),
       ].filter(Boolean),
     }));
-  const verify = parentVerifyItems([...(stored?.things_to_verify ?? []), ...feeVerify]);
+  const verify = parentVerifyItems<ParentClaimInput>([
+    ...((stored?.things_to_verify ?? []) as ParentClaimInput[]),
+    ...feeVerify,
+  ]);
   const curriculum = sections.find((section) => section.key === "curriculum");
   const facilities = sections.find((section) => section.key === "facilities");
   const languages = sections.find((section) => /language|diploma/.test(section.key));
