@@ -1,7 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { schoolInitials, schoolLogoSrc } from "@/lib/school-mark";
+
+let extractedLogos: Promise<Record<string, string>> | null = null;
+
+function loadExtractedLogos() {
+  if (!extractedLogos) {
+    extractedLogos = fetch("/school-logos/extracted/index.json", { cache: "no-store" })
+      .then((response) => (response.ok ? response.json() : {}))
+      .catch(() => ({})) as Promise<Record<string, string>>;
+    setTimeout(() => {
+      extractedLogos = null;
+    }, 4000);
+  }
+  return extractedLogos;
+}
 
 export function SchoolMark({
   name,
@@ -14,9 +28,24 @@ export function SchoolMark({
   groupId?: string | null;
   size?: "sm" | "md" | "lg";
 }) {
-  const src = schoolLogoSrc({ id: schoolId, school_group_id: groupId, name });
+  const hardcoded = schoolLogoSrc({ id: schoolId, school_group_id: groupId, name });
+  const [extracted, setExtracted] = useState<string | null>(null);
   const [failed, setFailed] = useState(false);
   const initials = schoolInitials(name);
+
+  useEffect(() => {
+    if (!schoolId) return;
+    let active = true;
+    void loadExtractedLogos().then((map) => {
+      if (!active) return;
+      setExtracted(map[schoolId] || null);
+    });
+    return () => {
+      active = false;
+    };
+  }, [schoolId]);
+
+  const src = extracted || hardcoded;
 
   if (src && !failed) {
     return (

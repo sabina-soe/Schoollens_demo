@@ -150,7 +150,7 @@ export function CrawlTargets({
           <p className="op-kicker">Live collection</p>
           <h2 id="crawl-targets-heading">Crawl official websites</h2>
           <p className="op-lead">
-            Queue a school website. The crawler reads public pages; extract then writes evidence on the profile.
+            Crawl the official website, then Gemini extracts claims onto the school profile. Use VPN if Gemini is blocked.
           </p>
         </div>
         <p className="op-count">
@@ -245,7 +245,7 @@ export function CrawlTargets({
                       disabled={!school.official_website_url || websiteBusy}
                       onClick={() => onQueue(school, "website")}
                     >
-                      {websiteBusy ? "Queueing…" : queued.includes("website") ? "Website queued" : "Crawl website"}
+                      {websiteBusy ? "Crawling…" : queued.includes("website") ? "Website queued" : "Crawl and extract"}
                     </button>
                     <button
                       type="button"

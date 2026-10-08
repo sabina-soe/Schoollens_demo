@@ -103,7 +103,6 @@ export async function loadClaimOverlay(ids: string[]): Promise<OverlayGroup[]> {
     const target = index.aliases?.[id] ?? id;
     if (index.bySchool?.[target]) files.add(index.bySchool[target]);
     else if (index.bySchool?.[id]) files.add(index.bySchool[id]);
-    else if (ids.length <= 20) files.add(`/school-claims/${target}.json`);
   }
   if (!files.size) {
     return (await loadKnownClaimOverlays()).groups.filter((group) =>

@@ -350,7 +350,7 @@ export function OperatorDashboard() {
             <div>
               <h1>Collect school evidence</h1>
               <p className="op-lead">
-                Queue official websites. SchoolLens crawls public pages, then extract writes fees, curriculum, and
+                Queue official websites. One click crawls public pages and Gemini extract writes fees, curriculum, and
                 facilities onto the school profile.
               </p>
             </div>
@@ -454,8 +454,8 @@ export function OperatorDashboard() {
                             <tr className="op-crawl-pages-row">
                               <td colSpan={5}>
                                 <ul className="op-crawl-pages">
-                                  {pages.map((page) => (
-                                    <li key={page.url}>
+                                  {pages.map((page, index) => (
+                                    <li key={`${page.url}-${index}`}>
                                       <a href={page.url} target="_blank" rel="noreferrer">
                                         {page.title || page.url}
                                       </a>

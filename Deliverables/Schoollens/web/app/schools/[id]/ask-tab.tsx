@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { loadClaimOverlay, type OverlayGroup } from "@/lib/claim-overlay";
 import { sourceTag } from "@/lib/confidence";
 import { ConfidenceChip } from "./confidence-chip";
 import { Skeleton } from "../../components/ui/skeleton";
@@ -24,54 +25,80 @@ type Turn = {
   error: string | null;
 };
 
-async function loadCitations(groupIds: string[]): Promise<Citation[]> {
+function citationsFromOverlay(groups: OverlayGroup[], groupIds: string[]): Citation[] {
+  const wanted = new Set(groupIds);
+  return groups
+    .filter((group) => wanted.has(group.id))
+    .map((group) => {
+      const claim = group.claims[0];
+      const evidence =
+        group.evidence.find((row) => row.claim_id === claim?.id) ?? group.evidence[0];
+      return {
+        id: group.id,
+        category: group.category,
+        confidence_label: group.confidence_label,
+        claim_text: claim?.claim_text ?? null,
+        source_tag: sourceTag(claim?.source_type, claim?.source_trust_tier),
+        excerpt: evidence?.source_excerpt ?? null,
+      };
+    });
+}
+
+async function loadCitations(schoolId: string, networkIds: string[] | undefined, groupIds: string[]): Promise<Citation[]> {
   if (groupIds.length === 0) return [];
-  const supabase = createClient();
-  const { data: groups } = await supabase
-    .from("claim_groups")
-    .select("id, category, confidence_label")
-    .in("id", groupIds);
-  const { data: members } = await supabase
-    .from("claim_group_members")
-    .select("claim_group_id, claim_id")
-    .in("claim_group_id", groupIds);
-  const claimIds = [...new Set((members ?? []).map((member) => member.claim_id))];
-  const { data: claims } = claimIds.length
-    ? await supabase
-        .from("claims")
-        .select("id, claim_text, source_type, source_trust_tier")
-        .in("id", claimIds)
-    : { data: [] };
-  const { data: evidence } = claimIds.length
-    ? await supabase.from("evidence").select("claim_id, source_excerpt").in("claim_id", claimIds)
-    : { data: [] };
+  const overlay = await loadClaimOverlay(networkIds?.length ? networkIds : [schoolId]);
+  const local = citationsFromOverlay(overlay, groupIds);
+  if (local.length) return local;
+  try {
+    const supabase = createClient();
+    const { data: groups } = await supabase
+      .from("claim_groups")
+      .select("id, category, confidence_label")
+      .in("id", groupIds);
+    const { data: members } = await supabase
+      .from("claim_group_members")
+      .select("claim_group_id, claim_id")
+      .in("claim_group_id", groupIds);
+    const claimIds = [...new Set((members ?? []).map((member) => member.claim_id))];
+    const { data: claims } = claimIds.length
+      ? await supabase
+          .from("claims")
+          .select("id, claim_text, source_type, source_trust_tier")
+          .in("id", claimIds)
+      : { data: [] };
+    const { data: evidence } = claimIds.length
+      ? await supabase.from("evidence").select("claim_id, source_excerpt").in("claim_id", claimIds)
+      : { data: [] };
 
-  const claimById = Object.fromEntries((claims ?? []).map((claim) => [claim.id, claim]));
-  const firstClaimId = new Map<string, string>();
-  for (const member of members ?? []) {
-    if (!firstClaimId.has(member.claim_group_id)) {
-      firstClaimId.set(member.claim_group_id, member.claim_id);
+    const claimById = Object.fromEntries((claims ?? []).map((claim) => [claim.id, claim]));
+    const firstClaimId = new Map<string, string>();
+    for (const member of members ?? []) {
+      if (!firstClaimId.has(member.claim_group_id)) {
+        firstClaimId.set(member.claim_group_id, member.claim_id);
+      }
     }
-  }
-  const excerptByClaim = new Map<string, string>();
-  for (const row of evidence ?? []) {
-    if (row.source_excerpt && !excerptByClaim.has(row.claim_id)) {
-      excerptByClaim.set(row.claim_id, row.source_excerpt);
+    const excerptByClaim = new Map<string, string>();
+    for (const row of evidence ?? []) {
+      if (row.source_excerpt && !excerptByClaim.has(row.claim_id)) {
+        excerptByClaim.set(row.claim_id, row.source_excerpt);
+      }
     }
-  }
 
-  return (groups ?? []).map((group) => {
-    const claimId = firstClaimId.get(group.id);
-    const claim = claimId ? claimById[claimId] : undefined;
-    return {
-      id: group.id,
-      category: group.category,
-      confidence_label: group.confidence_label,
-      claim_text: claim?.claim_text ?? null,
-      source_tag: sourceTag(claim?.source_type, claim?.source_trust_tier),
-      excerpt: claimId ? excerptByClaim.get(claimId) ?? null : null,
-    };
-  });
+    return (groups ?? []).map((group) => {
+      const claimId = firstClaimId.get(group.id);
+      const claim = claimId ? claimById[claimId] : undefined;
+      return {
+        id: group.id,
+        category: group.category,
+        confidence_label: group.confidence_label,
+        claim_text: claim?.claim_text ?? null,
+        source_tag: sourceTag(claim?.source_type, claim?.source_trust_tier),
+        excerpt: claimId ? excerptByClaim.get(claimId) ?? null : null,
+      };
+    });
+  } catch {
+    return [];
+  }
 }
 
 const SUGGESTIONS = [
@@ -93,26 +120,6 @@ export function AskTab({ schoolId, networkIds }: { schoolId: string; networkIds?
     setPending(true);
     setTurns((current) => [...current, { question: trimmed, answer: null, citations: [], error: null }]);
     try {
-      const supabase = createClient();
-      const { count, error: countError } = await supabase
-        .from("claim_groups")
-        .select("id", { count: "exact", head: true })
-        .in("school_id", networkIds?.length ? networkIds : [schoolId]);
-      if (countError) throw new Error(countError.message);
-      if (!count) {
-        setTurns((current) => {
-          const next = [...current];
-          next[next.length - 1] = {
-            question: trimmed,
-            answer: NO_EVIDENCE_ANSWER,
-            citations: [],
-            error: null,
-          };
-          return next;
-        });
-        return;
-      }
-
       const response = await fetch(`/api/schools/${schoolId}/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -122,7 +129,7 @@ export function AskTab({ schoolId, networkIds }: { schoolId: string; networkIds?
       if (!response.ok) {
         throw new Error(payload.error || "Question service failed.");
       }
-      const citations = await loadCitations(payload.cited_claim_group_ids ?? []);
+      const citations = await loadCitations(schoolId, networkIds, payload.cited_claim_group_ids ?? []);
       setTurns((current) => {
         const next = [...current];
         next[next.length - 1] = {

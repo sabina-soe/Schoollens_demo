@@ -251,6 +251,12 @@ QA_SCHEMA = {
 }
 
 GEMINI_REASON_MODEL = "gemini-3.5-flash-lite"
+_GEMINI_LOCATION_BLOCKED = False
+
+
+def _gemini_location_blocked(error: Exception) -> bool:
+    text = str(error)
+    return "FAILED_PRECONDITION" in text or "location is not supported" in text.lower()
 
 
 def _gemini_json(prompt, user_text, schema):
@@ -271,6 +277,8 @@ def _gemini_json(prompt, user_text, schema):
             return json.loads(text)
         except Exception as exc:
             last_error = exc
+            if _gemini_location_blocked(exc):
+                raise
             time.sleep(1.5 * (attempt + 1))
     raise last_error
 
@@ -615,6 +623,23 @@ def _retrieve_claim_groups(db, school_id, question_embedding):
     return list(groups.values())
 
 
+def _extractive_answer(retrieved):
+    cited = []
+    sentences = []
+    for group in retrieved[:4]:
+        texts = [text.strip() for text in (group.get("claims") or []) if text and str(text).strip()]
+        if not texts:
+            continue
+        group_id = group.get("claim_group_id")
+        if group_id:
+            cited.append(group_id)
+        label = group.get("confidence_label") or "unknown"
+        sentences.append(f"{texts[0]} ({label})")
+    if not sentences:
+        return NO_EVIDENCE_ANSWER, []
+    return "From the retrieved evidence: " + " ".join(sentences), cited
+
+
 def _answer_question(question, retrieved):
     if not retrieved:
         return NO_EVIDENCE_ANSWER, []
@@ -630,11 +655,20 @@ def _answer_question(question, retrieved):
             f"reconciliation_note: {group.get('reconciliation_note')}; "
             f"claims: {claims}"
         )
-    payload = _gemini_json(
-        QA_PROMPT,
-        f"Question: {question}\n\nEvidence:\n" + "\n".join(blocks),
-        QA_SCHEMA,
-    )
+    global _GEMINI_LOCATION_BLOCKED
+    if _GEMINI_LOCATION_BLOCKED:
+        return _extractive_answer(retrieved)
+    try:
+        payload = _gemini_json(
+            QA_PROMPT,
+            f"Question: {question}\n\nEvidence:\n" + "\n".join(blocks),
+            QA_SCHEMA,
+        )
+    except Exception as exc:
+        if _gemini_location_blocked(exc):
+            _GEMINI_LOCATION_BLOCKED = True
+            return _extractive_answer(retrieved)
+        raise
     answer = (payload.get("answer") or "").strip() or NO_EVIDENCE_ANSWER
     cited = []
     for group_id in payload.get("cited_claim_group_ids") or []:
@@ -643,6 +677,79 @@ def _answer_question(question, retrieved):
     if answer == NO_EVIDENCE_ANSWER:
         cited = []
     return answer, cited
+
+
+def _call_with_timeout(fn, seconds, default=None):
+    box = []
+
+    def run():
+        try:
+            box.append(("ok", fn()))
+        except Exception as exc:
+            box.append(("err", exc))
+
+    thread = threading.Thread(target=run, daemon=True)
+    thread.start()
+    thread.join(seconds)
+    if thread.is_alive() or not box:
+        return default
+    kind, value = box[0]
+    return default if kind == "err" else value
+
+
+def _overlay_file(school_id: str):
+    root = Path(__file__).resolve().parents[1] / "web" / "public" / "school-claims"
+    index_path = root / "index.json"
+    hub = school_id
+    if index_path.exists():
+        index = json.loads(index_path.read_text(encoding="utf-8"))
+        hub = (index.get("aliases") or {}).get(school_id, school_id)
+        rel = (index.get("bySchool") or {}).get(hub)
+        if rel:
+            return root / Path(rel).name
+    candidate = root / f"{hub}.json"
+    return candidate if candidate.exists() else None
+
+
+def _retrieve_from_overlay(school_id: str, question: str):
+    path = _overlay_file(school_id)
+    if not path or not path.exists():
+        return []
+    groups = json.loads(path.read_text(encoding="utf-8")).get("groups") or []
+    tokens = {token for token in re.findall(r"[a-z0-9]+", question.lower()) if len(token) > 2}
+    category_boost = {
+        "fees": {"fee", "fees", "tuition", "mmk", "usd", "cost", "semester", "kyat"},
+        "curriculum": {"curriculum", "igcse", "ial", "ib", "subject", "primary", "secondary"},
+        "cca": {"cca", "club", "sport", "music", "extracurricular"},
+        "facilities": {"campus", "facility", "lab", "library", "playground"},
+        "safety": {"safety", "safeguard", "child"},
+        "class size": {"class", "size", "ratio"},
+    }
+    scored = []
+    for group in groups:
+        claims = group.get("claims") or []
+        texts = [item.get("claim_text") or "" for item in claims if isinstance(item, dict)]
+        blob = " ".join([str(group.get("category") or ""), str(group.get("reconciliation_note") or ""), *texts]).lower()
+        score = sum(1 for token in tokens if token in blob)
+        for category, extra in category_boost.items():
+            if group.get("category") == category and tokens & extra:
+                score += 3
+        if not score:
+            continue
+        scored.append(
+            (
+                score,
+                {
+                    "claim_group_id": group.get("id"),
+                    "category": group.get("category"),
+                    "confidence_label": group.get("confidence_label"),
+                    "reconciliation_note": group.get("reconciliation_note"),
+                    "claims": texts,
+                },
+            )
+        )
+    scored.sort(key=lambda item: -item[0])
+    return [item for _, item in scored[:8]]
 
 
 def _ledger_school_id(db, school_id: str):
@@ -679,23 +786,32 @@ def qa(body: QaRequest):
     if not body.question.strip():
         raise HTTPException(status_code=400, detail="question is required")
 
-    db = _supabase()
-    ledger_id = _ledger_school_id(db, body.school_id)
-    retrieved = _retrieve_claim_groups(
-        db, ledger_id, _embed_claim_text(body.question)
-    )
+    overlay = _retrieve_from_overlay(body.school_id, body.question)
+    retrieved = overlay
+    if not retrieved:
+
+        def live_retrieve():
+            db = _supabase()
+            ledger_id = _ledger_school_id(db, body.school_id)
+            return _retrieve_claim_groups(db, ledger_id, _embed_claim_text(body.question))
+
+        retrieved = _call_with_timeout(live_retrieve, 5, default=[]) or []
     answer, cited = _answer_question(body.question, retrieved)
     now = datetime.now(timezone.utc).isoformat()
-    db.table("qa_interactions").insert(
-        {
-            "school_id": body.school_id,
-            "user_id": None,
-            "question": body.question,
-            "answer": answer,
-            "cited_claim_group_ids": cited,
-            "created_at": now,
-        }
-    ).execute()
+
+    def log_interaction():
+        _supabase().table("qa_interactions").insert(
+            {
+                "school_id": body.school_id,
+                "user_id": None,
+                "question": body.question,
+                "answer": answer,
+                "cited_claim_group_ids": cited,
+                "created_at": now,
+            }
+        ).execute()
+
+    _call_with_timeout(log_interaction, 2, default=None)
     return {"answer": answer, "cited_claim_group_ids": cited}
 
 

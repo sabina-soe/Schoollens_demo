@@ -1,10 +1,13 @@
-import { spawn } from "child_process";
+import { execFileSync, spawn } from "child_process";
 import { randomUUID } from "crypto";
 import { existsSync, readFileSync } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
 import { upsertOperatorJob, type OperatorJob } from "@/lib/operator-jobs";
+import { extractWebsiteClaims } from "@/lib/gemini-extract";
 import { crawlSchoolWebsite } from "@/lib/website-crawl";
+import { saveSchoolLogo } from "@/lib/save-school-logo";
+import { writeClaimOverlay } from "@/lib/write-claim-overlay";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -20,8 +23,7 @@ function localSchool(schoolId: string) {
 
 function ragBases() {
   if (process.env.RAG_SERVICE_URL) return [process.env.RAG_SERVICE_URL];
-  if (process.env.VERCEL) return [];
-  return ["http://127.0.0.1:8000", "http://127.0.0.1:8001"];
+  return [];
 }
 
 async function queueOnRag(schoolId: string, sourceType: string) {
@@ -61,7 +63,20 @@ function pythonScriptPath() {
   return path.resolve(process.cwd(), "..", "scrapers", "operator_local_crawl.py");
 }
 
-function startPythonCrawl(schoolId: string, schoolName: string) {
+function resolvePython() {
+  const names = process.platform === "win32" ? ["python", "py"] : ["python3", "python"];
+  for (const name of names) {
+    try {
+      execFileSync(name, ["-c", "import sys"], { stdio: "ignore", timeout: 2500, windowsHide: true });
+      return name;
+    } catch {
+      continue;
+    }
+  }
+  return null;
+}
+
+function startPythonCrawl(pythonBin: string, schoolId: string, schoolName: string) {
   const job: OperatorJob = {
     id: randomUUID(),
     school_id: schoolId,
@@ -73,7 +88,7 @@ function startPythonCrawl(schoolId: string, schoolName: string) {
     errors: { school_id: schoolId, reason: "local website crawl from operator desk" },
   };
   upsertOperatorJob(job);
-  const child = spawn("python", [pythonScriptPath(), job.id, schoolId], {
+  const child = spawn(pythonBin, [pythonScriptPath(), job.id, schoolId], {
     cwd: path.resolve(process.cwd(), ".."),
     detached: true,
     stdio: "ignore",
@@ -91,18 +106,36 @@ function startPythonCrawl(schoolId: string, schoolName: string) {
 
 async function runInlineWebsiteCrawl(schoolId: string, schoolName: string, website: string) {
   const started = new Date().toISOString();
-  const result = await crawlSchoolWebsite(website, { maxPages: 6, maxMs: 8000 });
+  const result = await crawlSchoolWebsite(website, { maxPages: 6, maxMs: 15000 });
+  const host = new URL(website).hostname;
+  let extractError: string | undefined;
+  let claimCount = 0;
+  if (result.withText > 0) {
+    const extracted = await extractWebsiteClaims(result.pages);
+    extractError = extracted.error;
+    claimCount = writeClaimOverlay(schoolId, extracted.claims);
+    if (claimCount > 0 && result.homeHtml) {
+      await saveSchoolLogo(schoolId, result.homeHtml, result.homeUrl);
+    }
+  }
+  const ok = result.withText > 0 && (claimCount > 0 || !extractError);
+  const reason = !result.withText
+    ? "The website did not return extractable page text."
+    : claimCount
+      ? `Crawled ${result.withText} pages from ${host} and extracted ${claimCount} claims.`
+      : extractError || `Crawled ${result.withText} pages from ${host}. Extract did not write claims.`;
   const job: OperatorJob = {
     id: randomUUID(),
     school_id: schoolId,
     source_type: "website",
-    status: result.withText > 0 ? "success" : "error",
+    status: ok ? "success" : "error",
     started_at: started,
     finished_at: new Date().toISOString(),
-    rows_ingested: result.withText,
+    rows_ingested: claimCount || result.withText,
     errors: {
       school_id: schoolId,
       page_count: result.pages.length,
+      claims: claimCount,
       crawled_pages: result.pages.map((page) => ({
         url: page.url,
         title: page.page_title,
@@ -110,23 +143,18 @@ async function runInlineWebsiteCrawl(schoolId: string, schoolName: string, websi
         chars: page.extracted_text.length,
         snippet: page.extracted_text.slice(0, 220),
       })),
-      reason:
-        result.withText > 0
-          ? `Crawled ${result.withText} page${result.withText === 1 ? "" : "s"} from ${new URL(website).hostname}`
-          : "The website did not return extractable page text.",
+      reason,
     },
   };
   upsertOperatorJob(job);
   return {
-    ok: result.withText > 0,
+    ok,
     job,
     job_id: job.id,
     status: job.status,
+    claims: claimCount,
     pages: result.pages.map((page) => ({ url: page.url, title: page.page_title, status: page.crawl_status })),
-    message:
-      result.withText > 0
-        ? `Crawled ${result.withText} pages from ${schoolName} (${new URL(website).hostname}).`
-        : `Could not read page text from ${schoolName}.`,
+    message: reason,
   };
 }
 
@@ -158,9 +186,12 @@ export async function POST(request: Request) {
     );
   }
 
-  const onVercel = Boolean(process.env.VERCEL);
-  if (!onVercel && existsSync(pythonScriptPath())) {
-    return NextResponse.json(startPythonCrawl(body.school_id, school?.name || "this school"));
+  const pythonBin =
+    !process.env.VERCEL && process.env.USE_PYTHON_CRAWL && existsSync(pythonScriptPath())
+      ? resolvePython()
+      : null;
+  if (pythonBin) {
+    return NextResponse.json(startPythonCrawl(pythonBin, body.school_id, school?.name || "this school"));
   }
 
   const payload = await runInlineWebsiteCrawl(body.school_id, school?.name || "this school", website);

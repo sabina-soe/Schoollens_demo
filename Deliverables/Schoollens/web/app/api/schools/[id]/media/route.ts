@@ -11,7 +11,8 @@ export async function GET(_request: Request, context: { params: Promise<{ id: st
   } catch {
     // No staged dump for this school.
   }
-  const base = process.env.RAG_SERVICE_URL || "http://127.0.0.1:8000";
+  const base = process.env.RAG_SERVICE_URL;
+  if (!base) return NextResponse.json({ items: [] });
   try {
     const response = await fetch(`${base.replace(/\/$/, "")}/rag/media`, {
       method: "POST",

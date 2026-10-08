@@ -63,6 +63,17 @@ function skip(url: string) {
   return /\.(pdf|jpg|jpeg|png|gif|webp|svg|zip|mp4)(\?|$)/i.test(url) || url.startsWith("mailto:");
 }
 
+function canon(url: string) {
+  try {
+    const parsed = new URL(url);
+    parsed.hash = "";
+    const href = parsed.toString();
+    return href.replace(/\/$/, "") || href;
+  } catch {
+    return url.replace(/\/$/, "");
+  }
+}
+
 function priority(url: string) {
   const path = url.toLowerCase();
   const index = PRIORITY.findIndex((token) => path.includes(token));
@@ -111,9 +122,13 @@ function seedList(seed: string) {
 async function fetchPage(url: string, remainMs: number): Promise<CrawledPage & { html: string }> {
   try {
     const response = await fetch(url, {
-      headers: { "User-Agent": "SchoolLensBot/1.0 (+https://schoollens-demo.vercel.app)" },
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36 SchoolLensBot/1.0",
+        Accept: "text/html,application/xhtml+xml",
+      },
       redirect: "follow",
-      signal: AbortSignal.timeout(Math.max(1500, Math.min(4000, remainMs))),
+      signal: AbortSignal.timeout(Math.max(2500, Math.min(8000, remainMs))),
     });
     const html = await response.text();
     if (!response.ok) {
@@ -141,33 +156,51 @@ async function fetchPage(url: string, remainMs: number): Promise<CrawledPage & {
 
 export async function crawlSchoolWebsite(seed: string, options?: { maxPages?: number; maxMs?: number }) {
   const maxPages = options?.maxPages ?? 6;
-  const maxMs = options?.maxMs ?? 8000;
+  const maxMs = options?.maxMs ?? 15000;
   const started = Date.now();
-  const queued = [...new Set(seedList(seed.endsWith("/") ? seed : `${seed}/`))];
-  queued.sort((a, b) => priority(a) - priority(b));
+  const seedUrl = seed.endsWith("/") ? seed : `${seed}/`;
+  const extras = seedList(seedUrl).filter((url) => url.replace(/\/$/, "") !== seedUrl.replace(/\/$/, ""));
+  extras.sort((a, b) => priority(a) - priority(b));
+  const queued = extras;
   const seen = new Set<string>();
   const pages: CrawledPage[] = [];
+  let homeHtml = "";
+  let homeUrl = seedUrl;
+
+  const enqueue = (url: string) => {
+    const id = canon(url);
+    if (!seen.has(id) && !queued.some((item) => canon(item) === id) && !skip(url)) queued.push(id);
+  };
+
+  const take = async (url: string, keepErrors: boolean) => {
+    const id = canon(url);
+    if (seen.has(id) || skip(url) || pages.length >= maxPages) return;
+    seen.add(id);
+    const remain = maxMs - (Date.now() - started);
+    if (remain <= 0) return;
+    const page = await fetchPage(url, remain);
+    const { html, ...publicPage } = page;
+    const finalId = canon(publicPage.url);
+    seen.add(finalId);
+    if (!keepErrors && publicPage.crawl_status !== "success") return;
+    if (pages.some((row) => canon(row.url) === finalId)) return;
+    pages.push(publicPage);
+    if (!html || publicPage.crawl_status !== "success") return;
+    if (!homeHtml) {
+      homeHtml = html;
+      homeUrl = publicPage.url;
+    }
+    for (const link of extractLinks(page.url, html)) enqueue(link);
+  };
+
+  await take(seedUrl, true);
+  queued.sort((a, b) => priority(a) - priority(b));
 
   while (queued.length && pages.length < maxPages && Date.now() - started < maxMs) {
-    const remain = maxMs - (Date.now() - started);
-    const batch = queued.splice(0, 3).filter((url) => {
-      if (seen.has(url) || skip(url)) return false;
-      seen.add(url);
-      return true;
-    });
-    if (!batch.length) continue;
-    const fetched = await Promise.all(batch.map((url) => fetchPage(url, remain)));
-    for (const page of fetched) {
-      const { html, ...publicPage } = page;
-      pages.push(publicPage);
-      if (pages.length >= maxPages) break;
-      if (!html) continue;
-      for (const link of extractLinks(page.url, html)) {
-        if (!seen.has(link) && !queued.includes(link)) queued.push(link);
-      }
-    }
+    const batch = queued.splice(0, 3);
+    await Promise.all(batch.map((url) => take(url, false)));
   }
 
   const withText = pages.filter((page) => page.extracted_text.length > 80).length;
-  return { pages, withText };
+  return { pages, withText, homeHtml, homeUrl };
 }

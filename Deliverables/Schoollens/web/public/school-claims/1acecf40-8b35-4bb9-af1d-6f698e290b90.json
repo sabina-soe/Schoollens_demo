@@ -1,0 +1,194 @@
+{
+  "school_id": "1acecf40-8b35-4bb9-af1d-6f698e290b90",
+  "groups": [
+    {
+      "id": "535bce3f-49fe-4c87-978c-3ec63ba20b02",
+      "school_id": "1acecf40-8b35-4bb9-af1d-6f698e290b90",
+      "category": "curriculum",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:07:11.699Z",
+      "claims": [
+        {
+          "id": "97834840-dce7-4574-aff0-2ddc9c7c2c77",
+          "claim_text": "The school offers an international curriculum from Pearson Edexcel.",
+          "category": "curriculum",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:07:11.699Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "97834840-dce7-4574-aff0-2ddc9c7c2c77",
+          "source_excerpt": "International Curriculum The students are going to learn the curriculum from Pearson Edexcel, the largest educational organisation in the UK.",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:07:11.699Z",
+          "original_url": "https://aia.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "cace5b68-f836-41e6-a732-9af1f497c0c4",
+      "school_id": "1acecf40-8b35-4bb9-af1d-6f698e290b90",
+      "category": "curriculum",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:07:11.699Z",
+      "claims": [
+        {
+          "id": "8b73dc5e-4ed3-486e-943f-9754dfb13ab8",
+          "claim_text": "Classes are taught by native and local teachers from Primary Level to IGCSE Level.",
+          "category": "curriculum",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:07:11.699Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8b73dc5e-4ed3-486e-943f-9754dfb13ab8",
+          "source_excerpt": "Native and local teachers will teach from Primary Level to IGCSE Level with effective teaching methods and beneficial assessments.",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:07:11.699Z",
+          "original_url": "https://aia.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "3b949d98-f0bc-4041-a48d-9eee862ef97b",
+      "school_id": "1acecf40-8b35-4bb9-af1d-6f698e290b90",
+      "category": "curriculum",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:07:11.699Z",
+      "claims": [
+        {
+          "id": "a5dcd772-6fec-4e68-b5d2-434a320e174a",
+          "claim_text": "The school provides Primary education covering Year 1 to Year 6.",
+          "category": "curriculum",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:07:11.699Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "a5dcd772-6fec-4e68-b5d2-434a320e174a",
+          "source_excerpt": "🔰Primary (Year 1 to 6) – Nurturing well-rounded development with a solid foundation.",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:07:11.699Z",
+          "original_url": "https://aia.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "9d288e30-35ad-4be9-82a6-da6db5332bd9",
+      "school_id": "1acecf40-8b35-4bb9-af1d-6f698e290b90",
+      "category": "curriculum",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:07:11.699Z",
+      "claims": [
+        {
+          "id": "3b8c2654-6dfc-4bc9-a6f5-7690c0bb7394",
+          "claim_text": "The school provides Lower Secondary education covering Year 7 to Year 9.",
+          "category": "curriculum",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:07:11.699Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "3b8c2654-6dfc-4bc9-a6f5-7690c0bb7394",
+          "source_excerpt": "🔰Lower Secondary (Year 7 to 9) – The steps toward international universities, students are at the most crucial stage of preparing for their future educational journey.",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:07:11.699Z",
+          "original_url": "https://aia.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "4d82f37e-71e7-430e-b45b-4739e4d0601d",
+      "school_id": "1acecf40-8b35-4bb9-af1d-6f698e290b90",
+      "category": "curriculum",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:07:11.699Z",
+      "claims": [
+        {
+          "id": "d5710ff7-7e52-47a4-aa6c-cf871461151a",
+          "claim_text": "AiA International School (Mandalay) is authorized by the Ministry of Education as a registered private school.",
+          "category": "curriculum",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:07:11.699Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "d5710ff7-7e52-47a4-aa6c-cf871461151a",
+          "source_excerpt": "AiA International School (Mandalay) is authorized by the Ministry of Education as a registered private school and is permitted to deliver an international curriculum.",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:07:11.699Z",
+          "original_url": "https://aia.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "3189d756-3c2d-4b9e-b41f-6b85c141f7cf",
+      "school_id": "1acecf40-8b35-4bb9-af1d-6f698e290b90",
+      "category": "contact info",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:07:11.699Z",
+      "claims": [
+        {
+          "id": "7a8c4868-6333-4bfe-b95d-a83b685dd492",
+          "claim_text": "The school is located at A-11, 30th street, Between 56th x 57th street, Chan Aye Thar Zan Township, Mandalay, Myanmar.",
+          "category": "contact info",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:07:11.699Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "7a8c4868-6333-4bfe-b95d-a83b685dd492",
+          "source_excerpt": "AiA International School (Mandalay) A-11, 30th street, Between 56th x 57th street, Chan Aye Thar Zan Township, Mandalay, Myanmar.",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:07:11.699Z",
+          "original_url": "https://aia.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "39d1c1f6-3e57-4ee0-95a9-3f72d3e5503e",
+      "school_id": "1acecf40-8b35-4bb9-af1d-6f698e290b90",
+      "category": "contact info",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:07:11.699Z",
+      "claims": [
+        {
+          "id": "ed567766-29cc-4efd-88b8-0c4bf7ff2449",
+          "claim_text": "The school contact phone numbers are +95-9784160604 and +95-9444925755.",
+          "category": "contact info",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:07:11.699Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "ed567766-29cc-4efd-88b8-0c4bf7ff2449",
+          "source_excerpt": "☎️: +95-9784160604, +95-9444925755",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:07:11.699Z",
+          "original_url": "https://aia.edu.mm/"
+        }
+      ]
+    }
+  ]
+}

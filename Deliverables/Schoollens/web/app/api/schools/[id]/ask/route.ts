@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { localAsk } from "@/lib/local-ask";
 
 function ragErrorMessage(payload: unknown) {
   if (!payload || typeof payload !== "object") return "Question service failed.";
@@ -13,6 +14,30 @@ function ragErrorMessage(payload: unknown) {
   return "Question service failed.";
 }
 
+async function askPython(schoolId: string, question: string) {
+  const base = process.env.RAG_SERVICE_URL;
+  if (!base) return null;
+  try {
+    const query = new URLSearchParams({ school_id: schoolId });
+    const response = await fetch(`${base.replace(/\/$/, "")}/rag/qa?${query}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ school_id: schoolId, question }),
+      signal: AbortSignal.timeout(8000),
+    });
+    const answered = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      return { error: ragErrorMessage(answered) };
+    }
+    return {
+      answer: answered.answer,
+      cited_claim_group_ids: answered.cited_claim_group_ids ?? [],
+    };
+  } catch {
+    return null;
+  }
+}
+
 export async function POST(
   request: Request,
   context: { params: Promise<{ id: string }> },
@@ -24,24 +49,9 @@ export async function POST(
     return NextResponse.json({ error: "question is required" }, { status: 400 });
   }
 
-  const base = process.env.RAG_SERVICE_URL || "http://127.0.0.1:8000";
-  const payload = { school_id: schoolId, question };
-  const query = new URLSearchParams({ school_id: schoolId });
-  try {
-    const response = await fetch(`${base.replace(/\/$/, "")}/rag/qa?${query}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const answered = await response.json().catch(() => ({}));
-    if (!response.ok) {
-      return NextResponse.json({ error: ragErrorMessage(answered) }, { status: 502 });
-    }
-    return NextResponse.json({
-      answer: answered.answer,
-      cited_claim_group_ids: answered.cited_claim_group_ids ?? [],
-    });
-  } catch {
-    return NextResponse.json({ error: "Question service is not running." }, { status: 503 });
-  }
+  const fromPython = await askPython(schoolId, question);
+  if (fromPython && "answer" in fromPython) return NextResponse.json(fromPython);
+
+  const local = await localAsk(schoolId, question);
+  return NextResponse.json(local);
 }

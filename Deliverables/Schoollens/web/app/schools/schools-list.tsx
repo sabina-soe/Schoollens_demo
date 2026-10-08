@@ -12,6 +12,7 @@ import { ConfidenceChip } from "./[id]/confidence-chip";
 import { SchoolMark } from "../components/school-mark";
 import { SchoolCardSkeleton } from "../components/ui/skeleton";
 import { placeMatchesAddress } from "@/lib/places";
+import { collapseDirectorySchools } from "@/lib/school-network";
 import { schoolMatchesQuery } from "@/lib/school-search";
 import { type MoeRecord } from "@/lib/moe-register";
 
@@ -22,6 +23,7 @@ type School = {
   curriculum_type: string | null;
   school_group_id: string | null;
   moe_approved_from: string | null;
+  campusCount?: number;
 };
 
 type SortKey = "name" | "concern" | "supported";
@@ -66,7 +68,7 @@ export function SchoolsList() {
           setMoeBySchool({});
         });
       if (local.length) {
-        setSchools(local);
+        setSchools(collapseDirectorySchools(local));
         setLoading(false);
         const seeded = await loadKnownClaimOverlays();
         if (seeded.groups.length) {
@@ -89,7 +91,7 @@ export function SchoolsList() {
         if (queryError) throw new Error(queryError.message);
         const rows = data ?? [];
         if (!rows.length) return;
-        setSchools(rows);
+        setSchools(collapseDirectorySchools(rows));
         const { data: groups } = await supabase.from("claim_groups").select("school_id, confidence_label");
         const next: Record<string, string[]> = {};
         for (const group of groups ?? []) {
@@ -521,7 +523,11 @@ export function SchoolsList() {
                                 : "MOE registered"}
                             </span>
                           ) : null}
-                          {school.school_group_id ? <span className="meta-badge">Network campus</span> : null}
+                          {(school.campusCount ?? 0) > 1 ? (
+                            <span className="meta-badge">{school.campusCount} campuses</span>
+                          ) : school.school_group_id ? (
+                            <span className="meta-badge">Network</span>
+                          ) : null}
                         </div>
                       </div>
                       <div className="dir-card-footer">

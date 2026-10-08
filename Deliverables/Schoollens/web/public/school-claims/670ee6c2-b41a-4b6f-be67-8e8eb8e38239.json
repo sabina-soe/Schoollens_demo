@@ -1,0 +1,140 @@
+{
+  "school_id": "670ee6c2-b41a-4b6f-be67-8e8eb8e38239",
+  "groups": [
+    {
+      "id": "d6f93d23-a8b7-4189-a11a-d69e7c91d526",
+      "school_id": "670ee6c2-b41a-4b6f-be67-8e8eb8e38239",
+      "category": "curriculum",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:06:12.153Z",
+      "claims": [
+        {
+          "id": "a8d77af9-ec28-4717-b3bf-51b1f3602863",
+          "claim_text": "ACMI International School offers education from Kindergarten to A-Level.",
+          "category": "curriculum",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:06:12.153Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "a8d77af9-ec28-4717-b3bf-51b1f3602863",
+          "source_excerpt": "offering quality education from Kindergarten to A-Level",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:06:12.153Z",
+          "original_url": "https://www.acmi.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "eb72c6be-114b-427c-b744-824c1c2f0206",
+      "school_id": "670ee6c2-b41a-4b6f-be67-8e8eb8e38239",
+      "category": "curriculum",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:06:12.153Z",
+      "claims": [
+        {
+          "id": "54ff768d-d1d4-439c-8ee4-8104a43b7437",
+          "claim_text": "ACMI International School follows the Pearson Edexcel curriculum.",
+          "category": "curriculum",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:06:12.153Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "54ff768d-d1d4-439c-8ee4-8104a43b7437",
+          "source_excerpt": "We follow the Pearson Edexcel curriculum",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:06:12.153Z",
+          "original_url": "https://www.acmi.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "6d5e5f7e-8e9e-4b11-9c18-a2bc68d02adc",
+      "school_id": "670ee6c2-b41a-4b6f-be67-8e8eb8e38239",
+      "category": "contact info",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:06:12.153Z",
+      "claims": [
+        {
+          "id": "8f10719e-ad2e-4225-8730-2dd5d4229c27",
+          "claim_text": "ACMI International School is located at No. 804, Aung Thu Kha Street, 10 Mile, Insein Township, Yangon.",
+          "category": "contact info",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:06:12.153Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "8f10719e-ad2e-4225-8730-2dd5d4229c27",
+          "source_excerpt": "No. 804, Aung Thu Kha Street, 10 Mile, Insein Township, Yangon",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:06:12.153Z",
+          "original_url": "https://www.acmi.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "c241a326-fef3-4ca9-8c6f-50a6e363a582",
+      "school_id": "670ee6c2-b41a-4b6f-be67-8e8eb8e38239",
+      "category": "contact info",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:06:12.153Z",
+      "claims": [
+        {
+          "id": "cfa4186b-cd14-4110-86d3-98b73116ea4b",
+          "claim_text": "ACMI International School contact telephone number is (09)899887177.",
+          "category": "contact info",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:06:12.153Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "cfa4186b-cd14-4110-86d3-98b73116ea4b",
+          "source_excerpt": "Tel: (09)899887177",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:06:12.153Z",
+          "original_url": "https://www.acmi.edu.mm/"
+        }
+      ]
+    },
+    {
+      "id": "ab2ca0e2-aafe-44f9-b591-b12a04af2997",
+      "school_id": "670ee6c2-b41a-4b6f-be67-8e8eb8e38239",
+      "category": "contact info",
+      "confidence_label": "likely",
+      "reconciliation_note": "Official website. One source, so the label is likely, not independently corroborated.",
+      "last_updated": "2026-10-08T16:06:12.153Z",
+      "claims": [
+        {
+          "id": "feddc051-7c9c-4612-9438-368f15ae0875",
+          "claim_text": "ACMI International School contact email addresses are admin@acmi.edu.mm and acmi.international.school@gmail.com.",
+          "category": "contact info",
+          "source_type": "website",
+          "source_trust_tier": "official_website",
+          "created_at": "2026-10-08T16:06:12.153Z"
+        }
+      ],
+      "evidence": [
+        {
+          "claim_id": "feddc051-7c9c-4612-9438-368f15ae0875",
+          "source_excerpt": "Email: admin@acmi.edu.mm acmi.international.school@gmail.com",
+          "evidence_type": "webpage",
+          "uploaded_at": "2026-10-08T16:06:12.153Z",
+          "original_url": "https://www.acmi.edu.mm/"
+        }
+      ]
+    }
+  ]
+}
