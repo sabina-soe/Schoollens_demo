@@ -6,6 +6,7 @@ import re
 import sys
 import threading
 import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -1218,10 +1219,15 @@ def _run_website_recrawl(school_id: str, job_id: str, url: str):
     scrapers = str(root / "scrapers")
     if scrapers not in sys.path:
         sys.path.insert(0, scrapers)
-    db = _supabase()
+    db = None
+    try:
+        db = _supabase()
+    except Exception:
+        db = None
     with _WEBSITE_CRAWL_LOCK:
         try:
-            db.table("sync_jobs").update({"status": "running"}).eq("id", job_id).execute()
+            if db is not None:
+                db.table("sync_jobs").update({"status": "running"}).eq("id", job_id).execute()
             import importlib
 
             import crawl_website
@@ -1232,61 +1238,67 @@ def _run_website_recrawl(school_id: str, job_id: str, url: str):
             out_dir.mkdir(parents=True, exist_ok=True)
             out_path = out_dir / f"{datetime.now(timezone.utc).date().isoformat()}.json"
             out_path.write_text(json.dumps(pages, ensure_ascii=False, indent=2), encoding="utf-8")
-            ingested = _ingest_website_pages(db, school_id, pages)
+            ingested = _ingest_website_pages(db, school_id, pages) if db is not None else 0
             with_text = sum(
                 1 for page in pages if page.get("crawl_status") == "success" and page.get("extracted_text")
             )
             blocked = sum(1 for page in pages if page.get("crawl_status") == "blocked")
-            if not with_text:
+            status = "error" if not with_text else "success"
+            extracted = claims = 0
+            if status == "success" and db is not None:
+                extracted, claims = _extract_new_sources(school_id)
+            payload = {
+                "status": status,
+                "finished_at": datetime.now(timezone.utc).isoformat(),
+                "rows_ingested": ingested or with_text,
+                "errors": {
+                    "school_id": school_id,
+                    "pages": len(pages),
+                    "blocked": blocked,
+                    "hit_cap": hit_cap,
+                    "extracted_sources": extracted,
+                    "new_claims": claims,
+                    "reason": (
+                        "Crawl finished but no extractable page text was saved."
+                        if status == "error"
+                        else "manual recrawl from operator dashboard"
+                    ),
+                    "path": str(out_path),
+                },
+            }
+            if db is not None:
+                db.table("sync_jobs").update(payload).eq("id", job_id).execute()
+        except Exception as exc:
+            if db is not None:
                 db.table("sync_jobs").update(
                     {
                         "status": "error",
                         "finished_at": datetime.now(timezone.utc).isoformat(),
-                        "rows_ingested": ingested,
-                        "errors": {
-                            "school_id": school_id,
-                            "pages": len(pages),
-                            "blocked": blocked,
-                            "reason": "Crawl finished but no extractable page text was saved.",
-                        },
+                        "errors": {"school_id": school_id, "reason": str(exc)},
                     }
                 ).eq("id", job_id).execute()
-                return
-            extracted, claims = _extract_new_sources(school_id)
-            db.table("sync_jobs").update(
-                {
-                    "status": "success",
-                    "finished_at": datetime.now(timezone.utc).isoformat(),
-                    "rows_ingested": ingested,
-                    "errors": {
-                        "school_id": school_id,
-                        "pages": len(pages),
-                        "hit_cap": hit_cap,
-                        "extracted_sources": extracted,
-                        "new_claims": claims,
-                        "reason": "manual recrawl from operator dashboard",
-                    },
-                }
-            ).eq("id", job_id).execute()
-        except Exception as exc:
-            db.table("sync_jobs").update(
-                {
-                    "status": "error",
-                    "finished_at": datetime.now(timezone.utc).isoformat(),
-                    "errors": {"school_id": school_id, "reason": str(exc)},
-                }
-            ).eq("id", job_id).execute()
 
 
-@app.post("/rag/queue-recrawl")
-def queue_recrawl(request: QueueRecrawlRequest):
-    if request.source_type not in ("website", "fb_page"):
-        raise HTTPException(status_code=400, detail="source_type must be website or fb_page")
+def _local_school(school_id: str):
+    path = Path(__file__).resolve().parents[1] / "web" / "public" / "demo-register" / "schools.json"
+    if not path.exists():
+        return None
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    for row in payload.get("schools") or []:
+        if row.get("id") == school_id:
+            return row
+    return None
+
+
+def _resolve_queue_school(school_id: str):
+    local = _local_school(school_id)
+    if local:
+        return local
     db = _supabase()
     school = (
         db.table("schools")
         .select("id, name, official_website_url, official_facebook_url")
-        .eq("id", request.school_id)
+        .eq("id", school_id)
         .limit(1)
         .execute()
         .data
@@ -1294,7 +1306,14 @@ def queue_recrawl(request: QueueRecrawlRequest):
     )
     if not school:
         raise HTTPException(status_code=404, detail="school not found")
-    row = school[0]
+    return school[0]
+
+
+@app.post("/rag/queue-recrawl")
+def queue_recrawl(request: QueueRecrawlRequest):
+    if request.source_type not in ("website", "fb_page"):
+        raise HTTPException(status_code=400, detail="source_type must be website or fb_page")
+    row = _resolve_queue_school(request.school_id)
     url = row.get("official_website_url") if request.source_type == "website" else row.get("official_facebook_url")
     if not url:
         raise HTTPException(
@@ -1310,22 +1329,28 @@ def queue_recrawl(request: QueueRecrawlRequest):
         reason = "queued for Apify / n8n — Facebook crawl is not started from this button yet"
         message = f"Facebook recrawl queued for {row['name']}. Apify will run it when that pipeline is connected."
 
-    inserted = (
-        db.table("sync_jobs")
-        .insert(
-            {
-                "source_type": request.source_type,
-                "started_at": now,
-                "status": "queued",
-                "rows_ingested": 0,
-                "errors": {"school_id": request.school_id, "reason": reason},
-            }
+    job = {"id": str(uuid.uuid4())}
+    try:
+        db = _supabase()
+        inserted = (
+            db.table("sync_jobs")
+            .insert(
+                {
+                    "source_type": request.source_type,
+                    "started_at": now,
+                    "status": "queued",
+                    "rows_ingested": 0,
+                    "errors": {"school_id": request.school_id, "reason": reason},
+                }
+            )
+            .execute()
+            .data
+            or []
         )
-        .execute()
-        .data
-        or []
-    )
-    job = inserted[0] if inserted else {}
+        if inserted and inserted[0].get("id"):
+            job = inserted[0]
+    except Exception:
+        job = {"id": str(uuid.uuid4())}
     if request.source_type == "website" and job.get("id"):
         threading.Thread(
             target=_run_website_recrawl,

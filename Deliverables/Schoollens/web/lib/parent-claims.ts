@@ -3,6 +3,8 @@ export type ParentClaimInput = {
   confidence_label?: string | null;
   reconciliation_note?: string | null;
   claim_texts?: string[];
+  source_url?: string | null;
+  claim_group_id?: string | null;
 };
 
 const PARENT_CATEGORIES = new Set([

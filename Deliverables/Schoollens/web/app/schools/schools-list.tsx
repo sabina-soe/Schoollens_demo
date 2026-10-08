@@ -9,6 +9,7 @@ import { isRegisterUnreachable, loadLocalSchools, withTimeout } from "@/lib/publ
 import { loadKnownClaimOverlays, overlayLabels } from "@/lib/claim-overlay";
 import { headlineConfidence } from "@/lib/row-confidence";
 import { ConfidenceChip } from "./[id]/confidence-chip";
+import { SchoolMark } from "../components/school-mark";
 import { SchoolCardSkeleton } from "../components/ui/skeleton";
 import { placeMatchesAddress } from "@/lib/places";
 import { schoolMatchesQuery } from "@/lib/school-search";
@@ -32,18 +33,6 @@ const CONFIDENCE_TITLES: Record<ConfidenceLabel, string> = {
   outdated: "Outdated",
   unknown: "Unknown",
 };
-
-function schoolMonogram(name: string) {
-  const letters = name
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((word) => word[0])
-    .join("")
-    .replace(/[^A-Za-z]/g, "")
-    .slice(0, 3)
-    .toUpperCase();
-  return letters || name.slice(0, 3).toUpperCase();
-}
 
 function placeLabel(address: string | null) {
   if (!address) return "";
@@ -494,9 +483,7 @@ export function SchoolsList() {
                       <div className="dir-card-body">
                         <div className="dir-card-top">
                           <div className="dir-card-identity">
-                            <div className="dir-card-crest" aria-hidden="true">
-                              {schoolMonogram(school.name)}
-                            </div>
+                            <SchoolMark name={school.name} schoolId={school.id} groupId={school.school_group_id} size="md" />
                             <div>
                               <h2 className="dir-card-title">
                                 <Link href={`/schools/${school.id}`}>{school.name}</Link>

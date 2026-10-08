@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import { readLocalDemoSession, withDeadline } from "@/lib/demo-session";
+import { loadLocalSchools } from "@/lib/public-register";
 import { DEFAULT_SCHEDULES, type ScheduleRow } from "@/lib/operator-schedule";
 import { CrawlTargets, jobSchoolId, type Job, type LastCrawl, type SchoolRow } from "./crawl-targets";
 
@@ -12,6 +14,35 @@ type Mention = {
   school_id: string;
   confidence: string | null;
 };
+
+async function loadLocalJobs(): Promise<Job[]> {
+  try {
+    const response = await fetch("/api/operator/jobs", { cache: "no-store" });
+    if (!response.ok) return [];
+    const payload = (await response.json()) as { jobs?: Job[] };
+    return payload.jobs ?? [];
+  } catch {
+    return [];
+  }
+}
+
+function mergeJobs(live: Job[], local: Job[]) {
+  const seen = new Set(live.map((job) => job.id));
+  return [...local.filter((job) => !seen.has(job.id)), ...live];
+}
+
+function applyLocalCrawlStatus(latest: Record<string, LastCrawl>, jobs: Job[]) {
+  for (const job of jobs) {
+    const schoolId = jobSchoolId(job);
+    if (!schoolId || job.source_type !== "website") continue;
+    if (job.status === "success") {
+      latest[schoolId] = {
+        crawled_at: job.finished_at || job.started_at,
+        crawl_status: "success",
+      };
+    }
+  }
+}
 
 export function OperatorDashboard() {
   const [state, setState] = useState<"loading" | "denied" | "ready">("loading");
@@ -33,58 +64,107 @@ export function OperatorDashboard() {
 
   const load = useCallback(async () => {
     const supabase = createClient();
-    const { data: sessionData } = await supabase.auth.getSession();
-    const user = sessionData.session?.user;
-    if (!user) {
+    let user = null as { id: string } | null;
+    try {
+      const { data: sessionData } = await withDeadline(supabase.auth.getSession(), 3000);
+      user = sessionData.session?.user ?? null;
+    } catch {
+      user = null;
+    }
+    const localOperator = readLocalDemoSession()?.role === "platform_operator";
+    if (!user && !localOperator) {
       setState("denied");
       return;
     }
-    const { data: profile } = await supabase.from("users").select("role").eq("id", user.id).maybeSingle();
-    if (profile?.role !== "platform_operator") {
-      setState("denied");
-      return;
+    if (user) {
+      try {
+        const { data: profile } = await withDeadline(
+          supabase.from("users").select("role").eq("id", user.id).maybeSingle(),
+          3000,
+        );
+        if (profile?.role !== "platform_operator" && !localOperator) {
+          setState("denied");
+          return;
+        }
+      } catch {
+        if (!localOperator) {
+          setState("denied");
+          return;
+        }
+      }
     }
 
-    const { data: schoolRows, error: schoolError } = await supabase
-      .from("schools")
-      .select("id, name, official_website_url, official_facebook_url, address, location, geocode_confidence")
-      .order("name");
-    const { data: sources } = await supabase
-      .from("raw_sources")
-      .select("school_id, crawled_at, crawl_status")
-      .order("crawled_at", { ascending: false })
-      .limit(4000);
-    const { data: jobRows } = await supabase
-      .from("sync_jobs")
-      .select("id, source_type, started_at, finished_at, status, rows_ingested, errors")
-      .order("started_at", { ascending: false })
-      .limit(40);
-    const { data: mentionRows } = await supabase
-      .from("raw_source_school_mentions")
-      .select("id, raw_source_id, school_id, confidence")
-      .in("confidence", ["low", "unknown"]);
-    const { data: scheduleRows } = await supabase.from("operator_schedules").select("pipeline, cron_expr, timezone");
+    try {
+      const [schoolRes, sources, jobRows, mentionRows, scheduleRows] = await withDeadline(
+        Promise.all([
+          supabase
+            .from("schools")
+            .select("id, name, official_website_url, official_facebook_url, address, location, geocode_confidence")
+            .order("name"),
+          supabase
+            .from("raw_sources")
+            .select("school_id, crawled_at, crawl_status")
+            .order("crawled_at", { ascending: false })
+            .limit(4000),
+          supabase
+            .from("sync_jobs")
+            .select("id, source_type, started_at, finished_at, status, rows_ingested, errors")
+            .order("started_at", { ascending: false })
+            .limit(40),
+          supabase
+            .from("raw_source_school_mentions")
+            .select("id, raw_source_id, school_id, confidence")
+            .in("confidence", ["low", "unknown"]),
+          supabase.from("operator_schedules").select("pipeline, cron_expr, timezone"),
+        ]),
+        5000,
+      );
 
-    if (schoolError) {
-      setError(schoolError.message);
-    } else {
+      if (schoolRes.error) {
+        setError(schoolRes.error.message);
+      } else {
+        setError(null);
+      }
+      let list = schoolRes.data ?? [];
+      if (!list.length) {
+        list = await loadLocalSchools();
+        if (list.length) {
+          setNotice("Live school table was empty. Showing the local register.");
+        }
+      }
+      setSchools(list);
+      setSchoolById(Object.fromEntries(list.map((row) => [row.id, row.name])));
+      const latest: Record<string, LastCrawl> = {};
+      for (const row of sources.data ?? []) {
+        if (!row.school_id || latest[row.school_id]) continue;
+        latest[row.school_id] = { crawled_at: row.crawled_at, crawl_status: row.crawl_status };
+      }
+      const localJobs = await loadLocalJobs();
+      const mergedJobs = mergeJobs(jobRows.data ?? [], localJobs);
+      applyLocalCrawlStatus(latest, localJobs);
+      setLastBySchool(latest);
+      setJobs(mergedJobs);
+      setMentions(mentionRows.data ?? []);
+      if (scheduleRows.data?.length) {
+        setSchedules(scheduleRows.data);
+      }
+      setState("ready");
+    } catch {
+      const list = await loadLocalSchools();
+      const localJobs = await loadLocalJobs();
+      const latest: Record<string, LastCrawl> = {};
+      applyLocalCrawlStatus(latest, localJobs);
+      setSchools(list);
+      setSchoolById(Object.fromEntries(list.map((row) => [row.id, row.name])));
+      setLastBySchool(latest);
+      setJobs(localJobs);
+      setMentions([]);
+      if (!localJobs.length) {
+        setNotice("Signed in locally. Website crawls now run on this machine.");
+      }
       setError(null);
+      setState("ready");
     }
-    const list = schoolRows ?? [];
-    setSchools(list);
-    setSchoolById(Object.fromEntries(list.map((row) => [row.id, row.name])));
-    const latest: Record<string, LastCrawl> = {};
-    for (const row of sources ?? []) {
-      if (!row.school_id || latest[row.school_id]) continue;
-      latest[row.school_id] = { crawled_at: row.crawled_at, crawl_status: row.crawl_status };
-    }
-    setLastBySchool(latest);
-    setJobs(jobRows ?? []);
-    setMentions(mentionRows ?? []);
-    if (scheduleRows?.length) {
-      setSchedules(scheduleRows);
-    }
-    setState("ready");
   }, []);
 
   useEffect(() => {
@@ -151,32 +231,17 @@ export function OperatorDashboard() {
       body: JSON.stringify({ school_id: school.id, source_type: sourceType }),
     });
     const payload = await response.json().catch(() => ({}));
-    if (response.ok) {
-      setNotice(
-        sourceType === "website"
-          ? `${payload.message || "Website recrawl queued."} The profile fills after extract finishes — watch Run history.`
-          : payload.message || "Queued Facebook recrawl.",
-      )
-      setBusyKey(null);
-      void load();
-      return;
-    }
-
-    const supabase = createClient();
-    const { error: insertError } = await supabase.from("sync_jobs").insert({
-      source_type: sourceType,
-      started_at: new Date().toISOString(),
-      status: "queued",
-      rows_ingested: 0,
-      errors: { school_id: school.id, reason: "manual recrawl from operator dashboard" },
-    });
     setBusyKey(null);
-    if (!insertError) {
-      setNotice(`Queued ${sourceType === "website" ? "website" : "Facebook"} recrawl for ${school.name}.`);
-      void load();
+    if (!response.ok) {
+      setError(payload.error || "The crawl did not start.");
       return;
     }
-    setError(payload.error || insertError.message);
+    setNotice(
+      sourceType === "website"
+        ? `${payload.message || "Website crawl started."} Watch Run history for pages saved.`
+        : payload.message || "Queued Facebook recrawl.",
+    );
+    void load();
   }
 
   async function saveSchedule(event: FormEvent<HTMLFormElement>, pipeline: string) {
@@ -222,9 +287,13 @@ export function OperatorDashboard() {
   if (state === "loading") {
     return (
       <main className="operator-page">
-        <p className="operator-kicker">Platform</p>
-        <h1>Operator</h1>
-        <p>Loading…</p>
+        <section className="op-band">
+          <div className="op-band-inner">
+            <p className="op-kicker">Collection desk</p>
+            <h1>Operator</h1>
+            <p className="op-lead">Loading the crawl console…</p>
+          </div>
+        </section>
       </main>
     );
   }
@@ -232,10 +301,13 @@ export function OperatorDashboard() {
   if (state === "denied") {
     return (
       <main className="operator-page">
-        <p className="operator-kicker">Platform</p>
-        <h1>Operator</h1>
-        <p>This dashboard is limited to platform operators.</p>
-        <p>Click Sign in, choose Operator, then open this page again.</p>
+        <section className="op-band">
+          <div className="op-band-inner">
+            <p className="op-kicker">Collection desk</p>
+            <h1>Operator access only</h1>
+            <p className="op-lead">Sign in as Operator, then open this page again.</p>
+          </div>
+        </section>
       </main>
     );
   }
@@ -248,178 +320,229 @@ export function OperatorDashboard() {
 
   return (
     <main className="operator-page">
-      <header className="operator-hero">
-        <p className="operator-kicker">
-          <Link href="/">Home</Link>
-        </p>
-        <h1>Platform operator</h1>
-        <p className="operator-lead">
-          Crawl infrastructure only — URLs, schedules, run history, and mention review. Claim content stays on the
-          moderator desk.
-        </p>
-      </header>
+      <section className="op-band">
+        <div className="op-band-inner">
+          <p className="op-kicker">
+            <Link href="/">Directory</Link>
+            <span aria-hidden="true"> / </span>
+            Collection desk
+          </p>
+          <div className="op-hero">
+            <div>
+              <h1>Collect school evidence</h1>
+              <p className="op-lead">
+                Queue official websites. SchoolLens crawls public pages, then extract writes fees, curriculum, and
+                facilities onto the school profile.
+              </p>
+            </div>
+            <a href="#collect" className="btn op-hero-btn">
+              Start a website crawl
+            </a>
+          </div>
+          <ol className="op-steps">
+            <li>
+              <span>1</span>
+              Choose a school with a website
+            </li>
+            <li>
+              <span>2</span>
+              Queue the crawl
+            </li>
+            <li>
+              <span>3</span>
+              Open the profile after extract
+            </li>
+          </ol>
+        </div>
+      </section>
 
-      {error ? <p className="error operator-error">{error}</p> : null}
+      <div className="op-shell">
+        {error ? <p className="op-error">{error}</p> : null}
 
-      <div className="operator-stats">
-        <div className="operator-stat">
-          <p className="operator-stat-value">{stats.total}</p>
-          <p className="operator-stat-label">Schools</p>
+        <div className="op-stats">
+          <article className="op-stat">
+            <p className="op-stat-value">{stats.total}</p>
+            <p className="op-stat-label">Schools on file</p>
+          </article>
+          <article className="op-stat">
+            <p className="op-stat-value">{stats.withWebsite}</p>
+            <p className="op-stat-label">Official websites</p>
+          </article>
+          <article className="op-stat">
+            <p className="op-stat-value">{stats.neverCrawled}</p>
+            <p className="op-stat-label">Not crawled yet</p>
+          </article>
+          <article className="op-stat">
+            <p className="op-stat-value">{stats.queued}</p>
+            <p className="op-stat-label">In the queue</p>
+          </article>
         </div>
-        <div className="operator-stat">
-          <p className="operator-stat-value">{stats.withWebsite}</p>
-          <p className="operator-stat-label">With website</p>
+
+        <CrawlTargets
+          schools={schools}
+          lastBySchool={lastBySchool}
+          jobs={jobs}
+          busyKey={busyKey}
+          notice={notice}
+          onSaveUrls={saveUrls}
+          onQueue={queueRecrawl}
+        />
+
+        <div className="op-grid">
+          <section className="op-card" id="history">
+            <div className="op-card-head">
+              <div>
+                <p className="op-kicker">Activity</p>
+                <h2>Run history</h2>
+                <p className="op-lead">Website jobs start here. The school profile updates after extract finishes.</p>
+              </div>
+            </div>
+            {jobs.length === 0 ? (
+              <p className="op-empty">No runs yet. Queue a website crawl to see the first row.</p>
+            ) : (
+              <div className="op-table-wrap">
+                <table className="op-table">
+                  <thead>
+                    <tr>
+                      <th>School</th>
+                      <th>Source</th>
+                      <th>Status</th>
+                      <th>Pages</th>
+                      <th>Started</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {jobs.map((job) => {
+                      const schoolId = jobSchoolId(job);
+                      const tone =
+                        job.status === "success" ? "success" : job.status === "error" ? "blocked" : "queued";
+                      return (
+                        <tr key={job.id}>
+                          <td>{schoolId ? (schoolById[schoolId] ?? schoolId) : "—"}</td>
+                          <td>{job.source_type === "fb_page" ? "Facebook" : job.source_type ?? "—"}</td>
+                          <td>
+                            <span className={`op-status op-status-${tone}`}>{job.status ?? "—"}</span>
+                          </td>
+                          <td>{job.rows_ingested ?? "—"}</td>
+                          <td>{job.started_at?.replace("T", " ").slice(0, 16) ?? "—"}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </section>
+
+          <section className="op-card" id="schedules">
+            <div className="op-card-head">
+              <div>
+                <p className="op-kicker">Automation</p>
+                <h2>Schedules</h2>
+                <p className="op-lead">Intended cron in Asia/Yangon. Live runs start in n8n.</p>
+              </div>
+            </div>
+            <div className="op-schedule-list">
+              {DEFAULT_SCHEDULES.map((meta) => {
+                const row = schedules.find((item) => item.pipeline === meta.pipeline) ?? meta;
+                return (
+                  <form
+                    key={meta.pipeline}
+                    className="op-schedule"
+                    onSubmit={(event) => void saveSchedule(event, meta.pipeline)}
+                  >
+                    <div className="op-schedule-top">
+                      <h3>{meta.label}</h3>
+                      <span className="op-cadence">{meta.cadence}</span>
+                    </div>
+                    <label htmlFor={`cron-${meta.pipeline}`}>
+                      Cron
+                      <input id={`cron-${meta.pipeline}`} name="cron" defaultValue={row.cron_expr} />
+                    </label>
+                    <label htmlFor={`tz-${meta.pipeline}`}>
+                      Timezone
+                      <input id={`tz-${meta.pipeline}`} name="timezone" defaultValue={row.timezone} />
+                    </label>
+                    <button type="submit" className="btn btn-secondary">
+                      Save schedule
+                    </button>
+                  </form>
+                );
+              })}
+            </div>
+          </section>
         </div>
-        <div className="operator-stat">
-          <p className="operator-stat-value">{stats.neverCrawled}</p>
-          <p className="operator-stat-label">Never crawled</p>
-        </div>
-        <div className="operator-stat">
-          <p className="operator-stat-value">{stats.queued}</p>
-          <p className="operator-stat-label">In queue</p>
+
+        <div className="op-grid">
+          <section className="op-card" id="review">
+            <div className="op-card-head">
+              <div>
+                <p className="op-kicker">Review</p>
+                <h2>Group mentions</h2>
+                <p className="op-lead">Low-confidence Facebook group matches. Confirm or reject the school link.</p>
+              </div>
+            </div>
+            {mentions.length === 0 ? (
+              <p className="op-empty">No low-confidence group mentions.</p>
+            ) : (
+              <ul className="op-mention-list">
+                {mentions.map((row) => (
+                  <li key={row.id}>
+                    <div>
+                      <strong>{schoolById[row.school_id] ?? row.school_id}</strong>
+                      <p>{row.confidence}</p>
+                    </div>
+                    <div className="op-mention-actions">
+                      <button type="button" className="btn btn-secondary" onClick={() => void decideMention(row.id, "confirmed")}>
+                        Confirm
+                      </button>
+                      <button type="button" className="btn btn-secondary" onClick={() => void decideMention(row.id, "rejected")}>
+                        Reject
+                      </button>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+
+          <section className="op-card">
+            <div className="op-card-head">
+              <div>
+                <p className="op-kicker">Maps</p>
+                <h2>Geocode queue</h2>
+                <p className="op-lead">Low or failed pins. Batch job: python scrapers/geocode_schools.py</p>
+              </div>
+            </div>
+            {geocodeQueue.length === 0 ? (
+              <p className="op-empty">No addresses waiting for a pin.</p>
+            ) : (
+              <div className="op-geo-list">
+                {geocodeQueue.map((school) => (
+                  <form key={school.id} className="op-schedule" onSubmit={(event) => void savePin(event, school.id)}>
+                    <h3>
+                      <Link href={`/schools/${school.id}`}>{school.name}</Link>
+                    </h3>
+                    <p className="op-lead">{school.address}</p>
+                    <p className="op-lead">Confidence: {school.geocode_confidence || "none"}</p>
+                    <label htmlFor={`lat-${school.id}`}>
+                      Latitude
+                      <input id={`lat-${school.id}`} name="lat" required />
+                    </label>
+                    <label htmlFor={`lng-${school.id}`}>
+                      Longitude
+                      <input id={`lng-${school.id}`} name="lng" required />
+                    </label>
+                    <button type="submit" className="btn btn-secondary">
+                      Save pin
+                    </button>
+                  </form>
+                ))}
+              </div>
+            )}
+          </section>
         </div>
       </div>
-
-      <CrawlTargets
-        schools={schools}
-        lastBySchool={lastBySchool}
-        jobs={jobs}
-        busyKey={busyKey}
-        notice={notice}
-        onSaveUrls={saveUrls}
-        onQueue={queueRecrawl}
-      />
-
-      <section className="operator-panel">
-        <h2>Schedules</h2>
-        <p className="operator-lead">Intended cron in Asia/Yangon. Live runs start in n8n, not from this page.</p>
-        <div className="schedule-grid">
-          {DEFAULT_SCHEDULES.map((meta) => {
-            const row = schedules.find((item) => item.pipeline === meta.pipeline) ?? meta;
-            return (
-              <form
-                key={meta.pipeline}
-                className="schedule-card"
-                onSubmit={(event) => void saveSchedule(event, meta.pipeline)}
-              >
-                <h3>
-                  {meta.label}
-                  <span className="schedule-cadence">{meta.cadence}</span>
-                </h3>
-                <label htmlFor={`cron-${meta.pipeline}`}>
-                  Cron
-                  <input id={`cron-${meta.pipeline}`} name="cron" defaultValue={row.cron_expr} />
-                </label>
-                <label htmlFor={`tz-${meta.pipeline}`}>
-                  Timezone
-                  <input id={`tz-${meta.pipeline}`} name="timezone" defaultValue={row.timezone} />
-                </label>
-                <button type="submit" className="op-btn">
-                  Save schedule
-                </button>
-              </form>
-            );
-          })}
-        </div>
-      </section>
-
-      <section className="operator-panel">
-        <h2>Run history</h2>
-        {jobs.length === 0 ? (
-          <p className="operator-empty">No sync jobs yet. Queue a recrawl to see the first row.</p>
-        ) : (
-          <div className="operator-table-wrap">
-            <table className="operator-table">
-              <thead>
-                <tr>
-                  <th>School</th>
-                  <th>Source</th>
-                  <th>Status</th>
-                  <th>Rows</th>
-                  <th>Started</th>
-                </tr>
-              </thead>
-              <tbody>
-                {jobs.map((job) => {
-                  const schoolId = jobSchoolId(job);
-                  return (
-                    <tr key={job.id}>
-                      <td>{schoolId ? (schoolById[schoolId] ?? schoolId) : "—"}</td>
-                      <td>{job.source_type === "fb_page" ? "Facebook" : job.source_type ?? "—"}</td>
-                      <td>
-                        <span className={`crawl-status crawl-status-${job.status === "success" ? "success" : job.status === "error" ? "blocked" : "queued"}`}>
-                          {job.status ?? "—"}
-                        </span>
-                      </td>
-                      <td>{job.rows_ingested ?? "—"}</td>
-                      <td>{job.started_at?.replace("T", " ").slice(0, 16) ?? "—"}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </section>
-
-      <section className="operator-panel">
-        <h2>Group-mention review</h2>
-        {mentions.length === 0 ? (
-          <p className="operator-empty">No low-confidence group mentions.</p>
-        ) : (
-          <ul className="mention-list">
-            {mentions.map((row) => (
-              <li key={row.id}>
-                <div>
-                  <strong>{schoolById[row.school_id] ?? row.school_id}</strong>
-                  <p className="directory-meta">{row.confidence}</p>
-                </div>
-                <div className="crawl-actions">
-                  <button type="button" className="op-btn" onClick={() => void decideMention(row.id, "confirmed")}>
-                    Confirm
-                  </button>
-                  <button type="button" className="op-btn danger" onClick={() => void decideMention(row.id, "rejected")}>
-                    Reject
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </section>
-
-      <section className="operator-panel">
-        <h2>Geocode manual-fix queue</h2>
-        <p className="operator-lead">
-          Batch job: <code>python scrapers/geocode_schools.py</code>. Low or failed results land here.
-        </p>
-        {geocodeQueue.length === 0 ? (
-          <p className="operator-empty">No addresses waiting for a pin.</p>
-        ) : (
-          <div className="geocode-list">
-            {geocodeQueue.map((school) => (
-              <form key={school.id} className="schedule-card" onSubmit={(event) => void savePin(event, school.id)}>
-                <h3>
-                  <Link href={`/schools/${school.id}`}>{school.name}</Link>
-                </h3>
-                <p className="directory-meta">{school.address}</p>
-                <p className="directory-meta">Current confidence: {school.geocode_confidence || "none"}</p>
-                <label htmlFor={`lat-${school.id}`}>
-                  Latitude
-                  <input id={`lat-${school.id}`} name="lat" required />
-                </label>
-                <label htmlFor={`lng-${school.id}`}>
-                  Longitude
-                  <input id={`lng-${school.id}`} name="lng" required />
-                </label>
-                <button type="submit" className="op-btn">
-                  Save pin
-                </button>
-              </form>
-            ))}
-          </div>
-        )}
-      </section>
     </main>
   );
 }

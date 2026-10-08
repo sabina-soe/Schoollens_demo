@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { FormEvent, useMemo, useState } from "react";
+import { SchoolMark } from "../components/school-mark";
 
 export type SchoolRow = {
   id: string;
@@ -30,13 +31,21 @@ type Filter = "all" | "website" | "facebook" | "never" | "queued" | "blocked";
 const PAGE_SIZE = 20;
 
 const FILTERS: { id: Filter; label: string }[] = [
-  { id: "all", label: "All" },
+  { id: "all", label: "All schools" },
   { id: "website", label: "Has website" },
   { id: "facebook", label: "Has Facebook" },
   { id: "never", label: "Never crawled" },
   { id: "queued", label: "In queue" },
   { id: "blocked", label: "Blocked" },
 ];
+
+const DEMO_FIRST = new Set([
+  "b0595924-73f7-49c4-94b0-b05017d77ef8",
+  "f6c7b97d-8959-4d0c-841f-8148d10dcd4d",
+  "d1e8deee-ed2c-43fb-a382-c3adb5d06861",
+  "ba3c6f02-961b-42e1-8ef9-21d872abbda7",
+  "5d88ea9c-c422-4696-88f3-5f2afb315530",
+]);
 
 export function jobSchoolId(job: Job): string | null {
   const errors = job.errors;
@@ -78,7 +87,7 @@ export function CrawlTargets({
   onQueue: (school: SchoolRow, sourceType: "website" | "fb_page") => void;
 }) {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState<Filter>("all");
+  const [filter, setFilter] = useState<Filter>("website");
   const [openId, setOpenId] = useState<string | null>(null);
   const [visible, setVisible] = useState(PAGE_SIZE);
 
@@ -97,7 +106,7 @@ export function CrawlTargets({
 
   const filtered = useMemo(() => {
     const needle = query.trim().toLowerCase();
-    return schools.filter((school) => {
+    const rows = schools.filter((school) => {
       if (needle && !school.name.toLowerCase().includes(needle)) return false;
       const last = lastBySchool[school.id];
       const queued = (activeBySchool[school.id]?.sources.length ?? 0) > 0;
@@ -108,45 +117,52 @@ export function CrawlTargets({
       if (filter === "blocked") return last?.crawl_status === "blocked" || last?.crawl_status === "disallowed";
       return true;
     });
+    return rows.sort((a, b) => {
+      const aFirst = DEMO_FIRST.has(a.id) ? 0 : 1;
+      const bFirst = DEMO_FIRST.has(b.id) ? 0 : 1;
+      if (aFirst !== bFirst) return aFirst - bFirst;
+      return a.name.localeCompare(b.name);
+    });
   }, [activeBySchool, filter, lastBySchool, query, schools]);
 
   const shown = filtered.slice(0, visible);
 
   return (
-    <section className="operator-panel" aria-labelledby="crawl-targets-heading">
-      <div className="operator-panel-head">
+    <section className="op-card" id="collect" aria-labelledby="crawl-targets-heading">
+      <div className="op-card-head">
         <div>
-          <h2 id="crawl-targets-heading">Crawl targets</h2>
-          <p className="operator-lead">
-            Edit official URLs, see last crawl status, and queue a recrawl. Website jobs start immediately. Facebook
-            jobs wait for the Apify pipeline.
+          <p className="op-kicker">Live collection</p>
+          <h2 id="crawl-targets-heading">Crawl official websites</h2>
+          <p className="op-lead">
+            Queue a school website. The crawler reads public pages; extract then writes evidence on the profile.
           </p>
         </div>
-        <p className="operator-count">
-          {filtered.length} of {schools.length}
+        <p className="op-count">
+          <strong>{filtered.length}</strong>
+          <span>of {schools.length} schools</span>
         </p>
       </div>
 
-      {notice ? <p className="operator-notice">{notice}</p> : null}
+      {notice ? <p className="op-notice">{notice}</p> : null}
 
-      <div className="crawl-toolbar">
-        <label className="crawl-search">
-          Search schools
+      <div className="op-toolbar">
+        <label className="op-search">
+          <span className="visually-hidden">Search schools</span>
           <input
             value={query}
             onChange={(event) => {
               setQuery(event.target.value);
               setVisible(PAGE_SIZE);
             }}
-            placeholder="Search by name"
+            placeholder="Search ILBC, ISY, Kings…"
           />
         </label>
-        <div className="crawl-filters" role="group" aria-label="Filter crawl targets">
+        <div className="op-filters" role="group" aria-label="Filter crawl targets">
           {FILTERS.map((item) => (
             <button
               key={item.id}
               type="button"
-              className={filter === item.id ? "op-chip op-chip-active" : "op-chip"}
+              className={filter === item.id ? "op-pill op-pill-active" : "op-pill"}
               onClick={() => {
                 setFilter(item.id);
                 setVisible(PAGE_SIZE);
@@ -159,9 +175,9 @@ export function CrawlTargets({
       </div>
 
       {shown.length === 0 ? (
-        <p className="operator-empty">No schools match this filter.</p>
+        <p className="op-empty">No schools match this filter.</p>
       ) : (
-        <ul className="crawl-list">
+        <ul className="op-crawl-list">
           {shown.map((school) => {
             const last = lastBySchool[school.id];
             const queued = activeBySchool[school.id]?.sources ?? [];
@@ -170,52 +186,68 @@ export function CrawlTargets({
             const status = queued.length
               ? { tone: "queued", text: activeBySchool[school.id]?.running ? "Running" : "Queued" }
               : !last?.crawled_at
-                ? { tone: "unknown", text: "Never crawled" }
+                ? { tone: "unknown", text: "Ready to crawl" }
                 : last.crawl_status === "blocked" || last.crawl_status === "disallowed"
-                  ? { tone: "blocked", text: `${last.crawl_status} · ${last.crawled_at.slice(0, 10)}` }
-                  : { tone: "success", text: `Success · ${last.crawled_at.slice(0, 10)}` };
+                  ? { tone: "blocked", text: last.crawl_status }
+                  : { tone: "success", text: "Crawled" };
             const website = hostLabel(school.official_website_url);
             const facebook = hostLabel(school.official_facebook_url);
             const open = openId === school.id;
+            const when = last?.crawled_at ? last.crawled_at.slice(0, 10) : null;
 
             return (
-              <li key={school.id} className={open ? "crawl-row crawl-row-open" : "crawl-row"}>
-                <div className="crawl-main">
-                  <div className="crawl-identity">
-                    <Link href={`/schools/${school.id}`}>{school.name}</Link>
-                    <p className="crawl-urls">
-                      <span>{website ?? "No website"}</span>
+              <li key={school.id} className={open ? "op-crawl-row is-open" : "op-crawl-row"}>
+                <div className="op-crawl-main">
+                  <SchoolMark name={school.name} schoolId={school.id} groupId={null} size="md" />
+                  <div className="op-crawl-copy">
+                    <div className="op-crawl-title-row">
+                      <Link href={`/schools/${school.id}`} className="op-crawl-name">
+                        {school.name}
+                      </Link>
+                      <span className={`op-status op-status-${status.tone}`}>{status.text}</span>
+                    </div>
+                    <p className="op-crawl-meta">
+                      <span className={website ? "op-source-ok" : "op-source-missing"}>
+                        {website ?? "No website"}
+                      </span>
                       <span aria-hidden="true">·</span>
-                      <span>{facebook ?? "No Facebook"}</span>
+                      <span className={facebook ? "op-source-ok" : "op-source-missing"}>
+                        {facebook ?? "No Facebook"}
+                      </span>
+                      {when ? (
+                        <>
+                          <span aria-hidden="true">·</span>
+                          <span>Last {when}</span>
+                        </>
+                      ) : null}
                     </p>
                   </div>
-                  <span className={`crawl-status crawl-status-${status.tone}`}>{status.text}</span>
-                  <div className="crawl-actions">
-                    <button type="button" className="op-btn ghost" onClick={() => setOpenId(open ? null : school.id)}>
-                      {open ? "Close" : "Edit URLs"}
-                    </button>
+                  <div className="op-crawl-actions">
                     <button
                       type="button"
-                      className="op-btn"
+                      className="btn btn-primary"
                       disabled={!school.official_website_url || websiteBusy}
                       onClick={() => onQueue(school, "website")}
                     >
-                      {websiteBusy ? "Queueing…" : queued.includes("website") ? "Website queued" : "Queue website"}
+                      {websiteBusy ? "Queueing…" : queued.includes("website") ? "Website queued" : "Crawl website"}
                     </button>
                     <button
                       type="button"
-                      className="op-btn ghost"
+                      className="btn btn-secondary"
                       disabled={!school.official_facebook_url || facebookBusy}
                       onClick={() => onQueue(school, "fb_page")}
                     >
                       {facebookBusy ? "Queueing…" : queued.includes("fb_page") ? "Facebook queued" : "Queue Facebook"}
                     </button>
+                    <button type="button" className="op-text-btn" onClick={() => setOpenId(open ? null : school.id)}>
+                      {open ? "Close" : "Edit sources"}
+                    </button>
                   </div>
                 </div>
                 {open ? (
-                  <form className="crawl-edit" onSubmit={(event) => onSaveUrls(event, school)}>
+                  <form className="op-crawl-edit" onSubmit={(event) => onSaveUrls(event, school)}>
                     <label htmlFor={`web-${school.id}`}>
-                      Website
+                      Official website
                       <input
                         id={`web-${school.id}`}
                         name="website"
@@ -224,7 +256,7 @@ export function CrawlTargets({
                       />
                     </label>
                     <label htmlFor={`fb-${school.id}`}>
-                      Facebook
+                      Official Facebook
                       <input
                         id={`fb-${school.id}`}
                         name="facebook"
@@ -232,8 +264,8 @@ export function CrawlTargets({
                         placeholder="https://facebook.com/…"
                       />
                     </label>
-                    <button type="submit" className="op-btn">
-                      Save URLs
+                    <button type="submit" className="btn btn-primary">
+                      Save sources
                     </button>
                   </form>
                 ) : null}
@@ -244,7 +276,7 @@ export function CrawlTargets({
       )}
 
       {filtered.length > visible ? (
-        <button type="button" className="op-btn ghost crawl-more" onClick={() => setVisible((count) => count + PAGE_SIZE)}>
+        <button type="button" className="btn btn-secondary op-more" onClick={() => setVisible((count) => count + PAGE_SIZE)}>
           Show more ({filtered.length - visible} left)
         </button>
       ) : null}

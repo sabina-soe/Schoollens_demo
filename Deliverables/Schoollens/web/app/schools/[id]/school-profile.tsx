@@ -7,6 +7,8 @@ import { normalizeConfidence, type ConfidenceLabel } from "@/lib/confidence";
 import { isRegisterUnreachable, loadLocalSchools, withTimeout } from "@/lib/public-register";
 import { loadClaimOverlay, localNetworkIds } from "@/lib/claim-overlay";
 import { networkIds, pickBySchoolIds } from "@/lib/school-network";
+import { addFeePosterCounts } from "@/lib/fee-claims";
+import type { FeePoster } from "@/lib/school-branches";
 import { moeBadgeLabel, moeRangeLabel, type MoeRecord } from "@/lib/moe-register";
 import { DeferredSection } from "../../components/deferred-section";
 import { AskTab } from "./ask-tab";
@@ -16,6 +18,7 @@ import { ClaimForm } from "./claim-form";
 import { ConfidenceChip } from "./confidence-chip";
 import { OverviewTab } from "./overview-tab";
 import { ReviewsTab } from "./reviews-tab";
+import { SchoolMark } from "../../components/school-mark";
 import { ProfileHeaderSkeleton, Skeleton } from "../../components/ui/skeleton";
 
 const PROFILE_NAV = [
@@ -53,18 +56,6 @@ const EMPTY_COUNTS: Record<ConfidenceLabel, number> = {
   unknown: 0,
 };
 
-function schoolMonogram(name: string) {
-  const letters = name
-    .split(/\s+/)
-    .filter(Boolean)
-    .map((word) => word[0])
-    .join("")
-    .replace(/[^A-Za-z]/g, "")
-    .slice(0, 3)
-    .toUpperCase();
-  return letters || name.slice(0, 3).toUpperCase();
-}
-
 export function SchoolProfile({ id }: { id: string }) {
   const [school, setSchool] = useState<School | null>(null);
   const [signedIn, setSignedIn] = useState(false);
@@ -87,10 +78,10 @@ export function SchoolProfile({ id }: { id: string }) {
     if (typeof window === "undefined") return;
     const hash = window.location.hash.replace("#", "");
     if (!hash) return;
-    const mapped = hash === "culture-safety" ? "overview" : hash;
+    const mapped = hash.startsWith("claim-") ? "verification-hub" : hash === "culture-safety" ? "overview" : hash;
     setActiveSection(mapped);
     const timer = window.setTimeout(() => {
-      document.getElementById(mapped)?.scrollIntoView({ behavior: "smooth", block: "start" });
+      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 400);
     return () => window.clearTimeout(timer);
   }, [id]);
@@ -156,18 +147,30 @@ export function SchoolProfile({ id }: { id: string }) {
             if (!cancelled) setMoeRecord(pickBySchoolIds(payload, mergedIds));
           })
           .catch(() => {});
-        const groupsRes = await supabase.from("claim_groups").select("confidence_label").in("school_id", mergedIds);
+        const groupsRes = await supabase.from("claim_groups").select("confidence_label, category").in("school_id", mergedIds);
         if (cancelled) return;
         let labels = groupsRes.data ?? [];
         if (!labels.length) {
           const overlay = await loadClaimOverlay(mergedIds);
-          labels = overlay.map((group) => ({ confidence_label: group.confidence_label }));
+          labels = overlay.map((group) => ({ confidence_label: group.confidence_label, category: group.category }));
         }
         const next = { ...EMPTY_COUNTS };
         for (const group of labels) {
           next[normalizeConfidence(group.confidence_label)] += 1;
         }
-        setCounts(next);
+        try {
+          const response = await fetch("/school-fees/by-school.json", { cache: "no-store" });
+          if (response.ok) {
+            const payload = (await response.json()) as Record<string, { posters?: FeePoster[] }>;
+            const posters = pickBySchoolIds(payload, mergedIds)?.posters ?? [];
+            const hasFee = labels.some((row) => String(row.category || "").toLowerCase() === "fees");
+            setCounts(addFeePosterCounts(next, posters, hasFee));
+          } else {
+            setCounts(next);
+          }
+        } catch {
+          setCounts(next);
+        }
         const user = sessionRes.data.session?.user;
         setSignedIn(Boolean(user));
         if (!user) return;
@@ -188,7 +191,19 @@ export function SchoolProfile({ id }: { id: string }) {
           for (const group of overlay) {
             next[normalizeConfidence(group.confidence_label)] += 1;
           }
-          setCounts(next);
+          try {
+            const response = await fetch("/school-fees/by-school.json", { cache: "no-store" });
+            if (response.ok) {
+              const payload = (await response.json()) as Record<string, { posters?: FeePoster[] }>;
+              const posters = pickBySchoolIds(payload, seededIds)?.posters ?? [];
+              const hasFee = overlay.some((row) => String(row.category || "").toLowerCase() === "fees");
+              setCounts(addFeePosterCounts(next, posters, hasFee));
+            } else {
+              setCounts(next);
+            }
+          } catch {
+            setCounts(next);
+          }
         }
         if (!local) {
           setError(isRegisterUnreachable(caught) ? null : caught instanceof Error ? caught.message : "Failed to fetch");
@@ -257,12 +272,7 @@ export function SchoolProfile({ id }: { id: string }) {
       <header className="profile-hero">
         <div className="profile-hero-inner">
           <div className="profile-hero-main">
-            <div className="profile-crest" aria-hidden="true">
-              <svg className="profile-crest-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 3 2 8l10 5 8-4.1V17h2V8L12 3zm-7 9.2V14c0 2.5 3.1 4.5 7 4.5s7-2 7-4.5v-1.8l-7 3.5-7-3.5z" />
-              </svg>
-              <span className="profile-crest-letters">{schoolMonogram(school.name)}</span>
-            </div>
+            <SchoolMark name={school.name} schoolId={school.id} groupId={school.school_group_id} size="lg" />
             <div className="profile-hero-copy">
               <div className="profile-badges-row">
                 {moeBadge ? <span className="badge-moe-verified">{moeBadge}</span> : null}
@@ -327,10 +337,23 @@ export function SchoolProfile({ id }: { id: string }) {
                     (["supported", "likely", "conflicting", "outdated", "unknown"] as ConfidenceLabel[])
                       .filter((label) => counts[label] > 0)
                       .map((label) => (
-                        <div key={label} className="confidence-summary-item">
+                        <a
+                          key={label}
+                          href={`#claim-${label}`}
+                          className="confidence-summary-item confidence-summary-link"
+                          onClick={() => {
+                            setActiveSection("verification-hub");
+                            window.setTimeout(() => {
+                              document.getElementById(`claim-${label}`)?.scrollIntoView({
+                                behavior: "smooth",
+                                block: "start",
+                              });
+                            }, 80);
+                          }}
+                        >
                           <ConfidenceChip label={label} size="sm" />
                           <span className="confidence-summary-count">{counts[label]}</span>
-                        </div>
+                        </a>
                       ))
                   )}
                 </div>

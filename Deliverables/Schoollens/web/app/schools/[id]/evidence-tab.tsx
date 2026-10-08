@@ -13,8 +13,12 @@ import {
   freshnessLabel,
   normalizeConfidence,
   sourceTag,
+  type ConfidenceLabel,
 } from "@/lib/confidence";
 import { isParentDecisionTopic } from "@/lib/parent-claims";
+import { feePostersToLedgerRows } from "@/lib/fee-claims";
+import { pickBySchoolIds } from "@/lib/school-network";
+import type { FeePoster } from "@/lib/school-branches";
 import { ConfidenceChip } from "./confidence-chip";
 import { Skeleton } from "../../components/ui/skeleton";
 
@@ -76,6 +80,21 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
             }),
           );
       }
+      async function withFeeOverlay(base: LedgerRow[]) {
+        try {
+          const response = await fetch("/school-fees/by-school.json", { cache: "no-store" });
+          if (!response.ok) return base;
+          const payload = (await response.json()) as Record<string, { posters?: FeePoster[] }>;
+          const record = pickBySchoolIds(payload, ledgerIds);
+          const posters = record?.posters ?? [];
+          const hasFeeClaimGroups = base.some((row) => String(row.category || "").toLowerCase() === "fees");
+          const extra = feePostersToLedgerRows(schoolId, posters, hasFeeClaimGroups);
+          const seen = new Set(base.map((row) => row.id));
+          return [...extra.filter((row) => !seen.has(row.id)), ...base];
+        } catch {
+          return base;
+        }
+      }
       try {
       const { data: groups, error: groupError } = await supabase
         .from("claim_groups")
@@ -85,7 +104,7 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
       if (groupError && !isRegisterUnreachable(groupError)) setError(groupError.message);
 
       if (!groups?.length) {
-        setRows(rowsFromOverlay(await loadClaimOverlay(ledgerIds)));
+        setRows(await withFeeOverlay(rowsFromOverlay(await loadClaimOverlay(ledgerIds))));
         setLoading(false);
         return;
       }
@@ -124,60 +143,77 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
       }
 
       setRows(
-        groups
-          .map((group) => {
-            const ids = membersByGroup.get(group.id) ?? [];
-            const claimTexts: string[] = [];
-            const excerpts: EvidenceRow[] = [];
-            for (const claimId of ids) {
-              const claim = claimById[claimId];
-              if (claim?.claim_text && !claimTexts.includes(claim.claim_text)) {
-                claimTexts.push(claim.claim_text);
+        await withFeeOverlay(
+          groups
+            .map((group) => {
+              const ids = membersByGroup.get(group.id) ?? [];
+              const claimTexts: string[] = [];
+              const excerpts: EvidenceRow[] = [];
+              for (const claimId of ids) {
+                const claim = claimById[claimId];
+                if (claim?.claim_text && !claimTexts.includes(claim.claim_text)) {
+                  claimTexts.push(claim.claim_text);
+                }
+                for (const item of evidenceByClaim.get(claimId) ?? []) {
+                  excerpts.push({
+                    source_excerpt: item.source_excerpt,
+                    evidence_type: item.evidence_type,
+                    uploaded_at: item.uploaded_at,
+                    original_url: item.original_url,
+                    source_type: claim?.source_type ?? null,
+                    source_trust_tier: claim?.source_trust_tier ?? null,
+                  });
+                }
               }
-              for (const item of evidenceByClaim.get(claimId) ?? []) {
-                excerpts.push({
-                  source_excerpt: item.source_excerpt,
-                  evidence_type: item.evidence_type,
-                  uploaded_at: item.uploaded_at,
-                  original_url: item.original_url,
-                  source_type: claim?.source_type ?? null,
-                  source_trust_tier: claim?.source_trust_tier ?? null,
-                });
-              }
-            }
-            return {
-              id: group.id,
-              category: group.category,
-              confidence_label: group.confidence_label,
-              reconciliation_note: group.reconciliation_note,
-              last_updated: group.last_updated,
-              claim_texts: claimTexts,
-              evidence: excerpts,
-            };
-          })
-          .filter((row) =>
-            isParentDecisionTopic({
-              category: row.category,
-              confidence_label: row.confidence_label,
-              reconciliation_note: row.reconciliation_note,
-              claim_texts: row.claim_texts,
-            }),
-          ),
+              return {
+                id: group.id,
+                category: group.category,
+                confidence_label: group.confidence_label,
+                reconciliation_note: group.reconciliation_note,
+                last_updated: group.last_updated,
+                claim_texts: claimTexts,
+                evidence: excerpts,
+              };
+            })
+            .filter((row) =>
+              isParentDecisionTopic({
+                category: row.category,
+                confidence_label: row.confidence_label,
+                reconciliation_note: row.reconciliation_note,
+                claim_texts: row.claim_texts,
+              }),
+            ),
+        ),
       );
       setLoading(false);
       } catch {
-        setRows(rowsFromOverlay(await loadClaimOverlay(ledgerIds)));
+        setRows(await withFeeOverlay(rowsFromOverlay(await loadClaimOverlay(ledgerIds))));
         setLoading(false);
       }
     })();
   }, [schoolId, networkIds?.join("|")]);
 
+  const [focusLabel, setFocusLabel] = useState<ConfidenceLabel | null>(null);
+
+  useEffect(() => {
+    function readHash() {
+      const match = window.location.hash.replace("#", "").match(/^claim-(supported|likely|conflicting|outdated|unknown)$/);
+      setFocusLabel(match ? (match[1] as ConfidenceLabel) : null);
+    }
+    readHash();
+    window.addEventListener("hashchange", readHash);
+    return () => window.removeEventListener("hashchange", readHash);
+  }, []);
+
   useEffect(() => {
     if (loading) return;
     const id = window.location.hash.replace("#", "");
-    if (!id) return;
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [loading, rows]);
+    if (!id.startsWith("claim-")) return;
+    const timer = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+    return () => window.clearTimeout(timer);
+  }, [loading, rows, focusLabel]);
 
   if (loading) {
     return (
@@ -197,8 +233,11 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
     );
   }
 
+  const visibleRows = focusLabel
+    ? rows.filter((row) => normalizeConfidence(row.confidence_label) === focusLabel)
+    : rows;
   const grouped = new Map<string, LedgerRow[]>();
-  for (const row of rows) {
+  for (const row of visibleRows) {
     const key = String(row.category || "other").toLowerCase();
     const list = grouped.get(key) ?? [];
     list.push(row);
@@ -208,14 +247,25 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
     ...CATEGORY_SECTIONS.map((section) => section.key),
     ...[...grouped.keys()].filter((key) => !CATEGORY_SECTIONS.some((section) => section.key === key)),
   ].filter((key) => grouped.has(key));
+  const usedFocusIds = new Set<string>();
 
   return (
     <div className="evidence-ledger-container">
+      {focusLabel ? (
+        <div className="evidence-filter-banner">
+          <p>
+            Showing {visibleRows.length} {focusLabel} claim{visibleRows.length === 1 ? "" : "s"}.
+          </p>
+          <a href="#verification-hub" className="evidence-filter-clear" onClick={() => setFocusLabel(null)}>
+            Show all
+          </a>
+        </div>
+      ) : null}
       <nav className="section-jump-nav" aria-label="Evidence categories">
         <span className="jump-title">Categories:</span>
         <div className="jump-pills">
           {orderedKeys.map((key) => (
-            <a key={key} href={`#${categoryId(key)}`} className="jump-pill">
+            <a key={key} href={`#evidence-${categoryId(key)}`} className="jump-pill">
               {categoryTitle(key)} ({grouped.get(key)?.length || 0})
             </a>
           ))}
@@ -231,7 +281,7 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
               : [],
           );
           return (
-            <section key={key} id={categoryId(key)} className="evidence-section-group">
+            <section key={key} id={`evidence-${categoryId(key)}`} className="evidence-section-group">
               <div className="section-group-header">
                 <h3 className="section-group-title">{categoryTitle(key)}</h3>
                 <span className="section-group-count">{sectionRows.length} verified item{sectionRows.length === 1 ? "" : "s"}</span>
@@ -249,8 +299,17 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
               ) : null}
 
               <div className="evidence-cards-list">
-                {sectionRows.map((row) => (
-                  <article key={row.id} className="evidence-item-card">
+                {sectionRows.map((row) => {
+                  const label = normalizeConfidence(row.confidence_label);
+                  const focusId = `claim-${label}`;
+                  const takeFocusId = !usedFocusIds.has(focusId);
+                  if (takeFocusId) usedFocusIds.add(focusId);
+                  return (
+                  <article
+                    key={row.id}
+                    id={takeFocusId ? focusId : `claim-group-${row.id}`}
+                    className={`evidence-item-card${focusLabel === label ? " evidence-item-card-focus" : ""}`}
+                  >
                     <div className="evidence-item-header">
                       <div className="evidence-header-left">
                         <ConfidenceChip label={row.confidence_label} size="sm" />
@@ -266,11 +325,28 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
                     </div>
 
                     <div className="evidence-claims-body">
-                      {row.claim_texts.map((text) => (
-                        <p key={text} className="evidence-claim-statement">
-                          {text}
-                        </p>
-                      ))}
+                      {row.claim_texts.map((text) => {
+                        const href =
+                          row.evidence.find((item) => item.original_url)?.original_url || null;
+                        return href ? (
+                          <a
+                            key={text}
+                            href={href}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="evidence-claim-statement evidence-claim-link"
+                          >
+                            {text}
+                            <span className="evidence-claim-link-mark" aria-hidden="true">
+                              ↗
+                            </span>
+                          </a>
+                        ) : (
+                          <p key={text} className="evidence-claim-statement">
+                            {text}
+                          </p>
+                        );
+                      })}
                     </div>
 
                     {row.reconciliation_note ? (
@@ -294,14 +370,36 @@ export function EvidenceTab({ schoolId, networkIds }: { schoolId: string; networ
                                 <span className="source-tag-pill">
                                   {sourceTag(item.source_type, item.source_trust_tier)}
                                 </span>
+                                {item.original_url ? (
+                                  <a
+                                    href={item.original_url}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="source-open-link"
+                                  >
+                                    Open source
+                                  </a>
+                                ) : null}
                               </div>
-                              <p className="source-quote-text">“{item.source_excerpt}”</p>
+                              {item.original_url ? (
+                                <a
+                                  href={item.original_url}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="source-quote-text source-quote-link"
+                                >
+                                  “{item.source_excerpt}”
+                                </a>
+                              ) : (
+                                <p className="source-quote-text">“{item.source_excerpt}”</p>
+                              )}
                             </blockquote>
                           ))}
                       </div>
                     ) : null}
                   </article>
-                ))}
+                  );
+                })}
               </div>
             </section>
           );

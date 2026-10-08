@@ -431,7 +431,24 @@ export function OverviewTab({
   if (error) return <div className="error-banner">{error}</div>;
 
   const stats = (stored?.key_stats ?? []).filter((item) => item.label && item.value);
-  const verify = parentVerifyItems(stored?.things_to_verify ?? []);
+  const feeVerify = feePosters
+    .filter((poster) => {
+      const label = String(poster.confidence || "").toLowerCase();
+      return label === "outdated" || label === "conflicting";
+    })
+    .map((poster) => ({
+      category: "fees",
+      confidence_label: poster.confidence,
+      reconciliation_note: poster.lead || null,
+      source_url: poster.source_url || (poster.file ? `/school-fees/${encodeURIComponent(poster.file)}` : null),
+      claim_texts: [
+        ...(poster.branches ?? []).flatMap((branch) =>
+          (branch.programmes ?? []).map((row) => `${row.item}: ${row.amount || ""}`.trim()),
+        ),
+        ...(poster.shared ?? []).map((row) => `${row.item}: ${row.amount || ""}`.trim()),
+      ].filter(Boolean),
+    }));
+  const verify = parentVerifyItems([...(stored?.things_to_verify ?? []), ...feeVerify]);
   const curriculum = sections.find((section) => section.key === "curriculum");
   const facilities = sections.find((section) => section.key === "facilities");
   const languages = sections.find((section) => /language|diploma/.test(section.key));
@@ -620,6 +637,10 @@ export function OverviewTab({
                       <Link href={`/schools/${schoolId}/conflict/${item.claim_group_id}`} className="verify-inspect-link">
                         Open full comparison
                       </Link>
+                    ) : item.source_url ? (
+                      <a href={item.source_url} target="_blank" rel="noreferrer" className="verify-inspect-link">
+                        Open source
+                      </a>
                     ) : null
                   }
                 />

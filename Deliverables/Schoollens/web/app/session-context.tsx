@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { clearLocalDemoSession, readLocalDemoSession, withDeadline } from "@/lib/demo-session";
 import { createClient } from "@/lib/supabase/client";
 
 export type SessionStatus = "loading" | "out" | "in";
@@ -32,21 +33,44 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   const [email, setEmail] = useState<string | null>(null);
   const [role, setRole] = useState<string | null>(null);
 
-  const loadUser = useCallback(async () => {
-    const supabase = createClient();
-    const { data, error } = await supabase.auth.getSession();
-    if (error || !data.session?.user) {
+  const applyLocalDemo = useCallback(() => {
+    const demo = readLocalDemoSession();
+    if (!demo) {
       setEmail(null);
       setRole(null);
       setStatus("out");
-      return;
+      return false;
     }
-    const user = data.session.user;
-    setEmail(user.email ?? user.phone ?? user.id);
-    const { data: profile } = await supabase.from("users").select("role").eq("id", user.id).maybeSingle();
-    setRole(profile?.role ?? "parent");
+    setEmail(demo.email);
+    setRole(demo.role);
     setStatus("in");
+    return true;
   }, []);
+
+  const loadUser = useCallback(async () => {
+    const supabase = createClient();
+    try {
+      const { data, error } = await withDeadline(supabase.auth.getSession(), 3000);
+      if (!error && data.session?.user) {
+        const user = data.session.user;
+        setEmail(user.email ?? user.phone ?? user.id);
+        try {
+          const { data: profile } = await withDeadline(
+            supabase.from("users").select("role").eq("id", user.id).maybeSingle(),
+            3000,
+          );
+          setRole(profile?.role ?? readLocalDemoSession()?.role ?? "parent");
+        } catch {
+          setRole(readLocalDemoSession()?.role ?? "parent");
+        }
+        setStatus("in");
+        return;
+      }
+    } catch {
+      // Live auth is offline; fall through to the local demo session.
+    }
+    applyLocalDemo();
+  }, [applyLocalDemo]);
 
   useEffect(() => {
     void loadUser();
@@ -60,8 +84,13 @@ export function SessionProvider({ children }: { children: React.ReactNode }) {
   }, [loadUser]);
 
   const logOut = useCallback(async () => {
+    clearLocalDemoSession();
     const supabase = createClient();
-    await supabase.auth.signOut();
+    try {
+      await withDeadline(supabase.auth.signOut(), 2500);
+    } catch {
+      // Local demo logout still works if Auth is offline.
+    }
     window.location.assign("/");
   }, []);
 

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { DEMO_ACCOUNTS, DEMO_PASSWORD, type DemoRole } from "@/lib/demo-accounts";
 import { isDemoModeClient } from "@/lib/demo-mode";
+import { writeLocalDemoSession, withDeadline } from "@/lib/demo-session";
 import { createClient } from "@/lib/supabase/client";
 import { assertDemoLogin } from "./actions";
 
@@ -24,26 +25,32 @@ export function RoleSwitcher({ open, onClose }: { open: boolean; onClose: () => 
     return null;
   }
 
+  function finish(role: DemoRole) {
+    writeLocalDemoSession(role);
+    window.location.assign(role === "platform_operator" ? "/operator" : "/");
+  }
+
   async function loginAs(role: DemoRole) {
     setError(null);
     setPendingRole(role);
     try {
       const { email } = await assertDemoLogin(role);
       const supabase = createClient();
-      const { data, error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password: DEMO_PASSWORD,
-      });
-      if (signInError) {
-        throw new Error(signInError.message);
+      const { data, error: signInError } = await withDeadline(
+        supabase.auth.signInWithPassword({
+          email,
+          password: DEMO_PASSWORD,
+        }),
+        4000,
+      );
+      if (signInError || !data.session) {
+        finish(role);
+        return;
       }
-      if (!data.session) {
-        throw new Error("Signed in but no session was returned. Confirm the repair SQL ran.");
-      }
-      window.location.assign("/");
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Demo login failed");
-      setPendingRole(null);
+      writeLocalDemoSession(role);
+      window.location.assign(role === "platform_operator" ? "/operator" : "/");
+    } catch {
+      finish(role);
     }
   }
 

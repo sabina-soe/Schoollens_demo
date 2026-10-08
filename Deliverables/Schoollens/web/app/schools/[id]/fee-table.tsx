@@ -8,9 +8,11 @@ function hasSplitAmounts(rows: FeeAmountRow[]) {
 function ProgrammeTable({
   rows,
   focusYear,
+  sourceHref,
 }: {
   rows: FeeAmountRow[];
   focusYear?: string;
+  sourceHref?: string;
 }) {
   const split = hasSplitAmounts(rows);
   const visible = focusYear ? rows.filter((row) => row.item === focusYear) : rows;
@@ -50,7 +52,15 @@ function ProgrammeTable({
                     <td className="fee-table-amount">{row.online || "—"}</td>
                   </>
                 ) : (
-                  <td className="fee-table-amount">{row.amount || "—"}</td>
+                  <td className="fee-table-amount">
+                    {sourceHref && row.amount ? (
+                      <a href={sourceHref} target="_blank" rel="noreferrer" className="fee-amount-link">
+                        {row.amount}
+                      </a>
+                    ) : (
+                      row.amount || "—"
+                    )}
+                  </td>
                 )}
               </tr>
             );
@@ -119,7 +129,7 @@ export function FeeTable({
         </div>
       ) : null}
 
-      {programmes.length ? <ProgrammeTable rows={programmes} focusYear={focusYear} /> : null}
+      {programmes.length ? <ProgrammeTable rows={programmes} focusYear={focusYear} sourceHref={href} /> : null}
 
       {!programmes.length && parsed?.rows.length ? (
         <div className="fee-table-wrap">
