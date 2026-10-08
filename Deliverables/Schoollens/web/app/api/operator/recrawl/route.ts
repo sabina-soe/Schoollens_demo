@@ -3,7 +3,11 @@ import { randomUUID } from "crypto";
 import { existsSync, readFileSync } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
-import { upsertOperatorJob } from "@/lib/operator-jobs";
+import { upsertOperatorJob, type OperatorJob } from "@/lib/operator-jobs";
+import { crawlSchoolWebsite } from "@/lib/website-crawl";
+
+export const runtime = "nodejs";
+export const maxDuration = 60;
 
 function localSchool(schoolId: string) {
   const file = path.resolve(process.cwd(), "public", "demo-register", "schools.json");
@@ -14,22 +18,24 @@ function localSchool(schoolId: string) {
   return payload.schools?.find((row) => row.id === schoolId) ?? null;
 }
 
+function ragBases() {
+  if (process.env.RAG_SERVICE_URL) return [process.env.RAG_SERVICE_URL];
+  if (process.env.VERCEL) return [];
+  return ["http://127.0.0.1:8000", "http://127.0.0.1:8001"];
+}
+
 async function queueOnRag(schoolId: string, sourceType: string) {
-  const bases = [
-    ...new Set(
-      [process.env.RAG_SERVICE_URL, "http://127.0.0.1:8000", "http://127.0.0.1:8001"].filter(
-        (value): value is string => Boolean(value),
-      ),
-    ),
-  ];
-  for (const base of bases) {
+  for (const base of ragBases()) {
     try {
       const controller = new AbortController();
       const timer = setTimeout(() => controller.abort(), 3500);
       const response = await fetch(`${base.replace(/\/$/, "")}/rag/queue-recrawl`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ school_id: schoolId, source_type: sourceType }),
+        body: JSON.stringify({
+          school_id: schoolId,
+          source_type: sourceType,
+        }),
         signal: controller.signal,
       });
       clearTimeout(timer);
@@ -37,7 +43,11 @@ async function queueOnRag(schoolId: string, sourceType: string) {
       if (response.status === 404) continue;
       if (!response.ok) {
         const detail = payload.detail ?? payload.error ?? "Queue failed.";
-        return { ok: false as const, status: response.status, error: typeof detail === "string" ? detail : "Queue failed." };
+        return {
+          ok: false as const,
+          status: response.status,
+          error: typeof detail === "string" ? detail : "Queue failed.",
+        };
       }
       return { ok: true as const, payload };
     } catch {
@@ -47,8 +57,12 @@ async function queueOnRag(schoolId: string, sourceType: string) {
   return null;
 }
 
-function startLocalWebsiteCrawl(schoolId: string, schoolName: string) {
-  const job = {
+function pythonScriptPath() {
+  return path.resolve(process.cwd(), "..", "scrapers", "operator_local_crawl.py");
+}
+
+function startPythonCrawl(schoolId: string, schoolName: string) {
+  const job: OperatorJob = {
     id: randomUUID(),
     school_id: schoolId,
     source_type: "website",
@@ -59,8 +73,7 @@ function startLocalWebsiteCrawl(schoolId: string, schoolName: string) {
     errors: { school_id: schoolId, reason: "local website crawl from operator desk" },
   };
   upsertOperatorJob(job);
-  const script = path.resolve(process.cwd(), "..", "scrapers", "operator_local_crawl.py");
-  const child = spawn("python", [script, job.id, schoolId], {
+  const child = spawn("python", [pythonScriptPath(), job.id, schoolId], {
     cwd: path.resolve(process.cwd(), ".."),
     detached: true,
     stdio: "ignore",
@@ -69,9 +82,45 @@ function startLocalWebsiteCrawl(schoolId: string, schoolName: string) {
   child.unref();
   return {
     ok: true,
+    job,
     job_id: job.id,
     status: "queued",
     message: `Website crawl started locally for ${schoolName}. Watch Run history.`,
+  };
+}
+
+async function runInlineWebsiteCrawl(schoolId: string, schoolName: string, website: string) {
+  const started = new Date().toISOString();
+  const result = await crawlSchoolWebsite(website, { maxPages: 6, maxMs: 8000 });
+  const job: OperatorJob = {
+    id: randomUUID(),
+    school_id: schoolId,
+    source_type: "website",
+    status: result.withText > 0 ? "success" : "error",
+    started_at: started,
+    finished_at: new Date().toISOString(),
+    rows_ingested: result.withText,
+    errors: {
+      school_id: schoolId,
+      pages: result.pages.length,
+      titles: result.pages.map((page) => page.page_title || page.url).slice(0, 8),
+      reason:
+        result.withText > 0
+          ? `Crawled ${result.withText} page${result.withText === 1 ? "" : "s"} from ${new URL(website).hostname}`
+          : "The website did not return extractable page text.",
+    },
+  };
+  upsertOperatorJob(job);
+  return {
+    ok: result.withText > 0,
+    job,
+    job_id: job.id,
+    status: job.status,
+    pages: result.pages.map((page) => ({ url: page.url, title: page.page_title, status: page.crawl_status })),
+    message:
+      result.withText > 0
+        ? `Crawled ${result.withText} pages from ${schoolName} (${new URL(website).hostname}).`
+        : `Could not read page text from ${schoolName}.`,
   };
 }
 
@@ -89,18 +138,25 @@ export async function POST(request: Request) {
 
   if (body.source_type !== "website") {
     return NextResponse.json(
-      { error: "The crawl service is offline. Facebook queue needs the RAG service." },
+      { error: "Facebook crawl is not available on this host. Use a local SchoolLens with RAG for Facebook." },
       { status: 502 },
     );
   }
 
   const school = localSchool(body.school_id);
-  if (!school?.official_website_url) {
+  const website = String(body.website_url || school?.official_website_url || "").trim();
+  if (!website) {
     return NextResponse.json(
       { error: "This school is not in the local register with a website URL." },
       { status: 400 },
     );
   }
 
-  return NextResponse.json(startLocalWebsiteCrawl(school.id, school.name));
+  const onVercel = Boolean(process.env.VERCEL);
+  if (!onVercel && existsSync(pythonScriptPath())) {
+    return NextResponse.json(startPythonCrawl(body.school_id, school?.name || "this school"));
+  }
+
+  const payload = await runInlineWebsiteCrawl(body.school_id, school?.name || "this school", website);
+  return NextResponse.json(payload, { status: payload.ok ? 200 : 502 });
 }

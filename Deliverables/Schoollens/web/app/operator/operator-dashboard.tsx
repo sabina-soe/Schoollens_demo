@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/client";
 import { readLocalDemoSession, withDeadline } from "@/lib/demo-session";
 import { loadLocalSchools } from "@/lib/public-register";
 import { DEFAULT_SCHEDULES, type ScheduleRow } from "@/lib/operator-schedule";
+import { readClientJobs, saveClientJob } from "@/lib/operator-job-store";
+import type { OperatorJob } from "@/lib/operator-jobs";
 import { CrawlTargets, jobSchoolId, type Job, type LastCrawl, type SchoolRow } from "./crawl-targets";
 
 type Mention = {
@@ -16,13 +18,14 @@ type Mention = {
 };
 
 async function loadLocalJobs(): Promise<Job[]> {
+  const stored = readClientJobs() as Job[];
   try {
     const response = await fetch("/api/operator/jobs", { cache: "no-store" });
-    if (!response.ok) return [];
+    if (!response.ok) return stored;
     const payload = (await response.json()) as { jobs?: Job[] };
-    return payload.jobs ?? [];
+    return mergeJobs(payload.jobs ?? [], stored);
   } catch {
-    return [];
+    return stored;
   }
 }
 
@@ -228,20 +231,36 @@ export function OperatorDashboard() {
     const response = await fetch("/api/operator/recrawl", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ school_id: school.id, source_type: sourceType }),
+      body: JSON.stringify({
+        school_id: school.id,
+        source_type: sourceType,
+        website_url: school.official_website_url,
+      }),
     });
-    const payload = await response.json().catch(() => ({}));
+    const payload = (await response.json().catch(() => ({}))) as {
+      error?: string;
+      message?: string;
+      job?: OperatorJob;
+    };
     setBusyKey(null);
+    if (payload.job) {
+      saveClientJob(payload.job);
+      setJobs((current) => mergeJobs([payload.job as Job], current));
+      setLastBySchool((current) => {
+        const next = { ...current };
+        applyLocalCrawlStatus(next, [payload.job as Job]);
+        return next;
+      });
+    }
     if (!response.ok) {
-      setError(payload.error || "The crawl did not start.");
+      setError(payload.error || payload.message || "The crawl did not start.");
       return;
     }
     setNotice(
       sourceType === "website"
-        ? `${payload.message || "Website crawl started."} Watch Run history for pages saved.`
+        ? payload.message || "Website crawl finished. Check Run history."
         : payload.message || "Queued Facebook recrawl.",
     );
-    void load();
   }
 
   async function saveSchedule(event: FormEvent<HTMLFormElement>, pipeline: string) {

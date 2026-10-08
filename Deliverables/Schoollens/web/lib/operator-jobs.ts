@@ -17,9 +17,9 @@ export function operatorJobsPath() {
 }
 
 export function readOperatorJobs(): OperatorJob[] {
-  const file = operatorJobsPath();
-  if (!existsSync(file)) return [];
   try {
+    const file = operatorJobsPath();
+    if (!existsSync(file)) return [];
     const payload = JSON.parse(readFileSync(file, "utf8"));
     return Array.isArray(payload) ? payload : [];
   } catch {
@@ -28,9 +28,14 @@ export function readOperatorJobs(): OperatorJob[] {
 }
 
 export function upsertOperatorJob(job: OperatorJob) {
-  const file = operatorJobsPath();
-  mkdirSync(path.dirname(file), { recursive: true });
-  const next = readOperatorJobs().filter((row) => row.id !== job.id);
-  next.unshift(job);
-  writeFileSync(file, JSON.stringify(next.slice(0, 80), null, 2), "utf8");
+  if (process.env.VERCEL) return;
+  try {
+    const file = operatorJobsPath();
+    mkdirSync(path.dirname(file), { recursive: true });
+    const next = readOperatorJobs().filter((row) => row.id !== job.id);
+    next.unshift(job);
+    writeFileSync(file, JSON.stringify(next.slice(0, 80), null, 2), "utf8");
+  } catch {
+    // Serverless disks are read-only. The operator UI keeps the job in the response.
+  }
 }
