@@ -56,6 +56,22 @@ export function jobSchoolId(job: Job): string | null {
   return null;
 }
 
+export type CrawledPageRow = {
+  url: string;
+  title: string | null;
+  status?: string;
+  chars?: number;
+  snippet?: string;
+};
+
+export function jobCrawledPages(job: Job): CrawledPageRow[] {
+  const errors = job.errors;
+  if (!errors || typeof errors !== "object" || Array.isArray(errors)) return [];
+  const pages = (errors as { crawled_pages?: unknown }).crawled_pages;
+  if (!Array.isArray(pages)) return [];
+  return pages.filter((row): row is CrawledPageRow => Boolean(row && typeof row === "object" && "url" in row));
+}
+
 function hostLabel(url: string | null) {
   if (!url) return null;
   try {

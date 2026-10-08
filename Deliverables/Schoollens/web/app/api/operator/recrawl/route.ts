@@ -102,8 +102,14 @@ async function runInlineWebsiteCrawl(schoolId: string, schoolName: string, websi
     rows_ingested: result.withText,
     errors: {
       school_id: schoolId,
-      pages: result.pages.length,
-      titles: result.pages.map((page) => page.page_title || page.url).slice(0, 8),
+      page_count: result.pages.length,
+      crawled_pages: result.pages.map((page) => ({
+        url: page.url,
+        title: page.page_title,
+        status: page.crawl_status,
+        chars: page.extracted_text.length,
+        snippet: page.extracted_text.slice(0, 220),
+      })),
       reason:
         result.withText > 0
           ? `Crawled ${result.withText} page${result.withText === 1 ? "" : "s"} from ${new URL(website).hostname}`

@@ -34,6 +34,15 @@ const EXTRA_PATHS: Record<string, string[]> = {
     "/campus-life",
     "/contact",
   ],
+  "alba-edu.com": [
+    "/pre-school",
+    "/primary",
+    "/lower",
+    "/upper",
+    "/admission",
+    "/facility",
+    "/contact-us",
+  ],
 };
 
 const GENERIC_PATHS = ["/about", "/about-us", "/admissions", "/academic-programs", "/curriculum", "/contact"];

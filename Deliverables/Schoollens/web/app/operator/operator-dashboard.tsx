@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { FormEvent, Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { readLocalDemoSession, withDeadline } from "@/lib/demo-session";
 import { loadLocalSchools } from "@/lib/public-register";
 import { DEFAULT_SCHEDULES, type ScheduleRow } from "@/lib/operator-schedule";
 import { readClientJobs, saveClientJob } from "@/lib/operator-job-store";
 import type { OperatorJob } from "@/lib/operator-jobs";
-import { CrawlTargets, jobSchoolId, type Job, type LastCrawl, type SchoolRow } from "./crawl-targets";
+import { CrawlTargets, jobCrawledPages, jobSchoolId, type Job, type LastCrawl, type SchoolRow } from "./crawl-targets";
 
 type Mention = {
   id: string;
@@ -413,7 +413,10 @@ export function OperatorDashboard() {
               <div>
                 <p className="op-kicker">Activity</p>
                 <h2>Run history</h2>
-                <p className="op-lead">Website jobs start here. The school profile updates after extract finishes.</p>
+                <p className="op-lead">
+                  This list is the proof a crawl ran. Page titles and snippets appear here. The public school profile
+                  does not change until extract writes claims.
+                </p>
               </div>
             </div>
             {jobs.length === 0 ? (
@@ -435,16 +438,39 @@ export function OperatorDashboard() {
                       const schoolId = jobSchoolId(job);
                       const tone =
                         job.status === "success" ? "success" : job.status === "error" ? "blocked" : "queued";
+                      const pages = jobCrawledPages(job);
                       return (
-                        <tr key={job.id}>
-                          <td>{schoolId ? (schoolById[schoolId] ?? schoolId) : "—"}</td>
-                          <td>{job.source_type === "fb_page" ? "Facebook" : job.source_type ?? "—"}</td>
-                          <td>
-                            <span className={`op-status op-status-${tone}`}>{job.status ?? "—"}</span>
-                          </td>
-                          <td>{job.rows_ingested ?? "—"}</td>
-                          <td>{job.started_at?.replace("T", " ").slice(0, 16) ?? "—"}</td>
-                        </tr>
+                        <Fragment key={job.id}>
+                          <tr>
+                            <td>{schoolId ? (schoolById[schoolId] ?? schoolId) : "—"}</td>
+                            <td>{job.source_type === "fb_page" ? "Facebook" : job.source_type ?? "—"}</td>
+                            <td>
+                              <span className={`op-status op-status-${tone}`}>{job.status ?? "—"}</span>
+                            </td>
+                            <td>{job.rows_ingested ?? "—"}</td>
+                            <td>{job.started_at?.replace("T", " ").slice(0, 16) ?? "—"}</td>
+                          </tr>
+                          {pages.length ? (
+                            <tr className="op-crawl-pages-row">
+                              <td colSpan={5}>
+                                <ul className="op-crawl-pages">
+                                  {pages.map((page) => (
+                                    <li key={page.url}>
+                                      <a href={page.url} target="_blank" rel="noreferrer">
+                                        {page.title || page.url}
+                                      </a>
+                                      <span>
+                                        {page.status ?? "fetched"}
+                                        {typeof page.chars === "number" ? ` · ${page.chars} chars` : ""}
+                                      </span>
+                                      {page.snippet ? <p>{page.snippet}</p> : null}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </td>
+                            </tr>
+                          ) : null}
+                        </Fragment>
                       );
                     })}
                   </tbody>
